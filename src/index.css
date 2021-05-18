@@ -1,13 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, p{
+  color: #F4F1F2;
+}
+
+
+/* Links */
+.link {
+  color: #F4F1F2;
+}
+
+.link:hover {
+   color: #F4F1F2
+}
+
+
+/* Buttons */
+.signUp_button_home {
+  background-color: #91A8C0;
+}
+
+.signUp_button_two {
+  background-color: #DC967F;
+}
+
+.login_button {
+  background-color: #DC967F;
 }
