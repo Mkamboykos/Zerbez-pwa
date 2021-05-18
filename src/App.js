@@ -29,6 +29,7 @@ export default App;
 
 
 /* 
+
 Class name : Home.js   <--- do not include inside class
 
 import React from 'react'
