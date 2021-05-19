@@ -36,9 +36,10 @@ h1, p{
   background-color: #DC967F; 
 }
 
+.Back_button_EnterCode,
 .continue_button_forgetPassword, 
 .continue_button_EnterCode,
-.submit_button_ResetPassword, 
+.Submit_button_forgetPassword, 
 .Dashboard_button_Settings,
 .Dashboard_button_Floorplan,
 .Dashboard_button_EndShift, 

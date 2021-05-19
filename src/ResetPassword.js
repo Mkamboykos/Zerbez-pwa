@@ -9,7 +9,8 @@ function ResetPassword() {
             <h1>Reset Password</h1>
 
             <button className="ResetPassword_button_Back"><Link to="/EnterCode" className="link">Back</Link></button>
-            <button className="ResetPassword_button_forgetPassword"><Link to="/EnterCode" className="link">continue</Link></button>
+            <br></br>
+            <button className="Submit_button_forgetPassword"><Link to="/" className="link">Submit</Link></button>
 
         </div>
     )
