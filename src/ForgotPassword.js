@@ -8,7 +8,9 @@ function ForgotPassword() {
         <div>
             <h1>Forgot Password?</h1>
 
-            <button className="continue_button_forgetPassword"><Link to="/EnterCode" className="link">continue</Link></button>
+            <button className="ForgotPassword_button_Backj"><Link to="/EnterCode" className="link">continue</Link></button>
+            <br></br>
+            <button className="ForgotPassword_button_EnterCode"><Link to="/EnterCode" className="link">continue</Link></button>
 
             
         </div>
