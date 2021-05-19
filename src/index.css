@@ -41,7 +41,7 @@ h1, p{
  .Dashboard_button_Floorplan, .Dashboard_button_NewReseration,
  .Dashboard_button_Reseration , .Dashboard_button_Shift,
  .Dashboard_button_Assing, .Dashboard_button_EndShift, 
- .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{`
+ .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{
   background-color: #E95554;
 }
 
