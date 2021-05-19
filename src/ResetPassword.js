@@ -9,7 +9,6 @@ function ResetPassword() {
             <h1>Reset Password</h1>
 
             <button className="submit_button_ResetPassword"><Link to="/" className="link">Submit</Link></button>
-            
         </div>
     )
 }
