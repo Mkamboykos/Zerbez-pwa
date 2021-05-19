@@ -66,10 +66,12 @@ h1, p{
   background-color: #2A3C60;
 }
 
-.Back_button_Settings {
+.Back_button_Settings,
+.continue_button_ForgotPassword{
+
   background-color: #E95554;
 }
-
+ 
 /*Back Buttons*/
 .Back_button_ForgotPassword,
 .Back_button_Settings,
