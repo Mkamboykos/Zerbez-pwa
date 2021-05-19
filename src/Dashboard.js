@@ -7,7 +7,7 @@ function Dashboard() {
     return(
         <div>
             <h1>Dashboard</h1>
-            <button className="Dashboard_button_Settings"><Link to="/EnterCode" className="link">Settings</Link></button>
+            <button className="Dashboard_button_Settings"><Link to="/Settings" className="link">Settings</Link></button>
             <br></br>
             <button className="Dashboard_button_Floorplan"><Link to="/EnterCode" className="link">Floor Plan</Link></button>
             <br></br>
