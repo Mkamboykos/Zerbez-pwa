@@ -36,13 +36,26 @@ h1, p{
   background-color: #DC967F;
 }
 
-.continue_button_forgetPassword, .continue_button_EnterCode,
- .submit_button_ResetPassword, .Dashboard_button_Settings,
- .Dashboard_button_Floorplan, .Dashboard_button_NewReseration,
- .Dashboard_button_Reseration , .Dashboard_button_Shift,
- .Dashboard_button_Assing, .Dashboard_button_EndShift, 
- .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{
+.continue_button_forgetPassword, 
+.continue_button_EnterCode,
+.submit_button_ResetPassword, 
+.Dashboard_button_Settings,
+.Dashboard_button_Floorplan,
+.Dashboard_button_EndShift, 
+.ResetPassword_button_Back, 
+.ResetPassword_button_forgetPassword{
   background-color: #E95554;
+}
+
+.Dashboard_button_NewReseration, 
+.Dashboard_button_Reseration{
+  background-color: #DC967F;
+}
+
+.Dashboard_button_ShiftSchedule,
+.Dashboard_button_AssingTables,
+.Dashboard_button_TimePerCover{
+  background-color: #91A8C0;
 }
 
 .Account_button_Settings, 
@@ -50,12 +63,10 @@ h1, p{
 .Notifications_button_Settings, 
 .Help_button_Settings, 
 .About_button_Settings {
-
   background-color: #2A3C60;
 }
 
 .Back_button_Settings {
-
   background-color: #E95554;
 }
 
@@ -64,6 +75,5 @@ h1, p{
 .Back_button_Notifications,
 .Back_button_Help,
 .Back_button_About {
-
   background-color: #E95554;
 } 

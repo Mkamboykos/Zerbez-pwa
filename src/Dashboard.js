@@ -13,13 +13,15 @@ function Dashboard() {
             <br></br>
             <button className="Dashboard_button_NewReseration"><Link to="/EnterCode" className="link">New Reseration</Link></button>
             <br></br>
-            <button className="Dashboard_button_Reseration"><Link to="/EnterCode" className="link">Reseration</Link></button>
+            <button className="Dashboard_button_Reseration"><Link to="/EnterCode" className="link">Reserations</Link></button>
             <br></br>
-            <button className="Dashboard_button_Shift"><Link to="/EnterCode" className="link">Shift</Link></button>
+            <button className="Dashboard_button_ShiftSchedule"><Link to="/EnterCode" className="link">Shift Schedule</Link></button>
             <br></br>
-            <button className="Dashboard_button_Assing"><Link to="/EnterCode" className="link">Assing</Link></button>
+            <button className="Dashboard_button_AssingTables"><Link to="/EnterCode" className="link">Assing Tables</Link></button>
             <br></br>
-            <button className="Dashboard_button_EndShift"><Link to="/EnterCode" className="link">End Shit</Link></button>
+            <button className="Dashboard_button_TimePerCover"><Link to="/EnterCode" className="link">Time Per Cover</Link></button>
+            <br></br>
+            <button className="Dashboard_button_EndShift"><Link to="/" className="link">End Shit</Link></button>
             
             
         </div>
