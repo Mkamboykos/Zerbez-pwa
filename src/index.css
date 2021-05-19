@@ -35,7 +35,7 @@ h1, p{
 .login_button {
   background-color: #DC967F;
 }
-
+/*Dashboard Buttons*/
 .continue_button_forgetPassword, .continue_button_EnterCode,
  .submit_button_ResetPassword, .Dashboard_button_Settings,
  .Dashboard_button_Floorplan, .Dashboard_button_NewReseration,
@@ -44,7 +44,7 @@ h1, p{
  .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{
   background-color: #E95554;
 }
-
+/*Settings Buttons*/
 .Account_button_Settings, 
 .Analytics_button_Settings, 
 .Notifications_button_Settings, 
@@ -54,16 +54,19 @@ h1, p{
   background-color: #2A3C60;
 }
 
-.Back_button_Settings {
+.ForgotPassword_button_Back{
 
   background-color: #E95554;
 }
-
+/*Back Buttons*/
+.Back_button_ForgotPassword,
+.Back_button_Settings,
 .Back_button_Account,
 .Back_button_Analytics,
 .Back_button_Notifications,
 .Back_button_Help,
-.Back_button_About {
+.Back_button_About ,
+.Back_button_EnterCode{
 
   background-color: #E95554;
 } 
