@@ -17,7 +17,7 @@ function Dashboard() {
             <br></br>
             <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link">Shift Schedule</Link></button>
             <br></br>
-            <button className="Dashboard_button_AssingTables"><Link to="/AssingTables" className="link">Assing Tables</Link></button>
+            <button className="Dashboard_button_AssignTables"><Link to="/AssignTables" className="link">Assing Tables</Link></button>
             <br></br>
             <button className="Dashboard_button_TimePerCover"><Link to="/TimePerCover" className="link">Time Per Cover</Link></button>
             <br></br>
