@@ -70,6 +70,9 @@ h1, p{
   background-color: #E95554;
 }
 
+/*Back Buttons*/
+.Back_button_ForgotPassword,
+.Back_button_Settings,
 .Back_button_Account,
 .Back_button_Analytics,
 .Back_button_Notifications,
