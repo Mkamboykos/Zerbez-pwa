@@ -41,7 +41,7 @@ h1, p{
  .Dashboard_button_Floorplan, .Dashboard_button_NewReseration,
  .Dashboard_button_Reseration , .Dashboard_button_Shift,
  .Dashboard_button_Assing, .Dashboard_button_EndShift, 
- .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{`
+ .ResetPassword_button_Back, .ResetPassword_button_forgetPassword{
   background-color: #E95554;
 }
 
@@ -52,18 +52,4 @@ h1, p{
 .About_button_Settings {
 
   background-color: #2A3C60;
-}
-
-.Back_button_Settings {
-
-  background-color: #E95554;
-}
-
-.Back_button_Account,
-.Back_button_Analytics,
-.Back_button_Notifications,
-.Back_button_Help,
-.Back_button_About {
-
-  background-color: #E95554;
 }
