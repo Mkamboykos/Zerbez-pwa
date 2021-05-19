@@ -6,7 +6,7 @@ function Notifications() {
       <div>
           <h1>Notifications</h1>
 
-          
+          <button className="Back_button_Notifications"><Link to="/Settings" className="link">Back</Link></button>
       </div>
   )
 }

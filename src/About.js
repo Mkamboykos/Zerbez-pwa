@@ -6,7 +6,7 @@ function About() {
       <div>
           <h1>About</h1>
 
-          
+          <button className="Back_button_About"><Link to="/Settings" className="link">Back</Link></button>
       </div>
   )
 }

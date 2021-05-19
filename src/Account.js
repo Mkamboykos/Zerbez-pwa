@@ -6,6 +6,7 @@ function Account() {
       <div>
           <h1>Account</h1>
 
+          <button className="Back_button_Account"><Link to="/Settings" className="link">Back</Link></button>
           
       </div>
   )
