@@ -9,11 +9,11 @@ function Dashboard() {
             <h1>Dashboard</h1>
             <button className="Dashboard_button_Settings"><Link to="/Settings" className="link">Settings</Link></button>
             <br></br>
-            <button className="Dashboard_button_Floorplan"><Link to="/Floorplan" className="link">Floor Plan</Link></button>
+            <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link">Floor Plan</Link></button>
             <br></br>
-            <button className="Dashboard_button_NewReseration"><Link to="/NewReseration" className="link">New Reseration</Link></button>
+            <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link">New Reseration</Link></button>
             <br></br>
-            <button className="Dashboard_button_Reseration"><Link to="/EnterCode" className="link">Reserations</Link></button>
+            <button className="Dashboard_button_Reseration"><Link to="/" className="link">Reserations</Link></button>
             <br></br>
             <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link">Shift Schedule</Link></button>
             <br></br>

@@ -41,14 +41,14 @@ h1, p{
 .continue_button_EnterCode,
 .Submit_button_forgetPassword, 
 .Dashboard_button_Settings,
-.Dashboard_button_Floorplan,
+.Dashboard_button_FloorPlan,
 .Dashboard_button_EndShift, 
 .ResetPassword_button_Back, 
 .ResetPassword_button_forgetPassword{
   background-color: #E95554;
 }
 
-.Dashboard_button_NewReseration, 
+.Dashboard_button_NewReservation, 
 .Dashboard_button_Reseration{
   background-color: #DC967F;
 }
@@ -67,19 +67,26 @@ h1, p{
   background-color: #2A3C60;
 }
 
-.Back_button_Settings,
 .continue_button_ForgotPassword{
-
   background-color: #E95554;
 }
  
 /*Back Buttons*/
+.Back_button_Settings,
 .Back_button_ForgotPassword,
 .Back_button_Settings,
 .Back_button_Account,
 .Back_button_Analytics,
 .Back_button_Notifications,
 .Back_button_Help,
-.Back_button_About {
+.Back_button_About,
+.Back_button_FloorPlan,
+.Back_button_ShiftSchedule,
+.Back_button_TimePerCover,
+.Back_button_AssignTables{
   background-color: #E95554;
 } 
+
+ .Plus_button_FloorPlan{
+   background-color: #91A8C0;
+ }

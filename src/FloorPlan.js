@@ -6,11 +6,11 @@ import {Link} from 'react-router-dom'
 function FloorPlan() {
     return(
         <div>
-            <h1>Reset Password</h1>
+            <h1>Floor Plan</h1>
 
-            <button className="Back_button_FloorPlan"><Link to="/" className="link">Back</Link></button>
+            <button className="Back_button_FloorPlan"><Link to="/Dashboard" className="link">Back</Link></button>
             <br></br>
-            <button className="Plus_button_forgetPassword"><Link to="/" className="link">PLus</Link></button>
+            <button className="Plus_button_FloorPlan"><Link to="/" className="link">Plus</Link></button>
 
         </div>
     )

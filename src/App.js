@@ -16,7 +16,8 @@ import About from './About'
 import ShiftSchedule from './ShiftSchedule'
 import AssignTables from './AssignTables'
 import TimePerCover from './TimePerCover'
-
+import FloorPlan from './FloorPlan'
+import NewReservation from './NewReservation'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
       <Route exact path="/About" component={About}/>
       <Route exact path="/ShiftSchedule" component={ShiftSchedule}/>
       <Route exact path="/AssignTables" component={AssignTables}/>
+      <Route exact path="/TimePerCover" component={TimePerCover}/>
       <Route exact path="/FloorPlan" component={FloorPlan}/>
       <Route exact path="/NewReservation" component={NewReservation}/>
 
