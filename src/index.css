@@ -53,3 +53,17 @@ h1, p{
 
   background-color: #2A3C60;
 }
+
+.Back_button_Settings {
+
+  background-color: #E95554;
+}
+
+.Back_button_Account,
+.Back_button_Analytics,
+.Back_button_Notifications,
+.Back_button_Help,
+.Back_button_About {
+
+  background-color: #E95554;
+} 
