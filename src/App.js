@@ -13,6 +13,9 @@ import Analytics from './Analytics'
 import Notifications from './Notifications'
 import Help from './Help'
 import About from './About'
+import ShiftSchedule from './ShiftSchedule'
+import AssignTables from './AssignTables'
+import TimePerCover from './TimePerCover'
 
 
 function App() {
@@ -32,7 +35,9 @@ function App() {
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Help" component={Help}/>
       <Route exact path="/About" component={About}/>
-
+      <Route exact path="/ShiftSchedule" component={ShiftSchedule}/>
+      <Route exact path="/AssignTables" component={AssignTables}/>
+      <Route exact path="/TimePerCover" component={TimePerCover}/>
 
     </div>
   )
