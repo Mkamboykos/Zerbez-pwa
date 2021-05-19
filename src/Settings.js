@@ -6,6 +6,8 @@ function Settings() {
       <div>
           <h1>Settings</h1>
 
+          <button className="Back_button_Settings"><Link to="/Dashboard" className="link">Back</Link></button>
+          <br></br>
           <button className="Account_button_Settings"><Link to="/Account" className="link">Account</Link></button>
           <br></br>
           <button className="Analytics_button_Settings"><Link to="/Analytics" className="link">Analytics</Link></button>

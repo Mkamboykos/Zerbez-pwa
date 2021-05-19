@@ -6,7 +6,7 @@ function Analytics() {
       <div>
           <h1>Analytics</h1>
 
-          
+          <button className="Back_button_Analytics"><Link to="/Settings" className="link">Back</Link></button>
       </div>
   )
 }
