@@ -5,6 +5,9 @@ import Home from './Home'
 import SignUp from './SignUp'
 import Dashboard from './Dashboard'
 import ForgotPassword from './ForgotPassword'
+import EnterCode from './EnterCode'
+import ResetPassword from './ResetPassword'
+
 
 function App() {
   return (
@@ -15,6 +18,10 @@ function App() {
       <Route exact path="/SignUp" component={SignUp}/>
       <Route exact path="/Dashboard" component={Dashboard}/>
       <Route exact path="/ForgotPassword" component={ForgotPassword}/>
+      <Route exact path="/EnterCode" component={EnterCode}/>
+      <Route exact path="/ResetPassword" component={ResetPassword}/>
+      
+
 
     </div>
   )

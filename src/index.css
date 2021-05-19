@@ -35,3 +35,7 @@ h1, p{
 .login_button {
   background-color: #DC967F;
 }
+
+.continue_button_forgetPassword, .continue_button_EnterCode, .submit_button_ResetPassword{
+  background-color: #E95554;
+}
