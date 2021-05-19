@@ -39,3 +39,12 @@ h1, p{
 .continue_button_forgetPassword, .continue_button_EnterCode, .submit_button_ResetPassword{
   background-color: #E95554;
 }
+
+.Account_button_Settings, 
+.Analytics_button_Settings, 
+.Notifications_button_Settings, 
+.Help_button_Settings, 
+.About_button_Settings {
+
+  background-color: #2A3C60;
+}
