@@ -13,7 +13,7 @@ function Dashboard() {
             <br></br>
             <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link">New Reseration</Link></button>
             <br></br>
-            <button className="Dashboard_button_Reseration"><Link to="/" className="link">Reserations</Link></button>
+            <button className="Dashboard_button_Reseration"><Link to="/Reservations" className="link">Reserations</Link></button>
             <br></br>
             <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link">Shift Schedule</Link></button>
             <br></br>

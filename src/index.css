@@ -83,7 +83,9 @@ h1, p{
 .Back_button_FloorPlan,
 .Back_button_ShiftSchedule,
 .Back_button_TimePerCover,
-.Back_button_AssignTables{
+.Back_button_AssignTables,
+.Back_button_Reservations,
+.Back_button_NewReservation{
   background-color: #E95554;
 } 
 

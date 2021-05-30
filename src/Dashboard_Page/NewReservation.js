@@ -8,7 +8,7 @@ function NewReservation() {
         <div>
             <h1>New Reservation</h1>
 
-            
+            <button className="Back_button_NewReservation"><Link to="/Dashboard" className="link">Back</Link></button>
 
         </div>
     )

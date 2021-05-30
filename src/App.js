@@ -1,23 +1,24 @@
 import './App.css'
 
 import {Route, Link} from 'react-router-dom'
-import Home from './Home'
-import SignUp from './SignUp'
-import Dashboard from './Dashboard'
-import ForgotPassword from './ForgotPassword'
-import EnterCode from './EnterCode'
-import ResetPassword from './ResetPassword'
-import Settings from './Settings'
-import Account from './Account'
-import Analytics from './Analytics'
-import Notifications from './Notifications'
-import Help from './Help'
-import About from './About'
-import ShiftSchedule from './ShiftSchedule'
-import AssignTables from './AssignTables'
-import TimePerCover from './TimePerCover'
-import FloorPlan from './FloorPlan'
-import NewReservation from './NewReservation'
+import Home from './Login_Page/Home'
+import SignUp from './Login_Page/SignUp'
+import Dashboard from './Dashboard_Page/Dashboard'
+import ForgotPassword from './Login_Page/ForgotPassword'
+import EnterCode from './ForgotPassword_Page/EnterCode'
+import ResetPassword from './ForgotPassword_Page/ResetPassword'
+import Settings from './Dashboard_Page/Settings'
+import Account from './Settings/Account'
+import Analytics from './Settings/Analytics'
+import Notifications from './Settings/Notifications'
+import Help from './Settings/Help'
+import About from './Settings/About'
+import ShiftSchedule from './Dashboard_Page/ShiftSchedule'
+import AssignTables from './Dashboard_Page/AssignTables'
+import TimePerCover from './Dashboard_Page/TimePerCover'
+import FloorPlan from './Dashboard_Page/FloorPlan'
+import NewReservation from './Dashboard_Page/NewReservation'
+import Reservations from './Dashboard_Page/Reservations'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
       <Route exact path="/TimePerCover" component={TimePerCover}/>
       <Route exact path="/FloorPlan" component={FloorPlan}/>
       <Route exact path="/NewReservation" component={NewReservation}/>
+      <Route exact path="/Reservations" component={Reservations}/>
 
     </div>
   )
