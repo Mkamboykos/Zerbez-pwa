@@ -26,7 +26,7 @@ import {Button, Row, Col, Card, Form} from 'react-bootstrap'
 //             <Link to="/ForgotPassword" className="link">Forgot Password?</Link>
 
 //         </div>
-//     )
+//     ) 
 // }
 
 class Home extends Component{
