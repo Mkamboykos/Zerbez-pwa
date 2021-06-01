@@ -12,6 +12,36 @@ h1, p{
   color: #F4F1F2;
 }
 
+/* Home Page Title */
+
+.homeTileTimeText{
+  font-size: 80px;
+  line-height: normal;
+  padding-top: 70px;
+}
+
+.homeTileWaiterText{
+  font-size: 80px;
+  padding-bottom: 10px;
+  margin-top: -20px;
+}
+
+/* Home Text Bars */
+
+.usernameBar{
+  margin: 0 auto;
+  width: 300px;
+  padding-bottom: 13px;
+}
+
+.passwordBar{
+  margin: 0 auto;
+  width: 300px;
+  padding-bottom: 13px;
+}
+
+/* Captcha */
+
 .captchaText{
   color: #F4F1F2;
   font-size: xx-large;
@@ -32,6 +62,7 @@ h1, p{
 /* Buttons */
 .signUp_button_home {
   background-color: #91A8C0;
+  margin-right: .3rem;
 }
 
 .signUp_button_two {
@@ -41,6 +72,7 @@ h1, p{
 .login_button {
   background-color: #DC967F;
   color: #F4F1F2;
+  margin-left: .3rem;
 }
 
 .Back_button_EnterCode,
@@ -105,4 +137,15 @@ h1, p{
 .Submit_button_Home {
   background-color: #E95554;
   color: #F4F1F2;
+}
+
+ /* Containers*/
+
+.forgotpasswordContainer{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.HomePageTitleContainer{
+  padding-bottom: 250pt;
 }

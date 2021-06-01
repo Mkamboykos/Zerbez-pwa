@@ -155,36 +155,44 @@ class Home extends Component{
                   {this.renderRedirect()}
                 </Form>
             </div>
-          ) 
-      }
+        ) 
+    }
     
     render() {
         return (
             <div>
-                <h1>Time Waiter</h1>
+                <div className="HomePageTitleContainer">
+                    <h1 className="homeTileTimeText"><b>Time</b></h1>
+                    <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                </div>
+                <div>
                     <Form onKeyPress={this.handleKeyPressLogin}>
-                        <Form.Group >
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="username" placeholder="Username" onChange={this.handleUsername}/>
+                        <Form.Group className="usernameBar">
+                                <Form.Control type="username" placeholder="Username"  onChange={this.handleUsername}/>
                         </Form.Group>
-    
-                        <Form.Group>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" onChange={this.handlePassword} />
+
+                        <Form.Group className="passwordBar">
+                            <Form.Control type="password"  placeholder="Password"  onChange={this.handlePassword} />
                         </Form.Group>
-                        
+
                         <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
-    
+                        
                         <button className="login_button" type="submit"  onClick={this.handleLogin} >
                             Login
                         </button>
-    
+
+                        <br></br>
+
+                        <div className="forgotpasswordContainer">
+                            <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
+                        </div>
+
                         {this.state.display? this.renderCaptcha():""}
                     </Form>
+                </div>
             </div>        
         );
       }
-      
     }
 
 export default Home;
