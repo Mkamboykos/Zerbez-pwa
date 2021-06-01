@@ -14,11 +14,9 @@ h1, p{
 
 .captchaText{
   color: #F4F1F2;
+  font-size: xx-large;
 }
 
-controlId{
-
-}
 
 /* Links */
 .link {

@@ -140,8 +140,8 @@ class Home extends Component{
               <div>
                   <br></br>
                 <Form onKeyPress={this.handleKeyPressSubmit}>
-                  <Form.Group as={Row} controlId="formPlaintextEmail">
-                      <Form.Label column sm="4" className="captchaText">
+                  <Form.Group controlId="formPlaintextEmail">
+                      <Form.Label className="captchaText">
                           {this.state.captcha}
                       </Form.Label>
                       <Col>
