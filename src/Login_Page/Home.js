@@ -3,31 +3,6 @@ import {Link, Redirect} from 'react-router-dom'
 
 import {Button, Row, Col, Form} from 'react-bootstrap'
 
-/*   Home.js is rendered in App.js    */
-
-// function Home() {
-//     return(
-//         <div>
-//             <h1>Time Waiter</h1>
-//             <br></br>
-//             <Form>
-//                 <Form.Group controlId="formBasicEmail">
-//                     <Form.Control type="username" placeholder="Username" />
-//                 </Form.Group>
-
-//                 <Form.Group controlId="formBasicPassword">
-//                     <Form.Control type="password" placeholder="Password" />
-//                     </Form.Group>
-//             </Form>
-
-//             <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
-//             <button className="login_button"><Link to="/Dashboard" className="link">Login</Link></button>
-//             <br></br>
-//             <Link to="/ForgotPassword" className="link">Forgot Password?</Link>
-
-//         </div>
-//     ) 
-// }
 
 class Home extends Component{
     
