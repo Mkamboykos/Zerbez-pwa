@@ -22,11 +22,11 @@ class Home extends Component{
     
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleCaptcha = this.handleCaptcha.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-
-    
+        this.handleCaptcha = this.handleCaptcha.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
+        this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
     }
 
     //Class Properties (Events On Change)
@@ -44,24 +44,55 @@ class Home extends Component{
         })
     }
     
-    handleSubmit(e){
+    handleLogin(e){
         e.preventDefault();
-        if (!this.state.username && !this.state.password)
+        if (!this.state.username && !this.state.password){
             return;
-        this.setState({
-            display: true,
-            btnDisplay:true
-        });
-    
+        }else if(this.state.username && !this.state.password){
+            alert("Missing Password")
+            return;
+        }else if(!this.state.username && this.state.password){
+            alert("Missing Username")
+        return;
+        }else{
+            this.setState({
+                display: true,
+                btnDisplay:true
+            });
+        }    
+
         let random = Math.random().toString(36).substring(7);
         this.setState({
             captcha: random
         })
     }
 
+    handleKeyPressLogin(e){
+        if (e.key === "Enter"){
+            e.preventDefault();
+            if (!this.state.username && !this.state.password){
+                return;
+            }else if(this.state.username && !this.state.password){
+                alert("Missing Password")
+                return;
+            }else if(!this.state.username && this.state.password){
+                alert("Missing Username")
+                return;
+            }else{
+                this.setState({
+                    display: true,
+                    btnDisplay:true
+                });
+            }
+            let random = Math.random().toString(36).substring(7);
+            this.setState({
+                captcha: random
+            })
+        }
+    }
+
     handleCaptcha(e){
         let userCaptcha = e.target.value
-        // <button onClick={handlePrint}>Print this out!</button>
         if(!userCaptcha)
             return;
             this.setState({
@@ -70,15 +101,32 @@ class Home extends Component{
         })
     }
 
-    handleLogin(){
-      if(this.state.userCaptcha === this.state.captcha){
-        alert("correct captcha")
-        this.setState({
-            redirect: true
-          }) 
-      }else{
-        alert("incorrect captcha!!")
-      }
+    handleKeyPressSubmit(e){
+        if (e.key === "Enter"){
+            e.preventDefault();
+            if(this.state.userCaptcha === this.state.captcha){
+                this.setState({
+                    redirect: true
+                }) 
+            }else if(this.state.userCaptcha != this.state.captcha){
+                alert("Incorrect CAPTCHA, please try again")
+            }else{
+                alert("You must enter the CAPTCHA Code provided")
+            }
+        }
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        if(this.state.userCaptcha === this.state.captcha){
+            this.setState({
+                redirect: true
+            }) 
+        }else if(this.state.userCaptcha != this.state.captcha){
+            alert("Incorrect CAPTCHA, please try again")
+        }else{
+            alert("You must enter the CAPTCHA Code provided")
+        }
     }
 
     renderRedirect(){
@@ -91,8 +139,9 @@ class Home extends Component{
           return(
               <div>
                   <br></br>
+                <Form onKeyPress={this.handleKeyPressSubmit}>
                   <Form.Group as={Row} controlId="formPlaintextEmail">
-                      <Form.Label column sm="4">
+                      <Form.Label column sm="4" className="captchaText">
                           {this.state.captcha}
                       </Form.Label>
                       <Col>
@@ -100,34 +149,33 @@ class Home extends Component{
                       </Col>
                   </Form.Group>
                   
-                  <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleLogin}>
+                  <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
                       Submit
                   </button>
                   {this.renderRedirect()}
-              </div>
+                </Form>
+            </div>
           ) 
       }
-
-    
     
     render() {
         return (
             <div>
                 <h1>Time Waiter</h1>
-                    <Form>
+                    <Form onKeyPress={this.handleKeyPressLogin}>
                         <Form.Group >
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control type="username" placeholder="Username" onChange={this.handleUsername}/>
                         </Form.Group>
     
-                        <Form.Group >
+                        <Form.Group>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" onChange={this.handlePassword}/>
-                         </Form.Group>
-
-                         <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
+                            <Form.Control type="password" placeholder="Password" onChange={this.handlePassword} />
+                        </Form.Group>
+                        
+                        <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
     
-                        <button className="login_button" type="submit" onClick={this.handleSubmit}>
+                        <button className="login_button" type="submit"  onClick={this.handleLogin} >
                             Login
                         </button>
     
