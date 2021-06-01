@@ -167,12 +167,13 @@ class Home extends Component{
                 </div>
                 <div>
                     <Form onKeyPress={this.handleKeyPressLogin}>
+                        <div >
                         <Form.Group className="usernameBar">
-                                <Form.Control type="username" placeholder="Username"  onChange={this.handleUsername}/>
+                                <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
                         </Form.Group>
-
+                        </div>
                         <Form.Group className="passwordBar">
-                            <Form.Control type="password"  placeholder="Password"  onChange={this.handlePassword} />
+                            <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
                         </Form.Group>
 
                         <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>

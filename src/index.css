@@ -17,7 +17,7 @@ h1, p{
 .homeTileTimeText{
   font-size: 80px;
   line-height: normal;
-  padding-top: 70px;
+  padding-top: 65px;
 }
 
 .homeTileWaiterText{
@@ -32,12 +32,43 @@ h1, p{
   margin: 0 auto;
   width: 300px;
   padding-bottom: 13px;
+  
+}
+
+input.usernameBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+}
+
+input.usernameBarText.form-control::placeholder{
+  color: #F4F1F2;
 }
 
 .passwordBar{
   margin: 0 auto;
   width: 300px;
-  padding-bottom: 13px;
+  padding-bottom: 18px;
+}
+
+input.passwordBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+}
+
+input.passwordBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+ /* Containers*/
+
+.forgotpasswordContainer{
+  padding-top: 20px;
+}
+
+.HomePageTitleContainer{
+  padding-bottom: 250px;
 }
 
 /* Captcha */
@@ -139,13 +170,3 @@ h1, p{
   color: #F4F1F2;
 }
 
- /* Containers*/
-
-.forgotpasswordContainer{
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.HomePageTitleContainer{
-  padding-bottom: 250pt;
-}
