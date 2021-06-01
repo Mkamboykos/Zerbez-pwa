@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-import {Button, Row, Col, Card, Form} from 'react-bootstrap'
+import {Button, Row, Col, Form} from 'react-bootstrap'
 
 /*   Home.js is rendered in App.js    */
 
@@ -29,7 +29,7 @@ import {Button, Row, Col, Card, Form} from 'react-bootstrap'
 //     ) 
 // }
 
-class Home extends Component{
+class Home extends React.Component{
     
     constructor(props) {
         super(props);
@@ -38,6 +38,7 @@ class Home extends Component{
         this.state = ({
             display: false,
             btnDisplay: false,
+            redirect: false,
             username: "",
             password: "",
             captcha: "",
@@ -49,6 +50,7 @@ class Home extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCaptcha = this.handleCaptcha.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+
     
     }
 
@@ -84,23 +86,31 @@ class Home extends Component{
 
     handleCaptcha(e){
         let userCaptcha = e.target.value
+        // <button onClick={handlePrint}>Print this out!</button>
         if(!userCaptcha)
             return;
             this.setState({
             btnDisplay: false,
             userCaptcha: userCaptcha
         })
-    
     }
 
-    handleLogin(e) {
-        if (this.setState.captcha == this.setState.userCaptcha){
-            redirect: "/Dashboard"
-        }else{
-            this.setState({ redirect: "/" });
-        }
+    handleLogin(){
+      if(this.state.userCaptcha === this.state.captcha){
+        alert("correct captcha")
+        this.setState({
+            redirect: true
+          }) 
+      }else{
+        alert("incorrect captcha!!")
+      }
     }
-    
+
+    renderRedirect(){
+        if (this.state.redirect) {
+            return <Redirect to='/Dashboard' />
+        }
+      }
     
     renderCaptcha(){
           return(
@@ -113,13 +123,16 @@ class Home extends Component{
                           <Form.Control type="text" placeholder="Enter Captcha" onChange={this.handleCaptcha} />
                       </Col>
                   </Form.Group>
-    
+                  
                   <Button variant="primary" type="save" disabled={this.state.btnDisplay} onClick={this.handleLogin}>
                       Login
                   </Button>
+                  {this.renderRedirect()}
               </div>
-          )
+          ) 
       }
+
+    
     
     render() {
         return (
