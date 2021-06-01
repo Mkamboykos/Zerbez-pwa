@@ -29,7 +29,7 @@ import {Button, Row, Col, Form} from 'react-bootstrap'
 //     ) 
 // }
 
-class Home extends React.Component{
+class Home extends Component{
     
     constructor(props) {
         super(props);
@@ -115,6 +115,7 @@ class Home extends React.Component{
     renderCaptcha(){
           return(
               <div>
+                  <br></br>
                   <Form.Group as={Row} controlId="formPlaintextEmail">
                       <Form.Label column sm="4">
                           {this.state.captcha}
@@ -124,9 +125,9 @@ class Home extends React.Component{
                       </Col>
                   </Form.Group>
                   
-                  <Button variant="primary" type="save" disabled={this.state.btnDisplay} onClick={this.handleLogin}>
-                      Login
-                  </Button>
+                  <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleLogin}>
+                      Submit
+                  </button>
                   {this.renderRedirect()}
               </div>
           ) 
@@ -148,10 +149,12 @@ class Home extends React.Component{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={this.handlePassword}/>
                          </Form.Group>
+
+                         <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
     
-                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                            Submit
-                        </Button>
+                        <button className="login_button" type="submit" onClick={this.handleSubmit}>
+                            Login
+                        </button>
     
                         {this.state.display? this.renderCaptcha():""}
                     </Form>

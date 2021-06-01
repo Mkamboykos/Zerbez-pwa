@@ -16,10 +16,11 @@ h1, p{
 /* Links */
 .link {
   color: #F4F1F2;
+  text-decoration: none;
 }
 
 .link:hover {
-   color: #F4F1F2
+   color: #F4F1F2;
 }
 
 
@@ -33,7 +34,8 @@ h1, p{
 }
 
 .login_button {
-  background-color: #DC967F; 
+  background-color: #DC967F;
+  color: #F4F1F2;
 }
 
 .Back_button_EnterCode,
@@ -92,3 +94,10 @@ h1, p{
  .Plus_button_FloorPlan{
    background-color: #91A8C0;
  }
+
+ /* Submit Buttons*/
+
+.Submit_button_Home {
+  background-color: #E95554;
+  color: #F4F1F2;
+}
