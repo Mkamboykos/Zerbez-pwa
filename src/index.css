@@ -12,73 +12,6 @@ h1, p{
   color: #F4F1F2;
 }
 
-/* Home Page Title */
-
-.homeTileTimeText{
-  font-size: 80px;
-  line-height: normal;
-  padding-top: 65px;
-}
-
-.homeTileWaiterText{
-  font-size: 80px;
-  padding-bottom: 10px;
-  margin-top: -20px;
-}
-
-/* Home Text Bars */
-
-.usernameBar{
-  margin: 0 auto;
-  width: 300px;
-  padding-bottom: 13px;
-  
-}
-
-input.usernameBarText.form-control {
-  background-color: #8D848D;
-  border-color: #707070;
-  color: #F4F1F2;
-}
-
-input.usernameBarText.form-control::placeholder{
-  color: #F4F1F2;
-}
-
-.passwordBar{
-  margin: 0 auto;
-  width: 300px;
-  padding-bottom: 18px;
-}
-
-input.passwordBarText.form-control {
-  background-color: #8D848D;
-  border-color: #707070;
-  color: #F4F1F2;
-}
-
-input.passwordBarText.form-control::placeholder{
-  color: #F4F1F2;
-}
-
- /* Containers*/
-
-.forgotpasswordContainer{
-  padding-top: 20px;
-}
-
-.HomePageTitleContainer{
-  padding-bottom: 250px;
-}
-
-/* Captcha */
-
-.captchaText{
-  color: #F4F1F2;
-  font-size: xx-large;
-}
-
-
 /* Links */
 .link {
   color: #F4F1F2;
@@ -87,24 +20,152 @@ input.passwordBarText.form-control::placeholder{
 
 .link:hover {
    color: #F4F1F2;
+   text-decoration: none;
 }
 
+/* Home Page Title */
+
+.homeTileTimeText{
+  font-size: 95px;
+  padding-top: 60px;
+}
+
+.homeTileWaiterText{
+  font-size: 95px;
+  padding-bottom: 10px;
+  margin-top: -33px;
+}
+
+/* Username bar in home page*/
+
+.usernameBar{
+  margin: 0 auto;
+  width: 300px;
+  padding-bottom: 13px;
+}
+
+input.usernameBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+}
+
+input.usernameBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+/* password bar in home page*/
+
+.passwordBar{
+  margin: 0 auto;
+  width: 300px;
+  padding-bottom: 13px;
+}
+
+input.passwordBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+}
+
+input.passwordBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+
+/* Captcha bar in home page*/
+
+.captchaText{
+  color: #F4F1F2;
+  font-size: 45px;
+  user-select:none;
+}
+
+div.captchaBar.form-group{
+  margin-bottom: 0;
+  padding-bottom: 13px;
+}
+
+input#formPlaintextEmail.captchaBar.form-control{
+  margin: 0 auto;
+  width: 300px;
+  border-radius: 25px;
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+}
+
+input#formPlaintextEmail.captchaBar.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+ /* Containers in home page*/
+
+.forgotpasswordContainer{
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.HomePageTitleContainer{
+  padding-bottom: 240px;
+}
+
+.captchaContainer{
+  padding-top: -10px;
+  padding-bottom: 100px;
+  
+}
 
 /* Buttons */
-.signUp_button_home {
+
+.signUp_button_home{
   background-color: #91A8C0;
-  margin-right: .3rem;
+  margin-right: .4rem;
+  border-radius: 25px;
+  border: 0;
+  height: calc(1.5em + .75rem + 2px);
+  width: 115px;
 }
+
+.signUp_button_home:active{
+  background-color:#7B8EA1;
+}
+
+.login_button_home{
+  background-color: #DC967F;
+  color: #F4F1F2;
+  margin-left: .4rem;
+  border-radius: 25px;
+  border: 0;
+  height: calc(1.5em + .75rem + 2px);
+  width: 115px;
+}
+
+.login_button_home:active{
+  background-color: #BE816D;
+}
+
+.Submit_button_Home{
+  background-color: #E95554;
+  color: #F4F1F2;
+  border-radius: 25px;
+  border: 0;
+  height: calc(1.5em + .75rem + 2px);
+  width: 115px;
+}
+
+.Submit_button_Home:active{
+  background-color: #D24B4A;
+}
+
+/* Signup button for signup page*/
 
 .signUp_button_two {
   background-color: #DC967F;
 }
 
-.login_button {
-  background-color: #DC967F;
-  color: #F4F1F2;
-  margin-left: .3rem;
-}
 
 .Back_button_EnterCode,
 .continue_button_forgetPassword, 
@@ -163,10 +224,4 @@ input.passwordBarText.form-control::placeholder{
    background-color: #91A8C0;
  }
 
- /* Submit Buttons*/
-
-.Submit_button_Home {
-  background-color: #E95554;
-  color: #F4F1F2;
-}
 

@@ -139,19 +139,19 @@ class Home extends Component{
           return(
               <div>
                   <br></br>
-                <Form onKeyPress={this.handleKeyPressSubmit}>
-                  <Form.Group controlId="formPlaintextEmail">
+                <Form onKeyPress={this.handleKeyPressSubmit} >
+                  <Form.Group controlId="formPlaintextEmail" className="captchaBar">
                       <Form.Label className="captchaText">
                           {this.state.captcha}
                       </Form.Label>
-                      <Col>
-                          <Form.Control type="text" placeholder="Enter Captcha" onChange={this.handleCaptcha} />
-                      </Col>
+                          <Form.Control type="text" className="captchaBar" placeholder="Enter Captcha" onChange={this.handleCaptcha} />
                   </Form.Group>
                   
+                  <div className="captchaContainer">
                   <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
-                      Submit
+                      <b>SUBMIT</b>
                   </button>
+                  </div>
                   {this.renderRedirect()}
                 </Form>
             </div>
@@ -176,10 +176,10 @@ class Home extends Component{
                             <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
                         </Form.Group>
 
-                        <button className="signUp_button_home"><Link to="/SignUp" className="link">Sign Up</Link></button>
+                        <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
                         
-                        <button className="login_button" type="submit"  onClick={this.handleLogin} >
-                            Login
+                        <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
+                            <b>LOGIN</b>
                         </button>
 
                         <br></br>
