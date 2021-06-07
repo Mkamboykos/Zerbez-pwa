@@ -1,25 +1,9 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
+import {IoChevronBack} from 'react-icons/io5'
+
 import {Form} from 'react-bootstrap'
-
-/*   ForgotPassword.js is rendered in App.js    */
-
-// function ForgotPassword() {
-//     return(
-//         <div>
-//             <h1>Forgot Password?</h1>
-
-//             <button className="Back_button_ForgotPassword"><Link to="/" className="link">Back</Link></button>
-//             <br></br>
-//             <button className="continue_button_ForgotPassword"><Link to="/EnterCode" className="link">continue</Link></button>
-
-            
-//         </div>
-//     )
-// }
-
-// export default ForgotPassword;
 
 class ForgotPassword extends Component{
     
@@ -81,8 +65,7 @@ class ForgotPassword extends Component{
     render() {
         return (
             <div>
-                <button className="Back_button_ForgotPassword"><Link to="/" className="link">Back</Link></button>
-
+                <Link to="/" className="link"><IoChevronBack className="Back_button_ForgotPassword"/></Link>
                 <div className="forgotPasswordTitleContainer">
                     <h1 className="forgotTitleText"><b>Forgot</b></h1>
                     <h1 className="passwordTitleText"><b>Password?</b></h1>

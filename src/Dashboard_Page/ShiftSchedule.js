@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import {IoChevronBack} from 'react-icons/io5'
+
 function ShiftSchedule() {
   return(
       <div>
           <h1>Shift Schedule</h1>
-
-          <button className="Back_button_ShiftSchedule"><Link to="/Dashboard" className="link">Back</Link></button>
+          <Link to="/Dashboard" className="link"><IoChevronBack className="Back_button_ShiftSchedule"/></Link>
       </div>
   )
 }

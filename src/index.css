@@ -267,7 +267,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   width: 470px;
   text-align: left;
   font-size: 20px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 30px;
 }
 
@@ -301,9 +301,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 .Submit_button_forgetPassword, 
 .Dashboard_button_Settings,
 .Dashboard_button_FloorPlan,
-.Dashboard_button_EndShift, 
-.ResetPassword_button_Back, 
-.ResetPassword_button_forgetPassword{
+.Dashboard_button_EndShift{
   background-color: #E95554;
 }
 
@@ -348,12 +346,14 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 .Back_button_AssignTables,
 .Back_button_Reservations,
 .Back_button_NewReservation,
-.Back_button_EnterCode{
-  background-color: #E95554;
+.Back_button_EnterCode,
+.Back_button_ResetPassword,
+.Back_button_SignUp{
   position:   absolute;
   top:        25px;
   left:       25px;
   text-align: left;
+  font-size: 40px;
 } 
 
  .Plus_button_FloorPlan{

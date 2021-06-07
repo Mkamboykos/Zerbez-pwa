@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import {IoChevronBack} from 'react-icons/io5'
+
 function Settings() {
   return(
       <div>
           <h1>Settings</h1>
-
-          <button className="Back_button_Settings"><Link to="/Dashboard" className="link">Back</Link></button>
+          <Link to="/Dashboard" className="link"><IoChevronBack className="Back_button_Settings"/></Link>
           <br></br>
           <button className="Account_button_Settings"><Link to="/Account" className="link">Account</Link></button>
           <br></br>
