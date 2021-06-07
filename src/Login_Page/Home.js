@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-import {Button, Row, Col, Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 
 
 class Home extends Component{
@@ -137,8 +137,7 @@ class Home extends Component{
     
     renderCaptcha(){
           return(
-              <div>
-                  <br></br>
+              <div className="captchaContainer">
                 <Form onKeyPress={this.handleKeyPressSubmit} >
                   <Form.Group controlId="formPlaintextEmail" className="captchaBar">
                       <Form.Label className="captchaText">
@@ -147,7 +146,7 @@ class Home extends Component{
                           <Form.Control type="text" className="captchaBar" placeholder="Enter Captcha" onChange={this.handleCaptcha} />
                   </Form.Group>
                   
-                  <div className="captchaContainer">
+                  <div>
                   <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
                       <b>SUBMIT</b>
                   </button>
@@ -160,32 +159,37 @@ class Home extends Component{
     
     render() {
         return (
-            <div>
+            <div className="homePageContainer">
                 <div className="HomePageTitleContainer">
                     <h1 className="homeTileTimeText"><b>Time</b></h1>
                     <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
                 </div>
                 <div>
                     <Form onKeyPress={this.handleKeyPressLogin}>
-                        <div >
-                        <Form.Group className="usernameBar">
-                                <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
-                        </Form.Group>
-                        </div>
-                        <Form.Group className="passwordBar">
-                            <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
-                        </Form.Group>
+                        <div className="inputContainer">
 
-                        <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
+                            <div className="homePageImageContainer">
+                                <p>Insert Image Here</p>
+                            </div>
+
+                            <Form.Group className="usernameBar">
+                                    <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
+                            </Form.Group>
                         
-                        <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
-                            <b>LOGIN</b>
-                        </button>
+                            <Form.Group className="passwordBar">
+                                <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
+                            </Form.Group>
+                            <div className="input_and_login_Container">
+                                <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
+                                
+                                <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
+                                    <b>LOGIN</b>
+                                </button>
+                            </div>
 
-                        <br></br>
-
-                        <div className="forgotpasswordContainer">
-                            <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
+                            <div className="forgotpasswordContainer">
+                                <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
+                            </div>
                         </div>
 
                         {this.state.display? this.renderCaptcha():""}
