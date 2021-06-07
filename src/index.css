@@ -221,6 +221,8 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 
 
 
+
+
 /*Forgot Password Container*/
 
 .forgotPasswordTitleContainer{
@@ -291,6 +293,9 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 
 
 
+
+
+
 .continue_button_forgetPassword, 
 .continue_button_EnterCode,
 .Submit_button_forgetPassword, 
@@ -324,6 +329,9 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 .continue_button_ForgotPassword{
   background-color: #E95554;
 }
+
+
+
  
 /*Back Buttons*/
 .Back_button_Settings,
