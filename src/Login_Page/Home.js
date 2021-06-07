@@ -46,7 +46,8 @@ class Home extends Component{
     
     handleLogin(e){
         e.preventDefault();
-        if (!this.state.username && !this.state.password){
+        if (this.state.username === '' && this.state.password === ''){
+            alert("Username and Password cannot be empty")
             return;
         }else if(this.state.username && !this.state.password){
             alert("Missing Password")
@@ -70,7 +71,8 @@ class Home extends Component{
     handleKeyPressLogin(e){
         if (e.key === "Enter"){
             e.preventDefault();
-            if (!this.state.username && !this.state.password){
+            if (this.state.username === '' && this.state.password === ''){
+                alert("Username and Password cannot be empty")
                 return;
             }else if(this.state.username && !this.state.password){
                 alert("Missing Password")
@@ -104,28 +106,28 @@ class Home extends Component{
     handleKeyPressSubmit(e){
         if (e.key === "Enter"){
             e.preventDefault();
-            if(this.state.userCaptcha === this.state.captcha){
+            if(this.state.userCaptcha === ''){
+                alert("You must enter the CAPTCHA Code provided")
+            }else if(this.state.userCaptcha != this.state.captcha){
+                alert("Incorrect CAPTCHA, please try again")
+            }else if(this.state.userCaptcha === this.state.captcha){
                 this.setState({
                     redirect: true
                 }) 
-            }else if(this.state.userCaptcha != this.state.captcha){
-                alert("Incorrect CAPTCHA, please try again")
-            }else{
-                alert("You must enter the CAPTCHA Code provided")
             }
         }
     }
 
     handleSubmit(e){
         e.preventDefault();
-        if(this.state.userCaptcha === this.state.captcha){
+        if(this.state.userCaptcha === ''){
+            alert("You must enter the CAPTCHA Code provided")
+        }else if(this.state.userCaptcha != this.state.captcha){
+            alert("Incorrect CAPTCHA, please try again")
+        }else if(this.state.userCaptcha === this.state.captcha){
             this.setState({
                 redirect: true
             }) 
-        }else if(this.state.userCaptcha != this.state.captcha){
-            alert("Incorrect CAPTCHA, please try again")
-        }else{
-            alert("You must enter the CAPTCHA Code provided")
         }
     }
 

@@ -264,7 +264,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 /* Forgot Password Text */
 
 .forgotPasswordText{
-  width: 470px;
+  width: 480px;
   text-align: left;
   font-size: 20px;
   margin-top: 25px;
@@ -290,6 +290,81 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 
 
 
+
+
+
+/* Enter Code Container*/
+
+.codeBarContainer{
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+/* Code Input Bars*/
+
+.codeOneBarText,
+.codeTwoBarText,
+.codeThreeBarText,
+.codeFourBarText{
+  margin: 6px;
+  margin-bottom: 0;
+  margin-top: 0;
+  text-align: center;
+
+}
+
+input.codeOneBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+  width: 50px;
+}
+
+input.codeOneBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+input.codeTwoBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+  width: 50px;
+}
+
+input.codeTwoBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+input.codeThreeBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+  width: 50px;
+}
+
+input.codeThreeBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
+
+input.codeFourBarText.form-control {
+  background-color: #8D848D;
+  border-color: #707070;
+  color: #F4F1F2;
+  border-radius: 25px;
+  width: 50px;
+}
+
+input.codeFourBarText.form-control::placeholder{
+  color: #F4F1F2;
+}
 
 
 
