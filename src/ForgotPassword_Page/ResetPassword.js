@@ -47,7 +47,7 @@ class ResetPassword extends Component{
             alert("Type your new password and confirm it")
             return;
         }else if(this.state.newPassword != this.state.confirmNewPassword){
-            alert("Passwords do not match")
+            alert("Passwords do not match, please try again")
             return;
         }else if(this.state.newPassword === this.state.confirmNewPassword){
             this.setState({
@@ -74,6 +74,7 @@ class ResetPassword extends Component{
 
     renderRedirect(){
         if (this.state.redirect){
+            alert("Your password has been changed!")
             return <Redirect to='/'/>
         }
     }
