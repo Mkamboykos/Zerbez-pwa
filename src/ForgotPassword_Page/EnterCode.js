@@ -85,7 +85,7 @@ class EnterCode extends Component{
             || this.state.two === '' 
             || this.state.three === ''
             || this.state.four === ''){
-                alert("Missing or Invalid Code")
+                alert("Missing or Invalid Code. Use numbers only!")
                 return;
         }else if(this.state.one === this.state.one 
             && this.state.two === this.state.two
