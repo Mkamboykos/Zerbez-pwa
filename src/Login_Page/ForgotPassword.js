@@ -30,7 +30,6 @@ class ForgotPassword extends Component{
 
 
     handleContinue(e){
-        e.preventDefault();
         if(this.state.email === ''){
             alert("You did not provide a valid email")
             return;
@@ -43,9 +42,7 @@ class ForgotPassword extends Component{
 
     handleKeyPressContinue(e){
         if (e.key === "Enter"){
-            e.preventDefault();
             if(this.state.email === ''){
-                alert("You did not provide a valid email")
                 return;
             }else if(this.state.email === this.state.email){
                 this.setState({
