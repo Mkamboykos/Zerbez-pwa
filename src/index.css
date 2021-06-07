@@ -231,7 +231,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   justify-content: center;
   width: 100%;
   height: 100%;
-  
+
   margin-top: 150px;
 }
 
@@ -259,7 +259,6 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   margin-bottom: 0;
 }
 
-
 /* Forgot Password Text */
 
 .forgotPasswordText{
@@ -286,7 +285,12 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   background-color: #C94B4A;
 }
 
-.Back_button_EnterCode,
+
+
+
+
+
+
 .continue_button_forgetPassword, 
 .continue_button_EnterCode,
 .Submit_button_forgetPassword, 
@@ -335,8 +339,13 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 .Back_button_TimePerCover,
 .Back_button_AssignTables,
 .Back_button_Reservations,
-.Back_button_NewReservation{
+.Back_button_NewReservation,
+.Back_button_EnterCode{
   background-color: #E95554;
+  position:   absolute;
+  top:        25px;
+  left:       25px;
+  text-align: left;
 } 
 
  .Plus_button_FloorPlan{
