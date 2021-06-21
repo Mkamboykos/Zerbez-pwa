@@ -1,13 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import {GoThreeBars} from 'react-icons/go'
+
 /*   Dashboard.js is rendered in App.js    */
 
 function Dashboard() {
     return(
         <div>
             <h1>Dashboard</h1>
-            <button className="Dashboard_button_Settings"><Link to="/Settings" className="link">Settings</Link></button>
+
+            <Link to="/Settings" className="link"><GoThreeBars className="Settings_button_Dashboard"/></Link>
             <br></br>
             <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link">Floor Plan</Link></button>
             <br></br>

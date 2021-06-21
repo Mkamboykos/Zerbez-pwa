@@ -26,8 +26,6 @@ h1, p{
 
 
 
-
-
  /* Containers in home page*/
 
 .homePageContainer{
@@ -371,6 +369,46 @@ input.codeFourBarText.form-control::placeholder{
 
 
 
+
+
+/* Dashboard r*/
+
+/* Settings button */
+.Settings_button_Dashboard{
+  position:   absolute;
+  top:        25px;
+  left:       25px;
+  text-align: left;
+  font-size: 40px;
+}
+
+/* side Nav bar for settings */
+
+
+
+
+
+
+
+
+
+
+
+
+.Account_button_Settings, 
+.Analytics_button_Settings, 
+.Notifications_button_Settings, 
+.Help_button_Settings, 
+.About_button_Settings {
+  background-color: #2A3C60;
+}
+
+
+
+
+/*      */
+
+
 .continue_button_forgetPassword, 
 .continue_button_EnterCode,
 .Submit_button_forgetPassword, 
@@ -391,13 +429,7 @@ input.codeFourBarText.form-control::placeholder{
   background-color: #91A8C0;
 }
 
-.Account_button_Settings, 
-.Analytics_button_Settings, 
-.Notifications_button_Settings, 
-.Help_button_Settings, 
-.About_button_Settings {
-  background-color: #2A3C60;
-}
+
 
 .continue_button_ForgotPassword{
   background-color: #E95554;
