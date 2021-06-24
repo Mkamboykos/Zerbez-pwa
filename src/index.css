@@ -7,6 +7,7 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 h1, p{
@@ -407,6 +408,78 @@ input.codeFourBarText.form-control::placeholder{
 
 
 /*      */
+
+.menu-button--full {
+  top: 40px;
+  right: 20px;
+}
+
+.menu-button {
+  z-index: 40;
+  border: none;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  padding: 12px;
+  font-size: 1em;
+  background: none;
+  background: #fff;
+  color: #692969;
+  transition: background 0.1s linear;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background: #e8daff;
+}
+
+.menu {
+  position: absolute;
+  background: #6929c4;
+  color: #fff;
+  z-index: 30;
+}
+
+/* positioning of the whole menu */
+.menu--right {
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+}
+
+
+
+.menu-list {
+  padding: 0;
+  list-style: none;
+  font-size: 25px;
+}
+
+.menu-list--right {
+  margin: 100px 24px;
+}
+
+/* Line spacing between setting list options*/
+.menu-list-item--right {
+  margin: 24px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #e8daff;
+}
+
+.menu a:hover,
+.menu a:focus {
+  color: #fff;
+}
+
+
+
+
+
+
 
 
 .continue_button_forgetPassword, 

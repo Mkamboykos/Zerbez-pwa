@@ -1,34 +1,52 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from "react";
+import { useSpring } from "react-spring";
+import { animated } from "react-spring";
 
-import {GoThreeBars} from 'react-icons/go'
 
 /*   Dashboard.js is rendered in App.js    */
 
 function Dashboard() {
-    return(
-        <div>
-            <h1>Dashboard</h1>
 
-            <Link to="/Settings" className="link"><GoThreeBars className="Settings_button_Dashboard"/></Link>
-            <br></br>
-            <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link">Floor Plan</Link></button>
-            <br></br>
-            <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link">New Reseration</Link></button>
-            <br></br>
-            <button className="Dashboard_button_Reseration"><Link to="/Reservations" className="link">Reserations</Link></button>
-            <br></br>
-            <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link">Shift Schedule</Link></button>
-            <br></br>
-            <button className="Dashboard_button_AssignTables"><Link to="/AssignTables" className="link">Assing Tables</Link></button>
-            <br></br>
-            <button className="Dashboard_button_TimePerCover"><Link to="/TimePerCover" className="link">Time Per Cover</Link></button>
-            <br></br>
-            <button className="Dashboard_button_EndShift"><Link to="/" className="link">End Shit</Link></button>
-            
-            
-        </div>
-    )
-}
+    const [rightMenuVisible, setRightMenuVisible] = useState(false);
+
+  
+
+    const MenuRight = ({ style }) => (
+        <animated.div className="menu menu--right" style={style}>
+            <nav>
+                <ul className="menu-list menu-list--right">
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/">Home</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/">About</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/">Work</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/">Contact</a>
+                </li>
+                </ul>
+            </nav>
+        </animated.div>
+    ); 
+
+    const rightMenuAnimation = useSpring({
+        opacity: rightMenuVisible ? 1 : 0,
+        transform: rightMenuVisible ? `translateX(0)` : `translateX(100%)`
+    });
+        
+    return (
+        <div className="Dashboard">
+            <button className="menu-button" onClick={() => setRightMenuVisible(!rightMenuVisible)}>
+                {rightMenuVisible ? "Close" : "Side Menu"}
+            </button>
+    
+            <MenuRight style={rightMenuAnimation} />
+        </div> 
+    );
+      
+    }
 
 export default Dashboard;
