@@ -375,68 +375,26 @@ input.codeFourBarText.form-control::placeholder{
 /* Dashboard r*/
 
 /* Settings button */
-.Settings_button_Dashboard{
-  position:   absolute;
-  top:        25px;
-  left:       25px;
-  text-align: left;
-  font-size: 40px;
-}
-
-/* side Nav bar for settings */
-
-
-
-
-
-
-
-
-
-
-
-
-.Account_button_Settings, 
-.Analytics_button_Settings, 
-.Notifications_button_Settings, 
-.Help_button_Settings, 
-.About_button_Settings {
-  background-color: #2A3C60;
-}
-
-
-
-
-/*      */
-
-.menu-button--full {
-  top: 40px;
-  right: 20px;
-}
-
 .menu-button {
   z-index: 40;
   border: none;
   position: fixed;
   top: 25px;
   right: 25px;
-  padding: 12px;
-  font-size: 1em;
-  background: none;
-  background: #fff;
-  color: #692969;
-  transition: background 0.1s linear;
+  font-size: 35px;
+  color: #F4F1F2;
+  transition: 0.1s linear;
   cursor: pointer;
 }
 
 .menu-button:hover {
-  background: #e8daff;
+  color: #E95554;
 }
 
 .menu {
   position: absolute;
-  background: #6929c4;
-  color: #fff;
+  background: #2A3C60;
+  color: #F4F1F2;
   z-index: 30;
 }
 
@@ -444,41 +402,48 @@ input.codeFourBarText.form-control::placeholder{
 .menu--right {
   top: 0;
   right: 0;
-  width: 250px;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  
 }
 
-
-
+/* Items in the list */
 .menu-list {
-  padding: 0;
   list-style: none;
-  font-size: 25px;
-}
-
-.menu-list--right {
-  margin: 100px 24px;
+  font-size: 28px;
+  position: absolute;
+  top: 32%; left: 42%;
 }
 
 /* Line spacing between setting list options*/
 .menu-list-item--right {
-  margin: 24px 0;
+  margin: 24px ;
 }
 
 .menu a {
   text-decoration: none;
-  color: #e8daff;
+  color: #F4F1F2;
 }
 
 .menu a:hover,
 .menu a:focus {
-  color: #fff;
+  color: #E95554;
 }
 
 
 
 
 
+
+
+/* back buttons*/
+.Account_button_Settings, 
+.Analytics_button_Settings, 
+.Notifications_button_Settings, 
+.Help_button_Settings, 
+.About_button_Settings {
+  background-color: #2A3C60;
+}
 
 
 
