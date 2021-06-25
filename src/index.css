@@ -400,11 +400,8 @@ input.codeFourBarText.form-control::placeholder{
 
 /* positioning of the whole menu */
 .menu--right {
-  top: 0;
-  right: 0;
   width: 100%;
   height: 100%;
-  
 }
 
 /* Items in the list */
@@ -412,7 +409,7 @@ input.codeFourBarText.form-control::placeholder{
   list-style: none;
   font-size: 28px;
   position: absolute;
-  top: 32%; left: 42%;
+  top: 32%; left: 32%; right:32%; bottom:32%;
 }
 
 /* Line spacing between setting list options*/
