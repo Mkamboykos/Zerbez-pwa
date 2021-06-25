@@ -27,6 +27,9 @@ h1, p{
 
 
 
+
+
+
  /* Containers in home page*/
 
 .homePageContainer{
@@ -433,17 +436,10 @@ input.codeFourBarText.form-control::placeholder{
 
 
 
-/* back buttons*/
-.Account_button_Settings, 
-.Analytics_button_Settings, 
-.Notifications_button_Settings, 
-.Help_button_Settings, 
-.About_button_Settings {
-  background-color: #2A3C60;
-}
 
 
-
+/* Red buttons */
+.continue_button_ForgotPassword,
 .continue_button_forgetPassword, 
 .continue_button_EnterCode,
 .Submit_button_forgetPassword, 
@@ -453,11 +449,14 @@ input.codeFourBarText.form-control::placeholder{
   background-color: #E95554;
 }
 
+/* Pink buttons */
 .Dashboard_button_NewReservation, 
 .Dashboard_button_Reseration{
   background-color: #DC967F;
 }
 
+/* Blue buttons */
+.Plus_button_FloorPlan,
 .Dashboard_button_ShiftSchedule,
 .Dashboard_button_AssignTables,
 .Dashboard_button_TimePerCover{
@@ -466,14 +465,17 @@ input.codeFourBarText.form-control::placeholder{
 
 
 
-.continue_button_ForgotPassword{
-  background-color: #E95554;
+
+/* Back buttons color*/
+.Account_button_Settings, 
+.Analytics_button_Settings, 
+.Notifications_button_Settings, 
+.Help_button_Settings, 
+.About_button_Settings {
+  background-color: #2A3C60;
 }
-
-
-
  
-/*Back Buttons*/
+/*Back Buttons formatting*/
 .Back_button_Settings,
 .Back_button_ForgotPassword,
 .Back_button_Settings,
@@ -497,9 +499,4 @@ input.codeFourBarText.form-control::placeholder{
   text-align: left;
   font-size: 40px;
 } 
-
- .Plus_button_FloorPlan{
-   background-color: #91A8C0;
- }
-
 
