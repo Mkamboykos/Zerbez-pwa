@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
-import { SettingsBar } from "./SettingsBar"
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
 
 /*   Dashboard.js is rendered in App.js    */
-
-
 
 function Dashboard() {
 
@@ -36,8 +33,35 @@ function Dashboard() {
         </animated.div>
 )
 
+const SettingsBar = ({ style }) => (
+    <animated.div className="menu menu--right" style={style}>
+        <nav>
+            <ul className="menu-list menu-list--right">
+                <li className="menu-list-item menu-list-item--right homeButton">
+                    <a href="/Dashboard" style={{color: "#E95554"}}>Home</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/Account">Account</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/Analytics">Analytics</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/Notifications">Notifications</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/Help">Help</a>
+                </li>
+                <li className="menu-list-item menu-list-item--right">
+                    <a href="/About">About</a>
+                </li>
+            </ul>
+        </nav>
+    </animated.div>
+)
+
     return(
-        <div className="Dashboard">
+        <div>
                 <div>
                     {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
                     {MenuVisible && <SettingsBar style={MenuAnimation}/>}

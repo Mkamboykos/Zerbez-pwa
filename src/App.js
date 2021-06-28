@@ -7,7 +7,6 @@ import Dashboard from './Dashboard_Page/Dashboard'
 import ForgotPassword from './Login_Page/ForgotPassword'
 import EnterCode from './ForgotPassword_Page/EnterCode'
 import ResetPassword from './ForgotPassword_Page/ResetPassword'
-import Settings from './Dashboard_Page/Settings'
 import Account from './Settings/Account'
 import Analytics from './Settings/Analytics'
 import Notifications from './Settings/Notifications'
@@ -31,7 +30,6 @@ function App() {
       <Route exact path="/ForgotPassword" component={ForgotPassword}/>
       <Route exact path="/EnterCode" component={EnterCode}/>
       <Route exact path="/ResetPassword" component={ResetPassword}/>
-      <Route exact path="/Settings" component={Settings}/>
       <Route exact path="/Account" component={Account}/>
       <Route exact path="/Analytics" component={Analytics}/>
       <Route exact path="/Notifications" component={Notifications}/>

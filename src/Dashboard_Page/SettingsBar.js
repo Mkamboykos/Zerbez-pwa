@@ -7,8 +7,8 @@ import { animated } from "react-spring";
         <animated.div className="menu menu--right" style={style}>
             <nav>
                 <ul className="menu-list menu-list--right">
-                    <li className="menu-list-item menu-list-item--right">
-                        <a href="/Dashboard">Home</a>
+                    <li className="menu-list-item menu-list-item--right homeButton">
+                        <a href="/Dashboard" >Home</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href="/Account">Account</a>
