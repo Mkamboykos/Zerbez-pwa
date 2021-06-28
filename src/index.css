@@ -90,10 +90,8 @@ h1, p{
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
-
-  margin-top: 75px;
-  margin-bottom: 75px;
+  height: 17vh;
+  margin-top: 25px;
 }
 
 /* Home Page Title */
