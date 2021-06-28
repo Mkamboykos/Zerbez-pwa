@@ -63,29 +63,31 @@ class ForgotPassword extends Component{
         return (
             <div>
                 <Link to="/" className="link"><IoChevronBack className="Back_button_ForgotPassword"/></Link>
-                <div className="forgotPasswordTitleContainer">
-                    <h1 className="forgotTitleText"><b>Forgot</b></h1>
-                    <h1 className="passwordTitleText"><b>Password?</b></h1>
-                </div>
-                <div>
-                    <Form onKeyPress={this.handleKeyPressContinue}>
-                        <div className="forgotPasswordTextContainer">
-                            <p className="forgotPasswordText">
-                                Enter your email for the verification process, we will send a 4 digit code to your email.
-                            </p>
-                        </div>
+                <div className="forgotContainer">
+                    <div className="forgotPasswordTitleContainer">
+                        <h1 className="forgotTitleText"><b>Forgot</b></h1>
+                        <h1 className="passwordTitleText"><b>Password?</b></h1>
+                    </div>
+                    <div>
+                        <Form onKeyPress={this.handleKeyPressContinue}>
+                            <div className="forgotPasswordTextContainer">
+                                <p className="forgotPasswordText">
+                                    Enter your email for the verification process, we will send a 4 digit code to your email.
+                                </p>
+                            </div>
 
-                        <Form.Group className="passwordBar">
-                            <Form.Control type="email"  placeholder="Email" className="passwordBarText" onChange={this.handleEmail} />
-                        </Form.Group>
+                            <Form.Group className="passwordBar">
+                                <Form.Control type="email"  placeholder="Email" className="passwordBarText" onChange={this.handleEmail} />
+                            </Form.Group>
 
-                        <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
-                            <b>CONTINUE</b>
-                        </button>
-                        {this.renderRedirect()}
-                    </Form>
-                </div>
-            </div>        
+                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
+                                <b>CONTINUE</b>
+                            </button>
+                            {this.renderRedirect()}
+                        </Form>
+                    </div>
+                </div>    
+            </div>    
         );
       }
     }

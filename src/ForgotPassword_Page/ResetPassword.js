@@ -84,33 +84,35 @@ class ResetPassword extends Component{
         return (
             <div>
                 <Link to="/EnterCode" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link>
-                <div className="forgotPasswordTitleContainer">
-                    <h1 className="forgotTitleText"><b>Reset</b></h1>
-                    <h1 className="passwordTitleText"><b>Password</b></h1>
-                </div>
-                <div>
-                    <Form onKeyPress={this.handleKeyPressSubmit}>
-                        <div className="forgotPasswordTextContainer">
-                            <p className="forgotPasswordText">
-                            Set the new password for your account so you can login and access all the features.
-                            </p>
-                        </div>
+                <div className="forgotContainer">
+                    <div className="forgotPasswordTitleContainer">
+                        <h1 className="forgotTitleText"><b>Reset</b></h1>
+                        <h1 className="passwordTitleText"><b>Password</b></h1>
+                    </div>
+                    <div>
+                        <Form onKeyPress={this.handleKeyPressSubmit}>
+                            <div className="forgotPasswordTextContainer">
+                                <p className="forgotPasswordText">
+                                Set the new password for your account so you can login and access all the features.
+                                </p>
+                            </div>
 
-                        <Form.Group className="usernameBar">
-                                    <Form.Control type="password" placeholder="New Password" className="usernameBarText" onChange={this.handleNewPassword}/>
-                            </Form.Group>
-                        
-                            <Form.Group className="passwordBar">
-                                <Form.Control type="password"  placeholder="Confirm New Password" className="passwordBarText" onChange={this.handleConfirmNewPassword} />
-                            </Form.Group>
+                            <Form.Group className="usernameBar">
+                                        <Form.Control type="password" placeholder="New Password" className="usernameBarText" onChange={this.handleNewPassword}/>
+                                </Form.Group>
+                            
+                                <Form.Group className="passwordBar">
+                                    <Form.Control type="password"  placeholder="Confirm New Password" className="passwordBarText" onChange={this.handleConfirmNewPassword} />
+                                </Form.Group>
 
-                        <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleSubmit} >
-                            <b>SUBMIT</b>
-                        </button>
-                        {this.renderRedirect()}
-                    </Form>
-                </div>
-            </div>        
+                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleSubmit} >
+                                <b>SUBMIT</b>
+                            </button>
+                            {this.renderRedirect()}
+                        </Form>
+                    </div>
+                </div> 
+            </div>           
         );
       }
     }

@@ -126,32 +126,34 @@ class EnterCode extends Component{
         return (
             <div>
                 <Link to="/ForgotPassword" className="link"><IoChevronBack className="Back_button_EnterCode"/></Link>
-                <div className="forgotPasswordTitleContainer">
-                    <h1 className="forgotTitleText"><b>Enter Code</b></h1>
-                </div>
-                <div>
-                    <Form onKeyPress={this.handleKeyPressContinue}>
-                        <div className="forgotPasswordTextContainer">
-                            <p className="forgotPasswordText">
-                            Enter the 4 digit code that you received on your email.
-                            </p>
-                        </div>
+                <div className="forgotContainer">
+                    <div className="forgotPasswordTitleContainer">
+                        <h1 className="forgotTitleText"><b>Enter Code</b></h1>
+                    </div>
+                    <div>
+                        <Form onKeyPress={this.handleKeyPressContinue}>
+                            <div className="forgotPasswordTextContainer">
+                                <p className="forgotPasswordText">
+                                Enter the 4 digit code that you received on your email.
+                                </p>
+                            </div>
 
-                        <Form.Group className="codeBarContainer">
-                            
-                            <Form.Control type="text" maxLength="1" className="codeOneBarText"   onChange={this.handleOne} />
-                            <Form.Control type="text" maxLength="1" className="codeTwoBarText"   onChange={this.handleTwo} />
-                            <Form.Control type="text" maxLength="1" className="codeThreeBarText" onChange={this.handleThree} />
-                            <Form.Control type="text" maxLength="1" className="codeFourBarText"  onChange={this.handleFour} />
-                        </Form.Group>
+                            <Form.Group className="codeBarContainer">
+                                
+                                <Form.Control type="text" maxLength="1" className="codeOneBarText"   onChange={this.handleOne} />
+                                <Form.Control type="text" maxLength="1" className="codeTwoBarText"   onChange={this.handleTwo} />
+                                <Form.Control type="text" maxLength="1" className="codeThreeBarText" onChange={this.handleThree} />
+                                <Form.Control type="text" maxLength="1" className="codeFourBarText"  onChange={this.handleFour} />
+                            </Form.Group>
 
-                        <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
-                            <b>CONTINUE</b>
-                        </button>
-                        {this.renderRedirect()}
-                    </Form>
-                </div>
-            </div>        
+                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
+                                <b>CONTINUE</b>
+                            </button>
+                            {this.renderRedirect()}
+                        </Form>
+                    </div>
+                </div>  
+            </div>      
         );
       }
     }
