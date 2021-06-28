@@ -420,7 +420,7 @@ input.codeFourBarText.form-control::placeholder{
 /* positioning of the whole menu */
 .menu--right {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   left: 0;
   top: 0;
   display: flex;
