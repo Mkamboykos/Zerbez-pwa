@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
+.App {
+  text-align: center;
+}
 
 
 /* Body */
@@ -52,9 +55,9 @@ h1, p{
 }
 
 .homePageImageContainer{
-  background-color: #C94B4A;
   margin-top: 100px;
   margin-bottom: 100px;
+  background-color: red;
 }
 
 .inputContainer{
@@ -92,6 +95,11 @@ h1, p{
   width: 100%;
   height: 17vh;
   margin-top: 25px;
+}
+
+.transitionCapchaContainer{
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 /* Home Page Title */

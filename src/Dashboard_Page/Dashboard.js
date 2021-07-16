@@ -62,11 +62,11 @@ const SettingsBar = ({ style }) => (
 
     return(
         <div>
-                <div>
-                    {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
-                    {MenuVisible && <SettingsBar style={MenuAnimation}/>}
-                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
-                </div>
+            <div>
+                {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
+                {MenuVisible && <SettingsBar style={MenuAnimation}/>}
+                <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
+            </div>
         </div>
     )
 }

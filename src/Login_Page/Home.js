@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
+import { Spring, animated } from 'react-spring';
 
 import {Form} from 'react-bootstrap'
 
@@ -11,7 +12,8 @@ class Home extends Component{
 
     //Initial State
         this.state = ({
-            display: false,
+            loginDisplay: true,
+            capChaDisplay: false,
             btnDisplay: false,
             redirect: false,
             username: "",
@@ -57,8 +59,9 @@ class Home extends Component{
         return;
         }else{
             this.setState({
-                display: true,
-                btnDisplay:true
+                capChaDisplay: true,
+                btnDisplay:true,
+                loginDisplay: false
             });
         }    
 
@@ -81,9 +84,10 @@ class Home extends Component{
                 alert("Missing Username")
                 return;
             }else{
-                this.setState({
-                    display: true,
-                    btnDisplay:true
+                this.setState({                    
+                    capChaDisplay: true,
+                    btnDisplay:true,
+                    loginDisplay:false
                 });
             }
             let random = Math.random().toString(36).substring(7);
@@ -158,48 +162,73 @@ class Home extends Component{
             </div>
         ) 
     }
-    
-    render() {
-        return (
-            <div className="homePageContainer">
-                <div className="HomePageTitleContainer">
-                    <h1 className="homeTileTimeText"><b>Time</b></h1>
-                    <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
-                </div>
-                <div>
-                    <Form onKeyPress={this.handleKeyPressLogin}>
-                        <div className="inputContainer">
 
-                            <div className="homePageImageContainer">
-                                <p>Insert Image Here</p>
-                            </div>
-
-                            <Form.Group className="usernameBar">
-                                    <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
-                            </Form.Group>
-                        
-                            <Form.Group className="passwordBar">
-                                <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
-                            </Form.Group>
-                            <div className="input_and_login_Container">
-                                <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
-                                
-                                <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
-                                    <b>LOGIN</b>
-                                </button>
-                            </div>
-
-                            <div className="forgotpasswordContainer">
-                                <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
-                            </div>
+    renderLogin(){
+        return(
+            <div>
+                <Form onKeyPress={this.handleKeyPressLogin}>    
+                    <div  className="inputContainer">       
+                        <div className="homePageImageContainer">
+                            <p>Insert Image Here</p>
                         </div>
-
-                        {this.state.display? this.renderCaptcha():""}
-                    </Form>
-                </div>
-            </div>        
-        );
-      }
+                        <Form.Group className="usernameBar">
+                            <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
+                        </Form.Group>
+                            
+                        <Form.Group className="passwordBar">
+                            <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
+                        </Form.Group>
+                        <div className="input_and_login_Container">
+                            <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
+                                
+                            <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
+                                <b>LOGIN</b>
+                            </button>
+                        </div>
+                        <div className="forgotpasswordContainer">
+                            <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
+                        </div>                     
+                    </div>
+                </Form> 
+            </div>
+        )
     }
+
+    render() {
+        if (this.state.loginDisplay){
+            return (
+                <Spring from={{ opacity: 1, Transform:`flash(0%)`}} to={{ opacity: 0, Transform:`flash(100%)`}}>
+                {style => (    
+                    <div className="homePageContainer">
+                        <div className="HomePageTitleContainer">
+                            <h1 className="homeTileTimeText"><b>Time</b></h1>
+                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                        </div>
+                        <animated.div>
+                            {this.state.loginDisplay?this.renderLogin():""}
+                        </animated.div>
+                    </div>
+                )}
+                </Spring>
+            )
+        } else if (this.state.capChaDisplay){
+            return (
+                <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
+                {style => (
+                    <div className="homePageContainer" >
+                        <div className="HomePageTitleContainer">
+                            <h1 className="homeTileTimeText"><b>Time</b></h1>
+                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                            <animated.div style={ style } className="transitionCapchaContainer">
+                                {this.state.capChaDisplay?this.renderCaptcha():""}
+                            </animated.div>
+                        </div>
+                    </div>
+                )}
+                </Spring>
+            )
+        }
+    }
+}
 
 export default Home;

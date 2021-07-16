@@ -1,6 +1,6 @@
-import './App.css'
+import './index.css'
 
-import {Route, Link} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import Home from './Login_Page/Home'
 import SignUp from './Login_Page/SignUp'
 import Dashboard from './Dashboard_Page/Dashboard'
@@ -46,36 +46,7 @@ function App() {
   )
 }
 
-// Background Color
+// Background Color of the entire app
 document.body.style = 'background: #2A3C60;';
 
 export default App;
-
-
-
-
-/* 
-
-Class name : Home.js   <--- do not include inside class
-
-import React from 'react'
-import {Link} from 'react-router-dom'
-
-function Home() {
-  return(
-      <div>
-          <h1>Time Waiter</h1>
-
-          <Link to="/SignUp">Sign Up</Link>
-          <br></br>
-          <Link to="/Dashboard">Login</Link>
-          <br></br>
-          <Link to="/ForgotPassword">Forgot Password?</Link>
-
-      </div>
-  )
-}
-
-export default Home;
-
-*/
