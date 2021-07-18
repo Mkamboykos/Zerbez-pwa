@@ -223,14 +223,48 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   background-color: #D24B4A;
 }
 
-/* Signup button for signup page*/
 
-.signUp_button_two {
-  background-color: #DC967F;
+
+
+
+
+/* SignUp Page*/
+
+/* SignUp Container that holds the form and button*/
+
+.SignUp_Page_Container{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
+/* SignUp Page Title*/
 
+.SignUp_Page_Title{
+  position: fixed;
+  font-weight: bold;
+  font-size: 30pt;
+  top: 18px;
+}
 
+/* SignUp Page Button */
+
+.signUp_button_two {
+  border: none;
+  position: fixed;
+  bottom: 3em;
+  border-radius: 25px;
+  width: 115px;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0;
+  background-color: #DC967F;
+}
 
 
 
@@ -523,7 +557,7 @@ input.codeFourBarText.form-control::placeholder{
 /* positioning of the whole menu */
 .menu--right {
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   left: 0;
   top: 0;
   display: flex;
