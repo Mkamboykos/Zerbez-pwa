@@ -24,7 +24,7 @@ function Dashboard() {
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
             <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link"><b>FLOOR PLAN</b></Link></button>
-            <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link"><b>New Reservation</b></Link></button>
+            <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link"><b>New<br/> Reservation</b></Link></button>
             <button className="Dashboard_button_Reserations"><Link to="/Reservations" className="link"><b>Reservations</b></Link></button>
             <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link"><b>SHIFT SCHEDULE</b></Link></button>
             <button className="Dashboard_button_AssignTables"><Link to="/ShiftSchedule" className="link"><b>ASSIGN TABLES</b></Link></button>

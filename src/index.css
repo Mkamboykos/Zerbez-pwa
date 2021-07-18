@@ -4,7 +4,6 @@
   text-align: center;
 }
 
-
 /* Body */
 
 body {
@@ -393,7 +392,105 @@ input.codeFourBarText.form-control::placeholder{
 
 
 
-/* Dashboard r*/
+/* Dashboard */
+
+/* Dashboard page column outer container holding all buttons */
+.Dashboard_Buttons{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0;
+}
+
+/* Dashboard buttons*/
+
+.Dashboard_button_FloorPlan{
+  border: none;
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  border-radius: 25px;
+  width: 10em;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_NewReservation{
+  border: none;
+  position: fixed;
+  bottom: 14.3em;
+  border-radius: 25px;
+  width: 8.6em;
+  height: calc(2.8em + .75rem + 2px);
+  font-size: 21pt;
+  line-height: 1.2;
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_Reserations{
+  border: none;
+  position: fixed;
+  bottom: 11.9em;
+  border-radius: 25px;
+  width: 9em;
+  height: calc(2.2em + .75rem + 2px);
+  font-size: 20pt;
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_ShiftSchedule{
+  border: none;
+  position: fixed;
+  bottom: 14.5em;
+  border-radius: 25px;
+  width: 10em;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_AssignTables{
+  border: none;
+  position: fixed;
+  bottom: 11.5em;
+  border-radius: 25px;
+  width: 10em;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_TimePerCover{
+  border: none;
+  position: fixed;
+  bottom: 8.5em;
+  border-radius: 25px;
+  width: 10em;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+.Dashboard_button_EndShift{
+  border: none;
+  position: fixed;
+  bottom: 3em;
+  border-radius: 25px;
+  width: 10em;
+  height: calc(1.5em + .75rem + 2px);
+  color: #F4F1F2;  
+  cursor: pointer;
+}
+
+
+
+
 
 /* Settings button */
 .menu-button {
@@ -432,6 +529,7 @@ input.codeFourBarText.form-control::placeholder{
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
 }
 
 /* Items in the list The padding 0 centers the list in the middle of the page */
@@ -455,8 +553,6 @@ input.codeFourBarText.form-control::placeholder{
 .menu a:focus {
   color: #E95554;
 }
-
-
 
 
 
@@ -488,6 +584,9 @@ input.codeFourBarText.form-control::placeholder{
 .Dashboard_button_TimePerCover{
   background-color: #91A8C0;
 }
+
+
+
 
 
 
