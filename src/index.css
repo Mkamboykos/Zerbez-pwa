@@ -12,7 +12,7 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1, p{
@@ -238,39 +238,54 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+}
+
+.signUp_Form_Container{
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: unset;
+  justify-content: center;
+  overflow-y: auto;
+  padding-left: 30px;
+  padding-right:30px;
+  padding-bottom: 30px;
+
 }
 
 /* SignUp Page Title*/
 
 .SignUp_Page_Title{
-  position: fixed;
+  position: relative;
   font-weight: bold;
   font-size: 30pt;
   top: 18px;
+  padding-bottom: 20px;
 }
 
 /* SignUp Page Button */
 
 .signUp_button_two {
   border: none;
-  position: fixed;
-  bottom: 3em;
+  position: relative;
+  top: 0px;
+
   border-radius: 25px;
   width: 115px;
   height: calc(1.5em + .75rem + 2px);
   color: #F4F1F2;  
   cursor: pointer;
   font-weight: bold;
-  padding: 0;
   background-color: #DC967F;
+  align-self: center;
+  
 }
 
-input {
- color: #F4F1F2 !important;
+label{
+  color: #F4F1F2;
 }
-
-
 
 
 

@@ -1,8 +1,7 @@
-import React, { useState, Col, makeStyles } from 'react'
+import React, { useState} from 'react'
 import {Link} from 'react-router-dom'
-import {Form} from 'react-bootstrap'
-import {TextField} from '@material-ui/core'
-
+import {Button, Form} from 'react-bootstrap'
+import {TextField, createTheme, MuiThemeProvider } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 
 /*   SignUp.js is rendered in App.js    */
@@ -17,95 +16,142 @@ function SignUp() {
             event.preventDefault();
             event.stopPropagation();
         }
-
         setValidated(true);
     };
+
+    // color is the main white used accross the app
+    const color = "#F4F1F2";
+    // color2 is the grey used accross the app
+    const color2 = "#91A8C0";
+
+    const theme = createTheme({
+        palette: {
+            common: { black: color, white: color },
+            primary: { main: color, dark: color, light: color },
+            text: { primary: color, secondary: color2 },
+
+        },
+        overrides: {
+            MuiInput: {
+                underline: {
+                    "&:before": {
+                    borderBottom: `1px solid ${color}`
+                    }
+                }
+            }
+        }
+    });
+
+
+      
+
+    const getData = (e) => {
+        console.warn(e.target.value)
+    }
 
 
     return(
         <div className="SignUp_Page_Container">
-            <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
-            <h1 className="SignUp_Page_Title">Sign Up</h1>
             
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Form.Group controlId="validationCustom01" as={Col} md="4">
-                    <TextField
-                        required
-                        className="signUp_TextField"
-                        variant ="filled"
-                        label="First Name"
-                        type="text"
-                    />
-                </Form.Group>
+            <Form className="signUp_Form_Container" noValidate validated={validated} onSubmit={handleSubmit} >
+                
+                <h1 className="SignUp_Page_Title">Sign Up</h1>
+                <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
+                <MuiThemeProvider theme={theme}>
+                    <Form.Group controlId="validationCustom01">
+                        <TextField
+                            required
+                            disableUnderline={true}
+                            label="First Name"
+                            type="text"
+                            fullWidth
+                            onChange={getData}
+                        />
+                    </Form.Group>
 
-                <Form.Group controlId="validationCustom02" as={Col} md="4">
-                    <Form.Control required type="text" placeholder="Last Name" />
-                </Form.Group>
+                    <Form.Group controlId="validationCustom02">
+                        <TextField
+                            required
+                            label="Last Name"
+                            type="text"
+                            fullWidth
+                        />
+                    </Form.Group>
+                    
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="Password"
+                            type="password"
+                            fullWidth
+                            // helperText="Your password must be 8-20 characters long, contain letters and numbers, and
+                            // must not contain spaces, special characters, or emoji."
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" htmlFor="inputPassword5" controlId="formBasicEmail">
-                    <Form.Control 
-                        type="password" 
-                        id="inputPassword5"
-                        aria-describedby="passwordHelpBlock"
-                        placeholder="Password" 
-                    />
-                    <Form.Text id="passwordHelpBlock" muted>
-                        Your password must be 8-20 characters long, contain letters and numbers, and
-                        must not contain spaces, special characters, or emoji.
-                    </Form.Text>
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="Confirm Password"
+                            type="password"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="confirmPassword" 
-                        placeholder="Confirm Password" 
-                    />
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="Restaurant Name"
+                            type="text"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="restaurantName" 
-                        placeholder="Restaurant Name" 
-                    />
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="Restaurant Address"
+                            type="address"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="restaurantAddress" 
-                        placeholder="Restaurant Address" 
-                    />
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="City"
+                            type="city"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="city" 
-                        placeholder="City" 
-                    />
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="State"
+                            type="state"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="state" 
-                        placeholder="State" 
-                    />
-                </Form.Group>
+                    <Form.Group >
+                        <TextField
+                            required
+                            label="ZIP Code"
+                            type="numbers"
+                            fullWidth
+                        />
+                    </Form.Group>
 
-                <Form.Group className="" controlId="formBasicPassword">
-                    <Form.Control 
-                        type="zipCode" 
-                        placeholder="ZIP Code" 
-                    />
-                </Form.Group>
-
-                <Form.Group className="" controlId="formBasicCheckbox">
-                    <Form.Check 
-                        type="radio"
-                        label="I affirm to be currently working as a host/hostess at this location." 
-                    />
-                </Form.Group>
+                    <Form.Group className="" controlId="formBasicCheckbox">
+                        <Form.Check 
+                            type="radio"
+                            label="I affirm to be currently working as a host/hostess at this location." 
+                        />
+                    </Form.Group>
+                </MuiThemeProvider>
+                <button className="signUp_button_two"><Link to="/DashBoard" className="link">SIGN UP</Link></button>
             </Form>
-
-            <button className="signUp_button_two"><Link to="/DashBoard" className="link">SIGN UP</Link></button>
         </div>
     )
 }
