@@ -252,7 +252,6 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   padding-left: 30px;
   padding-right:30px;
   padding-bottom: 30px;
-
 }
 
 /* SignUp Page Title*/
@@ -271,7 +270,6 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   border: none;
   position: relative;
   top: 0px;
-
   border-radius: 25px;
   width: 115px;
   height: calc(1.5em + .75rem + 2px);
@@ -280,7 +278,6 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   font-weight: bold;
   background-color: #DC967F;
   align-self: center;
-  
 }
 
 label{
