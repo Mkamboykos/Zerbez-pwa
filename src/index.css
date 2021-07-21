@@ -228,6 +228,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 
 
 
+
 /* SignUp Page*/
 
 /* SignUp Container that holds the form and button*/
@@ -283,6 +284,10 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 label{
   color: #F4F1F2;
 }
+
+
+
+
 
 
 
@@ -542,6 +547,8 @@ input.codeFourBarText.form-control::placeholder{
 
 
 
+
+
 /* Settings button */
 .menu-button {
   z-index: 40;
@@ -674,6 +681,9 @@ input.codeFourBarText.form-control::placeholder{
   text-align: left;
   font-size: 40px;
 } 
+
+
+
 
 
 /*Back Buttons hover red*/
