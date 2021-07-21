@@ -266,6 +266,10 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   background-color: #DC967F;
 }
 
+input {
+ color: #F4F1F2 !important;
+}
+
 
 
 
