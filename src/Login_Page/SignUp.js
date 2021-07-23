@@ -53,10 +53,10 @@ function SignUp() {
     return(
         <div className="SignUp_Page_Container">
             
+            <h1 className="SignUp_Page_Title">Sign Up</h1>
+            
             <Form className="signUp_Form_Container" noValidate validated={validated} onSubmit={handleSubmit} >
-                
-                <h1 className="SignUp_Page_Title">Sign Up</h1>
-                <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
+
                 <MuiThemeProvider theme={theme}>
                     <Form.Group controlId="validationCustom01">
                         <TextField
@@ -152,6 +152,8 @@ function SignUp() {
                 </MuiThemeProvider>
                 <button className="signUp_button_two"><Link to="/DashBoard" className="link">SIGN UP</Link></button>
             </Form>
+
+            <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
         </div>
     )
 }

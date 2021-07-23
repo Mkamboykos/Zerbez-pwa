@@ -167,10 +167,12 @@ class Home extends Component{
         return(
             <div>
                 <Form onKeyPress={this.handleKeyPressLogin}>    
-                    <div  className="inputContainer">       
-                        <div className="homePageImageContainer">
-                            <p>Insert Image Here</p>
-                        </div>
+
+                    <div className="homePageImageContainer">
+                        <p>Insert Image Here</p>
+                    </div>
+
+                    <div  className="inputContainer">  
                         <Form.Group className="usernameBar">
                             <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
                         </Form.Group>
@@ -219,11 +221,11 @@ class Home extends Component{
                         <div className="HomePageTitleContainer">
                             <h1 className="homeTileTimeText"><b>Time</b></h1>
                             <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                        </div>
                             <animated.div style={ style } className="transitionCapchaContainer">
                                 {this.state.capChaDisplay?this.renderCaptcha():""}
                             </animated.div>
                         </div>
-                    </div>
                 )}
                 </Spring>
             )

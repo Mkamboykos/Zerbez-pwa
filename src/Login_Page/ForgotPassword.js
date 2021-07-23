@@ -62,7 +62,6 @@ class ForgotPassword extends Component{
     render() {
         return (
             <div>
-                <Link to="/" className="link"><IoChevronBack className="Back_button_ForgotPassword"/></Link>
                 <div className="forgotContainer">
                     <div className="forgotPasswordTitleContainer">
                         <h1 className="forgotTitleText"><b>Forgot</b></h1>
@@ -86,7 +85,8 @@ class ForgotPassword extends Component{
                             {this.renderRedirect()}
                         </Form>
                     </div>
-                </div>    
+                </div>
+                <Link to="/" className="link"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
             </div>    
         );
       }

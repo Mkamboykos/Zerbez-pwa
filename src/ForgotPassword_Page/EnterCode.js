@@ -125,7 +125,6 @@ class EnterCode extends Component{
     render() {
         return (
             <div>
-                <Link to="/ForgotPassword" className="link"><IoChevronBack className="Back_button_EnterCode"/></Link>
                 <div className="forgotContainer">
                     <div className="forgotPasswordTitleContainer">
                         <h1 className="forgotTitleText"><b>Enter Code</b></h1>
@@ -152,7 +151,8 @@ class EnterCode extends Component{
                             {this.renderRedirect()}
                         </Form>
                     </div>
-                </div>  
+                </div>   
+                <Link to="/ForgotPassword" className="link"><IoChevronBack className="Back_button_EnterCode"/></Link>
             </div>      
         );
       }

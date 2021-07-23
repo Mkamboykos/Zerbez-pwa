@@ -83,7 +83,6 @@ class ResetPassword extends Component{
     render() {
         return (
             <div>
-                <Link to="/EnterCode" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link>
                 <div className="forgotContainer">
                     <div className="forgotPasswordTitleContainer">
                         <h1 className="forgotTitleText"><b>Reset</b></h1>
@@ -111,7 +110,8 @@ class ResetPassword extends Component{
                             {this.renderRedirect()}
                         </Form>
                     </div>
-                </div> 
+                </div>
+                <Link to="/EnterCode" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
             </div>           
         );
       }
