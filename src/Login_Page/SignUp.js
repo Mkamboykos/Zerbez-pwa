@@ -42,9 +42,7 @@ function SignUp() {
         }
     });
 
-
-      
-
+    
     const getData = (e) => {
         console.warn(e.target.value)
     }

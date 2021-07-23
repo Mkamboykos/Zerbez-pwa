@@ -21,6 +21,33 @@ function Dashboard() {
         transform: MenuVisible ? `flash(0%)` : `flash(100%)`
     });
 
+    const SettingsBar = ({ style }) => (
+        <animated.div className="menu menu--right" style={style}>
+            <nav>
+                <ul className="menu-list menu-list--right">
+                    <li className="menu-list-item menu-list-item--right homeButton">
+                        <a href="/Dashboard" style={{color: "#E95554"}}>Home</a>
+                    </li>
+                    <li className="menu-list-item menu-list-item--right">
+                        <a href="/Account">Account</a>
+                    </li>
+                    <li className="menu-list-item menu-list-item--right">
+                        <a href="/Analytics">Analytics</a>
+                    </li>
+                    <li className="menu-list-item menu-list-item--right">
+                        <a href="/Notifications">Notifications</a>
+                    </li>
+                    <li className="menu-list-item menu-list-item--right">
+                        <a href="/Help">Help</a>
+                    </li>
+                    <li className="menu-list-item menu-list-item--right">
+                        <a href="/About">About</a>
+                    </li>
+                </ul>
+            </nav>
+        </animated.div>
+    )
+
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
             <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link"><b>FLOOR PLAN</b></Link></button>
@@ -31,34 +58,7 @@ function Dashboard() {
             <button className="Dashboard_button_TimePerCover"><Link to="/TimePerCover" className="link"><b>TIME PER COVER</b></Link></button>
             <button className="Dashboard_button_EndShift"><Link to="/" className="link"><b>END OF SHIFT</b></Link></button>
         </animated.div>
-)
-
-const SettingsBar = ({ style }) => (
-    <animated.div className="menu menu--right" style={style}>
-        <nav>
-            <ul className="menu-list menu-list--right">
-                <li className="menu-list-item menu-list-item--right homeButton">
-                    <a href="/Dashboard" style={{color: "#E95554"}}>Home</a>
-                </li>
-                <li className="menu-list-item menu-list-item--right">
-                    <a href="/Account">Account</a>
-                </li>
-                <li className="menu-list-item menu-list-item--right">
-                    <a href="/Analytics">Analytics</a>
-                </li>
-                <li className="menu-list-item menu-list-item--right">
-                    <a href="/Notifications">Notifications</a>
-                </li>
-                <li className="menu-list-item menu-list-item--right">
-                    <a href="/Help">Help</a>
-                </li>
-                <li className="menu-list-item menu-list-item--right">
-                    <a href="/About">About</a>
-                </li>
-            </ul>
-        </nav>
-    </animated.div>
-)
+    )
 
     return(
         <div>
