@@ -181,7 +181,7 @@ class Home extends Component{
                             <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
                         </Form.Group>
                         <div className="input_and_login_Container">
-                            <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
+                            <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
                                 
                             <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
                                 <b>LOGIN</b>

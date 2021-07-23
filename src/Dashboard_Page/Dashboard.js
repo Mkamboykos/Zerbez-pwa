@@ -50,13 +50,13 @@ function Dashboard() {
 
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
-            <button className="Dashboard_button_FloorPlan"><Link to="/FloorPlan" className="link"><b>FLOOR PLAN</b></Link></button>
-            <button className="Dashboard_button_NewReservation"><Link to="/NewReservation" className="link"><b>New<br/> Reservation</b></Link></button>
-            <button className="Dashboard_button_Reserations"><Link to="/Reservations" className="link"><b>Reservations</b></Link></button>
-            <button className="Dashboard_button_ShiftSchedule"><Link to="/ShiftSchedule" className="link"><b>SHIFT SCHEDULE</b></Link></button>
-            <button className="Dashboard_button_AssignTables"><Link to="/ShiftSchedule" className="link"><b>ASSIGN TABLES</b></Link></button>
-            <button className="Dashboard_button_TimePerCover"><Link to="/TimePerCover" className="link"><b>TIME PER COVER</b></Link></button>
-            <button className="Dashboard_button_EndShift"><Link to="/" className="link"><b>END OF SHIFT</b></Link></button>
+            <Link to="/FloorPlan" className="link"><button className="Dashboard_button_FloorPlan"><b>FLOOR PLAN</b></button></Link>
+            <Link to="/NewReservation" className="link"><button className="Dashboard_button_NewReservation"><b>New<br/> Reservation</b></button></Link>
+            <Link to="/Reservations" className="link"><button className="Dashboard_button_Reserations"><b>Reservations</b></button></Link>
+            <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
+            <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
+            <Link to="/TimePerCover" className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
+            <Link to="/" className="link"><button className="Dashboard_button_EndShift"><b>END OF SHIFT</b></button></Link>
         </animated.div>
     )
 

@@ -152,7 +152,7 @@ function SignUp() {
                 </MuiThemeProvider>
 
                 <div className="signUp_button_two_Container">
-                    <button className="signUp_button_two"><Link to="/DashBoard" className="link">SIGN UP</Link></button>
+                    <Link to="/DashBoard" className="link"><button className="signUp_button_two">SIGN UP</button></Link>
                 </div>
 
             </Form>
