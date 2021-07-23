@@ -203,8 +203,8 @@ class Home extends Component{
                 {style => (    
                     <div className="homePageContainer">
                         <div className="HomePageTitleContainer">
-                            <h1 className="homeTileTimeText"><b>Time</b></h1>
-                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                         </div>
                         <animated.div>
                             {this.state.loginDisplay?this.renderLogin():""}
@@ -219,8 +219,8 @@ class Home extends Component{
                 {style => (
                     <div className="homePageContainer" >
                         <div className="HomePageTitleContainer">
-                            <h1 className="homeTileTimeText"><b>Time</b></h1>
-                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                         </div>
                             <animated.div style={ style } className="transitionCapchaContainer">
                                 {this.state.capChaDisplay?this.renderCaptcha():""}

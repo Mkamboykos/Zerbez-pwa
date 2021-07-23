@@ -101,11 +101,11 @@ h1, p{
 
 /* Home Page Title */
 
-.homeTileTimeText{
+.homeTitleTimeText{
   font-size: 95px;
 }
 
-.homeTileWaiterText{
+.homeTitleWaiterText{
   font-size: 95px;
   margin-top: -33px;
   margin-bottom: 0;
@@ -294,10 +294,15 @@ label{
 /*Forgot Password Container*/
 
 .forgotContainer{
-  position: absolute;
-  top: 37%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-left: 13px;
+  padding-right: 13px;
+  overflow: hidden;
 }
 
 .forgotPasswordTitleContainer{
@@ -306,9 +311,6 @@ label{
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  margin-top: 150px;
 }
 
 .forgotPasswordTextContainer{
@@ -324,25 +326,26 @@ label{
 
 .forgotTitleText{
   text-align: center;
-  font-size: 95px;
+  font-size: 70px;
   margin-bottom: 0;
 }
 
 .passwordTitleText{
   text-align: center;
-  font-size: 95px;
-  margin-top: -33px;
+  font-size: 70px;
+  margin-top: -15px;
   margin-bottom: 0;
 }
 
 /* Forgot Password Text */
 
 .forgotPasswordText{
-  width: 480px;
   text-align: center;
   font-size: 20px;
-  margin-top: 25px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Button in Forgot Password Page */
