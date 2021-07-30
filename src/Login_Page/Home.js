@@ -181,7 +181,7 @@ class Home extends Component{
                             <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
                         </Form.Group>
                         <div className="input_and_login_Container">
-                            <button className="signUp_button_home"><Link to="/SignUp" className="link"><b>SIGN UP</b></Link></button>
+                            <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
                                 
                             <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
                                 <b>LOGIN</b>
@@ -203,8 +203,8 @@ class Home extends Component{
                 {style => (    
                     <div className="homePageContainer">
                         <div className="HomePageTitleContainer">
-                            <h1 className="homeTileTimeText"><b>Time</b></h1>
-                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                         </div>
                         <animated.div>
                             {this.state.loginDisplay?this.renderLogin():""}
@@ -219,8 +219,8 @@ class Home extends Component{
                 {style => (
                     <div className="homePageContainer" >
                         <div className="HomePageTitleContainer">
-                            <h1 className="homeTileTimeText"><b>Time</b></h1>
-                            <h1 className="homeTileWaiterText"><b>Waiter</b></h1>
+                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                         </div>
                             <animated.div style={ style } className="transitionCapchaContainer">
                                 {this.state.capChaDisplay?this.renderCaptcha():""}

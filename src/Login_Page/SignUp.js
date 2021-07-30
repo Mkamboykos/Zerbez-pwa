@@ -42,9 +42,7 @@ function SignUp() {
         }
     });
 
-
-      
-
+    
     const getData = (e) => {
         console.warn(e.target.value)
     }
@@ -52,9 +50,9 @@ function SignUp() {
 
     return(
         <div className="SignUp_Page_Container">
-            
-            <h1 className="SignUp_Page_Title">Sign Up</h1>
-            
+            <div className="SignUp_Page_Title_Container">
+                <h1 className="SignUp_Page_Title">Sign Up</h1>
+            </div>
             <Form className="signUp_Form_Container" noValidate validated={validated} onSubmit={handleSubmit} >
 
                 <MuiThemeProvider theme={theme}>
@@ -122,6 +120,7 @@ function SignUp() {
                             label="City"
                             type="city"
                             fullWidth
+
                         />
                     </Form.Group>
 
@@ -147,10 +146,15 @@ function SignUp() {
                         <Form.Check 
                             type="radio"
                             label="I affirm to be currently working as a host/hostess at this location." 
+                            required
                         />
                     </Form.Group>
                 </MuiThemeProvider>
-                <button className="signUp_button_two"><Link to="/DashBoard" className="link">SIGN UP</Link></button>
+
+                <div className="signUp_button_two_Container">
+                    <Link to="/DashBoard" className="link"><button className="signUp_button_two">SIGN UP</button></Link>
+                </div>
+
             </Form>
 
             <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
