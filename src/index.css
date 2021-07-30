@@ -460,20 +460,22 @@ input.codeFourBarText.form-control::placeholder{
 
 /* Dashboard page column outer container holding all buttons */
 .Dashboard_Buttons{
-  display: flex;
+  display: inline-flex;
+  padding-top: 80px;
+  padding-bottom: 80px;
   flex-direction: column;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0;
+  
 }
 
 /* Dashboard buttons*/
 
 .Dashboard_button_FloorPlan{
   border: none;
-  position: absolute;
+  position: fixed;
   top: 40px;
   right: 40px;
   border-radius: 25px;
@@ -538,7 +540,7 @@ input.codeFourBarText.form-control::placeholder{
 
 .Dashboard_button_EndShift{
   border: none;
-  position: absolute;
+  position: fixed;
   bottom: 2em;
   border-radius: 25px;
   width: 10em;
