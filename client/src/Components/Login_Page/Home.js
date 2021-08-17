@@ -63,6 +63,7 @@ class Home extends Component{
                 btnDisplay:true,
                 loginDisplay: false
             });
+            //console.log(this.state.username + " " + this.state.password)
         }    
 
         let random = Math.random().toString(36).substring(7);
