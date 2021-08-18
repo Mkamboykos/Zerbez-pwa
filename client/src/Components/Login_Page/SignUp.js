@@ -23,10 +23,13 @@ class SignUp extends Component {
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
+            formDoneLoading: false,
             isValid: false,
             redirect: false,
-            helperText: '', 
-            error: false
+            helperTextFirstName: '',
+            helperTextLastName: '',
+            errorFirstName: false,
+            errorLastName: false
         });
 
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
@@ -47,15 +50,17 @@ class SignUp extends Component {
         let first_name = e.target.value;
         this.setState({
             first_name: first_name,
-            helperText: '',
-            error: false,
+            helperTextFirstName: '',
+            errorFirstName: false
         });
     }
 
     onChangeLastName(e){
         let last_name = e.target.value;
         this.setState({
-            last_name: last_name
+            last_name: last_name,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
@@ -133,14 +138,25 @@ class SignUp extends Component {
 
         if(this.state.first_name === ""){
             this.setState({
-                helperText: 'Field cannot be empty!',
-                error: true,
+                helperTextFirstName: 'Field cannot be empty!',
+                errorFirstName: true,
                 isValid: false
             });
         }
 
-        if(this.state.isValid === true){
+        if(this.state.last_name === ""){
+            this.setState({
+                helperTextLastName: 'Field cannot be empty!',
+                errorLastName: true,
+                isValid: false
+            });
+        }
+    }
 
+    
+    sentToDatabase = e =>{
+        e.preventDefault();
+        if(this.state.isValid === true){
             Axios.post('http://localhost:3001/SignUp', {
                 first_name: this.state.first_name, 
                 last_name: this.state.last_name, 
@@ -154,20 +170,25 @@ class SignUp extends Component {
                 restaurant_state: this.state.restaurant_state, 
                 restaurant_zip: this.state.restaurant_zip
             }).then((response) => {
-                console.log(response);
+                if(response.status === 200){
+                    console.log(response);
+                    this.setState({
+                        redirect: true
+                    });
+                }
             });
 
             this.setState({
                 redirect: true
             })
         }
-        
-        
+        console.log(this.state);
     }
 
+
     renderRedirect(){
-        if (this.state.redirect === true) {
-            return <Redirect to='/Dashboard'/>
+        if(this.state.redirect){
+            return <Redirect to='/Dashboard' />
         }
     }
 
@@ -194,23 +215,23 @@ class SignUp extends Component {
                 }
             }
         });
-        
+
         return (
             <div className="SignUp_Page_Container">
             <div className="SignUp_Page_Title_Container">
                 <h1 className="SignUp_Page_Title">Sign Up</h1>
             </div>
-            <Form className="signUp_Form_Container" >
+            <Form className="signUp_Form_Container" onSubmit={this.sentToDatabase}>
 
                 <MuiThemeProvider theme={theme}>
                     <Form.Group>
-                    <TextField
+                        <TextField
                             label="First Name"
                             type="text"
                             name="first_name"
                             fullWidth
-                            error={this.state.error}
-                            helperText={this.state.helperText}
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.first_name}
                             onChange={this.onChangeFirstName}
                         />
@@ -218,11 +239,12 @@ class SignUp extends Component {
 
                     <Form.Group>
                         <TextField
-                            required
                             label="Last Name"
                             type="text"
                             name="last_name"
                             fullWidth
+                            error={this.state.errorLastName}
+                            helperText={this.state.helperTextLastName}
                             value={this.state.last_name}
                             onChange={this.onChangeLastName}
                         />
@@ -348,15 +370,17 @@ class SignUp extends Component {
                 </MuiThemeProvider>
 
                 <div className="signUp_button_two_Container">
-                    <button type="submit" className="signUp_button_two" onClick={this.handleSignUp} >SIGN UP</button>
-                    {this.renderRedirect()}
+                    <button type="submit" className="signUp_button_two" onClick={this.handleSignUp}>SIGN UP</button>
                 </div>
+                
+                {this.renderRedirect()}
                 
             </Form>
             
             <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
         </div>
         )
+    
     }
 }
 

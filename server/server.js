@@ -49,6 +49,12 @@ app.post('/SignUp', (req, res) => {
     );
 });
 
+
+// set port, listen for requests
+// const PORT = process.env.PORT || 3001;
+// app.listen(PORT, () => {
+//     console.log(`Your server is running on port ${PORT}.`);
+// });
 app.listen(3001, () => {
     console.log("Your server is running on port 3001");
 });
