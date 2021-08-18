@@ -67,63 +67,81 @@ class SignUp extends Component {
     onChangeUsername(e){
         let username = e.target.value;
         this.setState({
-            username: username
+            username: username,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeEmail(e){
         let email = e.target.value;
         this.setState({
-            email: email
+            email: email,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangePassword(e){
         let password = e.target.value;
         this.setState({
-            password: password
+            password: password,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeConfirmPassword(e){
         let confirm_password = e.target.value;
         this.setState({
-            confirm_password: confirm_password
+            confirm_password: confirm_password,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeRestaurantName(e){
         let restaurant_name = e.target.value;
         this.setState({
-            restaurant_name: restaurant_name
+            restaurant_name: restaurant_name,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeRestauranAddress(e){
         let restaurant_address = e.target.value;
         this.setState({
-            restaurant_address: restaurant_address
+            restaurant_address: restaurant_address,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeRestaurantCity(e){
         let restaurant_city = e.target.value;
         this.setState({
-            restaurant_city: restaurant_city
+            restaurant_city: restaurant_city,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeRestaurantState(e){
         let restaurant_state = e.target.value;
         this.setState({
-            restaurant_state: restaurant_state
+            restaurant_state: restaurant_state,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
     onChangeRestaurantZip(e){
         let restaurant_zip = e.target.value;
         this.setState({
-            restaurant_zip: restaurant_zip
+            restaurant_zip: restaurant_zip,
+            helperTextLastName: '',
+            errorLastName: false
         })
     }
 
@@ -153,7 +171,7 @@ class SignUp extends Component {
         }
     }
 
-    
+
     sentToDatabase = e =>{
         e.preventDefault();
         if(this.state.isValid === true){
