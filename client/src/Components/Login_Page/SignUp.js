@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider } from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider, FormHelperText } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
 
-export default class SignUp extends Component {
+class SignUp extends Component {
 
     constructor(props) {
         super(props);
@@ -23,58 +23,154 @@ export default class SignUp extends Component {
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
-            errors: {}
+            isValid: false,
+            redirect: false,
+            helperText: '', 
+            error: false
+        });
+
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        this.onChangeLastName = this.onChangeLastName.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
+        this.onChangeRestaurantName = this.onChangeRestaurantName.bind(this);
+        this.onChangeRestauranAddress = this.onChangeRestauranAddress.bind(this);
+        this.onChangeRestaurantCity = this.onChangeRestaurantCity.bind(this);
+        this.onChangeRestaurantState = this.onChangeRestaurantState.bind(this);
+        this.onChangeRestaurantZip = this.onChangeRestaurantZip.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
+    }
+
+    onChangeFirstName(e){
+        let first_name = e.target.value;
+        this.setState({
+            first_name: first_name,
+            helperText: '',
+            error: false,
         });
     }
 
-    onChange = (e) => {
-        this.setState({[e.target.name] : e.target.value});
+    onChangeLastName(e){
+        let last_name = e.target.value;
+        this.setState({
+            last_name: last_name
+        })
     }
 
-    formValidation = () => {
-        const {first_name, last_name, username,email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip} = this.state;
-        let isValid = true;
-        const errors = {};
-        if (username.trim().length < 6){
-            errors.usernameLengthShort = "Username must be greater than 6 characters";
-            isValid = false;
+    onChangeUsername(e){
+        let username = e.target.value;
+        this.setState({
+            username: username
+        })
+    }
+
+    onChangeEmail(e){
+        let email = e.target.value;
+        this.setState({
+            email: email
+        })
+    }
+
+    onChangePassword(e){
+        let password = e.target.value;
+        this.setState({
+            password: password
+        })
+    }
+
+    onChangeConfirmPassword(e){
+        let confirm_password = e.target.value;
+        this.setState({
+            confirm_password: confirm_password
+        })
+    }
+
+    onChangeRestaurantName(e){
+        let restaurant_name = e.target.value;
+        this.setState({
+            restaurant_name: restaurant_name
+        })
+    }
+
+    onChangeRestauranAddress(e){
+        let restaurant_address = e.target.value;
+        this.setState({
+            restaurant_address: restaurant_address
+        })
+    }
+
+    onChangeRestaurantCity(e){
+        let restaurant_city = e.target.value;
+        this.setState({
+            restaurant_city: restaurant_city
+        })
+    }
+
+    onChangeRestaurantState(e){
+        let restaurant_state = e.target.value;
+        this.setState({
+            restaurant_state: restaurant_state
+        })
+    }
+
+    onChangeRestaurantZip(e){
+        let restaurant_zip = e.target.value;
+        this.setState({
+            restaurant_zip: restaurant_zip
+        })
+    }
+
+
+    handleSignUp(e){
+
+        if(this.state.isValid === false){
+            this.setState({
+                isValid: true
+            })
         }
 
-        // if (!username.includes("$")){
-        //     errors.username$ = "Username must have a $";
-        //     isValid = false;
-        // }
-        this.setState({errors});
-        return isValid;
+        if(this.state.first_name === ""){
+            this.setState({
+                helperText: 'Field cannot be empty!',
+                error: true,
+                isValid: false
+            });
+        }
+
+        if(this.state.isValid === true){
+
+            Axios.post('http://localhost:3001/SignUp', {
+                first_name: this.state.first_name, 
+                last_name: this.state.last_name, 
+                username: this.state.username, 
+                email: this.state.email, 
+                password: this.state.password, 
+                confirm_password: this.state.confirm_password, 
+                restaurant_name: this.state.restaurant_name, 
+                restaurant_address: this.state.restaurant_address, 
+                restaurant_city: this.state.restaurant_city, 
+                restaurant_state: this.state.restaurant_state, 
+                restaurant_zip: this.state.restaurant_zip
+            }).then((response) => {
+                console.log(response);
+            });
+
+            this.setState({
+                redirect: true
+            })
+        }
+        
+        
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        const isValid = this.formValidation();
-        if (isValid === true){
-            this.signUpSubmit();
+    renderRedirect(){
+        if (this.state.redirect === true) {
+            return <Redirect to='/Dashboard'/>
         }
     }
 
-    //function called when button SIGN UP button is clicked
-    // signUpSubmit(e){
-    //     //const {first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip} = this.state;
-    //     Axios.post('http://localhost:3001/SignUp', {
-    //         first_name: this.state.first_name, 
-    //         last_name: this.state.last_name, 
-    //         username: this.state.username, 
-    //         email: this.state.email, 
-    //         password: this.state.password, 
-    //         confirm_password: this.state.confirm_password, 
-    //         restaurant_name: this.state.restaurant_name, 
-    //         restaurant_address: this.state.restaurant_address, 
-    //         restaurant_city: this.state.restaurant_city, 
-    //         restaurant_state: this.state.restaurant_state, 
-    //         restaurant_zip: this.state.restaurant_zip
-    //     }).then((response) => {
-    //         console.log(response);
-    //     });
-    // };
 
     render() {
         // color is the main white used accross the app
@@ -98,8 +194,6 @@ export default class SignUp extends Component {
                 }
             }
         });
-
-        const {first_name, last_name, username,email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip, errors} = this.state;
         
         return (
             <div className="SignUp_Page_Container">
@@ -111,13 +205,14 @@ export default class SignUp extends Component {
                 <MuiThemeProvider theme={theme}>
                     <Form.Group>
                     <TextField
-                            required
                             label="First Name"
                             type="text"
                             name="first_name"
                             fullWidth
-                            value={first_name}
-                            onChange={this.onChange}
+                            error={this.state.error}
+                            helperText={this.state.helperText}
+                            value={this.state.first_name}
+                            onChange={this.onChangeFirstName}
                         />
                     </Form.Group>
 
@@ -128,8 +223,8 @@ export default class SignUp extends Component {
                             type="text"
                             name="last_name"
                             fullWidth
-                            value={last_name}
-                            onChange={this.onChange}
+                            value={this.state.last_name}
+                            onChange={this.onChangeLastName}
                         />
                     </Form.Group>
 
@@ -141,8 +236,8 @@ export default class SignUp extends Component {
                             type="text"
                             name="username"
                             fullWidth
-                            value={username}
-                            onChange={this.onChange}
+                            value={this.state.username}
+                            onChange={this.onChangeUsername}
                         />
                     </Form.Group>
 
@@ -154,8 +249,8 @@ export default class SignUp extends Component {
                             type="email"
                             name="email"
                             fullWidth
-                            value={email}
-                            onChange={this.onChange}
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
                         />
                     </Form.Group>
                     
@@ -166,10 +261,8 @@ export default class SignUp extends Component {
                             type="password"
                             fullWidth
                             name="password"
-                            value={password}
-                            onChange={this.onChange}
-                            // helperText="Your password must be 8-20 characters long, contain letters and numbers, and
-                            // must not contain spaces, special characters, or emoji."
+                            value={this.state.password}
+                            onChange={this.onChangePassword}
                         />
                     </Form.Group>
 
@@ -180,8 +273,8 @@ export default class SignUp extends Component {
                             type="password"
                             fullWidth
                             name="confirm_password"
-                            value={confirm_password}
-                            onChange={this.onChange}
+                            value={this.state.confirm_password}
+                            onChange={this.onChangeConfirmPassword}
                         />
                     </Form.Group>
 
@@ -192,8 +285,8 @@ export default class SignUp extends Component {
                             type="text"
                             fullWidth
                             name="restaurant_name"
-                            value={restaurant_name}
-                            onChange={this.onChange}
+                            value={this.state.restaurant_name}
+                            onChange={this.onChangeRestaurantName}
                         />
                     </Form.Group>
 
@@ -204,8 +297,8 @@ export default class SignUp extends Component {
                             type="address"
                             fullWidth
                             name="restaurant_address"
-                            value={restaurant_address}
-                            onChange={this.onChange}
+                            value={this.state.restaurant_address}
+                            onChange={this.onChangeRestauranAddress}
                         />
                     </Form.Group>
 
@@ -216,8 +309,8 @@ export default class SignUp extends Component {
                             type="city"
                             fullWidth
                             name="restaurant_city"
-                            value={restaurant_city}
-                            onChange={this.onChange}
+                            value={this.state.restaurant_city}
+                            onChange={this.onChangeRestaurantCity}
                         />
                     </Form.Group>
 
@@ -228,8 +321,8 @@ export default class SignUp extends Component {
                             type="state"
                             fullWidth
                             name="restaurant_state"
-                            value={restaurant_state}
-                            onChange={this.onChange}
+                            value={this.state.restaurant_state}
+                            onChange={this.onChangeRestaurantState}
                         />
                     </Form.Group>
 
@@ -240,8 +333,8 @@ export default class SignUp extends Component {
                             type="numbers"
                             fullWidth
                             name="restaurant_zip"
-                            value={restaurant_zip}
-                            onChange={this.onChange}
+                            value={this.state.restaurant_zip}
+                            onChange={this.onChangeRestaurantZip}
                         />
                     </Form.Group>
 
@@ -255,22 +348,19 @@ export default class SignUp extends Component {
                 </MuiThemeProvider>
 
                 <div className="signUp_button_two_Container">
-                    <button type="submit" className="signUp_button_two">SIGN UP</button>
+                    <button type="submit" className="signUp_button_two" onClick={this.handleSignUp} >SIGN UP</button>
+                    {this.renderRedirect()}
                 </div>
-
-                {Object.keys(errors).map((key)=>{
-                    return <div  key={key}>{errors[key]}</div>
-                })}
-
+                
             </Form>
-
+            
             <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
         </div>
         )
     }
 }
 
-
+export default SignUp;
 
 
 
