@@ -11,6 +11,7 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
 
+        // Initial states
         this.state = ({
             first_name: "", 
             last_name: "", 
@@ -23,129 +24,51 @@ class SignUp extends Component {
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
-            formDoneLoading: false,
+
             isValid: false,
             redirect: false,
+
             helperTextFirstName: '',
             helperTextLastName: '',
+            helperTextUsername: '',
+            helperTextPassword: '',
             errorFirstName: false,
-            errorLastName: false
+            errorLastName: false,
+            errorUsername: false,
+            errorPassword: false
         });
 
-        this.onChangeFirstName = this.onChangeFirstName.bind(this);
-        this.onChangeLastName = this.onChangeLastName.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
-        this.onChangeRestaurantName = this.onChangeRestaurantName.bind(this);
-        this.onChangeRestauranAddress = this.onChangeRestauranAddress.bind(this);
-        this.onChangeRestaurantCity = this.onChangeRestaurantCity.bind(this);
-        this.onChangeRestaurantState = this.onChangeRestaurantState.bind(this);
-        this.onChangeRestaurantZip = this.onChangeRestaurantZip.bind(this);
         this.handleSignUp = this.handleSignUp.bind(this);
+        this.onChangeTextfield = this.onChangeTextfield.bind(this);
     }
 
-    onChangeFirstName(e){
-        let first_name = e.target.value;
+    /*
+    *  - Update the result of every Textfield in the form
+    *  - Return false helpertext and error every time form is submitted
+    */
+    onChangeTextfield(e){
+        let field = e.target.name;
+        let value = e.target.value;
         this.setState({
-            first_name: first_name,
+            [field]: value,
             helperTextFirstName: '',
-            errorFirstName: false
+            helperTextLastName: '',
+            helperTextUsername: '',
+            helperTextEmail: '',
+            helperTextPassword:'',
+            errorFirstName: false,
+            errorLastName: false,
+            errorUsername: false,
+            errorEmail: false,
+            errorPassword: false
         });
     }
 
-    onChangeLastName(e){
-        let last_name = e.target.value;
-        this.setState({
-            last_name: last_name,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeUsername(e){
-        let username = e.target.value;
-        this.setState({
-            username: username,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeEmail(e){
-        let email = e.target.value;
-        this.setState({
-            email: email,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangePassword(e){
-        let password = e.target.value;
-        this.setState({
-            password: password,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeConfirmPassword(e){
-        let confirm_password = e.target.value;
-        this.setState({
-            confirm_password: confirm_password,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeRestaurantName(e){
-        let restaurant_name = e.target.value;
-        this.setState({
-            restaurant_name: restaurant_name,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeRestauranAddress(e){
-        let restaurant_address = e.target.value;
-        this.setState({
-            restaurant_address: restaurant_address,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeRestaurantCity(e){
-        let restaurant_city = e.target.value;
-        this.setState({
-            restaurant_city: restaurant_city,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeRestaurantState(e){
-        let restaurant_state = e.target.value;
-        this.setState({
-            restaurant_state: restaurant_state,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-    onChangeRestaurantZip(e){
-        let restaurant_zip = e.target.value;
-        this.setState({
-            restaurant_zip: restaurant_zip,
-            helperTextLastName: '',
-            errorLastName: false
-        })
-    }
-
-
+    /*
+    *  - Textfield validators when onClick event is triggered when submitting the Form
+    *    using the isValid state
+    *  - isValid must return as true to submit the form
+    */
     handleSignUp(e){
 
         if(this.state.isValid === false){
@@ -154,6 +77,7 @@ class SignUp extends Component {
             })
         }
 
+        // Validator -> first_name
         if(this.state.first_name === ""){
             this.setState({
                 helperTextFirstName: 'Field cannot be empty!',
@@ -162,6 +86,7 @@ class SignUp extends Component {
             });
         }
 
+        // Validators -> last_name
         if(this.state.last_name === ""){
             this.setState({
                 helperTextLastName: 'Field cannot be empty!',
@@ -169,10 +94,39 @@ class SignUp extends Component {
                 isValid: false
             });
         }
+
+        // Validators -> usename
+        if(this.state.username === ""){
+            this.setState({
+                helperTextUsername: 'Field cannot be empty!',
+                errorUsername: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> email
+        if(this.state.email === ""){
+            this.setState({
+                helperTextEmail: 'Field cannot be empty!',
+                errorEmail: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> password
+        if(this.state.password === ""){
+            this.setState({
+                helperTextPassword: 'Field cannot be empty!',
+                errorPassword: true,
+                isValid: false
+            });
+        }
     }
 
-
-    sentToDatabase = e =>{
+    /*
+    *  HTTP POST Request sent to the databse, and redirect is enabled
+    */
+    postToDatabase = e =>{
         e.preventDefault();
         if(this.state.isValid === true){
             Axios.post('http://localhost:3001/SignUp', {
@@ -190,9 +144,6 @@ class SignUp extends Component {
             }).then((response) => {
                 if(response.status === 200){
                     console.log(response);
-                    this.setState({
-                        redirect: true
-                    });
                 }
             });
 
@@ -203,20 +154,23 @@ class SignUp extends Component {
         console.log(this.state);
     }
 
-
+    // Redirect to Dashboard when redirect is true
     renderRedirect(){
         if(this.state.redirect){
-            return <Redirect to='/Dashboard' />
+            return <Redirect to='/Dashboard'/>
         }
     }
 
 
     render() {
+
         // color is the main white used accross the app
         const color = "#F4F1F2";
+
         // color2 is the grey used accross the app
         const color2 = "#91A8C0";
 
+        // overwrite Textfields' text and format with custome code
         const theme = createTheme({
             palette: {
                 common: { black: color, white: color },
@@ -239,7 +193,7 @@ class SignUp extends Component {
             <div className="SignUp_Page_Title_Container">
                 <h1 className="SignUp_Page_Title">Sign Up</h1>
             </div>
-            <Form className="signUp_Form_Container" onSubmit={this.sentToDatabase}>
+            <Form className="signUp_Form_Container" onSubmit={this.postToDatabase}>
 
                 <MuiThemeProvider theme={theme}>
                     <Form.Group>
@@ -251,7 +205,7 @@ class SignUp extends Component {
                             error={this.state.errorFirstName}
                             helperText={this.state.helperTextFirstName}
                             value={this.state.first_name}
-                            onChange={this.onChangeFirstName}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
@@ -264,124 +218,131 @@ class SignUp extends Component {
                             error={this.state.errorLastName}
                             helperText={this.state.helperTextLastName}
                             value={this.state.last_name}
-                            onChange={this.onChangeLastName}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group>
                         <TextField
-                            required
-                            disableUnderline={true}
                             label="Username"
                             type="text"
                             name="username"
                             fullWidth
+                            error={this.state.errorUsername}
+                            helperText={this.state.helperTextUsername}
                             value={this.state.username}
-                            onChange={this.onChangeUsername}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group>
                         <TextField
-                            required
-                            disableUnderline={true}
                             label="Email"
                             type="email"
                             name="email"
                             fullWidth
+                            error={this.state.errorEmail}
+                            helperText={this.state.helperTextEmail}
                             value={this.state.email}
-                            onChange={this.onChangeEmail}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
                     
                     <Form.Group >
                         <TextField
-                            required
                             label="Password"
                             type="password"
-                            fullWidth
                             name="password"
+                            fullWidth
+                            error={this.state.errorPassword}
+                            helperText={this.state.helperTextPassword}
                             value={this.state.password}
-                            onChange={this.onChangePassword}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="Confirm Password"
                             type="password"
-                            fullWidth
                             name="confirm_password"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.confirm_password}
-                            onChange={this.onChangeConfirmPassword}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="Restaurant Name"
                             type="text"
-                            fullWidth
                             name="restaurant_name"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.restaurant_name}
-                            onChange={this.onChangeRestaurantName}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="Restaurant Address"
                             type="address"
-                            fullWidth
                             name="restaurant_address"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.restaurant_address}
-                            onChange={this.onChangeRestauranAddress}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="City"
                             type="city"
-                            fullWidth
                             name="restaurant_city"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.restaurant_city}
-                            onChange={this.onChangeRestaurantCity}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="State"
                             type="state"
-                            fullWidth
                             name="restaurant_state"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.restaurant_state}
-                            onChange={this.onChangeRestaurantState}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group >
                         <TextField
-                            required
                             label="ZIP Code"
                             type="numbers"
-                            fullWidth
                             name="restaurant_zip"
+                            fullWidth
+                            error={this.state.errorFirstName}
+                            helperText={this.state.helperTextFirstName}
                             value={this.state.restaurant_zip}
-                            onChange={this.onChangeRestaurantZip}
+                            onChange={this.onChangeTextfield}
                         />
                     </Form.Group>
 
                     <Form.Group className="" controlId="formBasicCheckbox">
                         <Form.Check 
                             type="radio"
-                            label="I affirm to be the current Manager at this establishment." 
+                            label="I affirm to be the current Manager of this establishment." 
                             required
                         />
                     </Form.Group>
