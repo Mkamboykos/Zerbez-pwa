@@ -197,7 +197,7 @@ class SignUp extends Component {
         e.preventDefault();
         if(this.state.isValid === true){
 
-            const user = {
+            Axios.post('http://localhost:3001/SignUp', {
                 first_name: this.state.first_name, 
                 last_name: this.state.last_name, 
                 username: this.state.username, 
@@ -209,18 +209,17 @@ class SignUp extends Component {
                 restaurant_city: this.state.restaurant_city, 
                 restaurant_state: this.state.restaurant_state, 
                 restaurant_zip: this.state.restaurant_zip
-              };
+            }).then(res => {
+                console.log(res);
+                console.log(res.data);
+                console.log(res.status);
 
-            Axios.post('http://localhost:3001/SignUp', {user})
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    console.log(res.status);
+                if(res.status === 200){
+                    this.setState({
+                        redirect: true
+                    }) 
+                }
             });
-
-            this.setState({
-                redirect: true
-            })
 
         console.log(this.state);
         }

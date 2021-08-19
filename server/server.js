@@ -32,13 +32,12 @@ app.use(express.urlencoded({
 // ]);
 
 
-
-// app.get('/', (request, response) => {
-//     const username = request.body.username;
-//     const password = request.body.password;
-
-//     database.query('SELECT * FROM Login')
-// });
+// Test server connection is working
+app.get('/', (req, res) => {
+    res.send({
+        msg: 'Connection is working!'
+    });
+});
 
 
 // Post API for when a manager signs up
@@ -58,14 +57,9 @@ app.post('/SignUp', (req, res) => {
 
     database.query("INSERT INTO sign_up_manager (first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
         [first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            }else{
-                response.send("Values Inserted");
-            }
-        }
-    );
+        (err, results) => {
+            !err ? res.json(results) : res.json(err);
+        });
 });
 
 
