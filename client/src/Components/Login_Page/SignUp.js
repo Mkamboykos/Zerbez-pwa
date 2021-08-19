@@ -49,15 +49,6 @@ class SignUp extends Component {
             redirect: false,
             isChecked1: false,
             isChecked2: false,
-
-            helperTextFirstName: '',
-            helperTextLastName: '',
-            helperTextUsername: '',
-            helperTextPassword: '',
-            errorFirstName: false,
-            errorLastName: false,
-            errorUsername: false,
-            errorPassword: false
         });
 
         this.handleSignUp = this.handleSignUp.bind(this);
