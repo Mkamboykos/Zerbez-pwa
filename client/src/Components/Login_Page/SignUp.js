@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider} from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider, FormHelperText, FormControlLabel, Checkbox  } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -27,6 +27,8 @@ class SignUp extends Component {
 
             isValid: false,
             redirect: false,
+            isChecked1: false,
+            isChecked2: false,
 
             helperTextFirstName: '',
             helperTextLastName: '',
@@ -40,6 +42,7 @@ class SignUp extends Component {
 
         this.handleSignUp = this.handleSignUp.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
+        this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
     }
 
     /*
@@ -72,8 +75,14 @@ class SignUp extends Component {
             errorRestaurantAddress: false,
             errorRestaurantCity: false,
             errorRestaurantState: false,
-            errorRestaurantZip: false
+            errorRestaurantZip: false,
         });
+    }
+
+    onChangeCheckBox(e){
+        this.setState({
+            [e.target.name]: e.target.checked
+        })
     }
 
     /*
@@ -188,6 +197,20 @@ class SignUp extends Component {
             });
         }
 
+        // Validators -> checked1
+        if(this.state.isChecked1 === false){
+            this.setState({
+                isValid: false
+            });
+        }
+
+        // Validators -> checked2
+        if(this.state.isChecked2 === false){
+            this.setState({
+                isValid: false
+            });
+        }
+
     }
 
     /*
@@ -195,7 +218,7 @@ class SignUp extends Component {
     */
     postToDatabase = e =>{
         e.preventDefault();
-        if(this.state.isValid === true){
+        if((this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
 
             Axios.post('http://localhost:3001/SignUp', {
                 first_name: this.state.first_name, 
@@ -220,7 +243,6 @@ class SignUp extends Component {
                     }) 
                 }
             });
-
         console.log(this.state);
         }
     }
@@ -410,13 +432,34 @@ class SignUp extends Component {
                         />
                     </Form.Group>
 
-                    <Form.Group className="" controlId="formBasicCheckbox">
-                        <Form.Check 
-                            type="radio"
-                            label="I affirm to be the current Manager of this establishment." 
-                            required
-                        />
-                    </Form.Group>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={this.state.isChecked1}
+                                onChange={this.onChangeCheckBox}
+                                value={this.state.isChecked1}
+                                name="isChecked1"
+                            />
+                        } label="I affirm to be the current Manager of this establishment." 
+                    />
+
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={this.state.isChecked2}
+                                onChange={this.onChangeCheckBox}
+                                value={this.state.isChecked2}
+                                name="isChecked2"
+                            />
+                        } label={
+                            <div>
+                               <span>I accept the </span>
+                               <Link to={'/terms'} className="linkService">terms of use</Link>
+                               <span> & </span>
+                               <Link to={'/privacy'} className="linkService">privacy policy</Link>
+                            </div>
+                            } 
+                    />
                 </MuiThemeProvider>
 
                 <div className="signUp_button_two_Container">

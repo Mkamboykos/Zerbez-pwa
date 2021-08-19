@@ -30,6 +30,16 @@ h1, p{
    text-decoration: none;
 }
 
+.linkService {
+  color: #E95554;
+  text-decoration: none;
+}
+
+.linkService:hover {
+  color: #91A8C0;
+  text-decoration: none;
+}
+
 
 
 
@@ -290,7 +300,8 @@ label{
 }
 
 .signUp_button_two_Container {
-  padding-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 35px;
 }
 
 
