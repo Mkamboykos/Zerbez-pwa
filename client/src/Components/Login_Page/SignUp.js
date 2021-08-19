@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider, FormHelperText } from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider} from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -56,11 +56,23 @@ class SignUp extends Component {
             helperTextUsername: '',
             helperTextEmail: '',
             helperTextPassword:'',
+            helperTextConfirmPassword: '',
+            helperTextRestaurantName: '',
+            helperTextRestaurantAddress: '',
+            helperTextRestaurantCity: '',
+            helperTextRestaurantState: '',
+            helperTextRestaurantZip: '',
             errorFirstName: false,
             errorLastName: false,
             errorUsername: false,
             errorEmail: false,
-            errorPassword: false
+            errorPassword: false,
+            errorConfirmPassword: false,
+            errorRestaurantName: false,
+            errorRestaurantAddress: false,
+            errorRestaurantCity: false,
+            errorRestaurantState: false,
+            errorRestaurantZip: false
         });
     }
 
@@ -121,6 +133,61 @@ class SignUp extends Component {
                 isValid: false
             });
         }
+
+        // Validators -> confirm_password
+        if(this.state.confirm_password === ""){
+            this.setState({
+                helperTextConfirmPassword: 'Field cannot be empty!',
+                errorConfirmPassword: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> restaurant_name
+        if(this.state.restaurant_name === ""){
+            this.setState({
+                helperTextRestaurantName: 'Field cannot be empty!',
+                errorRestaurantName: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> restaurant_address
+        if(this.state.restaurant_address === ""){
+            this.setState({
+                helperTextRestaurantAddress: 'Field cannot be empty!',
+                errorRestaurantAddress: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> restaurant_city
+        if(this.state.restaurant_city === ""){
+            this.setState({
+                helperTextRestaurantCity: 'Field cannot be empty!',
+                errorRestaurantCity: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> restaurant_state
+        if(this.state.restaurant_state === ""){
+            this.setState({
+                helperTextRestaurantState: 'Field cannot be empty!',
+                errorRestaurantState: true,
+                isValid: false
+            });
+        }
+
+        // Validators -> restaurant_zip
+        if(this.state.restaurant_zip === ""){
+            this.setState({
+                helperTextRestaurantZip: 'Field cannot be empty!',
+                errorRestaurantZip: true,
+                isValid: false
+            });
+        }
+
     }
 
     /*
@@ -129,7 +196,8 @@ class SignUp extends Component {
     postToDatabase = e =>{
         e.preventDefault();
         if(this.state.isValid === true){
-            Axios.post('http://localhost:3001/SignUp', {
+
+            const user = {
                 first_name: this.state.first_name, 
                 last_name: this.state.last_name, 
                 username: this.state.username, 
@@ -141,17 +209,21 @@ class SignUp extends Component {
                 restaurant_city: this.state.restaurant_city, 
                 restaurant_state: this.state.restaurant_state, 
                 restaurant_zip: this.state.restaurant_zip
-            }).then((response) => {
-                if(response.status === 200){
-                    console.log(response);
-                }
+              };
+
+            Axios.post('http://localhost:3001/SignUp', {user})
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    console.log(res.status);
             });
 
             this.setState({
                 redirect: true
             })
-        }
+
         console.log(this.state);
+        }
     }
 
     // Redirect to Dashboard when redirect is true
@@ -267,8 +339,8 @@ class SignUp extends Component {
                             type="password"
                             name="confirm_password"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorConfirmPassword}
+                            helperText={this.state.helperTextConfirmPassword}
                             value={this.state.confirm_password}
                             onChange={this.onChangeTextfield}
                         />
@@ -280,8 +352,8 @@ class SignUp extends Component {
                             type="text"
                             name="restaurant_name"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorRestaurantName}
+                            helperText={this.state.helperTextRestaurantName}
                             value={this.state.restaurant_name}
                             onChange={this.onChangeTextfield}
                         />
@@ -293,8 +365,8 @@ class SignUp extends Component {
                             type="address"
                             name="restaurant_address"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorRestaurantAddress}
+                            helperText={this.state.helperTextRestaurantAddress}
                             value={this.state.restaurant_address}
                             onChange={this.onChangeTextfield}
                         />
@@ -306,8 +378,8 @@ class SignUp extends Component {
                             type="city"
                             name="restaurant_city"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorRestaurantCity}
+                            helperText={this.state.helperTextRestaurantCity}
                             value={this.state.restaurant_city}
                             onChange={this.onChangeTextfield}
                         />
@@ -319,8 +391,8 @@ class SignUp extends Component {
                             type="state"
                             name="restaurant_state"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorRestaurantState}
+                            helperText={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
                         />
@@ -332,8 +404,8 @@ class SignUp extends Component {
                             type="numbers"
                             name="restaurant_zip"
                             fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
+                            error={this.state.errorRestaurantZip}
+                            helperText={this.state.helperTextRestaurantZip}
                             value={this.state.restaurant_zip}
                             onChange={this.onChangeTextfield}
                         />
@@ -364,244 +436,3 @@ class SignUp extends Component {
 }
 
 export default SignUp;
-
-
-
-
-// import React, { useState} from 'react'
-// import {Link} from 'react-router-dom'
-// import {Button, Form} from 'react-bootstrap'
-// import {TextField, createTheme, MuiThemeProvider } from '@material-ui/core'
-// import {IoChevronBack} from 'react-icons/io5'
-// import Axios from 'axios';
-
-// /*   SignUp.js is rendered in App.js    */
-
-// function SignUp() {
-       
-//     const [first_nameReg, setFirst_nameReg] = useState("");
-//     const [last_nameReg, setLast_nameReg] = useState("");
-//     const [usernameReg, setUsernameReg] = useState("");
-//     const [emailReg, setEmailReg] = useState("");
-//     const [passwordReg, setPasswordReg] = useState("");
-//     const [confirm_passwordReg, setConfirm_passwordReg] = useState("");
-//     const [restaurant_nameReg, setRestaurant_nameReg] = useState("");
-//     const [restaurant_addressReg, setRestaurant_addressReg] = useState("");
-//     const [restaurant_cityReg, setRestaurant_cityReg] = useState("");
-//     const [restaurant_stateReg, setRestaurant_stateReg] = useState("");
-//     const [restaurant_zipReg, setRestaurant_zipReg] = useState(0);
-
-
-    // //function called when button SIGN UP button is clicked
-    // const signUpSubmit = () =>{
-    //     Axios.post('http://localhost:3001/SignUp', {
-    //         first_name: first_nameReg, 
-    //         last_name: last_nameReg, 
-    //         username: usernameReg, 
-    //         email: emailReg, 
-    //         password: passwordReg, 
-    //         confirm_password: confirm_passwordReg, 
-    //         restaurant_name: restaurant_nameReg, 
-    //         restaurant_address: restaurant_addressReg, 
-    //         restaurant_city: restaurant_cityReg, 
-    //         restaurant_state: restaurant_stateReg, 
-    //         restaurant_zip: restaurant_zipReg
-    // }).then((response) => {
-    //     console.log(response);
-    // });
-    // };
-    
-
-
-    // // color is the main white used accross the app
-    // const color = "#F4F1F2";
-    // // color2 is the grey used accross the app
-    // const color2 = "#91A8C0";
-
-    // const theme = createTheme({
-    //     palette: {
-    //         common: { black: color, white: color },
-    //         primary: { main: color, dark: color, light: color },
-    //         text: { primary: color, secondary: color2 },
-
-    //     },
-    //     overrides: {
-    //         MuiInput: {
-    //             underline: {
-    //                 "&:before": {
-    //                 borderBottom: `1px solid ${color}`
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-
-
-
-//     return(
-        // <div className="SignUp_Page_Container">
-        //     <div className="SignUp_Page_Title_Container">
-        //         <h1 className="SignUp_Page_Title">Sign Up</h1>
-        //     </div>
-        //     <Form className="signUp_Form_Container" >
-
-        //         <MuiThemeProvider theme={theme}>
-        //             <Form.Group>
-        //             <TextField
-        //                     required
-        //                     label="First Name"
-        //                     type="text"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setFirst_nameReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group>
-        //                 <TextField
-        //                     required
-        //                     label="Last Name"
-        //                     type="text"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setLast_nameReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group>
-        //                 <TextField
-        //                     required
-        //                     disableUnderline={true}
-        //                     label="Username"
-        //                     type="text"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setUsernameReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group>
-        //                 <TextField
-        //                     required
-        //                     disableUnderline={true}
-        //                     label="Email"
-        //                     type="text"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setEmailReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-                    
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="Password"
-        //                     type="password"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setPasswordReg(e.target.value);
-        //                     }}
-        //                     // helperText="Your password must be 8-20 characters long, contain letters and numbers, and
-        //                     // must not contain spaces, special characters, or emoji."
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="Confirm Password"
-        //                     type="password"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setConfirm_passwordReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="Restaurant Name"
-        //                     type="text"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setRestaurant_nameReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="Restaurant Address"
-        //                     type="address"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setRestaurant_addressReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="City"
-        //                     type="city"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setRestaurant_cityReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="State"
-        //                     type="state"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setRestaurant_stateReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group >
-        //                 <TextField
-        //                     required
-        //                     label="ZIP Code"
-        //                     type="numbers"
-        //                     fullWidth
-        //                     onChange={(e) => {
-        //                         setRestaurant_zipReg(e.target.value);
-        //                     }}
-        //                 />
-        //             </Form.Group>
-
-        //             <Form.Group className="" controlId="formBasicCheckbox">
-        //                 <Form.Check 
-        //                     type="radio"
-        //                     label="I affirm to be the current Manager at this establishment." 
-        //                     required
-        //                 />
-        //             </Form.Group>
-        //         </MuiThemeProvider>
-
-        //         <div className="signUp_button_two_Container">
-        //             <Link to="/DashBoard" className="link"><button type="submit" onClick={signUpSubmit} onSubmit className="signUp_button_two">SIGN UP</button></Link>
-        //         </div>
-
-        //     </Form>
-
-        //     <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
-        // </div>
-//     )
-// }
-
-
-// export default SignUp;

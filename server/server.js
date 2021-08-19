@@ -1,24 +1,43 @@
-const express = require("express");
-const app = express();
-const cors = require('cors');
+var database = require('./Config/DatabaseConfig');
+var express = require('express');
+var app = express();
+var cors = require('cors'); 
+var port = process.env.PORT || 3001;
 
-const mysql = require('mysql');
+// test database connection
+database.connect((err) => {
+    if(err){
+      console.log('Error connecting to Db');
+      return;
+    }
+    console.log('Connection established');
+  });
 
+// This is to allow our api for parsing json
 app.use(express.json());
+
+// This is to allow our api for cross-origin resource sharing
 app.use(cors());
 
-const db = mysql.createConnection({
-    user: 'root',
-    host: 'localhost',
-    password: 'password',
-    database: 'time_waiter_db'
-});
+// This is to allow our api to receive data from a client app
+app.use(express.urlencoded({
+    extended: true
+}));
+
+
+// // Register routes in the main index.js
+// app.use('/', [
+//     require('./routes/tweet'),
+//     require('./routes/auth')
+// ]);
+
+
 
 // app.get('/', (request, response) => {
 //     const username = request.body.username;
 //     const password = request.body.password;
 
-//     db.query('SELECT * FROM Login')
+//     database.query('SELECT * FROM Login')
 // });
 
 
@@ -37,7 +56,7 @@ app.post('/SignUp', (req, res) => {
     const restaurant_state = req.body.restaurant_state;
     const restaurant_zip = req.body.restaurant_zip;
 
-    db.query("INSERT INTO sign_up_manager (first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    database.query("INSERT INTO sign_up_manager (first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
         [first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip],
         (err, result) => {
             if (err) {
@@ -55,6 +74,6 @@ app.post('/SignUp', (req, res) => {
 // app.listen(PORT, () => {
 //     console.log(`Your server is running on port ${PORT}.`);
 // });
-app.listen(3001, () => {
-    console.log("Your server is running on port 3001");
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
 });
