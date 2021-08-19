@@ -9,10 +9,10 @@ import Axios from 'axios';
 // styles are used to set the color white in the check boxes
 const styles = {
     root: {
-        // when button is inactive
+        // when checkbox is inactive
         color: "#F4F1F2",
         '&$checked': {
-            // when button is active
+            // when checkbox is active
             color: "#F4F1F2",
             '&:hover': {
                 background: "none",           
