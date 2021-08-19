@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import green from '@material-ui/core/colors/green';
 import {TextField, createTheme, MuiThemeProvider ,withStyles , FormControlLabel, Checkbox  } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
@@ -10,10 +9,18 @@ import Axios from 'axios';
 // styles are used to set the color white in the check boxes
 const styles = {
     root: {
+        // when button is inactive
         color: "#F4F1F2",
         '&$checked': {
+            // when button is active
             color: "#F4F1F2",
+            '&:hover': {
+                background: "none",           
+            },
         },
+        '&:hover': {
+            background: "none",           
+        }
     },
     checked: {},
 };
