@@ -471,7 +471,9 @@ class SignUp extends Component {
                                     checked: classes.checked,
                                 }}
                             />
-                        } label="I affirm to be the current Manager of this establishment." 
+                        }
+
+                        label="I affirm to be the current Manager of this establishment." 
                     />
 
                     <FormControlLabel
@@ -488,14 +490,16 @@ class SignUp extends Component {
                                     checked: classes.checked,
                                 }}
                             />
-                        } label={
+                        } 
+                        
+                        label={
                             <div>
                                <span>I accept the </span>
                                <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
                                <span> & </span>
                                <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                             </div>
-                            } 
+                        }
                     />
                 </MuiThemeProvider>
 
