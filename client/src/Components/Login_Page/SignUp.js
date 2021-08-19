@@ -1,9 +1,22 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider, FormHelperText, FormControlLabel, Checkbox  } from '@material-ui/core'
+import green from '@material-ui/core/colors/green';
+import {TextField, createTheme, MuiThemeProvider ,withStyles , FormControlLabel, Checkbox  } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
+
+
+// styles are used to set the color white in the check boxes
+const styles = {
+    root: {
+        color: "#F4F1F2",
+        '&$checked': {
+            color: "#F4F1F2",
+        },
+    },
+    checked: {},
+};
 
 
 class SignUp extends Component {
@@ -281,7 +294,12 @@ class SignUp extends Component {
             }
         });
 
+        // classes are used for the white color of the checkboxes, this calls to the props being used on this class
+        const { classes } = this.props;
+        
         return (
+
+            
             <div className="SignUp_Page_Container">
             <div className="SignUp_Page_Title_Container">
                 <h1 className="SignUp_Page_Title">Sign Up</h1>
@@ -439,6 +457,12 @@ class SignUp extends Component {
                                 onChange={this.onChangeCheckBox}
                                 value={this.state.isChecked1}
                                 name="isChecked1"
+
+                                //classes linked to const with classes, and root and checked from styles
+                                classes={{
+                                    root: classes.root,
+                                    checked: classes.checked,
+                                }}
                             />
                         } label="I affirm to be the current Manager of this establishment." 
                     />
@@ -450,13 +474,19 @@ class SignUp extends Component {
                                 onChange={this.onChangeCheckBox}
                                 value={this.state.isChecked2}
                                 name="isChecked2"
+
+                                //classes linked to const with classes, and root and checked from styles
+                                classes={{
+                                    root: classes.root,
+                                    checked: classes.checked,
+                                }}
                             />
                         } label={
                             <div>
                                <span>I accept the </span>
-                               <Link to={'/terms'} className="linkService">terms of use</Link>
+                               <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
                                <span> & </span>
-                               <Link to={'/privacy'} className="linkService">privacy policy</Link>
+                               <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                             </div>
                             } 
                     />
@@ -477,4 +507,5 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+//exported with the styles for the white colored check boxes
+export default withStyles(styles) (SignUp);

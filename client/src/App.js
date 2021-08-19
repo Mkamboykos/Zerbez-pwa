@@ -18,6 +18,8 @@ import TimePerCover from './Components/Dashboard_Page/TimePerCover'
 import FloorPlan from './Components/Dashboard_Page/FloorPlan'
 import NewReservation from './Components/Dashboard_Page/NewReservation'
 import Reservations from './Components/Dashboard_Page/Reservations'
+import Privacy from './Components/Legal/Privacy'
+import Terms from './Components/Legal/Terms'
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
       <Route exact path="/FloorPlan" component={FloorPlan}/>
       <Route exact path="/NewReservation" component={NewReservation}/>
       <Route exact path="/Reservations" component={Reservations}/>
+      <Route exact path="/Privacy" component={Privacy}/>
+      <Route exact path="/Terms" component={Terms}/>
 
     </div>
   )
