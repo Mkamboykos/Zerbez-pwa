@@ -187,6 +187,12 @@ class SignUp extends Component {
                 errorConfirmPassword: true,
                 isValid: false
             });
+        }else if(this.state.confirm_password !== this.state.password){
+            this.setState({
+                helperTextConfirmPassword: 'Passwords do not match!',
+                errorConfirmPassword: true,
+                isValid: false
+            });
         }
 
         // Validators -> restaurant_name
