@@ -45,6 +45,8 @@ class SignUp extends Component {
             restaurant_state: "", 
             restaurant_zip: "",
 
+            existUsername:'',
+            usernameNotEmpty: false,
             isValid: false,
             redirect: false,
             isChecked1: false,
@@ -126,7 +128,7 @@ class SignUp extends Component {
                 isValid: false
             });
         }
-
+        
         // Validators -> usename
         if(this.state.username === ""){
             this.setState({
@@ -135,11 +137,35 @@ class SignUp extends Component {
                 isValid: false
             });
         }
-
+        
+        // else if (this.state.username !== ""){
+        //     e.preventDefault();
+        //     Axios.post('http://localhost:3001/SignUp/username', {
+        //         username: this.state.username
+        //     }).then(res => {
+        //         this.setState({
+        //             existUsername: res.data.length
+        //         });
+        //         if(this.state.existUsername > 0){
+        //             this.setState({
+        //                 helperTextUsername: 'Username already exist!',
+        //                 errorUsername: true,
+        //                 isValid: false
+        //             });
+        //         }
+        //     }); 
+        // }
+        
         // Validators -> email
         if(this.state.email === ""){
             this.setState({
                 helperTextEmail: 'Field cannot be empty!',
+                errorEmail: true,
+                isValid: false
+            });
+        }else if(!(this.state.email).includes('@')){
+            this.setState({
+                helperTextEmail: 'This is not a valid email.',
                 errorEmail: true,
                 isValid: false
             });
@@ -197,12 +223,24 @@ class SignUp extends Component {
                 errorRestaurantState: true,
                 isValid: false
             });
+        } else if (this.state.restaurant_state.length > 2){
+            this.setState({
+                helperTextRestaurantState: 'State cannot be more than 2 letters!',
+                errorRestaurantState: true,
+                isValid: false
+            });
         }
 
         // Validators -> restaurant_zip
         if(this.state.restaurant_zip === ""){
             this.setState({
                 helperTextRestaurantZip: 'Field cannot be empty!',
+                errorRestaurantZip: true,
+                isValid: false
+            });
+        }else if(typeof this.state.restaurant_zip !== 'number'){
+            this.setState({
+                helperTextRestaurantZip: 'ZIP Code can only have numbers!',
                 errorRestaurantZip: true,
                 isValid: false
             });
@@ -221,8 +259,27 @@ class SignUp extends Component {
                 isValid: false
             });
         }
-
     }
+
+    // checkExistingUsername = e => {
+    //     if (this.state.username !== ""){
+    //         e.preventDefault();
+    //         Axios.post('http://localhost:3001/SignUp/username', {
+    //             username: this.state.username
+    //         }).then(res => {
+    //             this.setState({
+    //                 existUsername: res.data.length
+    //             });
+    //             if(this.state.existUsername > 0){
+    //                 this.setState({
+    //                     helperTextUsername: 'Username already exist!',
+    //                     errorUsername: true,
+    //                     isValid: false
+    //                 });
+    //             }
+    //         }); 
+    //     }
+    // }
 
     /*
     *  HTTP POST Request sent to the databse, and redirect is enabled
@@ -230,7 +287,7 @@ class SignUp extends Component {
     postToDatabase = e =>{
         e.preventDefault();
         if((this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
-
+            
             Axios.post('http://localhost:3001/SignUp', {
                 first_name: this.state.first_name, 
                 last_name: this.state.last_name, 
@@ -244,8 +301,6 @@ class SignUp extends Component {
                 restaurant_state: this.state.restaurant_state, 
                 restaurant_zip: this.state.restaurant_zip
             }).then(res => {
-                console.log(res);
-                console.log(res.data);
                 console.log(res.status);
 
                 if(res.status === 200){
@@ -254,7 +309,6 @@ class SignUp extends Component {
                     }) 
                 }
             });
-        console.log(this.state);
         }
     }
 

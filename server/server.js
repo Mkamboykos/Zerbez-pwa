@@ -4,15 +4,6 @@ var app = express();
 var cors = require('cors'); 
 var port = process.env.PORT || 3001;
 
-// test database connection
-database.connect((err) => {
-    if(err){
-      console.log('Error connecting to Db');
-      return;
-    }
-    console.log('Connection established');
-  });
-
 // This is to allow our api for parsing json
 app.use(express.json());
 
@@ -24,6 +15,21 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+// test database connection
+database.connect((err) => {
+    if(err){
+      console.log('Error connecting to Db');
+      return;
+    }
+    console.log('Connection established');
+});
+
+// Test server connection is working
+app.get('/', (req, res) => {
+    res.send({
+        msg: 'Connection is working!'
+    });
+});
 
 // // Register routes in the main index.js
 // app.use('/', [
@@ -32,11 +38,15 @@ app.use(express.urlencoded({
 // ]);
 
 
-// Test server connection is working
-app.get('/', (req, res) => {
-    res.send({
-        msg: 'Connection is working!'
-    });
+app.post('/SignUp/username', (req, res) => {
+
+    const username = req.body.username;
+
+    database.query("SELECT username FROM sign_up_manager WHERE username = ?",[username],
+        (err, results) => {
+            !err ? res.send(results).json : res.json(err);
+        }
+    );
 });
 
 
