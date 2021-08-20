@@ -229,9 +229,9 @@ class SignUp extends Component {
                 errorRestaurantState: true,
                 isValid: false
             });
-        } else if (this.state.restaurant_state.length > 2){
+        } else if (this.state.restaurant_state.length !== 2){
             this.setState({
-                helperTextRestaurantState: 'State cannot be more than 2 letters!',
+                helperTextRestaurantState: 'State must be 2 letters!',
                 errorRestaurantState: true,
                 isValid: false
             });
