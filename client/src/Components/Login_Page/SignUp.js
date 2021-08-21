@@ -246,6 +246,18 @@ class SignUp extends Component {
                 errorRestaurantState: true,
                 isValid: false
             });
+        }else if (this.state.restaurant_state.length !== 2){
+            this.setState({
+                helperTextRestaurantState: 'State must be 2 letters!',
+                errorRestaurantState: true,
+                isValid: false
+            });
+        }else if((this.state.restaurant_state).match(/^[0-9]+$/)){
+            this.setState({
+                helperTextRestaurantState: 'Field cannot have numbers!',
+                errorRestaurantState: true,
+                isValid: false
+            });
         }
 
         // Validators -> restaurant_zip
@@ -500,6 +512,8 @@ class SignUp extends Component {
                             type="state"
                             name="restaurant_state"
                             fullWidth
+                            error={this.state.errorRestaurantState}
+                            helperText={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
                         >
