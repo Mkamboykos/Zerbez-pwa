@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider ,withStyles , FormControlLabel, Checkbox  } from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox  } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -45,8 +45,7 @@ class SignUp extends Component {
             restaurant_state: "", 
             restaurant_zip: "",
 
-            existUsername:'',
-            usernameNotEmpty: false,
+            //existUsername:'',
             isValid: false,
             redirect: false,
             isChecked1: false,
@@ -118,12 +117,24 @@ class SignUp extends Component {
                 errorFirstName: true,
                 isValid: false
             });
+        }else if((this.state.first_name).match(/[0-9]/)){
+            this.setState({
+                helperTextFirstName: 'Field cannot have numbers!',
+                errorFirstName: true,
+                isValid: false
+            });
         }
 
         // Validators -> last_name
         if(this.state.last_name === ""){
             this.setState({
                 helperTextLastName: 'Field cannot be empty!',
+                errorLastName: true,
+                isValid: false
+            });
+        }else if((this.state.last_name).match(/[0-9]/)){
+            this.setState({
+                helperTextLastName: 'Field cannot have numbers!',
                 errorLastName: true,
                 isValid: false
             });
@@ -220,18 +231,18 @@ class SignUp extends Component {
                 errorRestaurantCity: true,
                 isValid: false
             });
+        }else if((this.state.restaurant_city).match(/[0-9]/)){
+            this.setState({
+                helperTextRestaurantCity: 'Field cannot have numbers!',
+                errorRestaurantCity: true,
+                isValid: false
+            });
         }
 
         // Validators -> restaurant_state
         if(this.state.restaurant_state === ""){
             this.setState({
                 helperTextRestaurantState: 'Field cannot be empty!',
-                errorRestaurantState: true,
-                isValid: false
-            });
-        } else if (this.state.restaurant_state.length !== 2){
-            this.setState({
-                helperTextRestaurantState: 'State must be 2 letters!',
                 errorRestaurantState: true,
                 isValid: false
             });
@@ -244,7 +255,7 @@ class SignUp extends Component {
                 errorRestaurantZip: true,
                 isValid: false
             });
-        }else if(typeof this.state.restaurant_zip !== 'number'){
+        }else if(!(this.state.restaurant_zip).match(/^[0-9]+$/)){
             this.setState({
                 helperTextRestaurantZip: 'ZIP Code can only have numbers!',
                 errorRestaurantZip: true,
@@ -365,7 +376,7 @@ class SignUp extends Component {
             <Form className="signUp_Form_Container" onSubmit={this.postToDatabase}>
 
                 <MuiThemeProvider theme={theme}>
-                    <Form.Group>
+                    <FormControl>
                         <TextField
                             label="First Name"
                             type="text"
@@ -376,9 +387,9 @@ class SignUp extends Component {
                             value={this.state.first_name}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group>
+                    <FormControl>
                         <TextField
                             label="Last Name"
                             type="text"
@@ -389,9 +400,9 @@ class SignUp extends Component {
                             value={this.state.last_name}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group>
+                    <FormControl>
                         <TextField
                             label="Username"
                             type="text"
@@ -402,9 +413,9 @@ class SignUp extends Component {
                             value={this.state.username}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group>
+                    <FormControl>
                         <TextField
                             label="Email"
                             type="email"
@@ -415,9 +426,9 @@ class SignUp extends Component {
                             value={this.state.email}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
                     
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="Password"
                             type="password"
@@ -428,9 +439,9 @@ class SignUp extends Component {
                             value={this.state.password}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="Confirm Password"
                             type="password"
@@ -441,9 +452,9 @@ class SignUp extends Component {
                             value={this.state.confirm_password}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="Restaurant Name"
                             type="text"
@@ -454,9 +465,9 @@ class SignUp extends Component {
                             value={this.state.restaurant_name}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="Restaurant Address"
                             type="address"
@@ -467,9 +478,9 @@ class SignUp extends Component {
                             value={this.state.restaurant_address}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="City"
                             type="city"
@@ -480,22 +491,25 @@ class SignUp extends Component {
                             value={this.state.restaurant_city}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <Form.Group >
-                        <TextField
+                    <FormControl className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-label">State</InputLabel>
+                        <Select
                             label="State"
                             type="state"
                             name="restaurant_state"
                             fullWidth
-                            error={this.state.errorRestaurantState}
-                            helperText={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
-                        />
-                    </Form.Group>
+                        >
+                            <MenuItem value={"AR"}>AR</MenuItem>
+                            <MenuItem value={"FL"}>FL</MenuItem>
+                            <MenuItem value={""}></MenuItem>
+                        </Select>
+                    </FormControl>
 
-                    <Form.Group >
+                    <FormControl>
                         <TextField
                             label="ZIP Code"
                             type="numbers"
@@ -506,52 +520,54 @@ class SignUp extends Component {
                             value={this.state.restaurant_zip}
                             onChange={this.onChangeTextfield}
                         />
-                    </Form.Group>
+                    </FormControl>
 
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.state.isChecked1}
-                                onChange={this.onChangeCheckBox}
-                                value={this.state.isChecked1}
-                                name="isChecked1"
+                    <FormControl>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.state.isChecked1}
+                                    onChange={this.onChangeCheckBox}
+                                    value={this.state.isChecked1}
+                                    name="isChecked1"
 
-                                //classes linked to const with classes, and root and checked from styles
-                                classes={{
-                                    root: classes.root,
-                                    checked: classes.checked,
-                                }}
-                            />
-                        }
+                                    //classes linked to const with classes, and root and checked from styles
+                                    classes={{
+                                        root: classes.root,
+                                        checked: classes.checked,
+                                    }}
+                                />
+                            }
 
-                        label="I affirm to be the current Manager of this establishment." 
-                    />
+                            label="I affirm to be the current Manager of this establishment." 
+                        />
 
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.state.isChecked2}
-                                onChange={this.onChangeCheckBox}
-                                value={this.state.isChecked2}
-                                name="isChecked2"
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.state.isChecked2}
+                                    onChange={this.onChangeCheckBox}
+                                    value={this.state.isChecked2}
+                                    name="isChecked2"
 
-                                //classes linked to const with classes, and root and checked from styles
-                                classes={{
-                                    root: classes.root,
-                                    checked: classes.checked,
-                                }}
-                            />
-                        } 
-                        
-                        label={
-                            <div>
-                               <span>I accept the </span>
-                               <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
-                               <span> & </span>
-                               <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
-                            </div>
-                        }
-                    />
+                                    //classes linked to const with classes, and root and checked from styles
+                                    classes={{
+                                        root: classes.root,
+                                        checked: classes.checked,
+                                    }}
+                                />
+                            } 
+                            
+                            label={
+                                <div>
+                                <span>I accept the </span>
+                                <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
+                                <span> & </span>
+                                <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
+                                </div>
+                            }
+                        />
+                    </FormControl>
                 </MuiThemeProvider>
 
                 <div className="signUp_button_two_Container">
