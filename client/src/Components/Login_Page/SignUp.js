@@ -64,6 +64,7 @@ class SignUp extends Component {
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
+            helperTextPassword: "Password must have",
 
             //existUsername:'',
             isValid: false,
