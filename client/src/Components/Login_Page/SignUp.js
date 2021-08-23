@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox  } from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider,FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox  } from '@material-ui/core'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -266,18 +266,6 @@ class SignUp extends Component {
                 errorRestaurantState: true,
                 isValid: false
             });
-        }else if (this.state.restaurant_state.length !== 2){
-            this.setState({
-                helperTextRestaurantState: 'State must be 2 letters!',
-                errorRestaurantState: true,
-                isValid: false
-            });
-        }else if((this.state.restaurant_state).match(/^[0-9]+$/)){
-            this.setState({
-                helperTextRestaurantState: 'Field cannot have numbers!',
-                errorRestaurantState: true,
-                isValid: false
-            });
         }
 
         // Validators -> restaurant_zip
@@ -525,9 +513,7 @@ class SignUp extends Component {
                         />
                     </FormControl>
 
-                    <FormControl inputProps={{
-                                style: { width: "0%" }
-                              }}>
+                    <FormControl error={this.state.errorRestaurantState}>
                         <InputLabel id="dropdown-state-select" >State</InputLabel>
                         <Select
                             labelId="dropdown-state-select"
@@ -595,6 +581,7 @@ class SignUp extends Component {
                             <MenuItem value={"Wisconsin"} classes={{ root: classes.selected }}>WI</MenuItem>
                             <MenuItem value={"Wyoming"} classes={{ root: classes.selected }}>WY</MenuItem>
                         </Select>
+                        <FormHelperText>{this.state.helperTextRestaurantState}</FormHelperText>
                     </FormControl>
 
                     <FormControl>
