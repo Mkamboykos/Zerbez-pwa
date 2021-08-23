@@ -20,9 +20,29 @@ const styles = {
         },
         '&:hover': {
             background: "none",           
-        }
+        },
     },
     checked: {},
+    
+    // color of icon for state select drop down menu
+    icon: {
+        fill: "#F4F1F2",
+    },
+    
+     // color of menu item for state select drop down menu
+    selected: {
+        backgroundColor: "white",
+        color: "black",
+        horizontal: "left",
+        "&:focus": {
+			backgroundColor: "#2A3C60",
+            color: "#F4F1F2",
+		}, 
+        "&:hover": {
+			backgroundColor: "#2A3C60",
+            color: "#F4F1F2",
+		},
+    },
 };
 
 
@@ -505,10 +525,12 @@ class SignUp extends Component {
                         />
                     </FormControl>
 
-                    <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-label">State</InputLabel>
+                    <FormControl inputProps={{
+                                style: { width: "0%" }
+                              }}>
+                        <InputLabel id="dropdown-state-select" >State</InputLabel>
                         <Select
-                            label="State"
+                            labelId="dropdown-state-select"
                             type="state"
                             name="restaurant_state"
                             fullWidth
@@ -516,10 +538,62 @@ class SignUp extends Component {
                             helperText={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
+                            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                            classes={{
+                                icon: classes.icon,
+                            }}
+                            style={{textAlign: 'left'}}
                         >
-                            <MenuItem value={"AR"}>AR</MenuItem>
-                            <MenuItem value={"FL"}>FL</MenuItem>
-                            <MenuItem value={""}></MenuItem>
+                            <MenuItem value={"Alabama"} classes={{ root: classes.selected }}>AL</MenuItem>
+                            <MenuItem value={"Alaska"} classes={{ root: classes.selected }}>AK</MenuItem>
+                            <MenuItem value={"Arizona"} classes={{ root: classes.selected }}>AZ</MenuItem>
+                            <MenuItem value={"Arkansas"} classes={{ root: classes.selected }}>AR</MenuItem>
+                            <MenuItem value={"California"} classes={{ root: classes.selected }}>CA</MenuItem>
+                            <MenuItem value={"Colorado"} classes={{ root: classes.selected }}>CO</MenuItem>
+                            <MenuItem value={"Connecticut"} classes={{ root: classes.selected }}>CT</MenuItem>
+                            <MenuItem value={"Delaware"} classes={{ root: classes.selected }}>DE</MenuItem>
+                            <MenuItem value={"Florida"} classes={{ root: classes.selected }}>FL</MenuItem>
+                            <MenuItem value={"Georgia"} classes={{ root: classes.selected }}>GA</MenuItem>
+                            <MenuItem value={"Hawaii"} classes={{ root: classes.selected }}>HI</MenuItem>
+                            <MenuItem value={"Idaho"} classes={{ root: classes.selected }}>ID</MenuItem>
+                            <MenuItem value={"Illinois"} classes={{ root: classes.selected }}>IL</MenuItem>
+                            <MenuItem value={"Indiana"} classes={{ root: classes.selected }}>IN</MenuItem>
+                            <MenuItem value={"Iowa"} classes={{ root: classes.selected }}>IA</MenuItem>
+                            <MenuItem value={"Kansas"} classes={{ root: classes.selected }}>KS</MenuItem>
+                            <MenuItem value={"Kentucky"} classes={{ root: classes.selected }}>KY</MenuItem>
+                            <MenuItem value={"Louisiana"} classes={{ root: classes.selected }}>LA</MenuItem>
+                            <MenuItem value={"Maine"} classes={{ root: classes.selected }}>ME</MenuItem>
+                            <MenuItem value={"Maryland"} classes={{ root: classes.selected }}>MD</MenuItem>
+                            <MenuItem value={"Massachusetts"} classes={{ root: classes.selected }}>MA</MenuItem>
+                            <MenuItem value={"Michigan"} classes={{ root: classes.selected }}>MI</MenuItem>
+                            <MenuItem value={"Minnesota"} classes={{ root: classes.selected }}>MN</MenuItem>
+                            <MenuItem value={"Mississippi"} classes={{ root: classes.selected }}>MS</MenuItem>
+                            <MenuItem value={"Missouri"} classes={{ root: classes.selected }}>MO</MenuItem>
+                            <MenuItem value={"Montana"} classes={{ root: classes.selected }}>MT</MenuItem>
+                            <MenuItem value={"Nebraska"} classes={{ root: classes.selected }}>NE</MenuItem>
+                            <MenuItem value={"Nevada"} classes={{ root: classes.selected }}>NV</MenuItem>
+                            <MenuItem value={"New Hampshire"} classes={{ root: classes.selected }}>NH</MenuItem>
+                            <MenuItem value={"New Jersey"} classes={{ root: classes.selected }}>NJ</MenuItem>
+                            <MenuItem value={"New Mexico"} classes={{ root: classes.selected }}>NM</MenuItem>
+                            <MenuItem value={"New York"} classes={{ root: classes.selected }}>NY</MenuItem>
+                            <MenuItem value={"North Carolina"} classes={{ root: classes.selected }}>NC</MenuItem>
+                            <MenuItem value={"North Dakota"} classes={{ root: classes.selected }}>ND</MenuItem>
+                            <MenuItem value={"Ohio"} classes={{ root: classes.selected }}>OH</MenuItem>
+                            <MenuItem value={"Oklahoma"} classes={{ root: classes.selected }}>OK</MenuItem>
+                            <MenuItem value={"Oregon"} classes={{ root: classes.selected }}>OR</MenuItem>
+                            <MenuItem value={"Pennsylvania"} classes={{ root: classes.selected }}>PA</MenuItem>
+                            <MenuItem value={"Rhode Island"} classes={{ root: classes.selected }}>RI</MenuItem>
+                            <MenuItem value={"South Carolina"} classes={{ root: classes.selected }}>SC</MenuItem>
+                            <MenuItem value={"South Dakota"} classes={{ root: classes.selected }}>SD</MenuItem>
+                            <MenuItem value={"Tennessee"} classes={{ root: classes.selected }}>TN</MenuItem>
+                            <MenuItem value={"Texas"} classes={{ root: classes.selected }}>TX</MenuItem>
+                            <MenuItem value={"Utah"} classes={{ root: classes.selected }}>UT</MenuItem>
+                            <MenuItem value={"Vermont"} classes={{ root: classes.selected }}>VT</MenuItem>
+                            <MenuItem value={"Virginia"} classes={{ root: classes.selected }}>VA</MenuItem>
+                            <MenuItem value={"Washington"} classes={{ root: classes.selected }}>WA</MenuItem>
+                            <MenuItem value={"West Virginia"} classes={{ root: classes.selected }}>WV</MenuItem>
+                            <MenuItem value={"Wisconsin"} classes={{ root: classes.selected }}>WI</MenuItem>
+                            <MenuItem value={"Wyoming"} classes={{ root: classes.selected }}>WY</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -554,6 +628,7 @@ class SignUp extends Component {
                             }
 
                             label="I affirm to be the current Manager of this establishment." 
+                            style={{textAlign: 'left'}}
                         />
 
                         <FormControlLabel
