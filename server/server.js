@@ -58,7 +58,7 @@ app.post('/SignUp', (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const confirm_password = req.body.confirm_password;
+    const retypePassword = req.body.retypePassword;
     const restaurant_name = req.body.restaurant_name;
     const restaurant_address = req.body.restaurant_address;
     const restaurant_city = req.body.restaurant_city;
@@ -66,7 +66,7 @@ app.post('/SignUp', (req, res) => {
     const restaurant_zip = req.body.restaurant_zip;
 
     database.query("INSERT INTO sign_up_manager (first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-        [first_name, last_name, username, email, password, confirm_password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip],
+        [first_name, last_name, username, email, password, retypePassword, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip],
         (err, results) => {
             !err ? res.json(results) : res.json(err);
         });

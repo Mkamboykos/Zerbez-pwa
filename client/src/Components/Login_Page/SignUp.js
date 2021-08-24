@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider,FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox  } from '@material-ui/core'
+import {TextField, createTheme, MuiThemeProvider,InputAdornment, Input, IconButton, FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox} from '@material-ui/core'
+import {Visibility, VisibilityOff} from '@material-ui/icons'
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -28,7 +29,9 @@ const styles = {
     icon: {
         fill: "#F4F1F2",
     },
-    
+    toggleIcon: {
+        color: "#F4F1F2",
+    },
      // color of menu item for state select drop down menu
     selected: {
         backgroundColor: "white",
@@ -58,24 +61,33 @@ class SignUp extends Component {
             username: "", 
             email: "", 
             password: "", 
-            confirm_password: "", 
+            retypePassword: "", 
             restaurant_name: "", 
             restaurant_address: "", 
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
-            helperTextPassword: "Password must have",
+
+            //password requirements
+            helperTextPasswordLength: "Must be between 8 and 20 characters long ",
+            helperTextPasswordUppercase: "Must contain at least one uppercase character",
+            helperTextPasswordLowercase: "Must contain at least one lowercase character",
+            helperTextPasswordNumber: "Must contain at least one number",
+            helperTextPasswordSpecial: "Must contain at least one special character (e.g. !@$&$)",
+            
 
             //existUsername:'',
             isValid: false,
             redirect: false,
             isChecked1: false,
             isChecked2: false,
+            showPassword: false,
         });
 
         this.handleSignUp = this.handleSignUp.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
         this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
+        this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
     }
 
     /*
@@ -91,8 +103,12 @@ class SignUp extends Component {
             helperTextLastName: '',
             helperTextUsername: '',
             helperTextEmail: '',
-            helperTextPassword:'',
-            helperTextConfirmPassword: '',
+            helperTextPasswordLength: 'Must be between 8 and 20 characters long',
+            helperTextPasswordUppercase: 'Must contain at least one uppercase character',
+            helperTextPasswordLowercase: 'Must contain at least one lowercase character',
+            helperTextPasswordNumber: 'Must contain at least one number',
+            helperTextPasswordSpecial: 'Must contain at least one special character (e.g. !@$&$)',
+            helperTextRetypePassword: '',
             helperTextRestaurantName: '',
             helperTextRestaurantAddress: '',
             helperTextRestaurantCity: '',
@@ -103,7 +119,7 @@ class SignUp extends Component {
             errorUsername: false,
             errorEmail: false,
             errorPassword: false,
-            errorConfirmPassword: false,
+            errorRetypePassword: false,
             errorRestaurantName: false,
             errorRestaurantAddress: false,
             errorRestaurantCity: false,
@@ -117,6 +133,16 @@ class SignUp extends Component {
             [e.target.name]: e.target.checked
         })
     }
+
+    handleClickShowPassword = () => {
+        this.setState({ 
+            showPassword: !this.state.showPassword 
+        });
+    };
+
+    handleMouseDownPassword = (e) => {
+        e.preventDefault();
+    };
 
     /*
     *  - Textfield validators when onClick event is triggered when submitting the Form
@@ -206,24 +232,112 @@ class SignUp extends Component {
         // Validators -> password
         if(this.state.password === ""){
             this.setState({
-                helperTextPassword: 'Field cannot be empty!',
+                helperTextPasswordLength: 'Field cannot be empty!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
                 errorPassword: true,
                 isValid: false
+            });
+        }else if(this.state.password.length < 9){
+            this.setState({
+                helperTextPasswordLength: 'Password is too short!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if(this.state.password.length > 20){
+            this.setState({
+                helperTextPasswordLength: 'Password is too long!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if((this.state.password).match(/[\s]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: 'Password cannot contain whitespaces!',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.password).match(/[A-Z]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: 'Must contain at least one uppercase character!',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.password).match(/[a-z]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: 'Must contain at least one lowercase character!',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.password).match(/[0-9]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: 'Must contain at least one number!',
+                helperTextPasswordSpecial: '',
+                errorPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.password).match(/[^\w\s]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: 'Must contain at least one special character (e.g. !@$&$)',
+                errorPassword: true,
+                isValid: false
+            });
+        }else {
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                isValid: true
             });
         }
 
         // Validators -> confirm_password
-        if(this.state.confirm_password === ""){
+        if(this.state.retypePassword === ""){
             this.setState({
-                helperTextConfirmPassword: 'Field cannot be empty!',
-                errorConfirmPassword: true,
+                helperTextRetypePassword: 'Field cannot be empty!',
+                errorRetypePassword: true,
                 isValid: false
             });
-        }else if(this.state.confirm_password !== this.state.password){
+        }else if(this.state.retypePassword !== this.state.password){
             this.setState({
-                helperTextConfirmPassword: 'Passwords do not match!',
-                errorConfirmPassword: true,
+                helperTextRetypePassword: 'Passwords do not match!',
+                errorRetypePassword: true,
                 isValid: false
+            });
+        }else if(this.state.retypePassword === this.state.password){
+            this.setState({
+                helperTextRetypePassword: 'Passwords match!',
+                isValid: true
             });
         }
 
@@ -332,7 +446,7 @@ class SignUp extends Component {
                 username: this.state.username, 
                 email: this.state.email, 
                 password: this.state.password, 
-                confirm_password: this.state.confirm_password, 
+                retypePassword: this.state.retypePassword, 
                 restaurant_name: this.state.restaurant_name, 
                 restaurant_address: this.state.restaurant_address, 
                 restaurant_city: this.state.restaurant_city, 
@@ -357,6 +471,7 @@ class SignUp extends Component {
         }
     }
 
+    
 
     render() {
 
@@ -386,6 +501,8 @@ class SignUp extends Component {
 
         // classes are used for the white color of the checkboxes, this calls to the props being used on this class
         const { classes } = this.props;
+
+        
         
         return (
 
@@ -452,26 +569,64 @@ class SignUp extends Component {
                     <FormControl>
                         <TextField
                             label="Password"
-                            type="password"
                             name="password"
                             fullWidth
                             error={this.state.errorPassword}
-                            helperText={this.state.helperTextPassword}
+                            helperText={
+                                <div>
+                                    <div>{this.state.helperTextPasswordLength}</div>
+                                    <div>{this.state.helperTextPasswordUppercase}</div>
+                                    <div>{this.state.helperTextPasswordLowercase}</div>
+                                    <div>{this.state.helperTextPasswordNumber}</div>
+                                    <div>{this.state.helperTextPasswordSpecial}</div>
+                                </div>
+                            }
                             value={this.state.password}
                             onChange={this.onChangeTextfield}
+                            
+                            type={this.state.showPassword ? 'text' : 'password'}
+                            InputProps={{
+                                endAdornment:(
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={this.handleClickShowPassword}
+                                        onMouseDown={this.handleMouseDownPassword}
+                                        classes={{root: classes.toggleIcon}}
+                                      >
+                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                      </IconButton>
+                                    </InputAdornment>
+                                )  
+                            }}
                         />
                     </FormControl>
 
                     <FormControl>
                         <TextField
-                            label="Confirm Password"
+                            label="Retype Password"
                             type="password"
-                            name="confirm_password"
+                            name="retypePassword"
                             fullWidth
-                            error={this.state.errorConfirmPassword}
-                            helperText={this.state.helperTextConfirmPassword}
-                            value={this.state.confirm_password}
+                            error={this.state.errorRetypePassword}
+                            helperText={this.state.helperTextRetypePassword}
+                            value={this.state.retypePassword}
                             onChange={this.onChangeTextfield}
+                            type={this.state.showPassword ? 'text' : 'password'}
+                            InputProps={{
+                                endAdornment:(
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={this.handleClickShowPassword}
+                                        onMouseDown={this.handleMouseDownPassword}
+                                        classes={{root: classes.toggleIcon}}
+                                      >
+                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                      </IconButton>
+                                    </InputAdornment>
+                                )  
+                            }}
                         />
                     </FormControl>
 
@@ -643,6 +798,7 @@ class SignUp extends Component {
                                 <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                                 </div>
                             }
+                            style={{textAlign: 'left'}}
                         />
                     </FormControl>
                 </MuiThemeProvider>
