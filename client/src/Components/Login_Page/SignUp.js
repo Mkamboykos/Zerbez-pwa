@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
-import {TextField, createTheme, MuiThemeProvider,InputAdornment, Input, IconButton, FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox} from '@material-ui/core'
-import {Visibility, VisibilityOff} from '@material-ui/icons'
+import {TextField, createTheme, MuiThemeProvider,InputAdornment, IconButton, FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox} from '@material-ui/core'
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
@@ -76,12 +77,14 @@ class SignUp extends Component {
             helperTextPasswordSpecial: "Must contain at least one special character (e.g. !@$&$)",
             
 
-            //existUsername:'',
+            existUsername:'',
+            existEmail: '',
             isValid: false,
             redirect: false,
             isChecked1: false,
             isChecked2: false,
             showPassword: false,
+            showRetypePassword: false,
         });
 
         this.handleSignUp = this.handleSignUp.bind(this);
@@ -114,6 +117,8 @@ class SignUp extends Component {
             helperTextRestaurantCity: '',
             helperTextRestaurantState: '',
             helperTextRestaurantZip: '',
+            existUsername:'',
+            existEmail: '',
             errorFirstName: false,
             errorLastName: false,
             errorUsername: false,
@@ -140,7 +145,13 @@ class SignUp extends Component {
         });
     };
 
-    handleMouseDownPassword = (e) => {
+    handleClickShowRetypePassword = () => {
+        this.setState({ 
+            showRetypePassword: !this.state.showRetypePassword 
+        });
+    };
+
+    handleMouseDownPassword(e){
         e.preventDefault();
     };
 
@@ -149,7 +160,7 @@ class SignUp extends Component {
     *    using the isValid state
     *  - isValid must return as true to submit the form
     */
-    handleSignUp(e){
+    handleSignUp(){
 
         if(this.state.isValid === false){
             this.setState({
@@ -195,24 +206,6 @@ class SignUp extends Component {
                 isValid: false
             });
         }
-        
-        // else if (this.state.username !== ""){
-        //     e.preventDefault();
-        //     Axios.post('http://localhost:3001/SignUp/username', {
-        //         username: this.state.username
-        //     }).then(res => {
-        //         this.setState({
-        //             existUsername: res.data.length
-        //         });
-        //         if(this.state.existUsername > 0){
-        //             this.setState({
-        //                 helperTextUsername: 'Username already exist!',
-        //                 errorUsername: true,
-        //                 isValid: false
-        //             });
-        //         }
-        //     }); 
-        // }
         
         // Validators -> email
         if(this.state.email === ""){
@@ -413,55 +406,68 @@ class SignUp extends Component {
         }
     }
 
-    // checkExistingUsername = e => {
-    //     if (this.state.username !== ""){
-    //         e.preventDefault();
-    //         Axios.post('http://localhost:3001/SignUp/username', {
-    //             username: this.state.username
-    //         }).then(res => {
-    //             this.setState({
-    //                 existUsername: res.data.length
-    //             });
-    //             if(this.state.existUsername > 0){
-    //                 this.setState({
-    //                     helperTextUsername: 'Username already exist!',
-    //                     errorUsername: true,
-    //                     isValid: false
-    //                 });
-    //             }
-    //         }); 
-    //     }
-    // }
-
     /*
     *  HTTP POST Request sent to the databse, and redirect is enabled
     */
-    postToDatabase = e =>{
+    checkExistingUsernameAndSubmit = async e =>{
         e.preventDefault();
-        if((this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
-            
-            Axios.post('http://localhost:3001/SignUp', {
-                first_name: this.state.first_name, 
-                last_name: this.state.last_name, 
-                username: this.state.username, 
-                email: this.state.email, 
-                password: this.state.password, 
-                retypePassword: this.state.retypePassword, 
-                restaurant_name: this.state.restaurant_name, 
-                restaurant_address: this.state.restaurant_address, 
-                restaurant_city: this.state.restaurant_city, 
-                restaurant_state: this.state.restaurant_state, 
-                restaurant_zip: this.state.restaurant_zip
-            }).then(res => {
-                console.log(res.status);
 
-                if(res.status === 200){
-                    this.setState({
-                        redirect: true
-                    }) 
-                }
+        // check if username already exists
+        Axios.post('http://localhost:3001/SignUp/username', {
+            username: this.state.username
+        }).then(res => {
+            this.setState({
+                existUsername: res.data.length
             });
-        }
+            if(this.state.existUsername > 0){
+                this.setState({
+                    helperTextUsername: 'Username already exist!',
+                    errorUsername: true,
+                    isValid: false,
+                });
+            }
+        }); 
+
+        // check if email already exists
+        Axios.post('http://localhost:3001/SignUp/email', {
+            email: this.state.email
+        }).then(res => {
+            this.setState({
+                existEmail: res.data.length
+            });
+            if(this.state.existEmail > 0){
+                this.setState({
+                    helperTextEmail: 'This email is already being used!',
+                    errorEmail: true,
+                    isValid: false,
+                });
+            }
+            else if((this.state.existUsername === 0 && this.state.existEmail === 0 && this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
+                
+                // if username and email are unique then post the account to the database
+                Axios.post('http://localhost:3001/SignUp', {
+                    first_name: this.state.first_name, 
+                    last_name: this.state.last_name, 
+                    username: this.state.username, 
+                    email: this.state.email, 
+                    password: this.state.password, 
+                    retypePassword: this.state.retypePassword, 
+                    restaurant_name: this.state.restaurant_name, 
+                    restaurant_address: this.state.restaurant_address, 
+                    restaurant_city: this.state.restaurant_city, 
+                    restaurant_state: this.state.restaurant_state, 
+                    restaurant_zip: this.state.restaurant_zip
+                }).then(res => {
+                    console.log(res.status);
+        
+                    if(res.status === 200){
+                        this.setState({
+                            redirect: true
+                        }) 
+                    }
+                });
+            }
+        });
     }
 
     // Redirect to Dashboard when redirect is true
@@ -472,7 +478,6 @@ class SignUp extends Component {
     }
 
     
-
     render() {
 
         // color is the main white used accross the app
@@ -501,17 +506,14 @@ class SignUp extends Component {
 
         // classes are used for the white color of the checkboxes, this calls to the props being used on this class
         const { classes } = this.props;
-
         
         
         return (
-
-            
             <div className="SignUp_Page_Container">
             <div className="SignUp_Page_Title_Container">
                 <h1 className="SignUp_Page_Title">Sign Up</h1>
             </div>
-            <Form className="signUp_Form_Container" onSubmit={this.postToDatabase}>
+            <Form className="signUp_Form_Container" onSubmit={this.checkExistingUsernameAndSubmit}>
 
                 <MuiThemeProvider theme={theme}>
                     <FormControl>
@@ -612,17 +614,17 @@ class SignUp extends Component {
                             helperText={this.state.helperTextRetypePassword}
                             value={this.state.retypePassword}
                             onChange={this.onChangeTextfield}
-                            type={this.state.showPassword ? 'text' : 'password'}
+                            type={this.state.showRetypePassword ? 'text' : 'password'}
                             InputProps={{
                                 endAdornment:(
                                     <InputAdornment position="end">
                                       <IconButton
                                         aria-label="toggle password visibility"
-                                        onClick={this.handleClickShowPassword}
+                                        onClick={this.handleClickShowRetypePassword}
                                         onMouseDown={this.handleMouseDownPassword}
                                         classes={{root: classes.toggleIcon}}
                                       >
-                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        {this.state.showRetypePassword ? <Visibility /> : <VisibilityOff />}
                                       </IconButton>
                                     </InputAdornment>
                                 )  

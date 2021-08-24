@@ -49,6 +49,17 @@ app.post('/SignUp/username', (req, res) => {
     );
 });
 
+app.post('/SignUp/email', (req, res) => {
+
+    const email = req.body.email;
+
+    database.query("SELECT email FROM sign_up_manager WHERE email = ?",[email],
+        (err, results) => {
+            !err ? res.send(results).json : res.json(err);
+        }
+    );
+});
+
 
 // Post API for when a manager signs up
 app.post('/SignUp', (req, res) => {
