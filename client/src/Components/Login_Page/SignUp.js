@@ -426,7 +426,7 @@ class SignUp extends Component {
                     isValid: false,
                 });
             }
-        }); 
+        }).catch((err) => console.error(err)); 
 
         // check if email already exists
         Axios.post('http://localhost:3001/SignUp/email', {
@@ -445,7 +445,7 @@ class SignUp extends Component {
             else if((this.state.existUsername === 0 && this.state.existEmail === 0 && this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
                 
                 // if username and email are unique then post the account to the database
-                Axios.post('http://localhost:3001/SignUp', {
+                Axios.post('http://localhost:3001/SignUp/user', {
                     first_name: this.state.first_name, 
                     last_name: this.state.last_name, 
                     username: this.state.username, 
@@ -477,7 +477,6 @@ class SignUp extends Component {
         }
     }
 
-    
     render() {
 
         // color is the main white used accross the app
@@ -682,7 +681,6 @@ class SignUp extends Component {
                             helperText={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
-                            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                             classes={{
                                 icon: classes.icon,
                             }}

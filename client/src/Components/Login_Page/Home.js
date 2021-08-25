@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
-
+import Axios from 'axios';
 import {Form} from 'react-bootstrap'
 
 
@@ -12,89 +12,91 @@ class Home extends Component{
 
     //Initial State
         this.state = ({
+            
+            username: "",
+            password: "",
+
+            captcha: "",
+            userCaptcha: "",
             loginDisplay: true,
             capChaDisplay: false,
             btnDisplay: false,
             redirect: false,
-            username: "",
-            password: "",
-            captcha: "",
-            userCaptcha: ""
+            isValid: false,
         });
     
-        this.handleUsername = this.handleUsername.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleCaptcha = this.handleCaptcha.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
         this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
+        this.onChangeTextfield = this.onChangeTextfield.bind(this);
+        this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
     }
 
-    //Class Properties (Events On Change)
-    handleUsername(e){
-        let username = e.target.value;
+    onChangeTextfield(e){
+        let field = e.target.name;
+        let value = e.target.value;
         this.setState({
-            username: username
-        })
-      }
-    
-    handlePassword(e){
-          let password = e.target.value;
-          this.setState({
-            password: password
-        })
+            [field]: value,
+            errorUsername: false,
+            errorPassword: false,
+            helperText: '',
+        });
     }
     
-    handleLogin(e){
-        e.preventDefault();
-        if (this.state.username === '' && this.state.password === ''){
-            alert("Username and Password cannot be empty")
-            return;
-        }else if(this.state.username && !this.state.password){
-            alert("Missing Password")
-            return;
-        }else if(!this.state.username && this.state.password){
-            alert("Missing Username")
-        return;
-        }else{
+    handleLogin(){
+    
+        if(this.state.isValid === false){
             this.setState({
-                capChaDisplay: true,
-                btnDisplay:true,
-                loginDisplay: false
-            });
-            //console.log(this.state.username + " " + this.state.password)
-        }    
+                isValid: true
+            })
+        }
 
-        let random = Math.random().toString(36).substring(7);
-        this.setState({
-            captcha: random
-        })
+        // Validators
+        if(this.state.username === ""){
+            this.setState({
+                helperText: 'Fields cannot be empty!',
+                errorUsername: true,
+                isValid: false
+            });
+        }
+
+        if(this.state.password === ""){
+            this.setState({
+                helperText: 'Fields cannot be empty!',
+                errorPassword: true,
+                isValid: false
+            });
+        }
     }
 
     handleKeyPressLogin(e){
         if (e.key === "Enter"){
             e.preventDefault();
-            if (this.state.username === '' && this.state.password === ''){
-                alert("Username and Password cannot be empty")
-                return;
-            }else if(this.state.username && !this.state.password){
-                alert("Missing Password")
-                return;
-            }else if(!this.state.username && this.state.password){
-                alert("Missing Username")
-                return;
-            }else{
-                this.setState({                    
-                    capChaDisplay: true,
-                    btnDisplay:true,
-                    loginDisplay:false
+
+            if(this.state.isValid === false){
+                this.setState({
+                    isValid: true
+                })
+            }
+
+            // Validators
+            if(this.state.username === ""){
+                this.setState({
+                    helperText: 'Fields cannot be empty!',
+                    errorUsername: true,
+                    isValid: false
                 });
             }
-            let random = Math.random().toString(36).substring(7);
-            this.setState({
-                captcha: random
-            })
+
+            if(this.state.password === ""){
+                this.setState({
+                    helperText: 'Fields cannot be empty!',
+                    errorPassword: true,
+                    isValid: false
+                });
+            }
+            document.getElementById("loginButton").click();
         }
     }
 
@@ -103,9 +105,9 @@ class Home extends Component{
         if(!userCaptcha)
             return;
             this.setState({
-            btnDisplay: false,
-            userCaptcha: userCaptcha
-        })
+                btnDisplay: false,
+                userCaptcha: userCaptcha
+            })
     }
 
     handleKeyPressSubmit(e){
@@ -136,6 +138,37 @@ class Home extends Component{
         }
     }
 
+
+    verifyCredentials = async e =>{
+        e.preventDefault();
+
+        // verify username and password
+        Axios.post('http://localhost:3001/login', {
+            username: this.state.username,
+            password: this.state.password,
+        }).then(res => {  
+            if(res.data.length !== 1){
+                this.setState({
+                    helperText: 'Username or Password is incorrect!',
+                    errorUsername: true,
+                    errorPassword: true,
+                    isValid: false,
+                });
+            }else{
+                this.setState({                    
+                    capChaDisplay: true,
+                    btnDisplay:true,
+                    loginDisplay:false
+                });
+                let random = Math.random().toString(36).substring(7);
+                this.setState({
+                    captcha: random
+                })
+            }
+        });
+    }
+    
+
     renderRedirect(){
         if (this.state.redirect) {
             return <Redirect to='/Dashboard' />
@@ -143,22 +176,27 @@ class Home extends Component{
     }
     
     renderCaptcha(){
-          return(
-              <div className="captchaContainer">
+        return(
+            <div className="captchaContainer">
                 <Form onKeyPress={this.handleKeyPressSubmit} >
-                  <Form.Group controlId="formPlaintextEmail" className="captchaBar">
-                      <Form.Label className="captchaText">
-                          {this.state.captcha}
-                      </Form.Label>
-                          <Form.Control type="text" className="captchaBar" placeholder="Enter Captcha" onChange={this.handleCaptcha} />
-                  </Form.Group>
+                    <Form.Group controlId="formPlaintextEmail" className="captchaBar">
+                        <Form.Label className="captchaText">
+                            {this.state.captcha}
+                        </Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            className="captchaBar"
+                            placeholder="Enter Captcha" 
+                            onChange={this.handleCaptcha} 
+                        />
+                    </Form.Group>
                   
-                  <div>
-                  <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
-                      <b>SUBMIT</b>
-                  </button>
-                  </div>
-                  {this.renderRedirect()}
+                    <div>
+                        <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
+                            <b>SUBMIT</b>
+                        </button>
+                    </div>
+                    {this.renderRedirect()}
                 </Form>
             </div>
         ) 
@@ -167,26 +205,43 @@ class Home extends Component{
     renderLogin(){
         return(
             <div>
-                <Form onKeyPress={this.handleKeyPressLogin}>    
+                <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
 
                     <div className="homePageImageContainer">
                         <p>Insert Image Here</p>
                     </div>
 
-                    <div  className="inputContainer">  
+                    <div className="inputContainer">  
                         <Form.Group className="usernameBar">
-                            <Form.Control type="username" placeholder="Username" className="usernameBarText" onChange={this.handleUsername}/>
+                            <Form.Control 
+                                type="username" 
+                                placeholder="Username"
+                                name="username"
+                                value={this.state.username}
+                                className="usernameBarText" 
+                                onChange={this.onChangeTextfield}
+                                isInvalid={this.state.errorUsername}
+                            />
                         </Form.Group>
                             
                         <Form.Group className="passwordBar">
-                            <Form.Control type="password"  placeholder="Password" className="passwordBarText" onChange={this.handlePassword} />
+                            <Form.Control 
+                                type="password"  
+                                placeholder="Password"
+                                name="password"
+                                value={this.state.password}
+                                className="passwordBarText" 
+                                onChange={this.onChangeTextfield}
+                                isInvalid={this.state.errorPassword}
+                            />
+                            <Form.Control.Feedback type='invalid'>
+                                {this.state.helperText}
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <div className="input_and_login_Container">
                             <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
                                 
-                            <button className="login_button_home" type="submit"  onClick={this.handleLogin} >
-                                <b>LOGIN</b>
-                            </button>
+                            <button className="login_button_home" type="submit" id="loginButton" onClick={this.handleLogin}><b>LOGIN</b></button>
                         </div>
                         <div className="forgotpasswordContainer">
                             <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
