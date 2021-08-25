@@ -2,15 +2,8 @@ const database = require('./Config/DatabaseConfig');
 const express = require('express');
 const app = express();
 const cors = require('cors'); 
+const {body, validationResult } = require('express-validator');
 const port = process.env.PORT || 3001;
-
-// Import Routes
-const authRoute = require('./Routes/Authentication');
-const signupRoute = require('./Routes/signup');
-
-// Route Middlewares
-app.use('/user', authRoute);
-app.use('/SignUp', signupRoute);
 
 // This is to allow our api for parsing json
 app.use(express.json());
@@ -21,21 +14,35 @@ app.use(cors());
 // This is to allow our api to receive data from a client app
 app.use(express.urlencoded({extended: true}));
 
+// Import Routes
+const authRoute = require('./Routes/Authentication');
+const signupRoute = require('./Routes/signup');
 
+// Route Middlewares
+app.use('/user', authRoute);
+app.use('/SignUp', signupRoute);
 
-// Home login
-app.post('/login', (req, res) => {
+// Home user login
+app.post('/login', 
+    body('username').isString(),
+    body('password').isLength({ min: 8, max: 20 }), 
+    (req, res) => {
 
-    const username = req.body.username;
-    const password = req.body.password;
-
-    database.query("SELECT username, password FROM sign_up_manager WHERE username = ? and password = ?",[username, password],
-        (err, results) => {
-            !err ? res.send(results).json : res.json(err);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()});
         }
-    );
-});
 
+        const username = req.body.username;
+        const password = req.body.password;
+
+        database.query("SELECT username, password FROM sign_up_manager WHERE username = ? and password = ?",[username, password],
+            (err, results) => {
+                !err ? res.send(results).json : res.json(err);
+            }
+        );
+    }
+);
 
 
 // Test server connection is working

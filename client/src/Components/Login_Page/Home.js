@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
-import Axios from 'axios';
 import {Form} from 'react-bootstrap'
-
+import Axios from 'axios';
 
 class Home extends Component{
     
@@ -45,14 +44,13 @@ class Home extends Component{
     }
     
     handleLogin(){
-    
+        // Validators for username and password
         if(this.state.isValid === false){
             this.setState({
                 isValid: true
             })
         }
-
-        // Validators
+        
         if(this.state.username === ""){
             this.setState({
                 helperText: 'Fields cannot be empty!',
@@ -71,6 +69,7 @@ class Home extends Component{
     }
 
     handleKeyPressLogin(e){
+        // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
             e.preventDefault();
 

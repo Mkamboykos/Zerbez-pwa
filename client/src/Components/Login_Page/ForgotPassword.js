@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
-
 import {IoChevronBack} from 'react-icons/io5'
-
 import {Form} from 'react-bootstrap'
 
 class ForgotPassword extends Component{

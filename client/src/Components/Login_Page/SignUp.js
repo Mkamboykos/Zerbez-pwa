@@ -233,7 +233,7 @@ class SignUp extends Component {
                 errorPassword: true,
                 isValid: false
             });
-        }else if(this.state.password.length < 9){
+        }else if(this.state.password.length < 8){
             this.setState({
                 helperTextPasswordLength: 'Password is too short!',
                 helperTextPasswordUppercase: '',
