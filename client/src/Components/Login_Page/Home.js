@@ -142,7 +142,7 @@ class Home extends Component{
         e.preventDefault();
 
         // verify username and password
-        Axios.post('http://localhost:3001/login', {
+        Axios.post('http://localhost:3001/Auth/Login', {
             username: this.state.username,
             password: this.state.password,
         }).then(res => {  

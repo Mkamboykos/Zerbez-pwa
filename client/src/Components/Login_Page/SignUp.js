@@ -7,7 +7,6 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 
-
 // styles are used to set the color white in the check boxes
 const styles = {
     root: {
@@ -175,9 +174,9 @@ class SignUp extends Component {
                 errorFirstName: true,
                 isValid: false
             });
-        }else if((this.state.first_name).match(/[0-9]/)){
+        }else if(!(this.state.first_name).match(/^[A-Za-z]+$/)){
             this.setState({
-                helperTextFirstName: 'Field cannot have numbers!',
+                helperTextFirstName: 'Field can only have letters!',
                 errorFirstName: true,
                 isValid: false
             });
@@ -190,9 +189,9 @@ class SignUp extends Component {
                 errorLastName: true,
                 isValid: false
             });
-        }else if((this.state.last_name).match(/[0-9]/)){
+        }else if(!(this.state.last_name).match(/^[A-Za-z]+$/)){
             this.setState({
-                helperTextLastName: 'Field cannot have numbers!',
+                helperTextLastName: 'Field can only have letters!',
                 errorLastName: true,
                 isValid: false
             });
@@ -205,6 +204,12 @@ class SignUp extends Component {
                 errorUsername: true,
                 isValid: false
             });
+        }else if(!(this.state.username).match(/^[a-zA-Z0-9]+$/)){
+            this.setState({
+                helperTextUsername: 'Field can only have letters and numbers!',
+                errorUsername: true,
+                isValid: false
+            });
         }
         
         // Validators -> email
@@ -214,14 +219,14 @@ class SignUp extends Component {
                 errorEmail: true,
                 isValid: false
             });
-        }else if(!(this.state.email).includes('@')){
+        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
             this.setState({
-                helperTextEmail: 'This is not a valid email.',
+                helperTextEmail: 'This is not a valid email!',
                 errorEmail: true,
                 isValid: false
             });
         }
-
+        
         // Validators -> password
         if(this.state.password === ""){
             this.setState({
@@ -416,15 +421,23 @@ class SignUp extends Component {
         Axios.post('http://localhost:3001/SignUp/username', {
             username: this.state.username
         }).then(res => {
+            console.log(res.data.username)
             this.setState({
-                existUsername: res.data.length
+                existUsername: res.data.username
             });
-            if(this.state.existUsername > 0){
+
+            if(this.state.existUsername === ""){
                 this.setState({
-                    helperTextUsername: 'Username already exist!',
+                    helperTextUsername: 'Field cannot be empty!',
                     errorUsername: true,
                     isValid: false,
                 });
+            }else if(this.state.username === this.state.existUsername){
+                    this.setState({
+                        helperTextUsername: 'Username already exist!',
+                        errorUsername: true,
+                        isValid: false,
+                    });
             }
         }).catch((err) => console.error(err)); 
 
@@ -433,25 +446,30 @@ class SignUp extends Component {
             email: this.state.email
         }).then(res => {
             this.setState({
-                existEmail: res.data.length
+                existEmail: res.data.email
             });
-            if(this.state.existEmail > 0){
+            if(this.state.existEmail === ""){
+                this.setState({
+                    helperTextEmail: 'Field cannot be empty!',
+                    errorEmail: true,
+                    isValid: false,
+                });
+            }else if(this.state.email === this.state.existEmail){
                 this.setState({
                     helperTextEmail: 'This email is already being used!',
                     errorEmail: true,
                     isValid: false,
                 });
             }
-            else if((this.state.existUsername === 0 && this.state.existEmail === 0 && this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
+            else if((this.state.username !== this.state.existUsername && this.state.email !== this.state.existEmail && this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
                 
                 // if username and email are unique then post the account to the database
-                Axios.post('http://localhost:3001/SignUp/user', {
+                Axios.post('http://localhost:3001/SignUp/Manager', {
                     first_name: this.state.first_name, 
                     last_name: this.state.last_name, 
                     username: this.state.username, 
                     email: this.state.email, 
                     password: this.state.password, 
-                    retypePassword: this.state.retypePassword, 
                     restaurant_name: this.state.restaurant_name, 
                     restaurant_address: this.state.restaurant_address, 
                     restaurant_city: this.state.restaurant_city, 
