@@ -431,6 +431,12 @@ class SignUp extends Component {
                     errorUsername: true,
                     isValid: false,
                 });
+            }else if(this.state.existUsername === "Admin" || this.state.existUsername === "Administrator"){
+                this.setState({
+                    helperTextUsername: 'Username already exist!',
+                    errorUsername: true,
+                    isValid: false,
+                });
             }else if(this.state.username === this.state.existUsername){
                     this.setState({
                         helperTextUsername: 'Username already exist!',
@@ -694,8 +700,8 @@ class SignUp extends Component {
                             type="state"
                             name="restaurant_state"
                             fullWidth
-                            error={this.state.errorRestaurantState}
-                            helperText={this.state.helperTextRestaurantState}
+                            // error={this.state.errorRestaurantState}
+                            // helpertext={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
                             classes={{
