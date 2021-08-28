@@ -700,8 +700,6 @@ class SignUp extends Component {
                             type="state"
                             name="restaurant_state"
                             fullWidth
-                            // error={this.state.errorRestaurantState}
-                            // helpertext={this.state.helperTextRestaurantState}
                             value={this.state.restaurant_state}
                             onChange={this.onChangeTextfield}
                             classes={{
