@@ -421,7 +421,6 @@ class SignUp extends Component {
         Axios.post('http://localhost:3001/SignUp/username', {
             username: this.state.username
         }).then(res => {
-            console.log(res.data.username)
             this.setState({
                 existUsername: res.data.username
             });
@@ -635,14 +634,14 @@ class SignUp extends Component {
                             InputProps={{
                                 endAdornment:(
                                     <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={this.handleClickShowRetypePassword}
-                                        onMouseDown={this.handleMouseDownPassword}
-                                        classes={{root: classes.toggleIcon}}
-                                      >
-                                        {this.state.showRetypePassword ? <Visibility /> : <VisibilityOff />}
-                                      </IconButton>
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={this.handleClickShowRetypePassword}
+                                            onMouseDown={this.handleMouseDownPassword}
+                                            classes={{root: classes.toggleIcon}}
+                                        >
+                                            {this.state.showRetypePassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
                                     </InputAdornment>
                                 )  
                             }}

@@ -49,6 +49,13 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 
+
+    // Manager.associate = (models) => {
+    //     Manager.hasOne(models.User, {
+    //         onDelete: "cascade",
+    //     });
+    // };
+
     // Manager.sync({alert: true}).then(() => {
     //     console.log("\n\nManager table and model synced successfully!\n\n");
     // })

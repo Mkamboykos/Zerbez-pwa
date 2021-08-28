@@ -15,7 +15,6 @@ class Home extends Component{
             username: "",
             password: "",
 
-            captcha: "",
             userCaptcha: "",
             loginDisplay: true,
             capChaDisplay: false,
@@ -42,7 +41,7 @@ class Home extends Component{
             helperText: '',
         });
     }
-    
+
     handleLogin(){
         // Validators for username and password
         if(this.state.isValid === false){
@@ -66,6 +65,10 @@ class Home extends Component{
                 isValid: false
             });
         }
+        let random = Math.random().toString(36).substring(7);
+        this.setState({
+            captcha: random
+        })
     }
 
     handleKeyPressLogin(e){
@@ -95,6 +98,10 @@ class Home extends Component{
                     isValid: false
                 });
             }
+            let random = Math.random().toString(36).substring(7);
+            this.setState({
+                captcha: random
+            })
             document.getElementById("loginButton").click();
         }
     }
@@ -105,8 +112,9 @@ class Home extends Component{
             return;
             this.setState({
                 btnDisplay: false,
-                userCaptcha: userCaptcha
+                userCaptcha: userCaptcha,
             })
+
     }
 
     handleKeyPressSubmit(e){
@@ -114,8 +122,16 @@ class Home extends Component{
             e.preventDefault();
             if(this.state.userCaptcha === ''){
                 alert("You must enter the CAPTCHA Code provided")
+                let random = Math.random().toString(36).substring(7);
+                this.setState({
+                    captcha: random
+                })
             }else if(this.state.userCaptcha != this.state.captcha){
                 alert("Incorrect CAPTCHA, please try again")
+                let random = Math.random().toString(36).substring(7);
+                this.setState({
+                    captcha: random
+                })
             }else if(this.state.userCaptcha === this.state.captcha){
                 this.setState({
                     redirect: true
@@ -128,8 +144,16 @@ class Home extends Component{
         e.preventDefault();
         if(this.state.userCaptcha === ''){
             alert("You must enter the CAPTCHA Code provided")
+            let random = Math.random().toString(36).substring(7);
+            this.setState({
+                captcha: random
+            })
         }else if(this.state.userCaptcha != this.state.captcha){
             alert("Incorrect CAPTCHA, please try again")
+            let random = Math.random().toString(36).substring(7);
+            this.setState({
+                captcha: random
+            })
         }else if(this.state.userCaptcha === this.state.captcha){
             this.setState({
                 redirect: true
@@ -141,12 +165,12 @@ class Home extends Component{
     verifyCredentials = async e =>{
         e.preventDefault();
 
-        // verify username and password
+        // Authenticate username and password
         Axios.post('http://localhost:3001/Auth/Login', {
             username: this.state.username,
             password: this.state.password,
         }).then(res => {  
-            if(res.data.length !== 1){
+            if(res.data.username !== this.state.username || res.data.username === ""){
                 this.setState({
                     helperText: 'Username or Password is incorrect!',
                     errorUsername: true,
@@ -159,10 +183,6 @@ class Home extends Component{
                     btnDisplay:true,
                     loginDisplay:false
                 });
-                let random = Math.random().toString(36).substring(7);
-                this.setState({
-                    captcha: random
-                })
             }
         });
     }

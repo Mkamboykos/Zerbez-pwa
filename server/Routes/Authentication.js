@@ -1,12 +1,42 @@
 const express = require('express');
 const router = express.Router();
-const {User} = require('../models');
-const bcrypy = require("bcrypt");
+const {Admin} = require('../models');
+const {Manager} = require('../models');
+const bcrypt = require("bcrypt");
 
-router.post('/Login', (req, res) => {
+router.post('/Login', async (req, res) => {
+    // Input from Home in client
     const {username, password} = req.body;
-    const user = await User.findOne({ where: {username: username} });
-    user ? res.send(user).json : res.json("");
+
+    //check for Admin user in Database
+    const adminUser = await Admin.findOne({ where: {
+        username: username
+    }});
+
+    //check for Manager user in Database
+    const managerUser = await Manager.findOne({ where: {
+        username: username
+    }});
+
+    //check if users exist and then check password in Database
+    if(adminUser){
+        bcrypt.compare(password, adminUser.password).then((match) =>{
+            if(!match){
+                res.json("");
+            }else{
+                res.send(adminUser).json
+            }
+        })
+    }else if (managerUser){
+        bcrypt.compare(password, managerUser.password).then((match) =>{
+        if(!match){
+            res.json("");
+        }else{
+            res.send(managerUser).json
+        }
+    })
+    }
+
 });
 
 module.exports = router;

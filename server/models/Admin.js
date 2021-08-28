@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 
+    // Admin.associate = (models) => {
+    //     Admin.hasOne(models.User, {
+    //         onDelete: "cascade",
+    //     });
+    // };
+
     // Admin.sync({alter:true}).then(() => {
 
     //     Admin.bulkCreate([
