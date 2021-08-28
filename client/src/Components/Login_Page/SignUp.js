@@ -646,7 +646,7 @@ class SignUp extends Component {
                                             onMouseDown={this.handleMouseDownPassword}
                                             classes={{root: classes.toggleIcon}}
                                         >
-                                            {this.state.showRetypePassword ? <Visibility /> : <VisibilityOff />}
+                                            {this.state.showRetypePassword ? <Visibility/> : <VisibilityOff/>}
                                         </IconButton>
                                     </InputAdornment>
                                 )  
@@ -776,6 +776,9 @@ class SignUp extends Component {
                         />
                     </FormControl>
 
+                    {/* break between Zip code and checked1 */}
+                    <br/>
+
                     <FormControl>
                         <FormControlLabel
                             control={
@@ -785,7 +788,7 @@ class SignUp extends Component {
                                     value={this.state.isChecked1}
                                     name="isChecked1"
 
-                                    //classes linked to const with classes, and root and checked from styles
+                                    // classes linked to const with classes, and root and checked from styles
                                     classes={{
                                         root: classes.root,
                                         checked: classes.checked,
@@ -796,7 +799,9 @@ class SignUp extends Component {
                             label="I affirm to be the current Manager of this establishment." 
                             style={{textAlign: 'left'}}
                         />
-
+                    </FormControl>
+                     
+                    <FormControl>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -815,10 +820,10 @@ class SignUp extends Component {
                             
                             label={
                                 <div>
-                                <span>I accept the </span>
-                                <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
-                                <span> & </span>
-                                <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
+                                    <span>I accept the </span>
+                                        <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
+                                    <span> & </span>
+                                        <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                                 </div>
                             }
                             style={{textAlign: 'left'}}

@@ -172,7 +172,7 @@ class Home extends Component{
         }).then(res => {  
             if(res.data.username !== this.state.username || res.data.username === ""){
                 this.setState({
-                    helperText: 'Username or Password is incorrect!',
+                    helperText: 'Wrong username and password convination!',
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
