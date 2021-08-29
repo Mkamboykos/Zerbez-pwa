@@ -12,11 +12,6 @@
   height: 100vh;
 }
 
-.ClockLoader {
-  opacity: 0;
-  transition: all 250ms linear 2s;
-}
-
 /* Body */
 
 body {

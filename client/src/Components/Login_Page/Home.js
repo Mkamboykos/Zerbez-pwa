@@ -35,7 +35,7 @@ class Home extends Component{
 
 
         // timer will set to time out for clockLoader after 4 seconds
-        this.timer = setTimeout(this.clockLoading, 4000);
+        this.timer = setTimeout(this.clockLoading, 3000);
     }
 
     // The timer is unmounter after finished
@@ -291,7 +291,6 @@ class Home extends Component{
     }
     
     render() {
-        
         if (this.state.loginDisplay){
             
             // Clock loading page
