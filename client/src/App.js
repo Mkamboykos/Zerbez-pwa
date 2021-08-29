@@ -23,29 +23,29 @@ import Terms from './Components/Legal/Terms'
 
 
 function App() {
+
   return (
     <div className="App">
-
-      {/* The Router is use to create different links for each class */}
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/SignUp" component={SignUp}/>
-      <Route exact path="/Dashboard" component={Dashboard}/>
-      <Route exact path="/ForgotPassword" component={ForgotPassword}/>
-      <Route exact path="/EnterCode" component={EnterCode}/>
-      <Route exact path="/ResetPassword" component={ResetPassword}/>
-      <Route exact path="/Account" component={Account}/>
-      <Route exact path="/Analytics" component={Analytics}/>
-      <Route exact path="/Notifications" component={Notifications}/>
-      <Route exact path="/Help" component={Help}/>
-      <Route exact path="/About" component={About}/>
-      <Route exact path="/ShiftSchedule" component={ShiftSchedule}/>
-      <Route exact path="/AssignTables" component={AssignTables}/>
-      <Route exact path="/TimePerCover" component={TimePerCover}/>
-      <Route exact path="/FloorPlan" component={FloorPlan}/>
-      <Route exact path="/NewReservation" component={NewReservation}/>
-      <Route exact path="/Reservations" component={Reservations}/>
-      <Route exact path="/Privacy" component={Privacy}/>
-      <Route exact path="/Terms" component={Terms}/>
+        {/* The Router is use to create different links for each class */}
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/SignUp" component={SignUp}/>
+        <Route exact path="/Dashboard" component={Dashboard}/>
+        <Route exact path="/ForgotPassword" component={ForgotPassword}/>
+        <Route exact path="/EnterCode" component={EnterCode}/>
+        <Route exact path="/ResetPassword" component={ResetPassword}/>
+        <Route exact path="/Account" component={Account}/>
+        <Route exact path="/Analytics" component={Analytics}/>
+        <Route exact path="/Notifications" component={Notifications}/>
+        <Route exact path="/Help" component={Help}/>
+        <Route exact path="/About" component={About}/>
+        <Route exact path="/ShiftSchedule" component={ShiftSchedule}/>
+        <Route exact path="/AssignTables" component={AssignTables}/>
+        <Route exact path="/TimePerCover" component={TimePerCover}/>
+        <Route exact path="/FloorPlan" component={FloorPlan}/>
+        <Route exact path="/NewReservation" component={NewReservation}/>
+        <Route exact path="/Reservations" component={Reservations}/>
+        <Route exact path="/Privacy" component={Privacy}/>
+        <Route exact path="/Terms" component={Terms}/>
 
     </div>
   )

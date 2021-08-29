@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
 import {Form} from 'react-bootstrap'
 import Axios from 'axios';
+import ClockLoader from "react-spinners/ClockLoader";
 
 class Home extends Component{
     
@@ -21,6 +22,7 @@ class Home extends Component{
             btnDisplay: false,
             redirect: false,
             isValid: false,
+            loading: true,
         });
     
         this.handleLogin = this.handleLogin.bind(this);
@@ -29,7 +31,24 @@ class Home extends Component{
         this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
         this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
+        this.clockLoading = this.clockLoading.bind(this);
+
+
+        // timer will set to time out for clockLoader after 4 seconds
+        this.timer = setTimeout(this.clockLoading, 4000);
     }
+
+    // The timer is unmounter after finished
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+    
+    clockLoading(){
+        this.setState({
+            loading: false
+        });
+    }
+
 
     onChangeTextfield(e){
         let field = e.target.name;
@@ -270,12 +289,22 @@ class Home extends Component{
             </div>
         )
     }
-
+    
     render() {
+        
         if (this.state.loginDisplay){
+            
+            // Clock loading page
+            if(this.state.loading){
+                return (
+                    <ClockLoader color={"#F4F1F2"} loading={this.clockLoading} size={150} />
+                )
+            }
+            
             return (
+             
                 <Spring from={{ opacity: 1, Transform:`flash(0%)`}} to={{ opacity: 0, Transform:`flash(100%)`}}>
-                {style => (    
+                {style => (  
                     <div className="homePageContainer">
                         <div className="HomePageTitleContainer">
                             <h1 className="homeTitleTimeText"><b>Time</b></h1>

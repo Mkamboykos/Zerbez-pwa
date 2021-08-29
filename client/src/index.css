@@ -1,7 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
+
+/* This also helps for the loading screen to load */
 .App {
   text-align: center;
+  background-color: #2A3C60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.ClockLoader {
+  opacity: 0;
+  transition: all 250ms linear 2s;
 }
 
 /* Body */
