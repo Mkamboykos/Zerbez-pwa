@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {Manager} = require('../models');
-const {User} = require('../models');
-const bcrypy = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 //check if username exists in signup
 router.post('/username', async (req, res) => {
@@ -21,7 +20,7 @@ router.post('/email', async (req, res) => {
 // Post API for when a manager signs up
 router.post('/Manager', async (req, res) => {
     const {first_name, last_name, username, email, password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip} = req.body;
-    await bcrypy.hash(password, 10).then((hash) =>{
+    await bcrypt.hash(password, 10).then((hash) =>{
         Manager.create({
             first_name: first_name,
             last_name: last_name,
