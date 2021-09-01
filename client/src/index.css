@@ -12,6 +12,8 @@
   height: 100vh;
 }
 
+
+
 /* Body */
 
 body {
@@ -309,7 +311,10 @@ label{
   padding-bottom: 35px;
 }
 
-
+/* display block for the password requirements */
+.multiline-block {
+  display: block;
+}
 
 
 

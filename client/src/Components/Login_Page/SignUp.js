@@ -532,315 +532,314 @@ class SignUp extends Component {
         
         return (
             <div className="SignUp_Page_Container">
-            <div className="SignUp_Page_Title_Container">
-                <h1 className="SignUp_Page_Title">Sign Up</h1>
-            </div>
-            <Form className="signUp_Form_Container" onSubmit={this.checkExistingUsernameAndSubmit}>
+                <div className="SignUp_Page_Title_Container">
+                    <h1 className="SignUp_Page_Title">Sign Up</h1>
+                </div>
+                <Form className="signUp_Form_Container" onSubmit={this.checkExistingUsernameAndSubmit}>
 
-                <MuiThemeProvider theme={theme}>
-                    <FormControl>
-                        <TextField
-                            label="First Name"
-                            type="text"
-                            name="first_name"
-                            fullWidth
-                            error={this.state.errorFirstName}
-                            helperText={this.state.helperTextFirstName}
-                            value={this.state.first_name}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                    <MuiThemeProvider theme={theme}>
+                        <FormControl>
+                            <TextField
+                                label="First Name"
+                                type="text"
+                                name="first_name"
+                                fullWidth
+                                error={this.state.errorFirstName}
+                                helperText={this.state.helperTextFirstName}
+                                value={this.state.first_name}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="Last Name"
-                            type="text"
-                            name="last_name"
-                            fullWidth
-                            error={this.state.errorLastName}
-                            helperText={this.state.helperTextLastName}
-                            value={this.state.last_name}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="Last Name"
+                                type="text"
+                                name="last_name"
+                                fullWidth
+                                error={this.state.errorLastName}
+                                helperText={this.state.helperTextLastName}
+                                value={this.state.last_name}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="Username"
-                            type="text"
-                            name="username"
-                            fullWidth
-                            error={this.state.errorUsername}
-                            helperText={this.state.helperTextUsername}
-                            value={this.state.username}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="Username"
+                                type="text"
+                                name="username"
+                                fullWidth
+                                error={this.state.errorUsername}
+                                helperText={this.state.helperTextUsername}
+                                value={this.state.username}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="Email"
-                            type="email"
-                            name="email"
-                            fullWidth
-                            error={this.state.errorEmail}
-                            helperText={this.state.helperTextEmail}
-                            value={this.state.email}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
-                    
-                    <FormControl>
-                        <TextField
-                            label="Password"
-                            name="password"
-                            fullWidth
-                            error={this.state.errorPassword}
-                            helperText={
-                                <div>
-                                    <div>{this.state.helperTextPasswordLength}</div>
-                                    <div>{this.state.helperTextPasswordUppercase}</div>
-                                    <div>{this.state.helperTextPasswordLowercase}</div>
-                                    <div>{this.state.helperTextPasswordNumber}</div>
-                                    <div>{this.state.helperTextPasswordSpecial}</div>
-                                </div>
-                            }
-                            value={this.state.password}
-                            onChange={this.onChangeTextfield}
-                            
-                            type={this.state.showPassword ? 'text' : 'password'}
-                            InputProps={{
-                                endAdornment:(
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={this.handleClickShowPassword}
-                                        onMouseDown={this.handleMouseDownPassword}
-                                        classes={{root: classes.toggleIcon}}
-                                      >
-                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                                      </IconButton>
-                                    </InputAdornment>
-                                )  
-                            }}
-                        />
-                    </FormControl>
-
-                    <FormControl>
-                        <TextField
-                            label="Retype Password"
-                            type="password"
-                            name="retypePassword"
-                            fullWidth
-                            error={this.state.errorRetypePassword}
-                            helperText={this.state.helperTextRetypePassword}
-                            value={this.state.retypePassword}
-                            onChange={this.onChangeTextfield}
-                            type={this.state.showRetypePassword ? 'text' : 'password'}
-                            InputProps={{
-                                endAdornment:(
-                                    <InputAdornment position="end">
+                        <FormControl>
+                            <TextField
+                                label="Email"
+                                type="email"
+                                name="email"
+                                fullWidth
+                                error={this.state.errorEmail}
+                                helperText={this.state.helperTextEmail}
+                                value={this.state.email}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
+                        
+                        <FormControl>
+                            <TextField
+                                label="Password"
+                                name="password"
+                                fullWidth
+                                error={this.state.errorPassword}
+                                helperText={
+                                    <span className="multiline-block">
+                                        <span className="multiline-block">{this.state.helperTextPasswordLength}</span>
+                                        <span className="multiline-block">{this.state.helperTextPasswordUppercase}</span>
+                                        <span className="multiline-block">{this.state.helperTextPasswordLowercase}</span>
+                                        <span className="multiline-block">{this.state.helperTextPasswordNumber}</span>
+                                        <span className="multiline-block">{this.state.helperTextPasswordSpecial}</span>
+                                    </span>
+                                }
+                                value={this.state.password}
+                                onChange={this.onChangeTextfield}
+                                
+                                type={this.state.showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment:(
+                                        <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
-                                            onClick={this.handleClickShowRetypePassword}
+                                            onClick={this.handleClickShowPassword}
                                             onMouseDown={this.handleMouseDownPassword}
                                             classes={{root: classes.toggleIcon}}
                                         >
-                                            {this.state.showRetypePassword ? <Visibility/> : <VisibilityOff/>}
+                                            {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
                                         </IconButton>
-                                    </InputAdornment>
-                                )  
-                            }}
-                        />
-                    </FormControl>
+                                        </InputAdornment>
+                                    )  
+                                }}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="Restaurant Name"
-                            type="text"
-                            name="restaurant_name"
-                            fullWidth
-                            error={this.state.errorRestaurantName}
-                            helperText={this.state.helperTextRestaurantName}
-                            value={this.state.restaurant_name}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="Retype Password"
+                                type="password"
+                                name="retypePassword"
+                                fullWidth
+                                error={this.state.errorRetypePassword}
+                                helperText={this.state.helperTextRetypePassword}
+                                value={this.state.retypePassword}
+                                onChange={this.onChangeTextfield}
+                                type={this.state.showRetypePassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment:(
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={this.handleClickShowRetypePassword}
+                                                onMouseDown={this.handleMouseDownPassword}
+                                                classes={{root: classes.toggleIcon}}
+                                            >
+                                                {this.state.showRetypePassword ? <Visibility/> : <VisibilityOff/>}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )  
+                                }}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="Restaurant Address"
-                            type="address"
-                            name="restaurant_address"
-                            fullWidth
-                            error={this.state.errorRestaurantAddress}
-                            helperText={this.state.helperTextRestaurantAddress}
-                            value={this.state.restaurant_address}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="Restaurant Name"
+                                type="text"
+                                name="restaurant_name"
+                                fullWidth
+                                error={this.state.errorRestaurantName}
+                                helperText={this.state.helperTextRestaurantName}
+                                value={this.state.restaurant_name}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="City"
-                            type="city"
-                            name="restaurant_city"
-                            fullWidth
-                            error={this.state.errorRestaurantCity}
-                            helperText={this.state.helperTextRestaurantCity}
-                            value={this.state.restaurant_city}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="Restaurant Address"
+                                type="address"
+                                name="restaurant_address"
+                                fullWidth
+                                error={this.state.errorRestaurantAddress}
+                                helperText={this.state.helperTextRestaurantAddress}
+                                value={this.state.restaurant_address}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl error={this.state.errorRestaurantState}>
-                        <InputLabel id="dropdown-state-select" >State</InputLabel>
-                        <Select
-                            labelId="dropdown-state-select"
-                            type="state"
-                            name="restaurant_state"
-                            fullWidth
-                            value={this.state.restaurant_state}
-                            onChange={this.onChangeTextfield}
-                            classes={{
-                                icon: classes.icon,
-                            }}
-                            style={{textAlign: 'left'}}
-                        >
-                            <MenuItem value={"Alabama"} classes={{ root: classes.selected }}>AL</MenuItem>
-                            <MenuItem value={"Alaska"} classes={{ root: classes.selected }}>AK</MenuItem>
-                            <MenuItem value={"Arizona"} classes={{ root: classes.selected }}>AZ</MenuItem>
-                            <MenuItem value={"Arkansas"} classes={{ root: classes.selected }}>AR</MenuItem>
-                            <MenuItem value={"California"} classes={{ root: classes.selected }}>CA</MenuItem>
-                            <MenuItem value={"Colorado"} classes={{ root: classes.selected }}>CO</MenuItem>
-                            <MenuItem value={"Connecticut"} classes={{ root: classes.selected }}>CT</MenuItem>
-                            <MenuItem value={"Delaware"} classes={{ root: classes.selected }}>DE</MenuItem>
-                            <MenuItem value={"Florida"} classes={{ root: classes.selected }}>FL</MenuItem>
-                            <MenuItem value={"Georgia"} classes={{ root: classes.selected }}>GA</MenuItem>
-                            <MenuItem value={"Hawaii"} classes={{ root: classes.selected }}>HI</MenuItem>
-                            <MenuItem value={"Idaho"} classes={{ root: classes.selected }}>ID</MenuItem>
-                            <MenuItem value={"Illinois"} classes={{ root: classes.selected }}>IL</MenuItem>
-                            <MenuItem value={"Indiana"} classes={{ root: classes.selected }}>IN</MenuItem>
-                            <MenuItem value={"Iowa"} classes={{ root: classes.selected }}>IA</MenuItem>
-                            <MenuItem value={"Kansas"} classes={{ root: classes.selected }}>KS</MenuItem>
-                            <MenuItem value={"Kentucky"} classes={{ root: classes.selected }}>KY</MenuItem>
-                            <MenuItem value={"Louisiana"} classes={{ root: classes.selected }}>LA</MenuItem>
-                            <MenuItem value={"Maine"} classes={{ root: classes.selected }}>ME</MenuItem>
-                            <MenuItem value={"Maryland"} classes={{ root: classes.selected }}>MD</MenuItem>
-                            <MenuItem value={"Massachusetts"} classes={{ root: classes.selected }}>MA</MenuItem>
-                            <MenuItem value={"Michigan"} classes={{ root: classes.selected }}>MI</MenuItem>
-                            <MenuItem value={"Minnesota"} classes={{ root: classes.selected }}>MN</MenuItem>
-                            <MenuItem value={"Mississippi"} classes={{ root: classes.selected }}>MS</MenuItem>
-                            <MenuItem value={"Missouri"} classes={{ root: classes.selected }}>MO</MenuItem>
-                            <MenuItem value={"Montana"} classes={{ root: classes.selected }}>MT</MenuItem>
-                            <MenuItem value={"Nebraska"} classes={{ root: classes.selected }}>NE</MenuItem>
-                            <MenuItem value={"Nevada"} classes={{ root: classes.selected }}>NV</MenuItem>
-                            <MenuItem value={"New Hampshire"} classes={{ root: classes.selected }}>NH</MenuItem>
-                            <MenuItem value={"New Jersey"} classes={{ root: classes.selected }}>NJ</MenuItem>
-                            <MenuItem value={"New Mexico"} classes={{ root: classes.selected }}>NM</MenuItem>
-                            <MenuItem value={"New York"} classes={{ root: classes.selected }}>NY</MenuItem>
-                            <MenuItem value={"North Carolina"} classes={{ root: classes.selected }}>NC</MenuItem>
-                            <MenuItem value={"North Dakota"} classes={{ root: classes.selected }}>ND</MenuItem>
-                            <MenuItem value={"Ohio"} classes={{ root: classes.selected }}>OH</MenuItem>
-                            <MenuItem value={"Oklahoma"} classes={{ root: classes.selected }}>OK</MenuItem>
-                            <MenuItem value={"Oregon"} classes={{ root: classes.selected }}>OR</MenuItem>
-                            <MenuItem value={"Pennsylvania"} classes={{ root: classes.selected }}>PA</MenuItem>
-                            <MenuItem value={"Rhode Island"} classes={{ root: classes.selected }}>RI</MenuItem>
-                            <MenuItem value={"South Carolina"} classes={{ root: classes.selected }}>SC</MenuItem>
-                            <MenuItem value={"South Dakota"} classes={{ root: classes.selected }}>SD</MenuItem>
-                            <MenuItem value={"Tennessee"} classes={{ root: classes.selected }}>TN</MenuItem>
-                            <MenuItem value={"Texas"} classes={{ root: classes.selected }}>TX</MenuItem>
-                            <MenuItem value={"Utah"} classes={{ root: classes.selected }}>UT</MenuItem>
-                            <MenuItem value={"Vermont"} classes={{ root: classes.selected }}>VT</MenuItem>
-                            <MenuItem value={"Virginia"} classes={{ root: classes.selected }}>VA</MenuItem>
-                            <MenuItem value={"Washington"} classes={{ root: classes.selected }}>WA</MenuItem>
-                            <MenuItem value={"West Virginia"} classes={{ root: classes.selected }}>WV</MenuItem>
-                            <MenuItem value={"Wisconsin"} classes={{ root: classes.selected }}>WI</MenuItem>
-                            <MenuItem value={"Wyoming"} classes={{ root: classes.selected }}>WY</MenuItem>
-                        </Select>
-                        <FormHelperText>{this.state.helperTextRestaurantState}</FormHelperText>
-                    </FormControl>
+                        <FormControl>
+                            <TextField
+                                label="City"
+                                type="city"
+                                name="restaurant_city"
+                                fullWidth
+                                error={this.state.errorRestaurantCity}
+                                helperText={this.state.helperTextRestaurantCity}
+                                value={this.state.restaurant_city}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <TextField
-                            label="ZIP Code"
-                            type="numbers"
-                            name="restaurant_zip"
-                            fullWidth
-                            error={this.state.errorRestaurantZip}
-                            helperText={this.state.helperTextRestaurantZip}
-                            value={this.state.restaurant_zip}
-                            onChange={this.onChangeTextfield}
-                        />
-                    </FormControl>
+                        <FormControl error={this.state.errorRestaurantState}>
+                            <InputLabel id="dropdown-state-select" >State</InputLabel>
+                            <Select
+                                labelId="dropdown-state-select"
+                                type="state"
+                                name="restaurant_state"
+                                fullWidth
+                                value={this.state.restaurant_state}
+                                onChange={this.onChangeTextfield}
+                                classes={{
+                                    icon: classes.icon,
+                                }}
+                                style={{textAlign: 'left'}}
+                            >
+                                <MenuItem value={"Alabama"} classes={{ root: classes.selected }}>AL</MenuItem>
+                                <MenuItem value={"Alaska"} classes={{ root: classes.selected }}>AK</MenuItem>
+                                <MenuItem value={"Arizona"} classes={{ root: classes.selected }}>AZ</MenuItem>
+                                <MenuItem value={"Arkansas"} classes={{ root: classes.selected }}>AR</MenuItem>
+                                <MenuItem value={"California"} classes={{ root: classes.selected }}>CA</MenuItem>
+                                <MenuItem value={"Colorado"} classes={{ root: classes.selected }}>CO</MenuItem>
+                                <MenuItem value={"Connecticut"} classes={{ root: classes.selected }}>CT</MenuItem>
+                                <MenuItem value={"Delaware"} classes={{ root: classes.selected }}>DE</MenuItem>
+                                <MenuItem value={"Florida"} classes={{ root: classes.selected }}>FL</MenuItem>
+                                <MenuItem value={"Georgia"} classes={{ root: classes.selected }}>GA</MenuItem>
+                                <MenuItem value={"Hawaii"} classes={{ root: classes.selected }}>HI</MenuItem>
+                                <MenuItem value={"Idaho"} classes={{ root: classes.selected }}>ID</MenuItem>
+                                <MenuItem value={"Illinois"} classes={{ root: classes.selected }}>IL</MenuItem>
+                                <MenuItem value={"Indiana"} classes={{ root: classes.selected }}>IN</MenuItem>
+                                <MenuItem value={"Iowa"} classes={{ root: classes.selected }}>IA</MenuItem>
+                                <MenuItem value={"Kansas"} classes={{ root: classes.selected }}>KS</MenuItem>
+                                <MenuItem value={"Kentucky"} classes={{ root: classes.selected }}>KY</MenuItem>
+                                <MenuItem value={"Louisiana"} classes={{ root: classes.selected }}>LA</MenuItem>
+                                <MenuItem value={"Maine"} classes={{ root: classes.selected }}>ME</MenuItem>
+                                <MenuItem value={"Maryland"} classes={{ root: classes.selected }}>MD</MenuItem>
+                                <MenuItem value={"Massachusetts"} classes={{ root: classes.selected }}>MA</MenuItem>
+                                <MenuItem value={"Michigan"} classes={{ root: classes.selected }}>MI</MenuItem>
+                                <MenuItem value={"Minnesota"} classes={{ root: classes.selected }}>MN</MenuItem>
+                                <MenuItem value={"Mississippi"} classes={{ root: classes.selected }}>MS</MenuItem>
+                                <MenuItem value={"Missouri"} classes={{ root: classes.selected }}>MO</MenuItem>
+                                <MenuItem value={"Montana"} classes={{ root: classes.selected }}>MT</MenuItem>
+                                <MenuItem value={"Nebraska"} classes={{ root: classes.selected }}>NE</MenuItem>
+                                <MenuItem value={"Nevada"} classes={{ root: classes.selected }}>NV</MenuItem>
+                                <MenuItem value={"New Hampshire"} classes={{ root: classes.selected }}>NH</MenuItem>
+                                <MenuItem value={"New Jersey"} classes={{ root: classes.selected }}>NJ</MenuItem>
+                                <MenuItem value={"New Mexico"} classes={{ root: classes.selected }}>NM</MenuItem>
+                                <MenuItem value={"New York"} classes={{ root: classes.selected }}>NY</MenuItem>
+                                <MenuItem value={"North Carolina"} classes={{ root: classes.selected }}>NC</MenuItem>
+                                <MenuItem value={"North Dakota"} classes={{ root: classes.selected }}>ND</MenuItem>
+                                <MenuItem value={"Ohio"} classes={{ root: classes.selected }}>OH</MenuItem>
+                                <MenuItem value={"Oklahoma"} classes={{ root: classes.selected }}>OK</MenuItem>
+                                <MenuItem value={"Oregon"} classes={{ root: classes.selected }}>OR</MenuItem>
+                                <MenuItem value={"Pennsylvania"} classes={{ root: classes.selected }}>PA</MenuItem>
+                                <MenuItem value={"Rhode Island"} classes={{ root: classes.selected }}>RI</MenuItem>
+                                <MenuItem value={"South Carolina"} classes={{ root: classes.selected }}>SC</MenuItem>
+                                <MenuItem value={"South Dakota"} classes={{ root: classes.selected }}>SD</MenuItem>
+                                <MenuItem value={"Tennessee"} classes={{ root: classes.selected }}>TN</MenuItem>
+                                <MenuItem value={"Texas"} classes={{ root: classes.selected }}>TX</MenuItem>
+                                <MenuItem value={"Utah"} classes={{ root: classes.selected }}>UT</MenuItem>
+                                <MenuItem value={"Vermont"} classes={{ root: classes.selected }}>VT</MenuItem>
+                                <MenuItem value={"Virginia"} classes={{ root: classes.selected }}>VA</MenuItem>
+                                <MenuItem value={"Washington"} classes={{ root: classes.selected }}>WA</MenuItem>
+                                <MenuItem value={"West Virginia"} classes={{ root: classes.selected }}>WV</MenuItem>
+                                <MenuItem value={"Wisconsin"} classes={{ root: classes.selected }}>WI</MenuItem>
+                                <MenuItem value={"Wyoming"} classes={{ root: classes.selected }}>WY</MenuItem>
+                            </Select>
+                            {!this.state.restaurant_state ? (<FormHelperText>{this.state.helperTextRestaurantState}</FormHelperText>) : null}
+                        </FormControl>
 
-                    {/* break between Zip code and checked1 */}
-                    <br/>
+                        <FormControl>
+                            <TextField
+                                label="ZIP Code"
+                                type="numbers"
+                                name="restaurant_zip"
+                                fullWidth
+                                error={this.state.errorRestaurantZip}
+                                helperText={this.state.helperTextRestaurantZip}
+                                value={this.state.restaurant_zip}
+                                onChange={this.onChangeTextfield}
+                            />
+                        </FormControl>
 
-                    <FormControl>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={this.state.isChecked1}
-                                    onChange={this.onChangeCheckBox}
-                                    value={this.state.isChecked1}
-                                    name="isChecked1"
+                        {/* break between Zip code and checked1 */}
+                        <br/>
 
-                                    // classes linked to const with classes, and root and checked from styles
-                                    classes={{
-                                        root: classes.root,
-                                        checked: classes.checked,
-                                    }}
-                                />
-                            }
+                        <FormControl>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={this.state.isChecked1}
+                                        onChange={this.onChangeCheckBox}
+                                        value={this.state.isChecked1}
+                                        name="isChecked1"
 
-                            label="I affirm to be the current Manager of this establishment." 
-                            style={{textAlign: 'left'}}
-                        />
-                    </FormControl>
-                     
-                    <FormControl>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={this.state.isChecked2}
-                                    onChange={this.onChangeCheckBox}
-                                    value={this.state.isChecked2}
-                                    name="isChecked2"
+                                        // classes linked to const with classes, and root and checked from styles
+                                        classes={{
+                                            root: classes.root,
+                                            checked: classes.checked,
+                                        }}
+                                    />
+                                }
 
-                                    //classes linked to const with classes, and root and checked from styles
-                                    classes={{
-                                        root: classes.root,
-                                        checked: classes.checked,
-                                    }}
-                                />
-                            } 
-                            
-                            label={
-                                <div>
-                                    <span>I accept the </span>
-                                        <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
-                                    <span> & </span>
-                                        <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
-                                </div>
-                            }
-                            style={{textAlign: 'left'}}
-                        />
-                    </FormControl>
-                </MuiThemeProvider>
+                                label="I affirm to be the current Manager of this establishment." 
+                                style={{textAlign: 'left'}}
+                            />
+                        </FormControl>
+                        
+                        <FormControl>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={this.state.isChecked2}
+                                        onChange={this.onChangeCheckBox}
+                                        value={this.state.isChecked2}
+                                        name="isChecked2"
 
-                <div className="signUp_button_two_Container">
-                    <button type="submit" className="signUp_button_two" onClick={this.handleSignUp}>SIGN UP</button>
-                </div>
+                                        //classes linked to const with classes, and root and checked from styles
+                                        classes={{
+                                            root: classes.root,
+                                            checked: classes.checked,
+                                        }}
+                                    />
+                                } 
+                                
+                                label={
+                                    <div>
+                                        <span>I accept the </span>
+                                            <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
+                                        <span> & </span>
+                                            <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
+                                    </div>
+                                }
+                                style={{textAlign: 'left'}}
+                            />
+                        </FormControl>
+                    </MuiThemeProvider>
+
+                    <div className="signUp_button_two_Container">
+                        <button type="submit" className="signUp_button_two" onClick={this.handleSignUp}>SIGN UP</button>
+                    </div>
+                    
+                    {this.renderRedirect()}
+                    
+                </Form>
                 
-                {this.renderRedirect()}
-                
-            </Form>
-            
-            <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
-        </div>
+                <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
+            </div>
         )
-    
     }
 }
 
