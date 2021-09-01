@@ -17,11 +17,13 @@ app.use(cors());
 
 // Import Routes
 const authRoute = require('./Routes/Authentication');
-const signupRoute = require('./Routes/signup');
+const signupRoute = require('./Routes/signUp');
+const forgotPasswordRoute = require('./Routes/forgotPassword');
 
 // Route Middlewares
 app.use('/Auth', authRoute);
 app.use('/SignUp', signupRoute);
+app.use('/ForgotPassword', forgotPasswordRoute);
 
 // Test database connection is working
 const sequelize = new Sequelize('time_waiter_db', 'root', 'password', {

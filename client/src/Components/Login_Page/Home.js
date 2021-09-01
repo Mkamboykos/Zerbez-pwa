@@ -185,7 +185,7 @@ class Home extends Component{
         e.preventDefault();
 
         // Authenticate username and password
-        Axios.post('http://localhost:3001/Auth/Login', {
+        await Axios.post('http://localhost:3001/Auth/Login', {
             username: this.state.username,
             password: this.state.password,
         }).then(res => {  
