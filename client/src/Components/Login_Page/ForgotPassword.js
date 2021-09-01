@@ -59,7 +59,6 @@ class ForgotPassword extends Component{
 
     handleKeyPressContinue(e){
         if (e.key === "Enter"){
-            e.preventDefault();
 
             if(this.state.isValid === false){
                 this.setState({

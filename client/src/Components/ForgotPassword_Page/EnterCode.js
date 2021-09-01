@@ -15,104 +15,88 @@ class EnterCode extends Component{
             one: "",
             two: "",
             three: "",
-            four: ""
+            four: "",
+            isValid: false
         });
         
-        this.handleOne = this.handleOne.bind(this);
-        this.handleTwo = this.handleTwo.bind(this);
-        this.handleThree = this.handleThree.bind(this);
-        this.handleFour = this.handleFour.bind(this);
         this.handleContinue = this.handleContinue.bind(this);
         this.handleKeyPressContinue = this.handleKeyPressContinue.bind(this);
+        this.onChangeCode = this.onChangeCode.bind(this);
     }
-    
 
-    //Class Properties (Events On Change)
-    handleOne(e){
-        const re = /^[0-9\b]+$/;
-        const index = e.currentTarget.dataset.index;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            let one = e.target.value;
-            this.setState({
-                one: one
-            }) 
-        }
-        if (e.target.value.length >= e.target.getAttribute("maxlength")) {
-            e.target.nextElementSibling.focus();
+    onChangeCode(e){
+        let field = e.target.name;
+        let value = e.target.value;
+        
+        this.setState({
+            [field]: value,
+            errorCode: false,
+            helperTextCode: '',
+        })
+        
+        //code for the the next and previous node
+        if (value.length >= e.target.getAttribute("maxlength")) {
+            if(value !== this.state.four){
+                e.target.nextElementSibling.focus();
+            }
+        }else if(value.length <= e.target.getAttribute("maxlength")){
+            if(value !== this.state.two){
+                e.target.previousElementSibling.focus();
+            }
         }
     }
-    
 
-    handleTwo(e){
-        const re = /^[0-9\b]+$/;
-        const index = e.currentTarget.dataset.index;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            let two = e.target.value;
+    handleContinue(e){
+        if(this.state.isValid === false){
             this.setState({
-                two: two
+                isValid: true
             })
         }
-        if (e.target.value.length >= e.target.getAttribute("maxlength")) {
-            e.target.nextElementSibling.focus();
-        }
-    }
 
-    handleThree(e){
-        const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            let three = e.target.value;
+        if(this.state.one === '' || this.state.two === '' || this.state.three === '' || this.state.four === ''){
             this.setState({
-                three: three
-            })
-        }
-        if (e.target.value.length >= e.target.getAttribute("maxlength")) {
-            e.target.nextElementSibling.focus();
-        }
-    }
-
-    handleFour(e){
-        const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            let four = e.target.value;
+                helperTextCode: 'Fields cannot be empty!',
+                errorCode: true,
+                isValid: false
+            });
+        }else if(!(this.state.one || this.state.two || this.state.three || this.state.four).match(/^[0-9]+$/)){
             this.setState({
-                four: four
-            })
-        }
-    }
-
-    handleContinue(){
-        if(this.state.one === '' 
-            || this.state.two === '' 
-            || this.state.three === ''
-            || this.state.four === ''){
-                alert("Missing or Invalid Code. Use numbers only!")
-                return;
-        }else if(this.state.one === this.state.one 
-            && this.state.two === this.state.two
-            && this.state.three === this.state.three
-            && this.state.four === this.state.four){
-            this.setState({
-                redirect: true
-            }) 
+                helperTextCode: 'Fields can only have numbers!',
+                errorCode: true,
+                isValid: false
+            });
         }
     }
 
     handleKeyPressContinue(e){
         if (e.key === "Enter"){
-            if(this.state.one === '' 
-                || this.state.two === '' 
-                || this.state.three === ''
-                || this.state.four === ''){
-                    return;
-            }else if(this.state.one === this.state.one 
-                && this.state.two === this.state.two
-                && this.state.three === this.state.three
-                && this.state.four === this.state.four){
+            e.preventDefault();
+
+            if(this.state.isValid === false){
                 this.setState({
-                    redirect: true
-                }) 
+                    isValid: true
+                })
+            }
+    
+            if(this.state.one === '' || this.state.two === '' || this.state.three === '' || this.state.four === ''){
+                this.setState({
+                    helperTextCode: 'Fields cannot be empty!',
+                    errorCode: true,
+                    isValid: false
+                });
+            }else if(!(this.state.one || this.state.two || this.state.three || this.state.four).match(/^[0-9]+$/)){
+                this.setState({
+                    helperTextCode: 'Fields can only have numbers!',
+                    errorCode: true,
+                    isValid: false
+                });
             }
         }
+    }
+
+    validateCode = async e =>{
+        e.preventDefault();
+
     }
 
     renderRedirect(){
@@ -127,10 +111,10 @@ class EnterCode extends Component{
             <div>
                 <div className="forgotContainer">
                     <div className="forgotPasswordTitleContainer">
-                        <h1 className="forgotTitleText"><b>Enter Code</b></h1>
+                        <h1 className="codeTitleText"><b>Enter Code</b></h1>
                     </div>
                     <div>
-                        <Form onKeyPress={this.handleKeyPressContinue}>
+                        <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.validateCode}>
                             <div className="forgotPasswordTextContainer">
                                 <p className="forgotPasswordText">
                                 Enter the 4 digit code that you received on your email.
@@ -138,14 +122,49 @@ class EnterCode extends Component{
                             </div>
 
                             <Form.Group className="codeBarContainer">
-                                
-                                <Form.Control type="text" maxLength="1" className="codeOneBarText"   onChange={this.handleOne} />
-                                <Form.Control type="text" maxLength="1" className="codeTwoBarText"   onChange={this.handleTwo} />
-                                <Form.Control type="text" maxLength="1" className="codeThreeBarText" onChange={this.handleThree} />
-                                <Form.Control type="text" maxLength="1" className="codeFourBarText"  onChange={this.handleFour} />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1"
+                                    className="codeOneBarText"
+                                    name="one"
+                                    value={this.state.one}   
+                                    onChange={this.onChangeCode}
+                                    isInvalid={this.state.errorCode} 
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1"
+                                    className="codeTwoBarText"
+                                    name="two"
+                                    value={this.state.two}    
+                                    onChange={this.onChangeCode}
+                                    isInvalid={this.state.errorCode}  
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1" 
+                                    className="codeThreeBarText" 
+                                    name="three"
+                                    value={this.state.three}  
+                                    onChange={this.onChangeCode} 
+                                    isInvalid={this.state.errorCode} 
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1" 
+                                    className="codeFourBarText"
+                                    name="four"
+                                    value={this.state.four}
+                                    onChange={this.onChangeCode} 
+                                    isInvalid={this.state.errorCode} 
+                                />
+                                <br/>
+                                <Form.Control.Feedback type='invalid'>
+                                    {this.state.helperTextCode}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
-                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
+                            <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinue} >
                                 <b>CONTINUE</b>
                             </button>
                             {this.renderRedirect()}

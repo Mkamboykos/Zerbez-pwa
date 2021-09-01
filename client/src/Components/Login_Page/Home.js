@@ -4,6 +4,7 @@ import { Spring, animated } from 'react-spring';
 import {Form} from 'react-bootstrap'
 import Axios from 'axios';
 import ClockLoader from "react-spinners/ClockLoader";
+import { IoChevronBack } from 'react-icons/io5'
 
 class Home extends Component{
     
@@ -212,6 +213,10 @@ class Home extends Component{
             return <Redirect to='/Dashboard' />
         }
     }
+
+    refreshPage = () => {
+        window.location.reload(false);
+      }
     
     renderCaptcha(){
         return(
@@ -236,6 +241,7 @@ class Home extends Component{
                     </div>
                     {this.renderRedirect()}
                 </Form>
+                <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
             </div>
         ) 
     }
@@ -329,6 +335,7 @@ class Home extends Component{
                                 {this.state.capChaDisplay?this.renderCaptcha():""}
                             </animated.div>
                         </div>
+                        
                 )}
                 </Spring>
             )
