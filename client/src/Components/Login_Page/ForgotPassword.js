@@ -13,7 +13,8 @@ class ForgotPassword extends Component{
         this.state = ({
             email: "",
             isValid: false,
-            redirect: false
+            redirect: false,
+            error: ""
         });
     
         this.handleEmail = this.handleEmail.bind(this);
@@ -85,14 +86,14 @@ class ForgotPassword extends Component{
 
     verifyCredentials = async e =>{
         e.preventDefault();
-
+        
         // Authenticate username and password
         await Axios.post('http://localhost:3001/ForgotPassword/Email', {
             email: this.state.email
         }).then(res => {  
             if(res.data.email !== this.state.email || res.data.email === ""){
                 this.setState({
-                    helperText: 'Invalid email!',
+                    helperTextEmail: 'This is not a valid email!',
                     errorEmail: true,
                     isValid: false,
                 });
@@ -101,6 +102,19 @@ class ForgotPassword extends Component{
                     redirect: true
                 });
             }
+        }).catch((e) => {
+            this.setState({
+                error: `${e.response.status}`
+            })
+
+            if(this.state.error === '404'){
+                this.setState({
+                    helperTextEmail: 'Email could not be found!',
+                    errorEmail: true,
+                    isValid: false,
+                });
+            }
+            
         });
     }
 

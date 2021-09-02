@@ -206,9 +206,9 @@ class Home extends Component{
                     loginDisplay:false
                 });
             }
-        }).catch((error) => {
+        }).catch((e) => {
             this.setState({
-                error: `${error.response.status}`
+                error: `${e.response.status}`
             })
 
             if(this.state.error === '422'){
