@@ -24,6 +24,7 @@ class Home extends Component{
             redirect: false,
             isValid: false,
             loading: true,
+            error: ""
         });
     
         this.handleLogin = this.handleLogin.bind(this);
@@ -184,12 +185,13 @@ class Home extends Component{
 
     verifyCredentials = async e =>{
         e.preventDefault();
-
+        
         // Authenticate username and password
         await Axios.post('http://localhost:3001/Auth/Login', {
             username: this.state.username,
             password: this.state.password,
-        }).then(res => {  
+        }).then(res => {
+
             if(res.data.username !== this.state.username || res.data.username === ""){
                 this.setState({
                     helperText: 'Wrong username and password convination!',
@@ -204,7 +206,23 @@ class Home extends Component{
                     loginDisplay:false
                 });
             }
+        }).catch((error) => {
+            this.setState({
+                error: `${error.response.status}`
+            })
+
+            if(this.state.error === '422'){
+                this.setState({
+                    helperText: 'Wrong username and password convination!',
+                    errorUsername: true,
+                    errorPassword: true,
+                    isValid: false,
+                });
+            }
+            
         });
+
+        
     }
     
 

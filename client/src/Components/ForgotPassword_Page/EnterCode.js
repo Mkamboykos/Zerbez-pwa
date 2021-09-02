@@ -158,7 +158,6 @@ class EnterCode extends Component{
                                     onChange={this.onChangeCode} 
                                     isInvalid={this.state.errorCode} 
                                 />
-                                <br/>
                                 <Form.Control.Feedback type='invalid'>
                                     {this.state.helperTextCode}
                                 </Form.Control.Feedback>

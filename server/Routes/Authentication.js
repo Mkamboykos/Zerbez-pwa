@@ -9,32 +9,34 @@ router.post('/Login', async (req, res) => {
     const {username, password} = req.body;
 
     //check for Admin user in Database
-    const adminUser = await Admin.findOne({ where: {
-        username: username
-    }});
+    const adminUser = await Admin.findOne({where: {username: username}});
 
     //check for Manager user in Database
-    const managerUser = await Manager.findOne({ where: {
-        username: username
-    }});
+    const managerUser = await Manager.findOne({where: {username: username}});
 
     //check if users exist and then check password in Database
     if(adminUser){
         bcrypt.compare(password, adminUser.password).then((match) =>{
             if(!match){
-                res.json("");
+                res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{
                 res.send(adminUser).json
             }
-        })
+        }).catch(error =>{
+            res.status(422).send(error)
+        });
     }else if (managerUser){
         bcrypt.compare(password, managerUser.password).then((match) =>{
-        if(!match){
-            res.json("");
-        }else{
-            res.send(managerUser).json
-        }
-    })
+            if(!match){
+                res.status(422).send({error:'Wrong Username or Password combination!'});
+            }else{
+                res.send(managerUser).json
+            }
+        }).catch(error =>{
+            res.status(422).send(error)
+        });
+    }else{
+        res.status(422).send({error:'Wrong Username or Password combination!'});
     }
 
 });

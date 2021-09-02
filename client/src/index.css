@@ -432,7 +432,7 @@ input.codeOneBarText.form-control {
   border-color: #707070;
   color: #F4F1F2;
   border-radius: 25px;
-  width: 57px;
+  width: 50px;
 }
 
 input.codeOneBarText.form-control::placeholder{
@@ -444,7 +444,7 @@ input.codeTwoBarText.form-control {
   border-color: #707070;
   color: #F4F1F2;
   border-radius: 25px;
-  width: 57px;
+  width: 50px;
 }
 
 input.codeTwoBarText.form-control::placeholder{
@@ -456,7 +456,7 @@ input.codeThreeBarText.form-control {
   border-color: #707070;
   color: #F4F1F2;
   border-radius: 25px;
-  width: 57px;
+  width: 50px;
 }
 
 input.codeThreeBarText.form-control::placeholder{
@@ -468,7 +468,7 @@ input.codeFourBarText.form-control {
   border-color: #707070;
   color: #F4F1F2;
   border-radius: 25px;
-  width: 57px;
+  width: 50px;
 }
 
 input.codeFourBarText.form-control::placeholder{
