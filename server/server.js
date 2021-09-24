@@ -4,7 +4,11 @@ const express = require('express');
 const app = express();
 const database = require("./models");
 const cors = require('cors'); 
-const port = process.env.PORT || 3001;
+const dotenv = require('dotenv').config()
+const DB_DATABASE = process.env.DB_DATABASE;
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const PORT = process.env.PORT;
 
 // This is to allow our api to receive data from a client app
 app.use(express.urlencoded({extended: true}));
@@ -26,7 +30,7 @@ app.use('/SignUp', signupRoute);
 app.use('/ForgotPassword', forgotPasswordRoute);
 
 // Test database connection is working
-const sequelize = new Sequelize('time_waiter_db', 'root', 'password', {
+const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
     dialect: 'mysql',
 });
 
@@ -38,7 +42,7 @@ sequelize.authenticate().then(() => {
 
 // set port, listen for requests
 database.sequelize.sync().then(() => {
-    app.listen(port, () => {
-        console.log("\n*** " + `Listening at http://localhost:${port}` + " ***\n");
+    app.listen(process.env.PORT || PORT, () => {
+        console.log("\n*** " + `Listening at http://localhost:${PORT}` + " ***\n");
     });
 })

@@ -12,7 +12,7 @@ router.post('/Login', async (req, res) => {
     const adminUser = await Admin.findOne({where: {username: username}});
 
     //check for Manager user in Database
-    const managerUser = await Manager.findOne({where: {username: username}});
+    const managerUser = await Manager.findOne({where: {username: username}}); 
 
     //check if users exist and then check password in Database
     if(adminUser){
