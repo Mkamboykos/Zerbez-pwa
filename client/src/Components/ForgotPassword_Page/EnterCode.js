@@ -97,6 +97,7 @@ class EnterCode extends Component{
     validateCode = async e =>{
         e.preventDefault();
 
+          
     }
 
     renderRedirect(){
