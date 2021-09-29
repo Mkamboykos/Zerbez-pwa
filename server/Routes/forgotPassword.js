@@ -33,9 +33,6 @@ router.post('/Email', async (req, res) => {
                 }
             });
 
-            
-            
-        
             const msg = {
                 from: `"Time Waiter Team" <${process.env.MAIL_FROM}>`, // sender address
                 to: email, // list of receivers
