@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const database = require("./models");
 const cors = require('cors'); 
-const nodemailer = require("nodemailer");
 const dotenv = require('dotenv').config();
 const DB_DATABASE = process.env.DB_DATABASE;
 const DB_USERNAME = process.env.DB_USERNAME;
