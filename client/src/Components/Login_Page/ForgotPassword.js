@@ -98,12 +98,10 @@ class ForgotPassword extends Component{
                     isValid: false,
                 });
             }else if (this.state.isValid === true){
-                console.log(res);
                 this.setState({                    
                     redirect: true
                 });
         }}).catch((e) => {
-            console.log(e);
             this.setState({
                 error: `${e.response.status}`
             })
