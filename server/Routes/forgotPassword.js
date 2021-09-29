@@ -29,7 +29,7 @@ router.post('/Email', async (req, res) => {
             });
         
             const msg = {
-                from: '"Time Waiter Team" <No-Reply@timewaiter.com>', // sender address
+                from: `"Time Waiter Team" <${process.env.MAIL_FROM}>`, // sender address
                 to: email, // list of receivers
                 subject: "Forgot Password Code", // Subject line
                 text: `Hey there, it’s our first message sent with Nodemailer ;) `, // plain text body
