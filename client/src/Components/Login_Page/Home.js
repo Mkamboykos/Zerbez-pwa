@@ -270,7 +270,7 @@ class Home extends Component{
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
 
                     <div className="homePageImageContainer">
-                        <p>Insert Image Here</p>
+                        <img src="/images/homePageHand.png" className="homePageImageContainer"/>
                     </div>
 
                     <div className="inputContainer">  

@@ -70,9 +70,18 @@ h1, p{
 }
 
 .homePageImageContainer{
-  height: calc(30vh);
-  margin-bottom: 13px;
-  background-color: red;
+  height: 27vh;
+  margin-bottom: 17px;
+  display: inline-flex;
+  width: 98%;
+  justify-content: space-around;
+}
+
+/* Media Query for Ipad Pro View */
+@media only screen and (min-height: 1366px) and (min-width: 1024px){
+  .homePageImageContainer {
+    height: 18vh;
+  }
 }
 
 .inputContainer{
@@ -123,7 +132,7 @@ h1, p{
 
 .homeTitleWaiterText{
   font-size: 95px;
-  margin-top: -33px;
+  margin-top: -40px;
   margin-bottom: 0;
 }
 
