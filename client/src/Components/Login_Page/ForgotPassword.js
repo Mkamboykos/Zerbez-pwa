@@ -99,7 +99,7 @@ class ForgotPassword extends Component{
         e.preventDefault();
         
         // Authenticate username and password
-        await Axios.post('http://localhost:3001/ForgotPassword/Email', {
+        Axios.post('http://localhost:3001/ForgotPassword/Email', {
             email: this.state.email
         }).then(res => {
 
@@ -122,8 +122,7 @@ class ForgotPassword extends Component{
                     enterCode: true,
                     enterEmailDisplay: false
                 });
-            }
-        }).catch((e) => {
+        }}).catch((e) => {
             this.setState({
                 error: `${e.response.status}`
             })
