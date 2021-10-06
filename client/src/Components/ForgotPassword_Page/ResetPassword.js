@@ -111,7 +111,7 @@ class ResetPassword extends Component{
                         </Form>
                     </div>
                 </div>
-                <Link to="/EnterCode" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
+                <Link to="/ForgotPassword" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
             </div>           
         );
       }

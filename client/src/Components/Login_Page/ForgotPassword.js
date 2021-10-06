@@ -22,6 +22,7 @@ class ForgotPassword extends Component{
             four: "",
             isValidCode: false,
             code: "",
+            nodesTogether: "",
             enterEmailDisplay: true
         });
     
@@ -180,6 +181,11 @@ class ForgotPassword extends Component{
                 errorCode: true,
                 isValidCode: false
             });
+        }else{
+            const nodesTogether = parseInt(this.state.one + this.state.two + this.state.three + this.state.four);
+            this.setState({
+                nodesTogether: nodesTogether
+            })
         }
     }
 
@@ -204,6 +210,11 @@ class ForgotPassword extends Component{
                     errorCode: true,
                     isValidCode: false
                 });
+            }else{
+                const nodesTogether = parseInt(this.state.one + this.state.two + this.state.three + this.state.four);
+                this.setState({
+                    nodesTogether: nodesTogether
+                })
             }
         }
     }
@@ -211,7 +222,20 @@ class ForgotPassword extends Component{
     validateCode = async e =>{
         e.preventDefault();
 
-          
+        if(this.state.code !== "" && this.state.nodesTogether !== ""){
+
+            if(this.state.nodesTogether === this.state.code){
+                this.setState({
+                    redirect: true
+                })
+            }else{
+                this.setState({
+                    helperTextCode: 'Incorrect Code!',
+                    errorCode: true,
+                    isValidCode: false
+                });
+            }
+        }
     }
 
     refreshPage = () => {
@@ -219,7 +243,7 @@ class ForgotPassword extends Component{
     }
 
     renderRedirect(){
-        if (this.state.redirect){
+        if (this.state.redirect === true){
             return <Redirect to='/ResetPassword'/>
         }
     }
