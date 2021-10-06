@@ -33,6 +33,8 @@ router.post('/Login', async (req, res) => {
             if(!match){
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{
+                req.session.user = managerUser;
+                console.log(req.session.user);
                 res.send(managerUser).json
             }
         }).catch(error =>{
