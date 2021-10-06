@@ -5,6 +5,7 @@ import {Form} from 'react-bootstrap'
 import Axios from 'axios';
 import ClockLoader from "react-spinners/ClockLoader";
 import { IoChevronBack } from 'react-icons/io5'
+Axios.defaults.withCredentials = true;
 
 class Home extends Component{
     
@@ -182,7 +183,7 @@ class Home extends Component{
         }
     }
 
-
+    
     verifyCredentials = async e =>{
         e.preventDefault();
         
@@ -219,10 +220,7 @@ class Home extends Component{
                     isValid: false,
                 });
             }
-            
         });
-
-        
     }
     
 

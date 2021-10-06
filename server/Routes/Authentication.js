@@ -4,6 +4,7 @@ const {Admin} = require('../models');
 const {Manager} = require('../models');
 const bcrypt = require("bcrypt");
 
+// Authenticate login credentials
 router.post('/Login', async (req, res) => {
     // Input from Home in client
     const {username, password} = req.body;
@@ -20,6 +21,8 @@ router.post('/Login', async (req, res) => {
             if(!match){
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{
+                req.session.user = adminUser;
+                console.log(req.session.user);
                 res.send(adminUser).json
             }
         }).catch(error =>{
@@ -38,7 +41,16 @@ router.post('/Login', async (req, res) => {
     }else{
         res.status(422).send({error:'Wrong Username or Password combination!'});
     }
-
 });
+
+// Check if user has logged in already
+router.get('/Login', (req, res) => {
+    if(req.session.user) {
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false});
+    }
+})
+
 
 module.exports = router;

@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const database = require("./models");
 const cors = require('cors'); 
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const dotenv = require('dotenv').config();
 const DB_DATABASE = process.env.DB_DATABASE;
 const DB_USERNAME = process.env.DB_USERNAME;
@@ -17,7 +19,25 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // This is to allow our api for cross-origin resource sharing
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["POST"],
+    credentials: true
+}));
+
+// Enable cookie dependency
+app.use(cookieParser());
+
+// Create a session that will last up to 24 hours before expiring
+app.use(session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24,
+    },
+}))
 
 // Import Routes
 const authRoute = require('./Routes/Authentication');
