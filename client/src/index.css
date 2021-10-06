@@ -70,8 +70,8 @@ h1, p{
 }
 
 .homePageImageContainer{
-  height: 27vh;
-  margin-bottom: 27px;
+  height: 23vh;
+  margin-bottom: 15px;
   display: inline-flex;
   width: 98%;
   justify-content: space-around;
@@ -80,7 +80,11 @@ h1, p{
 /* Media Query for Ipad Pro View */
 @media only screen and (min-height: 1366px) and (min-width: 1024px){
   .homePageImageContainer {
-    height: 18vh;
+    height: 16vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
   }
 }
 
