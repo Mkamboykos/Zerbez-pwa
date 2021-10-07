@@ -70,7 +70,7 @@ h1, p{
 }
 
 .homePageImageContainer{
-  height: 25vh;
+  height: 21vh;
   margin-bottom: 15px;
   display: inline-flex;
   width: 100%;
@@ -79,100 +79,34 @@ h1, p{
 
 
 
-
-
-/* Vertical screen media queries */
-
-@media only screen and (min-height: 900px){
-  .homePageImageContainer {
-    height: 21vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .homePageImageContainer {
+      height: 17vh;
+      margin-bottom: 27px;
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-around;
+    }
 }
 
-@media only screen and (min-height: 1000px){
-  .homePageImageContainer {
-    height: 19vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .homePageImageContainer {
+      height: 20vh;
+      margin-bottom: 27px;
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-around;
+    }
 }
-
-@media only screen and (min-height: 1100px){
-  .homePageImageContainer {
-    height: 17vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1200px){
-  .homePageImageContainer {
-    height: 16vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1300px){
-  .homePageImageContainer {
-    height: 15vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1400px){
-  .homePageImageContainer {
-    height: 14vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1500px){
-  .homePageImageContainer {
-    height: 13vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1600px){
-  .homePageImageContainer {
-    height: 12vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media only screen and (min-height: 1700px){
-  .homePageImageContainer {
-    height: 11vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
 
 
 
