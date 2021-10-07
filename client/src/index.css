@@ -88,6 +88,59 @@ h1, p{
   }
 }
 
+
+@media only screen and (min-height: 1000px){
+  .homePageImageContainer {
+    height: 20vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (min-height: 1100px){
+  .homePageImageContainer {
+    height: 17.5vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (min-height: 1400px){
+  .homePageImageContainer {
+    height: 14vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+
+@media only screen and (min-height: 1600px){
+  .homePageImageContainer {
+    height: 13vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+
+@media only screen and (min-height: 1700px){
+  .homePageImageContainer {
+    height: 12vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
 .inputContainer{
   display: block;
   flex-direction: column;
