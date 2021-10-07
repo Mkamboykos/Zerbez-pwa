@@ -3,7 +3,7 @@ import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
 import {Form} from 'react-bootstrap'
 import Axios from 'axios';
-import ClockLoader from "react-spinners/ClockLoader";
+// import ClockLoader from "react-spinners/ClockLoader";
 import { IoChevronBack } from 'react-icons/io5'
 Axios.defaults.withCredentials = true;
 
@@ -34,23 +34,23 @@ class Home extends Component{
         this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
         this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
-        this.clockLoading = this.clockLoading.bind(this);
+        // this.clockLoading = this.clockLoading.bind(this);
 
 
         // timer will set to time out for clockLoader after 4 seconds
-        this.timer = setTimeout(this.clockLoading, 3000);
+        // this.timer = setTimeout(this.clockLoading, 3000);
     }
 
     // The timer is unmounter after finished
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.timer);
+    // }
     
-    clockLoading(){
-        this.setState({
-            loading: false
-        });
-    }
+    // clockLoading(){
+    //     this.setState({
+    //         loading: false
+    //     });
+    // }
 
 
     onChangeTextfield(e){
@@ -316,11 +316,11 @@ class Home extends Component{
         if (this.state.loginDisplay){
             
             // Clock loading page
-            if(this.state.loading){
-                return (
-                    <ClockLoader color={"#F4F1F2"} loading={this.clockLoading} size={150} />
-                )
-            }
+            // if(this.state.loading){
+            //     return (
+            //         <ClockLoader color={"#F4F1F2"} loading={this.clockLoading} size={150} />
+            //     )
+            // }
             
             return (
              
