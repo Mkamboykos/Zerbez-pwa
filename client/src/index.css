@@ -70,25 +70,14 @@ h1, p{
 }
 
 .homePageImageContainer{
-  height: 23vh;
+  height: 25vh;
   margin-bottom: 15px;
   display: inline-flex;
-  width: 99%;
+  width: 100%;
   justify-content: space-around;
 }
 
-/* Media Query for Ipad Pro View */
-@media only screen and (min-height: 1366px) and (min-width: 1024px){
-  .homePageImageContainer {
-    height: 16vh;
-    margin-bottom: 27px;
-    display: inline-flex;
-    width: 97%;
-    justify-content: space-around;
-  }
-}
-
-
+/* Vertical screen media queries */
 @media only screen and (min-height: 1000px){
   .homePageImageContainer {
     height: 20vh;
@@ -101,7 +90,27 @@ h1, p{
 
 @media only screen and (min-height: 1100px){
   .homePageImageContainer {
-    height: 17.5vh;
+    height: 17vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (min-height: 1200px){
+  .homePageImageContainer {
+    height: 16vh;
+    margin-bottom: 27px;
+    display: inline-flex;
+    width: 97%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (min-height: 1300px){
+  .homePageImageContainer {
+    height: 15vh;
     margin-bottom: 27px;
     display: inline-flex;
     width: 97%;
@@ -119,7 +128,6 @@ h1, p{
   }
 }
 
-
 @media only screen and (min-height: 1600px){
   .homePageImageContainer {
     height: 13vh;
@@ -129,7 +137,6 @@ h1, p{
     justify-content: space-around;
   }
 }
-
 
 @media only screen and (min-height: 1700px){
   .homePageImageContainer {
