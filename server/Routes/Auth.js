@@ -3,9 +3,25 @@ const router = express.Router();
 const {Admin} = require('../models');
 const {Manager} = require('../models');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const {validateToken} = require('../middlewares/AuthMiddleware');
+
+// verify authentication of JWT token
+router.get('/UserAuth', validateToken, (req, res) => {
+res.send("Token works!");
+})
+
+// Check if user has logged in already
+router.get('/Login', (req, res) => {
+    if(req.session.user) {
+        res.send({LoggedIn: true, user: req.session.user})
+    }else{
+        res.send({LoggedIn: false});
+    }
+})
 
 // Authenticate login credentials
-router.post('/Login', async (req, res) => {
+router.post('/Login',  async (req, res) => {
     // Input from Home in client
     const {username, password} = req.body;
 
@@ -20,10 +36,23 @@ router.post('/Login', async (req, res) => {
         bcrypt.compare(password, adminUser.password).then((match) =>{
             if(!match){
                 res.status(422).send({error:'Wrong Username or Password combination!'});
-            }else{
-                req.session.user = adminUser;
-                console.log(req.session.user);
-                res.send(adminUser).json
+            }else{  
+                // get the id and username of the user in the database
+                const sessionUser ={id: adminUser.id, username: adminUser.username}
+
+                // create the token, with expiration
+                const accessToken = jwt.sign({sessionUser}, process.env.TOKEN_SECRET, {
+                    expiresIn: 500, 
+                });
+                
+                // create a session for this user
+                req.session.user = accessToken;
+
+                res.json({auth: true});
+                // res.header('auth-token', token);
+                // console.log(token);
+                
+                // res.send("Logged in!").json
             }
         }).catch(error =>{
             res.status(422).send(error)
@@ -35,7 +64,7 @@ router.post('/Login', async (req, res) => {
             }else{
                 req.session.user = managerUser;
                 console.log(req.session.user);
-                res.send(managerUser).json
+                res.send("Logged in!").json
             }
         }).catch(error =>{
             res.status(422).send(error)
@@ -45,14 +74,7 @@ router.post('/Login', async (req, res) => {
     }
 });
 
-// Check if user has logged in already
-router.get('/Login', (req, res) => {
-    if(req.session.user) {
-        res.send({loggedIn: true, user: req.session.user})
-    }else{
-        res.send({loggedIn: false});
-    }
-})
+
 
 
 module.exports = router;

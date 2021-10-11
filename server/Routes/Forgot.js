@@ -53,7 +53,7 @@ router.post('/Email', async (req, res) => {
         }
 
         // send both email and random code back
-        res.send({email: emailExist, code: code}).body
+        res.send({message:"success", code: code}).body
 
     }else{
         res.status(404).send({error:'Email could not be found!'});

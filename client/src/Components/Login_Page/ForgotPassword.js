@@ -100,10 +100,11 @@ class ForgotPassword extends Component{
         e.preventDefault();
         
         // Authenticate username and password
-        Axios.post('http://localhost:3001/ForgotPassword/Email', {
+        Axios.post('http://localhost:3001/Forgot/Email', {
             email: this.state.email
         }).then(res => {
 
+            console.log(res.data);
             //save random 4 digit code for authentication
             if(res.data.code){
                 this.setState({
@@ -112,7 +113,7 @@ class ForgotPassword extends Component{
             }
 
             console.log(this.state.code);
-            if(res.data.email.email !== this.state.email || res.data.email.email === ""){
+            if(res.data.message !== "success" || res.data === ""){
                 this.setState({
                     helperTextEmail: 'This is not a valid email!',
                     errorEmail: true,

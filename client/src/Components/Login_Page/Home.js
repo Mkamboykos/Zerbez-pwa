@@ -43,7 +43,19 @@ class Home extends Component{
 
     // The timer is unmounter after finished
     // componentWillUnmount() {
-    //     clearTimeout(this.timer);
+    //     //clearTimeout(this.timer);
+    // }
+
+    // componentDidMount(){
+    //     Axios.get('http://localhost:3001/Auth/Login')
+    //         .then(response => {
+    //             console.log(response.data);
+    //             if (response.data.LoggedIn === true){
+    //                 return <Redirect push to="./Dashboard"/>
+    //             }else if(response.data.LoggedIn === false){
+    //                 console.log("No user logged in!");
+    //             }
+    //         })
     // }
     
     // clockLoading(){
@@ -162,7 +174,7 @@ class Home extends Component{
         }
     }
 
-    handleSubmit(e){
+    handleSubmit = async e =>{
         e.preventDefault();
         if(this.state.userCaptcha === ''){
             alert("You must enter the CAPTCHA Code provided")
@@ -177,9 +189,17 @@ class Home extends Component{
                 captcha: random
             })
         }else if(this.state.userCaptcha === this.state.captcha){
-            this.setState({
-                redirect: true
-            }) 
+            await Axios.get('http://localhost:3001/Auth/Login')
+            .then(res => {
+                console.log(res.data);
+                if (res.data.LoggedIn === true){
+                    this.setState({
+                        redirect: true
+                    }) 
+                }else if(res.data.LoggedIn === false){
+                    console.log("No user logged in!");
+                }
+            })
         }
     }
 
@@ -192,8 +212,8 @@ class Home extends Component{
             username: this.state.username,
             password: this.state.password,
         }).then(res => {
-
-            if(res.data.username !== this.state.username || res.data.username === ""){
+            console.log(res.data);
+            if(res.data.auth !== true || res.data === ""){
                 this.setState({
                     helperText: 'Wrong username and password conbination!',
                     errorUsername: true,
