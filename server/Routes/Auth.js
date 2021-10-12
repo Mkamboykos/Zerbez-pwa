@@ -12,12 +12,16 @@ res.send("Token works!");
 })
 
 // Check if user has logged in already
-router.get('/Login', (req, res) => {
-    if(req.session.user) {
-        res.send({LoggedIn: true, user: req.session.user})
-    }else{
-        res.send({LoggedIn: false});
-    }
+// router.get('/Login', authenticateToken, (req, res) => {
+//     if(req.session.user) {
+//         res.send({LoggedIn: true, user: req.session.user})
+//     }else{
+//         res.send({LoggedIn: false});
+//     }
+// })
+
+router.get('/Login', authenticateToken, (req, res) => {
+    if('Authorized') return res.send({LoggedIn: true})
 })
 
 // Authenticate login credentials
@@ -38,21 +42,35 @@ router.post('/Login',  async (req, res) => {
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{  
                 // get the id and username of the user in the database
-                const sessionUser ={id: adminUser.id, username: adminUser.username}
+                const user = {name: adminUser.username};
 
-                // create the token, with expiration
-                const accessToken = jwt.sign({sessionUser}, process.env.TOKEN_SECRET, {
-                    expiresIn: 500, 
+                // create the access token, with expiration of 5 seconds
+                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                    expiresIn: 5000, 
                 });
                 
-                // create a session for this user
-                req.session.user = accessToken;
+                // create refresh token with expiration of 24 hours
+                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: 86400000,
+                });
 
-                res.json({auth: true});
-                // res.header('auth-token', token);
-                // console.log(token);
-                
-                // res.send("Logged in!").json
+                // set accessToken in cookie
+                // res.cookie("accessToken", accessToken, {
+                //     maxAge: 300000, // 5 minutes
+                //     httpOnly: true,
+                // });
+
+                // set refreshToken in cookie
+                // res.cookie("refreshToken", refreshToken, {
+                //     maxAge: 86400000, // 24 hours
+                //     httpOnly: true,
+                // });
+
+
+                // create a session for this user
+                // req.session.user = accessToken;
+
+                res.json({auth: true, accessToken: accessToken});
             }
         }).catch(error =>{
             res.status(422).send(error)
@@ -75,6 +93,17 @@ router.post('/Login',  async (req, res) => {
 });
 
 
+function authenticateToken(req, res, next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) =>{
+        if(err) return res.sendStatus(403)
+        req.user = user
+        next()
+    })
+}
 
 
 module.exports = router;

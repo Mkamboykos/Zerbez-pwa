@@ -42,11 +42,13 @@ app.use(session({
 }))
 
 // Import Routes
+const sessionRouter = require('./Routes/Session');
 const authRouter = require('./Routes/Auth');
 const signupRouter = require('./Routes/signUp');
 const forgotRouter = require('./Routes/Forgot');
 
 // Route Middlewares
+app.use('./Session', sessionRouter);
 app.use('/Auth', authRouter);
 app.use('/SignUp', signupRouter);
 app.use('/Forgot', forgotRouter);
