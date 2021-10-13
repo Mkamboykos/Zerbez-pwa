@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "start-server": "nodemon server.js"
+    "start-server": "nodemon server.js",
+    "update-project": "uninstall node_modules && uninstall package-lock.json && install"
   },
   "author": "",
   "license": "ISC",
