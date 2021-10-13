@@ -23,7 +23,7 @@ res.send("Token works!");
 router.get('/Login', authenticateToken, (req, res) => {
     if('Authorized') return res.send({LoggedIn: true})
 })
-
+ 
 // Authenticate login credentials
 router.post('/Login',  async (req, res) => {
     // Input from Home in client
