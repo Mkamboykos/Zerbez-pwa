@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "start-server": "nodemon server.js",
-    "update-project": "uninstall node_modules && uninstall package-lock.json && install"
+    "update": "rmdir /s /q node_modules && del package-lock.json && npm i"
   },
   "author": "",
   "license": "ISC",
