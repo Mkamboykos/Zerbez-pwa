@@ -4,7 +4,9 @@ import { Spring, animated } from 'react-spring';
 import {Form} from 'react-bootstrap'
 import Axios from 'axios';
 // import ClockLoader from "react-spinners/ClockLoader";
-import { IoChevronBack } from 'react-icons/io5'
+import { IoChevronBack } from 'react-icons/io5';
+import Cookies from 'js-cookie'
+
 Axios.defaults.withCredentials = true;
 
 class Home extends Component{
@@ -189,7 +191,11 @@ class Home extends Component{
                 captcha: random
             })
         }else if(this.state.userCaptcha === this.state.captcha){
-            await Axios.get('http://localhost:3001/Auth/Login')
+            await Axios.get('http://localhost:3001/Auth/Login', {
+                headers: {
+                    authorization: 'Bearer ' + "document.cookie."
+                }
+            })
             .then(res => {
                 console.log(res.data);
                 if (res.data.LoggedIn === true){
@@ -221,6 +227,7 @@ class Home extends Component{
                     isValid: false,
                 });
             }else{
+                sessionStorage.setItem('token', res.data.refreshToken);
                 this.setState({                    
                     capChaDisplay: true,
                     btnDisplay:true,
