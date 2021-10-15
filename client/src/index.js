@@ -4,12 +4,14 @@ import App from './App';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//axios.defaults.headers.common['Authorization'] = 'Bearer' + localStorage.getItem('accessToken');
 
 ReactDOM.render(
   <BrowserRouter>

@@ -42,16 +42,16 @@ app.use(session({
 }))
 
 // Import Routes
-const sessionRouter = require('./Routes/Session');
 const authRouter = require('./Routes/Auth');
 const signupRouter = require('./Routes/signUp');
 const forgotRouter = require('./Routes/Forgot');
+const floorPlanRouter = require('./Routes/FloorPlan');
 
 // Route Middlewares
-app.use('./Session', sessionRouter);
 app.use('/Auth', authRouter);
 app.use('/SignUp', signupRouter);
 app.use('/Forgot', forgotRouter);
+app.use('./FloorPlan', floorPlanRouter);
 
 // Test database connection is working
 const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
