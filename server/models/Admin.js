@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         role:{
             type: DataTypes.STRING,
             defaultValue: 'Admin'
+        },
+        token:{
+            type: DataTypes.STRING,
         }
     },{
         timestamps: false

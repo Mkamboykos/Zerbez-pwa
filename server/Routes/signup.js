@@ -16,7 +16,7 @@ router.post('/email', async (req, res) => {
     const emailExist = await Manager.findOne({ where: {email: email} })
     emailExist ? res.send(emailExist).json : res.json("");
 });
-
+// const user = await Users.findOne({ where: {username: username}})
 // Post API for when a manager signs up
 router.post('/Manager', async (req, res) => {
     const {first_name, last_name, username, email, password, restaurant_name, restaurant_address, restaurant_city, restaurant_state, restaurant_zip} = req.body;

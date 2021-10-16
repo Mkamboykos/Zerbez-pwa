@@ -6,19 +6,26 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 
-let refreshTokens = []
+// let refreshTokens = []
 
 router.get('/Login', authenticateToken, (req, res) => {
-    if('Authorized') return res.send({LoggedIn: true})
+    if('Authorized'){
+        return res.send({LoggedIn: true})
+    } else if ('Forbidden' || 'Unauthorized') {
+        return res.json("access token expired");
+    }
 })
 
 // Check if Refresh Token exist and creating a new Access Token with it
 router.post('/token', (req, res) => {
-    const refreshToken = req.body.token
+    const {username} = req.body;
+    const user = Admin.findOne({where: {username: username}});
+    const refreshToken = user.token
     if (refreshToken == null) return res.sendStatus(401)
-    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403)
+    if (!refreshToken.includes(refreshToken)) return res.sendStatus(403)
+    const refreshUser = {name: user.username};
+    jwt.verify(refreshUser, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403).send(err)
         const accessToken = generateAccessToken({ name: user.name })
         res.json({ accessToken: accessToken })
     })
@@ -47,6 +54,7 @@ router.post('/Login',  async (req, res) => {
             if(!match){
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{ 
+
                 // get the username of the user in the database
                 const user = {name: adminUser.username};
 
@@ -54,19 +62,30 @@ router.post('/Login',  async (req, res) => {
                 const accessToken = generateAccessToken(user)
 
                 // create the refresh token, with no expiration
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' })
+                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
 
                 // set accessToken in cookie
-                res.cookie("accessToken", accessToken, {
-                    maxAge: 15000, // 24 hours
-                    httpOnly: true,
-                });
+                // res.cookie("accessToken", accessToken, {
+                //     maxAge: 15000, // 24 hours
+                //     httpOnly: true,
+                // }).send({auth: true, refreshToken: refreshToken });
 
+                // update database by adding the refreshToken 
+                adminUser.update(
+                    { token: refreshToken },
+                    { where: {id: adminUser.id} }
+               ).then(token => {
+                    console.log(token);
+               }).catch(err => console.log('error: ' + err));
+
+                res.send({auth: true, accessToken: accessToken});
                 // push refresh token to array
-                refreshTokens.push(refreshToken)
+                //refreshTokens.push(refreshToken)
 
                 // responde with the access token and the refresh token
-                res.json({auth: true, refreshToken: refreshToken })
+               // res.json({auth: true, refreshToken: refreshToken })
+
+                //res.json({auth: true, refreshToken: refreshToken })
             }
         }).catch(error =>{
             res.status(422).send(error)
@@ -102,7 +121,7 @@ router.post('/Login',  async (req, res) => {
 // function to generate a new access token
 function generateAccessToken(user) {
     //return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
 }
 
 module.exports = router;

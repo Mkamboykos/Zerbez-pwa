@@ -191,9 +191,11 @@ class Home extends Component{
                 captcha: random
             })
         }else if(this.state.userCaptcha === this.state.captcha){
+
+            let accessToken = localStorage.getItem('accessToken');
             await Axios.get('http://localhost:3001/Auth/Login', {
                 headers: {
-                    authorization: 'Bearer ' + "document.cookie."
+                    authorization: 'Bearer ' + accessToken
                 }
             })
             .then(res => {
@@ -202,8 +204,14 @@ class Home extends Component{
                     this.setState({
                         redirect: true
                     }) 
-                }else if(res.data.LoggedIn === false){
-                    console.log("No user logged in!");
+                }else {
+                    localStorage.removeItem('accessToken');
+                    Axios.post('http://localhost:3001/Auth/token', {
+                        username: this.state.username
+                    })
+                    .then(res => {
+                        console.log(res.data);
+                    })
                 }
             })
         }
@@ -227,7 +235,7 @@ class Home extends Component{
                     isValid: false,
                 });
             }else{
-                sessionStorage.setItem('token', res.data.refreshToken);
+                localStorage.setItem('accessToken', res.data.accessToken);
                 this.setState({                    
                     capChaDisplay: true,
                     btnDisplay:true,
