@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "start-server": "nodemon server.js",
-    "update": "rmdir /s /q node_modules && del package-lock.json && npm i"
+    "start-server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
