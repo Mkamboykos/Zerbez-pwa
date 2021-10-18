@@ -9,6 +9,26 @@ import Cookies from 'js-cookie'
 
 Axios.defaults.withCredentials = true;
 
+
+
+// const hasAccess = async (accessToken, refreshToken) => {
+
+//     console.log("has access     " + accessToken, refreshToken)
+//     if (!refreshToken){
+//         return null;
+//     }
+
+//     if (accessToken === undefined) {
+//         // generate new accessToken
+//         accessToken = await refresh(refreshToken);
+//         return accessToken;
+//     }
+//     return accessToken;
+// };
+
+
+
+
 class Home extends Component{
     
     constructor(props) {
@@ -36,6 +56,8 @@ class Home extends Component{
         this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
         this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
+        // this.requestLogin = this.requestLogin.bind(this);
+        // this.refresh = this.refresh.bind(this);
         // this.clockLoading = this.clockLoading.bind(this);
 
 
@@ -65,6 +87,11 @@ class Home extends Component{
     //         loading: false
     //     });
     // }
+
+
+
+
+
 
 
     onChangeTextfield(e){
@@ -175,6 +202,68 @@ class Home extends Component{
             }
         }
     }
+// refresh = e => {
+//         console.log("Refreshing token!");
+//         let refreshToken = localStorage.getItem('refresh');
+    
+//         return new Promise((resolve, reject) => {
+//             Axios.post('http://localhost:3001/Auth/refresh', { token: refreshToken })
+//                 .then(data => {
+//                     if (data.data.success === false) {
+//                         console.log("Login again");
+//                         // set message and return.
+//                         resolve(false);
+//                     } else {
+//                         const { accessToken } = data.data;
+//                         Cookies.set("access", accessToken);
+//                         resolve(accessToken);
+//                     }
+//                 });
+//             });
+//         };
+//     hasAccess = async e => {
+//         let accessToken = localStorage.getItem('access');
+//         let refreshToken = localStorage.getItem('refresh');
+//         console.log("has access     " + accessToken, refreshToken)
+//         if (!refreshToken){
+//             return null;
+//         }
+    
+//         if (accessToken === undefined) {
+//             // generate new accessToken
+//             accessToken = await this.refresh;
+//             return accessToken;
+//         }
+//         return accessToken;
+//     };
+
+    
+
+// requestLogin = async e => {
+//     let accessToken = localStorage.getItem('access');
+//     let refreshToken = localStorage.getItem('refresh');
+//     return new Promise((resolve, reject) => {
+//         Axios.post('http://localhost:3001/Auth/protected',
+//             {headers: {authorization: 'Bearer ' + accessToken}})
+//             .then(async res => {
+//                 console.log(res);
+//                 if (res.data.success === false) {
+//                     if (res.data.message === "User not authenticated") {
+//                         console.log("Login again");
+//                         // set err message to login again.
+//                     } else if (res.data.message === "Access token expired") {
+//                         const accessToken = await this.refresh;
+//                         return await this.requestLogin;
+//                     }
+//                     resolve(false);
+//                 } else {
+//                     // protected route has been accessed, response can be used.
+//                     console.log("Protected route accessed!");
+//                     resolve(true);
+//                 }
+//             });
+//     });
+// };
 
     handleSubmit = async e =>{
         e.preventDefault();
@@ -192,10 +281,11 @@ class Home extends Component{
             })
         }else if(this.state.userCaptcha === this.state.captcha){
 
-            let accessToken = localStorage.getItem('accessToken');
+            // let accessToken = localStorage.getItem('accessToken');
+            let accessToken = Cookies.get('access');
             await Axios.get('http://localhost:3001/Auth/Login', {
                 headers: {
-                    authorization: 'Bearer ' + accessToken
+                    Authorization: 'Bearer ' + accessToken,
                 }
             })
             .then(res => {
@@ -205,15 +295,39 @@ class Home extends Component{
                         redirect: true
                     }) 
                 }else {
-                    localStorage.removeItem('accessToken');
-                    Axios.post('http://localhost:3001/Auth/token', {
-                        username: this.state.username
-                    })
-                    .then(res => {
-                        console.log(res.data);
-                    })
+                    // localStorage.removeItem('accessToken');
+                    // Axios.post('http://localhost:3001/Auth/token', {
+                    //     username: this.state.username
+                    // })
+                    // .then(res => {
+                    //     console.log(res.data);
+                    // })
+                    console.log("need to refresh token");
                 }
             })
+
+            // let accessToken = Cookies.get('access');
+            // let refreshToken = Cookies.get('refresh');
+
+            // let accessToken = localStorage.getItem('access');
+            // let refreshToken = localStorage.getItem('refresh');
+
+
+            // const access = await hasAccess(accessToken, refreshToken);
+
+            // console.log(access);
+            // if (!access) {
+            //     // Set message saying login again.
+            //     console.log("log in again!")
+            // } else {
+            //     const result = await this.requestLogin;
+            //     console.log(result);
+            //     if(result){
+            //         this.setState({
+            //             redirect: true
+            //         })
+            //     }
+            // }
         }
     }
 
@@ -235,7 +349,12 @@ class Home extends Component{
                     isValid: false,
                 });
             }else{
-                localStorage.setItem('accessToken', res.data.accessToken);
+
+                // Cookies.set('access', res.data.accessToken);
+                // Cookies.set('refresh', res.data.refreshToken);
+
+                // localStorage.setItem('access', res.data.accessToken);
+                // localStorage.setItem('refresh', res.data.refreshToken);
                 this.setState({                    
                     capChaDisplay: true,
                     btnDisplay:true,
@@ -255,6 +374,7 @@ class Home extends Component{
                     isValid: false,
                 });
             }
+            
         });
     }
     

@@ -29,17 +29,17 @@ app.use(cors({
 }));
 
 // Create a session that will last up to 24 hours before expiring
-app.use(session({
-    key: "sessionId",
-    secret: "subscribe",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        // secure: true,
-        expires: 60 * 60 * 24,
-    },
-}))
+// app.use(session({
+//     key: "sessionId",
+//     secret: "subscribe",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         httpOnly: true,
+//         // secure: true,
+//         expires: 60 * 60 * 24,
+//     },
+// }))
 
 // Import Routes
 const authRouter = require('./Routes/Auth');
