@@ -110,6 +110,15 @@ router.post('/Login',  async (req, res) => {
                     httpOnly: false,
                 })
 
+                // update database by adding the refreshToken 
+                //     adminUser.update(
+                //         { token: refreshToken },
+                //         { where: {id: adminUser.id} }
+                //    ).then(token => {
+                //         console.log(token);
+                //    }).catch(err => console.log('error: ' + err));
+
+
                 res.json({auth: true});
             }
         }).catch(error =>{
