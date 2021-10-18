@@ -9,6 +9,8 @@ const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 // Capcha authentication
 router.get('/Login', authenticateToken, (req, res) => {
     if('Authorized'){
+
+        console.log(req.user)
         return res.json({LoggedIn: true})
     } 
 });
@@ -56,11 +58,6 @@ router.get('/Login', authenticateToken, (req, res) => {
 // });
 
 
-// Protected route, can only be accessed when user is logged-in
-// router.post("/protected", auth, (req, res) => {
-//     return res.json({ message: "Protected content!" });
-// });
-
 
 
 
@@ -101,23 +98,14 @@ router.post('/Login',  async (req, res) => {
                 // create access cookie with accessToken, expires in 15 seconds
                 res.cookie("access", accessToken, {
                     maxAge: 15000, // 15 seconds
-                    httpOnly: false,
+                    httpOnly: true,
                 })
 
                 // create refresh cookie with refreshToken, expires in 24 hours
                 res.cookie("refresh", refreshToken, {
                     maxAge: 86400000, // 24 hours
-                    httpOnly: false,
+                    httpOnly: true,
                 })
-
-                // update database by adding the refreshToken 
-                //     adminUser.update(
-                //         { token: refreshToken },
-                //         { where: {id: adminUser.id} }
-                //    ).then(token => {
-                //         console.log(token);
-                //    }).catch(err => console.log('error: ' + err));
-
 
                 res.json({auth: true});
             }
@@ -139,13 +127,13 @@ router.post('/Login',  async (req, res) => {
                 // create access cookie with accessToken, expires in 15 seconds
                 res.cookie("access", accessToken, {
                     maxAge: 15000, // 15 seconds
-                    httpOnly: false,
+                    httpOnly: true,
                 })
 
                 // create refresh cookie with refreshToken, expires in 24 hours
                 res.cookie("refresh", refreshToken, {
                     maxAge: 86400000, // 24 hours
-                    httpOnly: false,
+                    httpOnly: true,
                 })
 
                 res.json({auth: true});

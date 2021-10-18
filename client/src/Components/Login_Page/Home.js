@@ -282,12 +282,8 @@ class Home extends Component{
         }else if(this.state.userCaptcha === this.state.captcha){
 
             // let accessToken = localStorage.getItem('accessToken');
-            let accessToken = Cookies.get('access');
-            await Axios.get('http://localhost:3001/Auth/Login', {
-                headers: {
-                    Authorization: 'Bearer ' + accessToken,
-                }
-            })
+            // let accessToken = Cookies.get('access');
+            await Axios.get('http://localhost:3001/Auth/Login')
             .then(res => {
                 console.log(res.data);
                 if (res.data.LoggedIn === true){
