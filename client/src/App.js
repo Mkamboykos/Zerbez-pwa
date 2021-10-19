@@ -6,7 +6,7 @@ import {Route} from 'react-router-dom'
 const Home = lazy(() => import('./Components/Login_Page/Home'))
 const SignUp = lazy(() => import('./Components/Login_Page/SignUp'))
 const Dashboard = lazy(() => import('./Components/Dashboard_Page/Dashboard'))
-const ForgotPassword = lazy(() => import('./Components/Login_Page/ForgotPassword'))
+const ForgotPassword = lazy(() => import('./Components/ForgotPassword_Page/ForgotPassword'))
 const ResetPassword = lazy(() => import('./Components/ForgotPassword_Page/ResetPassword'))
 const Account = lazy(() => import('./Components/Settings/Account'))
 const Analytics = lazy(() => import('./Components/Settings/Analytics'))
@@ -21,6 +21,7 @@ const NewReservation = lazy(() => import('./Components/Dashboard_Page/NewReserva
 const Reservations = lazy(() => import('./Components/Dashboard_Page/Reservations'))
 const Privacy = lazy(() => import('./Components/Legal/Privacy'))
 const Terms = lazy(() => import('./Components/Legal/Terms'))
+const NotFound = lazy(() => import('./Components/404_NotFound/NotFound'))
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/Reservations" component={Reservations}/>
           <Route exact path="/Privacy" component={Privacy}/>
           <Route exact path="/Terms" component={Terms}/>
+          <Route exact path="/404" component={NotFound}/>
         </Suspense>
     </div>
   )
