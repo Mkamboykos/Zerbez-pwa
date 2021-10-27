@@ -35,7 +35,7 @@ router.post('/Login',  async (req, res) => {
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{ 
                 // get the username of the user in the database
-                const user = {name: adminUser.username};
+                const user = {id: adminUser.id, name: adminUser.username};
 
                 // create accessToken and refreshToken with user
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
@@ -69,7 +69,7 @@ router.post('/Login',  async (req, res) => {
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{
                 // get the username of the user in the database
-                const user = {name: managerUser.username};
+                const user = {id: managerUser.id, name: managerUser.username};
 
                 // create accessToken and refreshToken with user
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)

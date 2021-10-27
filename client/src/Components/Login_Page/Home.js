@@ -126,7 +126,7 @@ class Home extends Component{
 
     }
 
-    handleKeyPressSubmit(e){
+    handleKeyPressSubmit = async e =>{
         if (e.key === "Enter"){
             e.preventDefault();
             if(this.state.userCaptcha === ''){
@@ -142,9 +142,17 @@ class Home extends Component{
                     captcha: random
                 })
             }else if(this.state.userCaptcha === this.state.captcha){
-                this.setState({
-                    redirect: true
-                }) 
+                await Axios.get('http://localhost:3001/Auth/Login')
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.LoggedIn === true){
+                        this.setState({
+                            redirect: true
+                        }) 
+                    }else if (res.data.message === "Tokens not present"){
+                        this.props.history.push('/');
+                    }
+                })
             }
         }
     }
