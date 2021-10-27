@@ -3,7 +3,6 @@ import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
 import {Form} from 'react-bootstrap'
 import Axios from 'axios';
-// import ClockLoader from "react-spinners/ClockLoader";
 import { IoChevronBack } from 'react-icons/io5';
 import Cookies from 'js-cookie'
 
@@ -38,40 +37,7 @@ class Home extends Component{
         this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
         this.onChangeTextfield = this.onChangeTextfield.bind(this);
         this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
-        // this.clockLoading = this.clockLoading.bind(this);
-
-
-        // timer will set to time out for clockLoader after 4 seconds
-        // this.timer = setTimeout(this.clockLoading, 3000);
     }
-
-    // The timer is unmounter after finished
-    // componentWillUnmount() {
-    //     //clearTimeout(this.timer);
-    // }
-
-    // componentDidMount(){
-    //     Axios.get('http://localhost:3001/Auth/Login')
-    //         .then(response => {
-    //             console.log(response.data);
-    //             if (response.data.LoggedIn === true){
-    //                 return <Redirect push to="./Dashboard"/>
-    //             }else if(response.data.LoggedIn === false){
-    //                 console.log("No user logged in!");
-    //             }
-    //         })
-    // }
-    
-    // clockLoading(){
-    //     this.setState({
-    //         loading: false
-    //     });
-    // }
-
-
-
-
-
 
 
     onChangeTextfield(e){
@@ -208,8 +174,8 @@ class Home extends Component{
                     this.setState({
                         redirect: true
                     }) 
-                }else if (res.data.message === "Page Not Found"){
-                    this.props.history.push('/404');
+                }else if (res.data.message === "Tokens not present"){
+                    this.props.history.push('/');
                 }
             })
         }
@@ -347,16 +313,7 @@ class Home extends Component{
     
     render() {
         if (this.state.loginDisplay){
-            
-            // Clock loading page
-            // if(this.state.loading){
-            //     return (
-            //         <ClockLoader color={"#F4F1F2"} loading={this.clockLoading} size={150} />
-            //     )
-            // }
-            
             return (
-             
                 <Spring from={{ opacity: 1, Transform:`flash(0%)`}} to={{ opacity: 0, Transform:`flash(100%)`}}>
                 {style => (  
                     <div className="homePageContainer">

@@ -61,7 +61,7 @@ function authenticateToken(req, res, next){
         })
     }else{
         // if both access or refresh token are missing, send 404
-        res.json({message: "Page Not Found"});
+        res.json({message: "Tokens not present"});
     }
 }
 
