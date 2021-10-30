@@ -8,8 +8,6 @@ import Cookies from 'js-cookie'
 
 Axios.defaults.withCredentials = true;
 
-
-
 class Home extends Component{
     
     constructor(props) {
@@ -123,7 +121,6 @@ class Home extends Component{
                 btnDisplay: false,
                 userCaptcha: userCaptcha,
             })
-
     }
 
     handleKeyPressSubmit = async e =>{
@@ -275,7 +272,7 @@ class Home extends Component{
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
 
                     <div className="homePageImageContainer">
-                        <img src="/images/homePageHand.png" className="homePageImageContainer" alt="Hand holding tray"/>
+                    <img alt="hand holding tray" src="/images/homePageHand.png" className="homePageImageContainer" />
                     </div>
 
                     <div className="inputContainer">  

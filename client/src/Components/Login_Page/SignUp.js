@@ -11,10 +11,10 @@ import Axios from 'axios';
 const styles = {
     root: {
         // when checkbox is inactive
-        color: "#F4F1F2",
+        color: "#3D3D3D",
         '&$checked': {
             // when checkbox is active
-            color: "#F4F1F2",
+            color: "#FFFFFF",
             '&:hover': {
                 background: "none",           
             },
@@ -27,23 +27,25 @@ const styles = {
     
     // color of icon for state select drop down menu
     icon: {
-        fill: "#F4F1F2",
+        fill: "#FFFFFF",
     },
+
+    // color for visibility
     toggleIcon: {
-        color: "#F4F1F2",
+        color: "#FFFFFF",
     },
      // color of menu item for state select drop down menu
     selected: {
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#FFFFFF",
+        color: "#3D3D3D",
         horizontal: "left",
         "&:focus": {
-			backgroundColor: "#2A3C60",
-            color: "#F4F1F2",
+			backgroundColor: "#3D3D3D",
+            color: "#FFFFFF",
 		}, 
         "&:hover": {
-			backgroundColor: "#2A3C60",
-            color: "#F4F1F2",
+			backgroundColor: "#3D3D3D",
+            color: "#FFFFFF",
 		},
     },
 };
@@ -503,10 +505,10 @@ class SignUp extends Component {
     render() {
 
         // color is the main white used accross the app
-        const color = "#F4F1F2";
+        const color = "#FFFFFF";
 
-        // color2 is the grey used accross the app
-        const color2 = "#91A8C0";
+        // color2 is the dark grey used accross the app
+        const color2 = "#3D3D3D";
 
         // overwrite Textfields' text and format with custome code
         const theme = createTheme({
@@ -517,14 +519,19 @@ class SignUp extends Component {
             },
             overrides: {
                 MuiInput: {
+                    TextField:{
+                        weight: 600
+                    },
+                    
                     underline: {
                         "&:before": {
-                        borderBottom: `1px solid ${color}`
+                        borderBottom: `2px solid ${color}`
                         }
                     }
                 }
             }
         });
+
 
         // classes are used for the white color of the checkboxes, this calls to the props being used on this class
         const { classes } = this.props;

@@ -55,6 +55,6 @@ function App() {
 }
 
 // Background Color of the entire app
-document.body.style = 'background: #2A3C60;';
+document.body.style = 'background: #999999;';
 
 export default App;

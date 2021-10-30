@@ -138,7 +138,7 @@ button,select {
 /* This also helps for the loading screen to load */
 .App {
   text-align: center;
-  background-color: #2A3C60;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,29 +158,32 @@ body {
 }
 
 h1, p{
-  color: #F4F1F2;
+  color: #FFFFFF;
 }
 
 /* Links */
 .link {
-  color: #F4F1F2;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
 .link:hover {
-   color: #F4F1F2;
+   color: #414141;
    text-decoration: none;
 }
 
 .linkService {
-  color: #E95554;
+  color: #414141;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .linkService:hover {
-  color: #91A8C0;
+  color: #E2C044;
   text-decoration: none;
+  font-weight: bold;
 }
+
 
 
 
@@ -373,15 +376,21 @@ h1, p{
 }
 
 input.usernameBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
 }
 
-input.usernameBarText.form-control::placeholder{
-  color: #F4F1F2;
+input.usernameBarText.form-control:focus {
+  border-color: none;
+  box-shadow: none;
 }
+
+input.usernameBarText.form-control::placeholder{
+  color: #f4f1f27a;
+}
+
 
 /* password bar in home page*/
 
@@ -392,14 +401,19 @@ input.usernameBarText.form-control::placeholder{
 }
 
 input.passwordBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
 }
 
+input.passwordBarText.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
 input.passwordBarText.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 /* Captcha bar in home page*/
@@ -423,20 +437,25 @@ input#formPlaintextEmail.captchaBar.form-control{
   margin: 0 auto;
   width: 300px;
   border-radius: 25px;
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
+}
+
+input#formPlaintextEmail.captchaBar.form-control:focus{
+  border-color: none;
+  box-shadow: none;
 }
 
 input#formPlaintextEmail.captchaBar.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 /* Buttons in Home Page*/
 
 .signUp_button_home{
-  background-color: #91A8C0;
-  color: #F4F1F2;
+  background-color: #985D6E;
+  color: #FFFFFF;
   margin-right: .4rem;
   border-radius: 25px;
   border: 0;
@@ -445,12 +464,12 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 }
 
 .signUp_button_home:active{
-  background-color:#7B8EA1;
+  background-color:#985D6E;
 }
 
 .login_button_home{
-  background-color: #DC967F;
-  color: #F4F1F2;
+  background-color: #587B7F;
+  color: #FFFFFF;
   margin-left: .4rem;
   border-radius: 25px;
   border: 0;
@@ -459,12 +478,12 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 }
 
 .login_button_home:active{
-  background-color: #BE816D;
+  background-color: #587B7F;
 }
 
 .Submit_button_Home{
-  background-color: #E95554;
-  color: #F4F1F2;
+  background-color: #587B7F;
+  color: #FFFFFF;
   border-radius: 25px;
   border: 0;
   height: calc(1.5em + .75rem + 2px);
@@ -472,7 +491,7 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
 }
 
 .Submit_button_Home:active{
-  background-color: #D24B4A;
+  background-color: #587B7F;
 }
 
 
@@ -531,18 +550,19 @@ input#formPlaintextEmail.captchaBar.form-control::placeholder{
   border-radius: 25px;
   width: 115px;
   height: calc(1.5em + .75rem + 2px);
-  color: #F4F1F2;  
+  color: #FFFFFF;  
   cursor: pointer;
   font-weight: bold;
-  background-color: #DC967F;
+  background-color: #985D6E;
   align-self: center;
 }
 
 label{
-  color: #F4F1F2;
+  color: #FFFFFF;
 }
 
 .signUp_button_two_Container {
+  padding-top: 15px;
   padding-bottom: 35px;
 }
 
@@ -551,7 +571,15 @@ label{
   display: block;
 }
 
+/* font weight of password requirements in signup page */
+span.multiline-block{
+  font-weight: 600;
+}
 
+/* font weight of input text fields in the signup page */
+input.MuiInput-input{
+  font-weight: bold;
+}
 
 /*Forgot Password Container*/
 
@@ -613,8 +641,8 @@ label{
 /* Button in Forgot Password Page */
 
 .continue_button_forgotPassword{
-  background-color: #E95554;
-  color: #F4F1F2;
+  background-color: #E2C044;
+  color: #FFFFFF;
   margin-left: .4rem;
   border-radius: 25px;
   border: 0;
@@ -623,7 +651,7 @@ label{
 }
 
 .continue_button_forgotPassword:active{
-  background-color: #C94B4A;
+  background-color: #E2C044;
 }
 
 
@@ -665,51 +693,51 @@ label{
 }
 
 input.codeOneBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
   width: 50px;
 }
 
 input.codeOneBarText.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 input.codeTwoBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
   width: 50px;
 }
 
 input.codeTwoBarText.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 input.codeThreeBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
   width: 50px;
 }
 
 input.codeThreeBarText.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 input.codeFourBarText.form-control {
-  background-color: #8D848D;
+  background-color: #414141;
   border-color: #707070;
-  color: #F4F1F2;
+  color: #FFFFFF;
   border-radius: 25px;
   width: 50px;
 }
 
 input.codeFourBarText.form-control::placeholder{
-  color: #F4F1F2;
+  color: #f4f1f27a;
 }
 
 
