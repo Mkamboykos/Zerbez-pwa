@@ -9,7 +9,6 @@ const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 // Capcha authentication
 router.get('/Login', authenticateToken, (req, res) => {
     if('Authorized'){
-
         console.log(req.user)
         return res.json({LoggedIn: true})
     } 
@@ -35,12 +34,11 @@ router.post('/Login',  async (req, res) => {
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{ 
                 // get the username of the user in the database
-                const user = {id: adminUser.id, name: adminUser.username};
+                const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
 
                 // create accessToken and refreshToken with user
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-                
 
                 // create refresh cookie with refreshToken, expires in 24 hours
                 res.cookie("refresh", refreshToken, {
@@ -69,7 +67,7 @@ router.post('/Login',  async (req, res) => {
                 res.status(422).send({error:'Wrong Username or Password combination!'});
             }else{
                 // get the username of the user in the database
-                const user = {id: managerUser.id, name: managerUser.username};
+                const user = {id: managerUser.id, name: managerUser.username, role: managerUser.role};
 
                 // create accessToken and refreshToken with user
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)

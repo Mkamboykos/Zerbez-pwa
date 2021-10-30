@@ -31,7 +31,7 @@ app.use(cors({
 
 // Create a session that will last up to 24 hours before expiring
 // app.use(session({
-//     key: "sessionId",
+//     key: "sid",
 //     secret: "subscribe",
 //     resave: false,
 //     saveUninitialized: false,

@@ -7,16 +7,24 @@ function authenticateToken(req, res, next){
     // check if headers for cookies exists
     if (headersExist){ 
         // check if there are more then one cookie
-        const authHeaderAccess = req.headers['cookie'].split(' ')[1]
-        
+        const authHeaderAccess = req.headers['cookie'].split(' ')[0]
+
         // if the second cookie is the access cookie, slice it
         if (authHeaderAccess){
-            const authHeaderAccessSlided = authHeaderAccess.slice(7)
-            req.accessToken = authHeaderAccessSlided;
-        }else{
-            // if there is no second cookie, pass the first one to avoid errors
-            const authHeader = req.headers['cookie']
-            req.accessToken = authHeader;
+            if ((authHeaderAccess.charAt(0) === 'a') === true){
+                const authHeaderAccessSlided = authHeaderAccess.slice(7).slice(0, -1)
+                req.accessToken = authHeaderAccessSlided;
+            } else {
+                const authHeaderAccess = req.headers['cookie'].split(' ')[1]
+
+                if(authHeaderAccess){
+                    const authHeaderAccessSlided = authHeaderAccess.slice(7)
+                    req.accessToken = authHeaderAccessSlided;
+                }else{
+                    const authHeader = req.headers['cookie']
+                    req.accessToken = authHeader;
+                }
+            }
         }
 
         // verify access token (sliced)
@@ -29,11 +37,11 @@ function authenticateToken(req, res, next){
                 jwt.verify(req.refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, verifiedRefresh) => {
 
                     if (err){
-                        res.json({message: "Invalid Resfresh Token"});
+                        res.json({message: "Invalid Refresh Token"});
                     } else if (verifiedRefresh){
 
                         // if refresh token passes verification, create new access token and verify
-                        const accessToken = jwt.sign({name: verifiedRefresh.name}, process.env.ACCESS_TOKEN_SECRET)
+                        const accessToken = jwt.sign({verifiedRefresh}, process.env.ACCESS_TOKEN_SECRET)
                                     
                         res.cookie("access", accessToken, {
                             maxAge: 15000, // 15 seconds
