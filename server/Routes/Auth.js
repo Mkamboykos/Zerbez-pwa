@@ -5,6 +5,8 @@ const {Manager} = require('../models');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
+const {body, validationResult} = require('express-validator');
+const ValidationException = require('../Exceptions/ValidationException');
 
 // Capcha authentication
 router.get('/Login', authenticateToken, (req, res) => {
@@ -21,18 +23,18 @@ router.get('/Login', authenticateToken, (req, res) => {
 // })
  
 // Authenticate login credentials
-router.post('/Login',  async (req, res) => {
+router.post('/Login', [
+    body('username').trim().notEmpty().withMessage('Field cannot be empty!').bail(),
+    body('password').trim().notEmpty().withMessage('Field cannot be empty!').bail()
+], async (req, res) => {
     // Input from Home page in client
     const {username, password} = req.body;
 
-    //check for Admin user in Database
-    const adminUser = await Admin.findOne({where: {username: username}});
+    const adminUser = await Admin.findOne({ where: {username: username} });
 
     if(adminUser){
-        bcrypt.compare(password, adminUser.password).then((match) =>{
-            if(!match){
-                res.status(422).send({error:'Wrong Username or Password combination!'});
-            }else{ 
+        await bcrypt.compare(password, adminUser.password).then((match) =>{
+            if(match){
                 // get the username of the user in the database
                 const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
 
@@ -53,19 +55,16 @@ router.post('/Login',  async (req, res) => {
                 })
                 res.json({auth: true});
             }
-        }).catch(error =>{
-            res.status(422).send(error)
+        }).catch(e =>{
+            console.log(e)
         });
     }
 
-    //check for Manager user in Database
-    if(!adminUser){
-        const managerUser = await Manager.findOne({where: {username: username}}); 
-        
-        bcrypt.compare(password, managerUser.password).then((match) =>{
-            if(!match){
-                res.status(422).send({error:'Wrong Username or Password combination!'});
-            }else{
+    const managerUser = await Manager.findOne({where: {username: username}})
+    
+    if(managerUser){
+        await bcrypt.compare(password, managerUser.password).then((match) =>{
+            if(match){
                 // get the username of the user in the database
                 const user = {id: managerUser.id, name: managerUser.username, role: managerUser.role};
 
@@ -87,10 +86,15 @@ router.post('/Login',  async (req, res) => {
 
                 res.json({auth: true});
             }
-        }).catch(error =>{
-            res.status(422).send(error)
+        }).catch(e =>{
+            console.log(e)
         });
     }
+    
+    if(adminUser === null && managerUser === null){
+        res.status(400).send({error:'Wrong usernames or password conbination!'})
+    }
+    
 });
 
 

@@ -11,7 +11,7 @@ import Axios from 'axios';
 const styles = {
     root: {
         // when checkbox is inactive
-        color: "#3D3D3D",
+        color: "#f4f1f27a",
         '&$checked': {
             // when checkbox is active
             color: "#FFFFFF",
@@ -508,7 +508,7 @@ class SignUp extends Component {
         const color = "#FFFFFF";
 
         // color2 is the dark grey used accross the app
-        const color2 = "#3D3D3D";
+        const color2 = "#f4f1f27a";
 
         // overwrite Textfields' text and format with custome code
         const theme = createTheme({

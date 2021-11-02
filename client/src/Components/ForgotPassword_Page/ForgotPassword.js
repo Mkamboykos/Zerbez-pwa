@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
-import {Form} from 'react-bootstrap'
+import {AiOutlineMail} from 'react-icons/ai'
+import {Form, InputGroup} from 'react-bootstrap'
+import {FormHelperText} from '@material-ui/core'
 import Axios from 'axios';
 
 class ForgotPassword extends Component{
@@ -267,19 +269,22 @@ class ForgotPassword extends Component{
                                     </p>
                                 </div>
 
-                                <Form.Group className="passwordBar">
-                                    <Form.Control 
-                                        type="email"
-                                        placeholder="Email" 
-                                        name="email"
-                                        value={this.state.email}
-                                        className="passwordBarText" 
-                                        onChange={this.handleEmail}
-                                        isInvalid={this.state.errorEmail} 
-                                    />
-                                    <Form.Control.Feedback type='invalid'>
+                                <Form.Group className="contentBar">
+                                    <InputGroup>
+                                        <InputGroup.Text><AiOutlineMail/></InputGroup.Text>
+                                        <Form.Control 
+                                            type="email"
+                                            placeholder="Email" 
+                                            name="email"
+                                            value={this.state.email}
+                                            className="contentBarText" 
+                                            onChange={this.handleEmail}
+                                            isInvalid={this.state.errorEmail} 
+                                        />
+                                    </InputGroup>
+                                    <FormHelperText>
                                         {this.state.helperTextEmail}
-                                    </Form.Control.Feedback>
+                                     </FormHelperText> 
                                 </Form.Group>
 
                                 <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >

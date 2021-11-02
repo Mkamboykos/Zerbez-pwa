@@ -149,8 +149,7 @@ button,select {
 /* Body */
 
 body {
-  margin: 0;
-  padding: 0;
+
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -173,7 +172,7 @@ h1, p{
 }
 
 .linkService {
-  color: #414141;
+  color: #E2C044;
   text-decoration: none;
   font-weight: bold;
 }
@@ -369,57 +368,46 @@ h1, p{
 
 /* Username bar in home page*/
 
-.usernameBar{
+.contentBar{
   margin: 0 auto;
   width: 300px;
-  padding-bottom: 13px;
+  padding-bottom: 15px;
 }
 
-input.usernameBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
+/*  Username icons in home page */
+span.input-group-text{
+  background-color: rgba(0, 0, 0, 0);
+  border-width: medium;
+  border-color: #FFFFFF;
   color: #FFFFFF;
   border-radius: 25px;
+  border-right: transparent;
+  padding-right: 0;
+  padding-left: 15px;
 }
 
-input.usernameBarText.form-control:focus {
+input.contentBarText.form-control {
+  background-color: #41414100;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  border-radius: 25px;
+  border-width: medium;
+  border-left: transparent;
+}
+
+input.contentBarText.form-control:focus {
   border-color: none;
   box-shadow: none;
 }
 
-input.usernameBarText.form-control::placeholder{
-  color: #f4f1f27a;
-}
-
-
-/* password bar in home page*/
-
-.passwordBar{
-  margin: 0 auto;
-  width: 300px;
-  padding-bottom: 13px;
-}
-
-input.passwordBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
-  color: #FFFFFF;
-  border-radius: 25px;
-}
-
-input.passwordBarText.form-control:focus {
-  border-color: none;
-  box-shadow: none;
-}
-
-input.passwordBarText.form-control::placeholder{
+input.contentBarText.form-control::placeholder{
   color: #f4f1f27a;
 }
 
 /* Captcha bar in home page*/
 
 .captchaText{
-  color: #F4F1F2;
+  color: #FFFFFF;
   font-size: 60px;
   user-select: none;
   font-weight: bold;
@@ -427,28 +415,6 @@ input.passwordBarText.form-control::placeholder{
 
 label.captchaText.form-label{
   margin-bottom: 15px;
-}
-
-div.captchaBar.form-group{
-  margin-bottom: 13px;
-}
-
-input#formPlaintextEmail.captchaBar.form-control{
-  margin: 0 auto;
-  width: 300px;
-  border-radius: 25px;
-  background-color: #414141;
-  border-color: #707070;
-  color: #FFFFFF;
-}
-
-input#formPlaintextEmail.captchaBar.form-control:focus{
-  border-color: none;
-  box-shadow: none;
-}
-
-input#formPlaintextEmail.captchaBar.form-control::placeholder{
-  color: #f4f1f27a;
 }
 
 /* Buttons in Home Page*/
@@ -1000,5 +966,5 @@ input.codeFourBarText.form-control::placeholder{
 .Back_button_EnterCode:hover,
 .Back_button_ResetPassword:hover,
 .Back_button_SignUp:hover{
-  color: #E95554;
+  color: #E2C044;
 }

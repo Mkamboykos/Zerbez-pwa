@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
-import {Form} from 'react-bootstrap'
+import {Form, InputGroup} from 'react-bootstrap'
+import {FormHelperText} from '@material-ui/core'
 import Axios from 'axios';
-import { IoChevronBack } from 'react-icons/io5';
+import { IoChevronBack} from 'react-icons/io5';
+import {FaRegUser} from 'react-icons/fa'
+import {RiLockPasswordLine} from 'react-icons/ri'
 import Cookies from 'js-cookie'
+import { Input } from '@material-ui/core';
 
 Axios.defaults.withCredentials = true;
 
@@ -63,6 +67,12 @@ class Home extends Component{
                 errorUsername: true,
                 isValid: false
             });
+        }else if(this.state.username === null){
+            this.setState({
+                helperText: 'Fields cannot be empty!',
+                errorUsername: true,
+                isValid: false
+            });
         }
 
         if(this.state.password === ""){
@@ -71,7 +81,14 @@ class Home extends Component{
                 errorPassword: true,
                 isValid: false
             });
+        }else if(this.state.password === null){
+            this.setState({
+                helperText: 'Fields cannot be empty!',
+                errorPassword: true,
+                isValid: false
+            });
         }
+
         let random = Math.random().toString(36).substring(7);
         this.setState({
             captcha: random
@@ -198,7 +215,7 @@ class Home extends Component{
             console.log(res.data);
             if(res.data.auth !== true || res.data === ""){
                 this.setState({
-                    helperText: 'Wrong username and password conbination!',
+                    helperText: 'Wrong username or password conbination!',
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
@@ -210,14 +227,14 @@ class Home extends Component{
                     loginDisplay:false
                 });
             }
-        }).catch((e) => {
+        }).catch(error => {
             this.setState({
-                error: `${e.response.status}`
+                error: `${error.response.status}`
             })
 
-            if(this.state.error === '422'){
+            if(this.state.error !== ''){
                 this.setState({
-                    helperText: 'Wrong username and password conbination!',
+                    helperText: 'Wrong username or password conbination!',
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
@@ -242,13 +259,13 @@ class Home extends Component{
         return(
             <div className="captchaContainer">
                 <Form onKeyPress={this.handleKeyPressSubmit} >
-                    <Form.Group controlId="formPlaintextEmail" className="captchaBar">
+                    <Form.Group  className="contentBar">
                         <Form.Label className="captchaText">
                             {this.state.captcha}
                         </Form.Label>
                         <Form.Control 
                             type="text" 
-                            className="captchaBar"
+                            className="contentBarText"
                             placeholder="Enter Captcha" 
                             onChange={this.handleCaptcha} 
                         />
@@ -272,35 +289,42 @@ class Home extends Component{
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
 
                     <div className="homePageImageContainer">
-                    <img alt="hand holding tray" src="/images/homePageHand.png" className="homePageImageContainer" />
+                        <img alt="hand holding tray" src="/images/homePageHand.png" className="homePageImageContainer" />
                     </div>
 
                     <div className="inputContainer">  
-                        <Form.Group className="usernameBar">
-                            <Form.Control 
-                                type="username" 
-                                placeholder="Username"
-                                name="username"
-                                value={this.state.username}
-                                className="usernameBarText" 
-                                onChange={this.onChangeTextfield}
-                                isInvalid={this.state.errorUsername}
-                            />
+                        <Form.Group className="contentBar">
+                            <InputGroup>
+                                <InputGroup.Text><FaRegUser/></InputGroup.Text>
+                                <Form.Control 
+                                    type="username" 
+                                    placeholder="Username"
+                                    name="username"
+                                    value={this.state.username}
+                                    className="contentBarText" 
+                                    onChange={this.onChangeTextfield}
+                                    isInvalid={this.state.errorUsername}
+                                />
+                             </InputGroup> 
                         </Form.Group>
                             
-                        <Form.Group className="passwordBar">
-                            <Form.Control 
-                                type="password"  
-                                placeholder="Password"
-                                name="password"
-                                value={this.state.password}
-                                className="passwordBarText" 
-                                onChange={this.onChangeTextfield}
-                                isInvalid={this.state.errorPassword}
-                            />
-                            <Form.Control.Feedback type='invalid'>
+                        <Form.Group className="contentBar">
+                            <InputGroup>
+                                <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
+                                <Form.Control 
+                                    type="password"  
+                                    placeholder="Password"
+                                    name="password"
+                                    value={this.state.password}
+                                    className="contentBarText" 
+                                    onChange={this.onChangeTextfield}
+                                    isInvalid={this.state.errorPassword}
+                                />
+                             </InputGroup>
+                             
+                            <FormHelperText>
                                 {this.state.helperText}
-                            </Form.Control.Feedback>
+                            </FormHelperText>
                         </Form.Group>
                         <div className="input_and_login_Container">
                             <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
