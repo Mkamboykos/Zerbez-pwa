@@ -2,13 +2,11 @@ import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
 import {Form, InputGroup} from 'react-bootstrap'
-import {FormHelperText} from '@material-ui/core'
 import Axios from 'axios';
 import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
-import Cookies from 'js-cookie'
-import { Input } from '@material-ui/core';
+import {Input, FormHelperText} from '@material-ui/core';
 
 Axios.defaults.withCredentials = true;
 
@@ -26,7 +24,7 @@ class Home extends Component{
             userCaptcha: "",
             loginDisplay: true,
             capChaDisplay: false,
-            btnDisplay: false,
+            btnDisplay: true,
             redirect: false,
             isValid: false,
             loading: true,
@@ -52,6 +50,7 @@ class Home extends Component{
             errorPassword: false,
             errorCaptcha: false,
             helperText: '',
+            btnDisplay: false,
         });
     }
 
@@ -115,6 +114,12 @@ class Home extends Component{
                     errorUsername: true,
                     isValid: false
                 });
+            }else if(this.state.username === null){
+                this.setState({
+                    helperText: 'Fields cannot be empty!',
+                    errorUsername: true,
+                    isValid: false
+                });
             }
 
             if(this.state.password === ""){
@@ -123,7 +128,14 @@ class Home extends Component{
                     errorPassword: true,
                     isValid: false
                 });
+            }else if(this.state.password === null){
+                this.setState({
+                    helperText: 'Fields cannot be empty!',
+                    errorPassword: true,
+                    isValid: false
+                });
             }
+            
             let random = Math.random().toString(36).substring(7);
             this.setState({
                 captcha: random
@@ -189,7 +201,7 @@ class Home extends Component{
                             redirect: true
                         }) 
                     }else if (res.data.message === "Tokens not present"){
-                        this.props.history.push('/');
+                        this.refreshPage()
                     }
                 })
             }
@@ -246,7 +258,7 @@ class Home extends Component{
                         redirect: true
                     }) 
                 }else if (res.data.message === "Tokens not present"){
-                    this.props.history.push('/');
+                    this.refreshPage()
                 }
             })
         }
@@ -323,8 +335,10 @@ class Home extends Component{
                                 isInvalid={this.state.errorCaptcha}
                             />
                             </InputGroup> 
-                            <FormHelperText>
-                                {this.state.helperText}
+                            <FormHelperText error>
+                                <span className="homeReqContainer">
+                                    <span className="requirements">{this.state.helperText}</span>
+                                </span>
                             </FormHelperText>
                     </Form.Group>
                   
@@ -379,14 +393,16 @@ class Home extends Component{
                                 />
                              </InputGroup>
                              
-                            <FormHelperText>
-                                {this.state.helperText}
+                            <FormHelperText error>
+                                <span className="centerReqContainer">
+                                    <span className="requirements">{this.state.helperText}</span>
+                                </span>
                             </FormHelperText>
                         </Form.Group>
                         <div className="input_and_login_Container">
                             <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
                                 
-                            <button className="login_button_home" type="submit" id="loginButton" onClick={this.handleLogin}><b>LOGIN</b></button>
+                            <button className="login_button_home" type="submit" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleLogin}><b>LOGIN</b></button>
                         </div>
                         <div className="forgotpasswordContainer">
                             <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>

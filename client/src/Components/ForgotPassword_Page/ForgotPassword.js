@@ -195,7 +195,7 @@ class ForgotPassword extends Component{
 
     handleKeyPressContinueCode(e){
         if (e.key === "Enter"){
-            e.preventDefault();
+            
             if(this.state.isValidCode === false){
                 this.setState({
                     isValidCode: true
@@ -283,9 +283,11 @@ class ForgotPassword extends Component{
                                             isInvalid={this.state.errorEmail} 
                                         />
                                     </InputGroup>
-                                    <FormHelperText>
-                                        {this.state.helperTextEmail}
-                                     </FormHelperText> 
+                                    <FormHelperText error>
+                                        <span className="centerReqContainer">
+                                            <span className="requirements">{this.state.helperTextEmail}</span>
+                                        </span>
+                                    </FormHelperText> 
                                 </Form.Group>
 
                                 <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
@@ -355,7 +357,9 @@ class ForgotPassword extends Component{
                                             isInvalid={this.state.errorCode} 
                                         />
                                         <Form.Control.Feedback type='invalid'>
-                                            {this.state.helperTextCode}
+                                            <span className="codeReqContainer">
+                                                {this.state.helperTextCode}
+                                            </span>
                                         </Form.Control.Feedback>
                                     </Form.Group>
             

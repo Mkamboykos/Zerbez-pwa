@@ -56,6 +56,6 @@ function App() {
 }
 
 // Background Color of the entire app
-document.body.style = 'background: linear-gradient(to top left, #823f5c, #016474)';
+document.body.style = 'background: linear-gradient(to top left, #823f5c, #016474) fixed';
 
 export default App;

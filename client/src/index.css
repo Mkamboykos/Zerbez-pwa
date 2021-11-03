@@ -182,7 +182,10 @@ h1, p{
   font-weight: bold;
 }
 
-
+/* validation text for FormTextHelper inputs */
+p.MuiFormHelperText-root{
+  color: #f4f1f27a;
+}
 
  /* Containers in home page*/
 
@@ -351,10 +354,7 @@ h1, p{
   margin-bottom: 100px;
 }
 
-p.MuiFormHelperText-root{
-  text-align: center;
-  color: #ff4747;
-}
+
 
 /* Home Page Title */
 
@@ -462,8 +462,12 @@ label.captchaText.form-label{
   background-color: #587B7F;
 }
 
-
-
+/* FormHelperText for home login */
+span.centerReqContainer{
+  display: block;
+  padding-block-start: 4px;
+  text-align: center;
+}
 
 
 
@@ -659,7 +663,7 @@ input.codeBarText.form-control {
   border-color: #FFFFFF;
   color: #FFFFFF;
   border-radius: 25px;
-  width: 55px;
+  width: 65px;
   border-width: medium;
 }
 
@@ -667,9 +671,27 @@ input.codeBarText.form-control::placeholder{
   color: #f4f1f27a;
 }
 
+span.codeReqContainer{
+  display: block;
+  padding-block-start: 10px;
+}
 
 
 
+
+
+
+
+/* Reset password requirements */
+span.reqContainer{
+  display: block;
+  padding-block-start: 10px;
+}
+
+/*  place password input requriments from every password into a block */
+.requirements{
+  display: block;
+}
 
 
 

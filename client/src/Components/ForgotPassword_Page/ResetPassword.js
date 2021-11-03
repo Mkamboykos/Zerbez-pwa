@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
-
-import {IoChevronBack} from 'react-icons/io5'
-
-import {Form} from 'react-bootstrap'
+import {RiLockPasswordLine} from 'react-icons/ri';
+import {IoChevronBack} from 'react-icons/io5';
+import {Form, InputGroup} from 'react-bootstrap';
+import {Input, FormHelperText} from '@material-ui/core';
 
 
 class ResetPassword extends Component{
@@ -14,61 +14,300 @@ class ResetPassword extends Component{
     //Initial State
         this.state = ({
             newPassword: "",
-            confirmNewPassword: ""
+            confirmPassword: "",
+
+            //password requirements
+            helperTextPasswordLength: "Must be between 8 and 20 characters long ",
+            helperTextPasswordUppercase: "Must contain at least one uppercase character",
+            helperTextPasswordLowercase: "Must contain at least one lowercase character",
+            helperTextPasswordNumber: "Must contain at least one number",
+            helperTextPasswordSpecial: "Must contain special character(s) (e.g. !@$&$)",
+
+            isValid: false,
+            redirect: false,
         });
-    
-        this.handleNewPassword = this.handleNewPassword.bind(this);
-        this.handleConfirmNewPassword = this.handleConfirmNewPassword.bind(this);
+
+        this.onChangeTextfield = this.onChangeTextfield.bind(this);
+        this.handlePasswords = this.handlePasswords.bind(this);
+        this.handleKeyPressPasswords = this.handleKeyPressPasswords.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
     }
 
     //Class Properties (Events On Change)
-    handleNewPassword(e){
-        let newPassword = e.target.value;
+    onChangeTextfield(e){
+        let field = e.target.name;
+        let value = e.target.value;
         this.setState({
-            newPassword: newPassword
-        })
-      }
-    
-    handleConfirmNewPassword(e){
-          let confirmNewPassword = e.target.value;
-          this.setState({
-            confirmNewPassword: confirmNewPassword
-        })
+            [field]: value,
+            errorNewPassword: false,
+            errorConfirmPassword: false,
+            helperTextPasswordLength: 'Must be between 8 and 20 characters long',
+            helperTextPasswordUppercase: 'Must contain at least one uppercase character',
+            helperTextPasswordLowercase: 'Must contain at least one lowercase character',
+            helperTextPasswordNumber: 'Must contain at least one number',
+            helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
+
+            helperTextConfirmPassword: '',
+        });
     }
 
-
-    handleSubmit(e){
-        if (this.state.newPassword === '' && this.state.confirmNewPassword === ''){
-            alert("You did not input anything")
-            return;
-        }else if(this.state.newPassword === '' || this.state.confirmNewPassword === ''){
-            alert("Type your new password and confirm it")
-            return;
-        }else if(this.state.newPassword != this.state.confirmNewPassword){
-            alert("Passwords do not match, please try again")
-            return;
-        }else if(this.state.newPassword === this.state.confirmNewPassword){
+    handlePasswords(){
+        // Validators for username and password
+        if(this.state.isValid === false){
             this.setState({
-                redirect: true
-            }) 
+                isValid: true
+            })
+        }
+
+         // Validators -> password
+         if(this.state.newPassword === ""){
+            this.setState({
+                helperTextPasswordLength: 'Field cannot be empty!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(this.state.newPassword.length < 8){
+            this.setState({
+                helperTextPasswordLength: 'Password is too short!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(this.state.newPassword.length > 20){
+            this.setState({
+                helperTextPasswordLength: 'Password is too long!',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if((this.state.newPassword).match(/[\s]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: 'Password cannot contain whitespaces!',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.newPassword).match(/[A-Z]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: 'Must contain at least one uppercase character!',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.newPassword).match(/[a-z]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: 'Must contain at least one lowercase character!',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.newPassword).match(/[0-9]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: 'Must contain at least one number!',
+                helperTextPasswordSpecial: '',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else if(!(this.state.newPassword).match(/[^\w\s]/)){
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
+                errorNewPassword: true,
+                isValid: false
+            });
+        }else {
+            this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
+                isValid: true
+            });
+        }
+
+        // Validators -> confirm_password
+        if(this.state.confirmPassword === ""){
+            this.setState({
+                helperTextConfirmPassword: 'Field cannot be empty!',
+                errorConfirmPassword: true,
+                isValid: false
+            });
+        }else if(this.state.confirmPassword !== this.state.newPassword){
+            this.setState({
+                helperTextConfirmPassword: 'Passwords do not match!',
+                errorConfirmPassword: true,
+                isValid: false
+            });
+        }else if(this.state.confirmPassword === this.state.newPassword){
+            this.setState({
+                helperTextConfirmPassword: 'Passwords match!',
+                isValid: true
+            });
+        }
+
+    }
+
+    handleKeyPressPasswords(e){
+         // Validators for username and password when Enter key is pressed
+        if (e.key === "Enter"){
+            e.preventDefault();
+
+            // Validators for username and password
+            if(this.state.isValid === false){
+                this.setState({
+                    isValid: true
+                })
+            }
+
+            // Validators -> password
+            if(this.state.newPassword === ""){
+                this.setState({
+                    helperTextPasswordLength: 'Field cannot be empty!',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(this.state.newPassword.length < 8){
+                this.setState({
+                    helperTextPasswordLength: 'Password is too short!',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(this.state.newPassword.length > 20){
+                this.setState({
+                    helperTextPasswordLength: 'Password is too long!',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if((this.state.newPassword).match(/[\s]/)){
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: 'Password cannot contain whitespaces!',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(!(this.state.newPassword).match(/[A-Z]/)){
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: 'Must contain at least one uppercase character!',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(!(this.state.newPassword).match(/[a-z]/)){
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: 'Must contain at least one lowercase character!',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(!(this.state.newPassword).match(/[0-9]/)){
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: 'Must contain at least one number!',
+                    helperTextPasswordSpecial: '',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else if(!(this.state.newPassword).match(/[^\w\s]/)){
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
+                    errorNewPassword: true,
+                    isValid: false
+                });
+            }else {
+                this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
+                    isValid: true
+                });
+            }
+
+            // Validators -> confirm_password
+            if(this.state.confirmPassword === ""){
+                this.setState({
+                    helperTextConfirmPassword: 'Field cannot be empty!',
+                    errorConfirmPassword: true,
+                    isValid: false
+                });
+            }else if(this.state.confirmPassword !== this.state.newPassword){
+                this.setState({
+                    helperTextConfirmPassword: 'Passwords do not match!',
+                    errorConfirmPassword: true,
+                    isValid: false
+                });
+            }else if(this.state.confirmPassword === this.state.newPassword){
+                this.setState({
+                    helperTextConfirmPassword: 'Passwords match!',
+                    isValid: true
+                });
+            }
         }
     }
 
-    handleKeyPressSubmit(e){
-        if (e.key === "Enter"){
-            if (this.state.newPassword === '' && this.state.confirmNewPassword === ''){
-                return;
-            }else if(this.state.newPassword === '' || this.state.confirmNewPassword === ''){
-                return;
-            }else if(this.state.newPassword != this.state.confirmNewPassword){
-                return;
-            }else if(this.state.newPassword === this.state.confirmNewPassword){
-                this.setState({
-                    redirect: true
-                }) 
-            }
+    
+
+
+    handleSubmit= async e =>{
+        e.preventDefault();
+        if(this.state.newPassword === this.state.confirmPassword){
+            this.setState({
+                redirect: true
+            }) 
         }
     }
 
@@ -89,22 +328,55 @@ class ResetPassword extends Component{
                         <h1 className="passwordTitleText"><b>Password</b></h1>
                     </div>
                     <div>
-                        <Form onKeyPress={this.handleKeyPressSubmit}>
+                        <Form onKeyPress={this.handleKeyPressPasswords} onSubmit={this.handleSubmit}>
                             <div className="forgotPasswordTextContainer">
                                 <p className="forgotPasswordText">
                                 Set the new password for your account so you can login and access all the features.
                                 </p>
                             </div>
-
-                            <Form.Group className="usernameBar">
-                                        <Form.Control type="password" placeholder="New Password" className="usernameBarText" onChange={this.handleNewPassword}/>
-                                </Form.Group>
                             
-                                <Form.Group className="passwordBar">
-                                    <Form.Control type="password"  placeholder="Confirm New Password" className="passwordBarText" onChange={this.handleConfirmNewPassword} />
+                                <Form.Group className="contentBar">
+                                    <InputGroup>
+                                        <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
+                                        <Form.Control 
+                                            type="password" 
+                                            placeholder="New Password" 
+                                            name="newPassword"
+                                            className="contentBarText" 
+                                            value={this.state.newPassword}
+                                            onChange={this.onChangeTextfield}
+                                            isInvalid={this.state.errorNewPassword}
+                                        />
+                                    </InputGroup>
+                                </Form.Group>
+                                
+                                <Form.Group className="contentBar">
+                                    <InputGroup>
+                                        <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
+                                        <Form.Control 
+                                            type="password"  
+                                            placeholder="Confirm New Password"
+                                            name="confirmPassword"
+                                            className="contentBarText"
+                                            value={this.state.confirmPassword}
+                                            onChange={this.onChangeTextfield}
+                                            isInvalid={this.state.errorConfirmPassword}
+                                        />
+                                    </InputGroup>
+
+                                    <FormHelperText error={this.state.errorNewPassword}>
+                                        <span className="reqContainer">
+                                            <span className="requirements">{this.state.helperTextPasswordLength}</span>
+                                            <span className="requirements">{this.state.helperTextPasswordUppercase}</span>
+                                            <span className="requirements">{this.state.helperTextPasswordLowercase}</span>
+                                            <span className="requirements">{this.state.helperTextPasswordNumber}</span>
+                                            <span className="requirements">{this.state.helperTextPasswordSpecial}</span>
+                                            <span className="requirements">{this.state.helperTextConfirmPassword}</span>
+                                        </span>
+                                    </FormHelperText>
                                 </Form.Group>
 
-                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleSubmit} >
+                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handlePasswords} >
                                 <b>SUBMIT</b>
                             </button>
                             {this.renderRedirect()}
@@ -117,4 +389,4 @@ class ResetPassword extends Component{
       }
     }
 
-export default ResetPassword;
+    export default ResetPassword;

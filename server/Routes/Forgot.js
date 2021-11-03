@@ -11,7 +11,7 @@ router.post('/Email', async (req, res) => {
     const {email} = req.body;
     const emailExist = await Manager.findOne({ where: {email: email} });
 
-    if(emailExist && email === emailExist.email){
+    if(emailExist){
         try{
             let transporter = await nodemailer.createTransport({
                 host: process.env.MAIL_HOST,
