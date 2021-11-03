@@ -1,18 +1,17 @@
 const express = require('express');
-const nodemailer = require("nodemailer");
 const router = express.Router();
 const {Manager} = require('../models');
-const dotenv = require('dotenv').config();
+const nodemailer = require("nodemailer");
+const jwt = require('jsonwebtoken');
+const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
+
+
+
 
 //check if username exists in signup
 router.post('/Email', async (req, res) => {
     const {email} = req.body;
     const emailExist = await Manager.findOne({ where: {email: email} });
-
-    //create random 4 digit code generator
-    var randomCode = Math.floor(1000 + Math.random() * 9000);
-    console.log(randomCode);
-    code = randomCode;
 
     if(emailExist && email === emailExist.email){
         try{
@@ -33,12 +32,17 @@ router.post('/Email', async (req, res) => {
                 }
             });
 
+            //create random 4 digit code generator
+            var randomCode = Math.floor(1000 + Math.random() * 9000);
+            console.log(randomCode);
+            code = randomCode;
+
             const msg = {
                 from: `"Time Waiter Team" <${process.env.MAIL_FROM}>`, // sender address
                 to: email, // list of receivers
                 subject: "Forgot Password Code", // Subject line
                 text: `Hey there, it’s our first message sent with Nodemailer ;) `, // plain text body
-                html: `<b>Hey there! </b><br> Here is your code ${code}`
+                html: `<b>Hey there! <br/> Here is your code ${code}`
             }
             // send mail with defined transport object
             const info = await transporter.sendMail(msg);
@@ -48,12 +52,21 @@ router.post('/Email', async (req, res) => {
         
             //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
             
+            const user = {id: emailExist.id, name: emailExist.username, role: emailExist.role};
+
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+
+            res.cookie("access", accessToken, {
+                maxAge: 900000, // 15 minutes
+                httpOnly: true,
+            })
+
+            // send both email and random code back
+            res.json({message:"success", code: code})
+
         } catch (err) {
             console.log(err);
         }
-
-        // send both email and random code back
-        res.send({message:"success", code: code}).body
 
     }else{
         res.status(404).send({error:'Email could not be found!'});

@@ -34,7 +34,9 @@ router.post('/Login', [
 
     if(adminUser){
         await bcrypt.compare(password, adminUser.password).then((match) =>{
-            if(match){
+            if(!match){
+                res.status(422).send({error:'Wrong usernames or password conbination!'})
+            }else if(match){
                 // get the username of the user in the database
                 const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
 
@@ -64,7 +66,9 @@ router.post('/Login', [
     
     if(managerUser){
         await bcrypt.compare(password, managerUser.password).then((match) =>{
-            if(match){
+            if(!match){
+                res.status(422).send({error:'Wrong usernames or password conbination!'})
+            }else if(match){
                 // get the username of the user in the database
                 const user = {id: managerUser.id, name: managerUser.username, role: managerUser.role};
 

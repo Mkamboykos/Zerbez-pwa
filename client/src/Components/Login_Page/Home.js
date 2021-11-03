@@ -5,8 +5,8 @@ import {Form, InputGroup} from 'react-bootstrap'
 import {FormHelperText} from '@material-ui/core'
 import Axios from 'axios';
 import { IoChevronBack} from 'react-icons/io5';
-import {FaRegUser} from 'react-icons/fa'
-import {RiLockPasswordLine} from 'react-icons/ri'
+import {FaRegUser, FaKey} from 'react-icons/fa';
+import {RiLockPasswordLine} from 'react-icons/ri';
 import Cookies from 'js-cookie'
 import { Input } from '@material-ui/core';
 
@@ -30,7 +30,8 @@ class Home extends Component{
             redirect: false,
             isValid: false,
             loading: true,
-            error: ""
+            error: "",
+            count: 3
         });
     
         this.handleLogin = this.handleLogin.bind(this);
@@ -49,6 +50,7 @@ class Home extends Component{
             [field]: value,
             errorUsername: false,
             errorPassword: false,
+            errorCaptcha: false,
             helperText: '',
         });
     }
@@ -143,17 +145,40 @@ class Home extends Component{
     handleKeyPressSubmit = async e =>{
         if (e.key === "Enter"){
             e.preventDefault();
-            if(this.state.userCaptcha === ''){
-                alert("You must enter the CAPTCHA Code provided")
-                let random = Math.random().toString(36).substring(7);
+            if(this.state.count === 0){
+
+                // reset count to 3
                 this.setState({
-                    captcha: random
+                    count: 3
                 })
-            }else if(this.state.userCaptcha != this.state.captcha){
-                alert("Incorrect CAPTCHA, please try again")
+
+                //refresh page
+                this.refreshPage()
+            }
+
+            if(this.state.userCaptcha === '' && this.state.count !== 0){
+    
+                this.setState((prevState, props) => ({
+                    count: prevState.count - 1
+                }));
+    
                 let random = Math.random().toString(36).substring(7);
                 this.setState({
-                    captcha: random
+                    captcha: random,
+                    helperText: `You have ${this.state.count} attempts left!`,
+                    errorCaptcha: true,
+                });
+            }else if(this.state.userCaptcha != this.state.captcha && this.state.count !== 0){
+                
+                this.setState((prevState, props) => ({
+                    count: prevState.count - 1
+                }));
+    
+                let random = Math.random().toString(36).substring(7);
+                this.setState({
+                    captcha: random,
+                    helperText: `You have ${this.state.count} attempts left!`,
+                    errorCaptcha: true,
                 })
             }else if(this.state.userCaptcha === this.state.captcha){
                 await Axios.get('http://localhost:3001/Auth/Login')
@@ -175,17 +200,41 @@ class Home extends Component{
 
     handleSubmit = async e =>{
         e.preventDefault();
-        if(this.state.userCaptcha === ''){
-            alert("You must enter the CAPTCHA Code provided")
+
+        if(this.state.count === 0){
+            
+            // reset count to 3
+            this.setState({
+                count: 3
+            })  
+
+            //refresh page
+            this.refreshPage()
+        }
+        
+        if(this.state.userCaptcha === '' && this.state.count !== 0){
+
+            this.setState((prevState, props) => ({
+                count: prevState.count - 1
+            }));
+
             let random = Math.random().toString(36).substring(7);
             this.setState({
-                captcha: random
-            })
-        }else if(this.state.userCaptcha != this.state.captcha){
-            alert("Incorrect CAPTCHA, please try again")
+                captcha: random,
+                helperText: `You have ${this.state.count} attempts left!`,
+                errorCaptcha: true,
+            });
+        }else if(this.state.userCaptcha != this.state.captcha && this.state.count !== 0){
+            
+            this.setState((prevState, props) => ({
+                count: prevState.count - 1
+            }));
+
             let random = Math.random().toString(36).substring(7);
             this.setState({
-                captcha: random
+                captcha: random,
+                helperText: `You have ${this.state.count} attempts left!`,
+                errorCaptcha: true,
             })
         }else if(this.state.userCaptcha === this.state.captcha){
 
@@ -263,12 +312,20 @@ class Home extends Component{
                         <Form.Label className="captchaText">
                             {this.state.captcha}
                         </Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            className="contentBarText"
-                            placeholder="Enter Captcha" 
-                            onChange={this.handleCaptcha} 
-                        />
+
+                        <InputGroup>
+                            <InputGroup.Text><FaKey/></InputGroup.Text>
+                            <Form.Control 
+                                type="text" 
+                                className="contentBarText"
+                                placeholder="Enter Captcha" 
+                                onChange={this.handleCaptcha} 
+                                isInvalid={this.state.errorCaptcha}
+                            />
+                            </InputGroup> 
+                            <FormHelperText>
+                                {this.state.helperText}
+                            </FormHelperText>
                     </Form.Group>
                   
                     <div>
@@ -342,20 +399,15 @@ class Home extends Component{
     
     render() {
         if (this.state.loginDisplay){
-            return (
-                <Spring from={{ opacity: 1, Transform:`flash(0%)`}} to={{ opacity: 0, Transform:`flash(100%)`}}>
-                {style => (  
-                    <div className="homePageContainer">
-                        <div className="HomePageTitleContainer">
-                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
-                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
-                        </div>
-                        <animated.div>
-                            {this.state.loginDisplay?this.renderLogin():""}
-                        </animated.div>
+            return ( 
+                <div className="homePageContainer">
+                    <div className="HomePageTitleContainer">
+                        <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                        <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                     </div>
-                )}
-                </Spring>
+                        
+                    {this.state.loginDisplay?this.renderLogin():""} 
+                </div>
             )
         } else if (this.state.capChaDisplay){
             return (
@@ -370,7 +422,6 @@ class Home extends Component{
                                 {this.state.capChaDisplay?this.renderCaptcha():""}
                             </animated.div>
                         </div>
-                        
                 )}
                 </Spring>
             )

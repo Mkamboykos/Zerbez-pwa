@@ -4,6 +4,7 @@ import {IoChevronBack} from 'react-icons/io5'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
 import {FormHelperText} from '@material-ui/core'
+import { Spring, animated } from 'react-spring';
 import Axios from 'axios';
 
 class ForgotPassword extends Component{
@@ -299,71 +300,77 @@ class ForgotPassword extends Component{
             );
         }else if (this.state.enterCode === true){
             return(
-                <div>
-                    <div className="forgotContainer">
-                        <div className="forgotPasswordTitleContainer">
-                            <h1 className="codeTitleText"><b>Enter Code</b></h1>
-                        </div>
-                        
-                        <div>
-                            <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
-                                <div className="forgotPasswordTextContainer">
-                                    <p className="forgotPasswordText">
-                                        Enter the 4 digit code that you received on your email.
-                                    </p>
-                                </div>
-        
-                                <Form.Group className="codeBarContainer">
-                                    <Form.Control 
-                                        type="text" 
-                                        maxLength="1"
-                                        className="codeOneBarText"
-                                        name="one"
-                                        value={this.state.one}   
-                                        onChange={this.onChangeCode}
-                                        isInvalid={this.state.errorCode} 
-                                    />
-                                    <Form.Control 
-                                        type="text" 
-                                        maxLength="1"
-                                        className="codeTwoBarText"
-                                        name="two"
-                                        value={this.state.two}    
-                                        onChange={this.onChangeCode}
-                                        isInvalid={this.state.errorCode}  
-                                    />
-                                    <Form.Control 
-                                        type="text" 
-                                        maxLength="1" 
-                                        className="codeThreeBarText" 
-                                        name="three"
-                                        value={this.state.three}  
-                                        onChange={this.onChangeCode} 
-                                        isInvalid={this.state.errorCode} 
-                                    />
-                                    <Form.Control 
-                                        type="text" 
-                                        maxLength="1" 
-                                        className="codeFourBarText"
-                                        name="four"
-                                        value={this.state.four}
-                                        onChange={this.onChangeCode} 
-                                        isInvalid={this.state.errorCode} 
-                                    />
-                                    <Form.Control.Feedback type='invalid'>
-                                        {this.state.helperTextCode}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-        
-                                <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
-                                    <b>CONTINUE</b>
-                                </button>
-                                {this.renderRedirect()}
-                            </Form>
-                        </div>
-                    </div>   
-                    <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
-                </div>      
+                <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
+                {style => (
+                    <animated.div style={ style } >
+                    <div>
+                        <div className="forgotContainer">
+                            <div className="forgotPasswordTitleContainer">
+                                <h1 className="codeTitleText"><b>Enter Code</b></h1>
+                            </div>
+                            
+                            <div>
+                                <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
+                                    <div className="forgotPasswordTextContainer">
+                                        <p className="forgotPasswordText">
+                                            Enter the 4 digit code that you received on your email.
+                                        </p>
+                                    </div>
+            
+                                    <Form.Group className="codeBarContainer">
+                                        <Form.Control 
+                                            type="text" 
+                                            maxLength="1"
+                                            className="codeBarText"
+                                            name="one"
+                                            value={this.state.one}   
+                                            onChange={this.onChangeCode}
+                                            isInvalid={this.state.errorCode} 
+                                        />
+                                        <Form.Control 
+                                            type="text" 
+                                            maxLength="1"
+                                            className="codeBarText"
+                                            name="two"
+                                            value={this.state.two}    
+                                            onChange={this.onChangeCode}
+                                            isInvalid={this.state.errorCode}  
+                                        />
+                                        <Form.Control 
+                                            type="text" 
+                                            maxLength="1" 
+                                            className="codeBarText" 
+                                            name="three"
+                                            value={this.state.three}  
+                                            onChange={this.onChangeCode} 
+                                            isInvalid={this.state.errorCode} 
+                                        />
+                                        <Form.Control 
+                                            type="text" 
+                                            maxLength="1" 
+                                            className="codeBarText"
+                                            name="four"
+                                            value={this.state.four}
+                                            onChange={this.onChangeCode} 
+                                            isInvalid={this.state.errorCode} 
+                                        />
+                                        <Form.Control.Feedback type='invalid'>
+                                            {this.state.helperTextCode}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+            
+                                    <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
+                                        <b>CONTINUE</b>
+                                    </button>
+                                    {this.renderRedirect()}
+                                </Form>
+                            </div>
+                        </div>   
+                        <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+                    </div>  
+                    </animated.div>
+                )}
+                </Spring>     
             );    
         }
     }  

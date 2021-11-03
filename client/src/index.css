@@ -184,8 +184,6 @@ h1, p{
 
 
 
-
-
  /* Containers in home page*/
 
 .homePageContainer{
@@ -351,6 +349,11 @@ h1, p{
 .transitionCapchaContainer{
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+p.MuiFormHelperText-root{
+  text-align: center;
+  color: #ff4747;
 }
 
 /* Home Page Title */
@@ -555,8 +558,6 @@ input.MuiInput-input{
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding-left: 9px;
-  padding-right: 9px;
   overflow: hidden;
 }
 
@@ -646,62 +647,23 @@ input.MuiInput-input{
 
 /* Code Input Bars*/
 
-.codeOneBarText,
-.codeTwoBarText,
-.codeThreeBarText,
-.codeFourBarText{
-  margin: 10px;
+.codeBarText{
+  margin: 12px;
   margin-bottom: 0;
   margin-top: 0;
   text-align: center;
-
 }
 
-input.codeOneBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
+input.codeBarText.form-control {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #FFFFFF;
   color: #FFFFFF;
   border-radius: 25px;
-  width: 50px;
+  width: 55px;
+  border-width: medium;
 }
 
-input.codeOneBarText.form-control::placeholder{
-  color: #f4f1f27a;
-}
-
-input.codeTwoBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
-  color: #FFFFFF;
-  border-radius: 25px;
-  width: 50px;
-}
-
-input.codeTwoBarText.form-control::placeholder{
-  color: #f4f1f27a;
-}
-
-input.codeThreeBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
-  color: #FFFFFF;
-  border-radius: 25px;
-  width: 50px;
-}
-
-input.codeThreeBarText.form-control::placeholder{
-  color: #f4f1f27a;
-}
-
-input.codeFourBarText.form-control {
-  background-color: #414141;
-  border-color: #707070;
-  color: #FFFFFF;
-  border-radius: 25px;
-  width: 50px;
-}
-
-input.codeFourBarText.form-control::placeholder{
+input.codeBarText.form-control::placeholder{
   color: #f4f1f27a;
 }
 
