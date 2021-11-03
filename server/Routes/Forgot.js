@@ -6,8 +6,6 @@ const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 
 
-
-
 //check if username exists in signup
 router.post('/Email', async (req, res) => {
     const {email} = req.body;
@@ -42,7 +40,7 @@ router.post('/Email', async (req, res) => {
                 to: email, // list of receivers
                 subject: "Forgot Password Code", // Subject line
                 text: `Hey there, it’s our first message sent with Nodemailer ;) `, // plain text body
-                html: `<b>Hey there! <br/> Here is your code ${code}`
+                html: `<b>Hey there!</b> <br/> Here is your code ${code}`
             }
             // send mail with defined transport object
             const info = await transporter.sendMail(msg);
