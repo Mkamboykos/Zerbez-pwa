@@ -29,7 +29,6 @@ function App() {
 
   return (
     <div className="App">
-        {/* The Router is use to create different links for each class */}
         <Suspense fallback={<SpinnerDotted color={'#E2C044'} size={130}/>}>
           <Route exact path="/" component={Home}/>
           <Route exact path="/SignUp" component={SignUp}/>

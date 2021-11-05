@@ -357,12 +357,10 @@ class Home extends Component{
     renderLogin(){
         return(
             <div>
-                <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
-
-                    <div className="homePageImageContainer">
-                        <img alt="hand holding tray" src="/images/homePageHand.png" className="homePageImageContainer" />
+                <div className="homePageImageContainer">
+                        <img alt="hand holding tray" src="/images/homePageHand.webp" className="homePageImageContainer" />
                     </div>
-
+                <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
                         <Form.Group className="contentBar">
                             <InputGroup>
