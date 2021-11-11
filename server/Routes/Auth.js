@@ -5,7 +5,6 @@ const {Manager} = require('../models');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
-const {body, validationResult} = require('express-validator');
 const ValidationException = require('../Exceptions/ValidationException');
 
 // Capcha authentication
@@ -23,10 +22,7 @@ router.get('/Login', authenticateToken, (req, res) => {
 // })
  
 // Authenticate login credentials
-router.post('/Login', [
-    body('username').trim().notEmpty().withMessage('Field cannot be empty!').bail(),
-    body('password').trim().notEmpty().withMessage('Field cannot be empty!').bail()
-], async (req, res) => {
+router.post('/Login', async (req, res) => {
     // Input from Home page in client
     const {username, password} = req.body;
 
@@ -35,7 +31,7 @@ router.post('/Login', [
     if(adminUser){
         await bcrypt.compare(password, adminUser.password).then((match) =>{
             if(!match){
-                res.status(422).send({error:'Wrong usernames or password conbination!'})
+                res.status(422).send({error: 'Wrong username or password combination!'})
             }else if(match){
                 // get the username of the user in the database
                 const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
@@ -67,7 +63,7 @@ router.post('/Login', [
     if(managerUser){
         await bcrypt.compare(password, managerUser.password).then((match) =>{
             if(!match){
-                res.status(422).send({error:'Wrong usernames or password conbination!'})
+                res.status(422).send({error:'Wrong username or password combination!'})
             }else if(match){
                 // get the username of the user in the database
                 const user = {id: managerUser.id, name: managerUser.username, role: managerUser.role};
@@ -96,7 +92,7 @@ router.post('/Login', [
     }
     
     if(adminUser === null && managerUser === null){
-        res.status(400).send({error:'Wrong usernames or password conbination!'})
+        res.status(400).send({error:'Wrong username or password conbination!'})
     }
     
 });

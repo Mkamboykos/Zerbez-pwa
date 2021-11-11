@@ -55,41 +55,6 @@ class Home extends Component{
     }
 
     handleLogin(){
-        // Validators for username and password
-        if(this.state.isValid === false){
-            this.setState({
-                isValid: true
-            })
-        }
-        
-        if(this.state.username === ""){
-            this.setState({
-                helperText: 'Fields cannot be empty!',
-                errorUsername: true,
-                isValid: false
-            });
-        }else if(this.state.username === null){
-            this.setState({
-                helperText: 'Fields cannot be empty!',
-                errorUsername: true,
-                isValid: false
-            });
-        }
-
-        if(this.state.password === ""){
-            this.setState({
-                helperText: 'Fields cannot be empty!',
-                errorPassword: true,
-                isValid: false
-            });
-        }else if(this.state.password === null){
-            this.setState({
-                helperText: 'Fields cannot be empty!',
-                errorPassword: true,
-                isValid: false
-            });
-        }
-
         let random = Math.random().toString(36).substring(7);
         this.setState({
             captcha: random
@@ -100,41 +65,6 @@ class Home extends Component{
         // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
             e.preventDefault();
-
-            if(this.state.isValid === false){
-                this.setState({
-                    isValid: true
-                })
-            }
-
-            // Validators
-            if(this.state.username === ""){
-                this.setState({
-                    helperText: 'Fields cannot be empty!',
-                    errorUsername: true,
-                    isValid: false
-                });
-            }else if(this.state.username === null){
-                this.setState({
-                    helperText: 'Fields cannot be empty!',
-                    errorUsername: true,
-                    isValid: false
-                });
-            }
-
-            if(this.state.password === ""){
-                this.setState({
-                    helperText: 'Fields cannot be empty!',
-                    errorPassword: true,
-                    isValid: false
-                });
-            }else if(this.state.password === null){
-                this.setState({
-                    helperText: 'Fields cannot be empty!',
-                    errorPassword: true,
-                    isValid: false
-                });
-            }
             
             let random = Math.random().toString(36).substring(7);
             this.setState({
@@ -290,9 +220,8 @@ class Home extends Component{
             }
         }).catch(error => {
             this.setState({
-                error: `${error.response.status}`
+                error: `${error}`
             })
-
             if(this.state.error !== ''){
                 this.setState({
                     helperText: 'Wrong username or password conbination!',
@@ -301,7 +230,6 @@ class Home extends Component{
                     isValid: false,
                 });
             }
-            
         });
     }
     
@@ -358,7 +286,7 @@ class Home extends Component{
         return(
             <div>
                 <div className="homePageImageContainer">
-                        <img alt="hand holding tray" src="/images/homePageHand.webp" className="homePageImageContainer" />
+                        <img alt="hand holding tray" src="/images/homePageHand.webp" className="homePageImageContainer" loading="lazy"/>
                     </div>
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
