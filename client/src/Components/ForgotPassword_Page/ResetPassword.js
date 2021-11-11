@@ -62,12 +62,13 @@ class ResetPassword extends Component{
          // Validators -> password
          if(this.state.newPassword === ""){
             this.setState({
-                helperTextPasswordLength: 'Field cannot be empty!',
+                helperTextPasswordLength: 'Field(s) cannot be empty!',
                 helperTextPasswordUppercase: '',
                 helperTextPasswordLowercase: '',
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(this.state.newPassword.length < 8){
@@ -152,19 +153,13 @@ class ResetPassword extends Component{
         }
 
         // Validators -> confirm_password
-        if(this.state.confirmPassword === ""){
-            this.setState({
-                helperTextConfirmPassword: 'Field cannot be empty!',
-                errorConfirmPassword: true,
-                isValid: false
-            });
-        }else if(this.state.confirmPassword !== this.state.newPassword){
+        if(this.state.confirmPassword !== this.state.newPassword){
             this.setState({
                 helperTextConfirmPassword: 'Passwords do not match!',
                 errorConfirmPassword: true,
                 isValid: false
             });
-        }else if(this.state.confirmPassword === this.state.newPassword){
+        }else if(this.state.confirmPassword === this.state.newPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
             this.setState({
                 helperTextConfirmPassword: 'Passwords match!',
                 isValid: true
@@ -188,12 +183,13 @@ class ResetPassword extends Component{
             // Validators -> password
             if(this.state.newPassword === ""){
                 this.setState({
-                    helperTextPasswordLength: 'Field cannot be empty!',
+                    helperTextPasswordLength: 'Field(s) cannot be empty!',
                     helperTextPasswordUppercase: '',
                     helperTextPasswordLowercase: '',
                     helperTextPasswordNumber: '',
                     helperTextPasswordSpecial: '',
                     errorNewPassword: true,
+                    errorConfirmPassword: true,
                     isValid: false
                 });
             }else if(this.state.newPassword.length < 8){
@@ -278,19 +274,13 @@ class ResetPassword extends Component{
             }
 
             // Validators -> confirm_password
-            if(this.state.confirmPassword === ""){
-                this.setState({
-                    helperTextConfirmPassword: 'Field cannot be empty!',
-                    errorConfirmPassword: true,
-                    isValid: false
-                });
-            }else if(this.state.confirmPassword !== this.state.newPassword){
+            if(this.state.confirmPassword !== this.state.newPassword){
                 this.setState({
                     helperTextConfirmPassword: 'Passwords do not match!',
                     errorConfirmPassword: true,
                     isValid: false
                 });
-            }else if(this.state.confirmPassword === this.state.newPassword){
+            }else if(this.state.confirmPassword === this.state.newPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
                 this.setState({
                     helperTextConfirmPassword: 'Passwords match!',
                     isValid: true
@@ -304,7 +294,7 @@ class ResetPassword extends Component{
 
     handleSubmit= async e =>{
         e.preventDefault();
-        if(this.state.newPassword === this.state.confirmPassword){
+        if(this.state.newPassword === this.state.confirmPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
             this.setState({
                 redirect: true
             }) 
