@@ -32,17 +32,10 @@ class Home extends Component{
             count: 3,
             username: ""
         });
-    
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handleCaptcha = this.handleCaptcha.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
-        this.onChangeTextfield = this.onChangeTextfield.bind(this);
-        this.handleKeyPressLogin = this.handleKeyPressLogin.bind(this);
     }
 
 
-    onChangeTextfield(e){
+    onChangeTextfield = (e) =>{
         let field = e.target.name;
         let value = e.target.value;
         this.setState({
@@ -55,14 +48,14 @@ class Home extends Component{
         });
     }
 
-    handleLogin(){
+    handleLogin = () =>{
         let random = Math.random().toString(36).substring(7);
         this.setState({
             captcha: random
         })
     }
 
-    handleKeyPressLogin(e){
+    handleKeyPressLogin = (e) =>{
         // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
             e.preventDefault();
@@ -75,7 +68,7 @@ class Home extends Component{
         }
     }
 
-    handleCaptcha(e){
+    handleCaptcha = (e) =>{
         let userCaptcha = e.target.value
         if(!userCaptcha)
             return;
@@ -85,7 +78,7 @@ class Home extends Component{
             })
     }
 
-    handleKeyPressSubmit = async e =>{
+    handleKeyPressSubmit = (e) =>{
         if (e.key === "Enter"){
             e.preventDefault();
             if(this.state.count === 0){
@@ -124,7 +117,7 @@ class Home extends Component{
                     errorCaptcha: true,
                 })
             }else if(this.state.userCaptcha === this.state.captcha){
-                await Axios.get('http://localhost:3001/Auth/Login')
+                 Axios.get('http://localhost:3001/Auth/Login')
                 .then(res => {
                     console.log(res.data);
                     if (res.data.LoggedIn === true){
@@ -142,7 +135,7 @@ class Home extends Component{
 
 
 
-    handleSubmit = async e =>{
+    handleSubmit = async (e) =>{
         e.preventDefault();
 
         if(this.state.count === 0){
@@ -198,7 +191,7 @@ class Home extends Component{
     }
 
     
-    verifyCredentials = async e =>{
+    verifyCredentials = async (e) =>{
         e.preventDefault();
         
         // Authenticate username and password
@@ -237,7 +230,7 @@ class Home extends Component{
     }
     
 
-    renderRedirect(){
+    renderRedirect = () =>{
         if (this.state.redirect === true) {
             return <Redirect to={'/Dashboard/'+ this.state.username}  />
         }
@@ -245,7 +238,7 @@ class Home extends Component{
 
     refreshPage = () => {
         window.location.reload(false);
-      }
+    }
     
     renderCaptcha(){
         return(
@@ -265,12 +258,12 @@ class Home extends Component{
                                 onChange={this.handleCaptcha} 
                                 isInvalid={this.state.errorCaptcha}
                             />
-                            </InputGroup> 
-                            <FormHelperText error>
-                                <span className="homeReqContainer">
-                                    <span className="requirements">{this.state.helperText}</span>
-                                </span>
-                            </FormHelperText>
+                        </InputGroup> 
+                        <FormHelperText error>
+                            <span className="homeReqContainer">
+                                <span className="requirements">{this.state.helperText}</span>
+                            </span>
+                        </FormHelperText>
                     </Form.Group>
                   
                     <div>
@@ -305,7 +298,7 @@ class Home extends Component{
                                     onChange={this.onChangeTextfield}
                                     isInvalid={this.state.errorUsername}
                                 />
-                             </InputGroup> 
+                            </InputGroup> 
                         </Form.Group>
                             
                         <Form.Group className="contentBar">
@@ -320,7 +313,7 @@ class Home extends Component{
                                     onChange={this.onChangeTextfield}
                                     isInvalid={this.state.errorPassword}
                                 />
-                             </InputGroup>
+                            </InputGroup>
                              
                             <FormHelperText error>
                                 <span className="centerReqContainer">
@@ -357,17 +350,17 @@ class Home extends Component{
         } else if (this.state.capChaDisplay){
             return (
                 <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
-                {style => (
-                    <div className="homePageContainer" >
-                        <div className="HomePageTitleContainer">
-                            <h1 className="homeTitleTimeText"><b>Time</b></h1>
-                            <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
-                        </div>
+                    {style => (
+                        <div className="homePageContainer" >
+                            <div className="HomePageTitleContainer">
+                                <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                                <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
+                            </div>
                             <animated.div style={ style } className="transitionCapchaContainer">
                                 {this.state.capChaDisplay?this.renderCaptcha():""}
                             </animated.div>
                         </div>
-                )}
+                    )}
                 </Spring>
             )
         }

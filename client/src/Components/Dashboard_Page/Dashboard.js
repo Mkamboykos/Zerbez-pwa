@@ -4,7 +4,7 @@ import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
 import Axios from 'axios';
-// Axios.defaults.withCredentials = true;
+Axios.defaults.withCredentials = true;
 /*   Dashboard.js is rendered in App.js    */
 
 function Dashboard() {
@@ -20,27 +20,28 @@ function Dashboard() {
     useEffect(() => {
         Axios.get('http://localhost:3001/Auth/Login')
         .then((res) => {
-            if(res.data.message) {
-                setAuthState({ ...authState, status: false });
-            }else if (res.data.LoggedIn) {
+            console.log(res.data)
+            if (res.data.LoggedIn) {
                 setAuthState({...authState,
                     username: res.data.username,
                     id: res.data.id,
                     role: res.data.role,
                     status: res.data.LoggedIn,
                 })
+            }else{
+                setAuthState({ ...authState, status: false });
             }
           });
       }, [JSON.stringify(authState)]);
 
 
-      function checkUser (){
-          if (authState.status === true){
+    function checkUser(){
+        if (authState.status === true){
             return
-          } else if (authState.status === false){
+        } else if (authState.status === false){
             return <Redirect to="/"/>
-          }
-      }
+        }
+    }
 
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
