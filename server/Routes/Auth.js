@@ -11,7 +11,7 @@ const ValidationException = require('../Exceptions/ValidationException');
 router.get('/Login', authenticateToken, (req, res) => {
     if('Authorized'){
         console.log(req.user)
-        return res.json({LoggedIn: true})
+        return res.json({LoggedIn: true, id: req.user.id, role: req.user.role, username: req.user.name})
     } 
 });
 

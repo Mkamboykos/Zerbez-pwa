@@ -29,7 +29,8 @@ class Home extends Component{
             isValid: false,
             loading: true,
             error: "",
-            count: 3
+            count: 3,
+            username: ""
         });
     
         this.handleLogin = this.handleLogin.bind(this);
@@ -128,7 +129,8 @@ class Home extends Component{
                     console.log(res.data);
                     if (res.data.LoggedIn === true){
                         this.setState({
-                            redirect: true
+                            redirect: true,
+                            id: res.data.username
                         }) 
                     }else if (res.data.message === "Tokens not present"){
                         this.refreshPage()
@@ -185,7 +187,8 @@ class Home extends Component{
                 console.log(res.data);
                 if (res.data.LoggedIn === true){
                     this.setState({
-                        redirect: true
+                        redirect: true,
+                        id: res.data.username
                     }) 
                 }else if (res.data.message === "Tokens not present"){
                     this.refreshPage()
@@ -235,8 +238,8 @@ class Home extends Component{
     
 
     renderRedirect(){
-        if (this.state.redirect) {
-            return <Redirect to='/Dashboard' />
+        if (this.state.redirect === true) {
+            return <Redirect to={'/Dashboard/'+ this.state.username}  />
         }
     }
 

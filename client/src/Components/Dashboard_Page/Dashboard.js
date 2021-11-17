@@ -1,12 +1,46 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
-
+import Axios from 'axios';
+// Axios.defaults.withCredentials = true;
 /*   Dashboard.js is rendered in App.js    */
 
 function Dashboard() {
+
+    const [authState, setAuthState] = useState({
+        username: '',
+        id: 0,
+        role: '',
+        status: null,
+      });
+    
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/Auth/Login')
+        .then((res) => {
+            if(res.data.message) {
+                setAuthState({ ...authState, status: false });
+            }else if (res.data.LoggedIn) {
+                setAuthState({...authState,
+                    username: res.data.username,
+                    id: res.data.id,
+                    role: res.data.role,
+                    status: res.data.LoggedIn,
+                })
+            }
+          });
+      }, [JSON.stringify(authState)]);
+
+
+      function checkUser (){
+          if (authState.status === true){
+            return
+          } else if (authState.status === false){
+            return <Redirect to="/"/>
+          }
+      }
 
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
@@ -62,6 +96,7 @@ function Dashboard() {
 
     return(
         <div>
+            {checkUser()}
             <div>
                 {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
                 {MenuVisible && <SettingsBar style={MenuAnimation}/>}

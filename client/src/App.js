@@ -32,7 +32,7 @@ function App() {
         <Suspense fallback={<SpinnerDotted color={'#E2C044'} size={130}/>}>
           <Route exact path="/" component={Home}/>
           <Route exact path="/SignUp" component={SignUp}/>
-          <Route exact path="/Dashboard" component={Dashboard}/>
+          <Route exact path="/Dashboard/:username" component={Dashboard}/>
           <Route exact path="/ForgotPassword" component={ForgotPassword}/>
           <Route exact path="/ResetPassword" component={ResetPassword}/>
           <Route exact path="/Account" component={Account}/>
