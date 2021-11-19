@@ -12,8 +12,6 @@ function Dashboard() {
     const history = useHistory();
 
     const [pass, setPass] = useState(false);
-    const [secondTrial, setSecondTrial] = useState(false);
-    const [trial, setTrial] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
     const [authState, setAuthState] = useState({
@@ -38,7 +36,7 @@ function Dashboard() {
                                 role: res.data.role,
                                 status: res.data.LoggedIn,
                             })
-
+                            
                             passUser();
                             
                         }else{
@@ -54,10 +52,12 @@ function Dashboard() {
         const passUser = () =>{
             
             if (authState.status === true){
+
                 if(savedUser !== "" || savedUser !== undefined){
                     const getUser = window.location.pathname.split('/');
                     savedUser = [...getUser][2]
                 }
+
                 if (savedUser === authState.username){
                     return setPass(true)
                 }
@@ -65,6 +65,7 @@ function Dashboard() {
                 if(savedUser !== authState.username){
                     return history.push('/404');
                 }
+
             }else if (authState.username === undefined){
                 history.push('/');
             }
