@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import React, { useState, useEffect} from 'react'
+import {Link, useHistory} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
@@ -8,43 +8,82 @@ Axios.defaults.withCredentials = true;
 /*   Dashboard.js is rendered in App.js    */
 
 function Dashboard() {
-
-    const [authState, setAuthState] = useState({
-        username: '',
-        id: 0,
-        role: '',
-        status: null,
-      });
     
+    const history = useHistory();
 
-    useEffect(() => {
-        Axios.get('http://localhost:3001/Auth/Login')
-        .then((res) => {
-            console.log(res.data)
-            if (res.data.LoggedIn) {
-                setAuthState({...authState,
-                    username: res.data.username,
-                    id: res.data.id,
-                    role: res.data.role,
-                    status: res.data.LoggedIn,
-                })
-            }else{
-                setAuthState({ ...authState, status: false });
-            }
-          });
-      }, [JSON.stringify(authState)]);
-
-
-    function checkUser(){
-        if (authState.status === true){
-            return
-        } else if (authState.status === false){
-            return <Redirect to="/"/>
-        }
-    }
-
+    const [pass, setPass] = useState(false);
+    const [secondTrial, setSecondTrial] = useState(false);
+    const [trial, setTrial] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
+    const [authState, setAuthState] = useState({
+        username: "",
+        id: 0,
+        role: "",
+        status: null
+    });
+    
+    useEffect(() => {
+
+        var savedUser = ""
+
+        const checkActive = () =>{
+            try {
+                Axios.get('http://localhost:3001/Auth/Login')
+                    .then((res) => {
+                        
+                        if (res.data.LoggedIn) {
+                            setAuthState({
+                                username: res.data.username,
+                                id: res.data.id,
+                                role: res.data.role,
+                                status: res.data.LoggedIn,
+                            })
+
+                            passUser();
+                            
+                        }else{
+                            setAuthState({ ...authState, status: false });
+                        }
+                    }
+                )
+            }catch(e){
+                console.log( e)
+            }
+        }
+
+        const passUser = () =>{
+            console.log("made it first")
+            console.log(authState.username)
+            
+            if (authState.status === true){
+                console.log("user: "+savedUser )
+                console.log("user top: "+authState.username )
+                if(savedUser !== "" || savedUser !== undefined){
+                    const getUser = window.location.pathname.split('/');
+                    savedUser = [...getUser][2]
+                    console.log(savedUser)
+                }
+                if (savedUser === authState.username){
+                    return setPass(true)
+                }
+                
+                if(savedUser !== authState.username){
+                    return history.push('/404');
+                }
+            }else if (authState.username === undefined){
+                history.push('/');
+            }
+                
+            // if(authState.status === false){
+            //     history.push('/404');
+            // }
+        }
+        
+        checkActive()
+        
+    }, [JSON.stringify(authState)] );
+
 
     const MenuButtonAnimation = useSpring({
         opacity: MenuButtonsVisible ? 1 : 0,
@@ -97,12 +136,13 @@ function Dashboard() {
 
     return(
         <div>
-            {checkUser()}
-            <div>
-                {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
-                {MenuVisible && <SettingsBar style={MenuAnimation}/>}
-                <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
-            </div>
+            {pass === true ? 
+                <div>
+                    {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
+                    {MenuVisible && <SettingsBar style={MenuAnimation}/>}
+                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
+                </div>
+            : ''}
         </div>
     )
 }

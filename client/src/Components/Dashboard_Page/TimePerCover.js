@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
 import {IoChevronBack} from 'react-icons/io5'
 
 function TimePerCover() {

@@ -6,23 +6,23 @@ function authenticateToken(req, res, next){
 
     // check if headers for cookies exists
     if (headersExist){ 
+
         // check if there are more then one cookie
-        const authHeaderAccess = req.headers['cookie'].split(' ')[0]
+        const authHeaders = req.headers['cookie'].split(' ')
 
-        // if the second cookie is the access cookie, slice it
-        if (authHeaderAccess){
-            if ((authHeaderAccess.charAt(0) === 'a') === true){
-                const authHeaderAccessSlided = authHeaderAccess.slice(7).slice(0, -1)
-                req.accessToken = authHeaderAccessSlided;
-            } else {
-                const authHeaderAccess = req.headers['cookie'].split(' ')[1]
-
-                if(authHeaderAccess){
-                    const authHeaderAccessSlided = authHeaderAccess.slice(7)
-                    req.accessToken = authHeaderAccessSlided;
-                }else{
-                    const authHeader = req.headers['cookie']
-                    req.accessToken = authHeader;
+        if (authHeaders){
+            for (let i=0; i < authHeaders.length; i++){  
+                if (([...authHeaders][i].includes('access')) === true){
+                    if (i !== authHeaders.length -1){
+                        authHeaderAccessSlided = [...authHeaders][i].slice(7).slice(0, -1)
+                        req.accessToken = authHeaderAccessSlided;
+                    }else if (i === authHeaders.length - 1){
+                        authHeaderAccessSlided = [...authHeaders][i].slice(7)
+                        req.accessToken = authHeaderAccessSlided;
+                    }else{
+                        const authHeader = req.headers['cookie']
+                        req.accessToken = authHeader;
+                    }
                 }
             }
         }
@@ -32,8 +32,22 @@ function authenticateToken(req, res, next){
 
             // if access token fails verification, verify refresh token
             if (err) {
-                const authHeaderRefresh = req.headers['cookie'].slice(8)
-                req.refreshToken = authHeaderRefresh
+
+                for (let i=0; i < authHeaders.length; i++){  
+                    if (([...authHeaders][i].includes('refresh')) === true){
+                        if (i !== authHeaders.length -1){
+                            authHeaderRefresh = [...authHeaders][i].slice(8).slice(0, -1)
+                            req.refreshToken = authHeaderRefresh;
+                        }else if (i === authHeaders.length - 1){
+                            authHeaderRefresh = [...authHeaders][i].slice(8)
+                            req.refreshToken = authHeaderRefresh;
+                        }else{
+                            const authHeader = req.headers['cookie']
+                            req.refreshToken = authHeader;
+                        }
+                    }
+                }
+
                 jwt.verify(req.refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, verifiedRefresh) => {
 
                     if (err){
