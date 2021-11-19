@@ -191,7 +191,7 @@ class Home extends Component{
     }
 
     
-    verifyCredentials = async (e) =>{
+    verifyCredentials = async e =>{
         e.preventDefault();
         
         // Authenticate username and password

@@ -31,7 +31,6 @@ function Dashboard() {
             try {
                 Axios.get('http://localhost:3001/Auth/Login')
                     .then((res) => {
-                        
                         if (res.data.LoggedIn) {
                             setAuthState({
                                 username: res.data.username,
@@ -53,16 +52,11 @@ function Dashboard() {
         }
 
         const passUser = () =>{
-            console.log("made it first")
-            console.log(authState.username)
             
             if (authState.status === true){
-                console.log("user: "+savedUser )
-                console.log("user top: "+authState.username )
                 if(savedUser !== "" || savedUser !== undefined){
                     const getUser = window.location.pathname.split('/');
                     savedUser = [...getUser][2]
-                    console.log(savedUser)
                 }
                 if (savedUser === authState.username){
                     return setPass(true)

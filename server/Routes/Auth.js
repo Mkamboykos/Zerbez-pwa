@@ -8,12 +8,19 @@ const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 const ValidationException = require('../Exceptions/ValidationException');
 
 
+
 // Capcha authentication
 router.get('/Login', authenticateToken, (req, res) => {
+    
     if('Authorized'){
-console.log("1" +req.user.verifiedRefresh.name)
-console.log("2" +req.user)        
-if (req.user.verifiedRefresh.name){
+        if(req.user.name){
+            return res.json({
+                LoggedIn: true, 
+                username: req.user.name,
+                id: req.user.id,
+                role: req.user.role
+            })
+        }else{
             return res.json({
                 LoggedIn: true, 
                 username: req.user.verifiedRefresh.name,
@@ -21,18 +28,7 @@ if (req.user.verifiedRefresh.name){
                 role: req.user.verifiedRefresh.role
             })
         }
-
-        // if(req.user){
-        //     console.log(req.user)
-        //     return res.json({
-        //         LoggedIn: true, 
-        //         username: req.user.name,
-        //         id: req.user.id,
-        //         role: req.user.role
-        //     })
-        // }
     }
-    console.log(req.user);
 });
 
 // logout and remove refresh token

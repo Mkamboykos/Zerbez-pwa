@@ -57,6 +57,13 @@ app.use('./FloorPlan', floorPlanRouter);
 // Apply error handler to every call
 app.use(ErrorHandler);
 
+// app.use((err, req, res, next) => {
+//     res.locals.error = err;
+//     const errorStatus = err.status || 500;
+//     res.status(errorStatus);
+//     res.render('error');
+// });
+
 // Test database connection is working
 const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
     dialect: 'mysql',
