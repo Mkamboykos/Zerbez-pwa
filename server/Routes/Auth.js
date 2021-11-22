@@ -11,7 +11,6 @@ const ValidationException = require('../Exceptions/ValidationException');
 
 // Capcha authentication
 router.get('/Login', authenticateToken, (req, res) => {
-    
     if('Authorized'){
         if(req.user.name){
             return res.json({

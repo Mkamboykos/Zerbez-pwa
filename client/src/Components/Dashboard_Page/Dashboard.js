@@ -53,7 +53,7 @@ function Dashboard() {
             
             if (authState.status === true){
 
-                if(savedUser !== "" || savedUser !== undefined){
+                if(savedUser !== undefined){
                     const getUser = window.location.pathname.split('/');
                     savedUser = [...getUser][2]
                 }

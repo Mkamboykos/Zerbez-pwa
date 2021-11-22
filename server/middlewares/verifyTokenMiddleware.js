@@ -8,10 +8,11 @@ function authenticateToken(req, res, next){
     if (headersExist){ 
 
         // check if there are more then one cookie
-        const authHeaders = req.headers['cookie'].split(' ')
+        const authHeaders = headersExist.split(' ')
 
         if (authHeaders){
             for (let i=0; i < authHeaders.length; i++){  
+                console.log([...authHeaders][i])
                 if (([...authHeaders][i].includes('access')) === true){
                     if (i !== authHeaders.length -1){
                         authHeaderAccessSlided = [...authHeaders][i].slice(7).slice(0, -1)
@@ -51,7 +52,7 @@ function authenticateToken(req, res, next){
                 jwt.verify(req.refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, verifiedRefresh) => {
 
                     if (err){
-                        res.json({message: "Invalid Refresh Token"});
+                        res.json({message: "Invalid Refresh Token", status: false});
                     } else if (verifiedRefresh){
 
                         // if refresh token passes verification, create new access token and verify
@@ -83,7 +84,7 @@ function authenticateToken(req, res, next){
         })
     }else{
         // if both access or refresh token are missing, send 404
-        res.json({message: "Tokens not present"});
+        res.json({message: "Tokens not present", status: false});
     }
 }
 
