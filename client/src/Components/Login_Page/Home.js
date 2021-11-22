@@ -7,8 +7,7 @@ import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
 import {Input, FormHelperText} from '@material-ui/core';
-import homeLogo from '../Icons/homeLogo.svg';
-import { ReactSVG } from 'react-svg'
+import homeLogoA from '../Icons/homeLogoA.svg';
 
 Axios.defaults.withCredentials = true;
 
@@ -284,7 +283,8 @@ class Home extends Component{
         return(
             <div>
                 <div className="homePageImageContainer">
-                    <ReactSVG src={homeLogo}/>
+                    
+                    <img src={homeLogoA} alt=""/>
                     </div>
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
