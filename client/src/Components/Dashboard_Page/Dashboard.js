@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useHistory, Redirect} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
@@ -29,6 +29,7 @@ function Dashboard() {
             try {
                 Axios.get('http://localhost:3001/Auth/Login')
                     .then((res) => {
+                        console.log(res.data)
                         if (res.data.LoggedIn) {
                             setAuthState({
                                 username: res.data.username,
@@ -36,9 +37,6 @@ function Dashboard() {
                                 role: res.data.role,
                                 status: res.data.LoggedIn,
                             })
-                            
-                            passUser();
-                            
                         }else{
                             setAuthState({ ...authState, status: false });
                         }
@@ -50,33 +48,26 @@ function Dashboard() {
         }
 
         const passUser = () =>{
-            
             if (authState.status === true){
-
                 if(savedUser !== undefined){
                     const getUser = window.location.pathname.split('/');
                     savedUser = [...getUser][2]
                 }
-
                 if (savedUser === authState.username){
                     return setPass(true)
-                }
-                
-                if(savedUser !== authState.username){
+                }else{
                     return history.push('/404');
                 }
-
             }else if (authState.username === undefined){
                 history.push('/');
+            }else if(authState.status === false){
+                history.push('/404');
             }
-                
-            // if(authState.status === false){
-            //     history.push('/404');
-            // }
         }
         
         checkActive()
-        
+        passUser();
+
     }, [JSON.stringify(authState)] );
 
 

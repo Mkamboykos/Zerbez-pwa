@@ -27,6 +27,10 @@ router.get('/Login', authenticateToken, (req, res) => {
                 role: req.user.verifiedRefresh.role
             })
         }
+    }else{
+        return res.json({
+            LoggedIn: false
+        })
     }
 });
 
