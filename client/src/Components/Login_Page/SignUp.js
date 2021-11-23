@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Navigate } from 'react-router-dom'
 import {Form} from 'react-bootstrap'
 import {TextField, createTheme, MuiThemeProvider,InputAdornment, IconButton, FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox} from '@material-ui/core'
 import Visibility from "@material-ui/icons/Visibility";
@@ -758,7 +758,7 @@ class SignUp extends Component {
     // Redirect to Dashboard when redirect is true
     renderRedirect(){
         if(this.state.redirect){
-            return <Redirect to='/Dashboard'/>
+            return <Navigate  to='/'/>
         }
     }
 

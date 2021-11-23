@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
@@ -304,7 +304,7 @@ class ResetPassword extends Component{
     renderRedirect(){
         if (this.state.redirect){
             alert("Your password has been changed!")
-            return <Redirect to='/'/>
+            return <Navigate  to='/'/>
         }
     }
     

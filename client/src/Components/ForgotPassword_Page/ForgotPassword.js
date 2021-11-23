@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
@@ -248,7 +248,7 @@ class ForgotPassword extends Component{
 
     renderRedirect(){
         if (this.state.redirect === true){
-            return <Redirect to='/ResetPassword'/>
+            return <Navigate  to='/ResetPassword'/>
         }
     }
     

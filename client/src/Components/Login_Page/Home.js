@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
 import {Form, InputGroup} from 'react-bootstrap'
 import Axios from 'axios';
@@ -233,7 +233,7 @@ class Home extends Component{
 
     renderRedirect = () =>{
         if (this.state.redirect === true) {
-            return <Redirect to={'/Dashboard/'+ this.state.user}  />
+            return <Navigate  to={'/Dashboard/'+ this.state.user}  />
         }
     }
 

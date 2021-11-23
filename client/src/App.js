@@ -1,7 +1,7 @@
 import './index.css'
 
 import React, {lazy, Suspense} from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import { SpinnerDotted } from 'spinners-react';
 
 const Home = lazy(() => import('./Components/Login_Page/Home'))
@@ -30,25 +30,27 @@ function App() {
   return (
     <div className="App">
         <Suspense fallback={<SpinnerDotted color={'#E2C044'} size={130}/>}>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/SignUp" component={SignUp}/>
-          <Route exact path="/Dashboard/:username" component={Dashboard}/>
-          <Route exact path="/ForgotPassword" component={ForgotPassword}/>
-          <Route exact path="/ResetPassword" component={ResetPassword}/>
-          <Route exact path="/Account" component={Account}/>
-          <Route exact path="/Analytics" component={Analytics}/>
-          <Route exact path="/Notifications" component={Notifications}/>
-          <Route exact path="/Help" component={Help}/>
-          <Route exact path="/About" component={About}/>
-          <Route exact path="/ShiftSchedule" component={ShiftSchedule}/>
-          <Route exact path="/AssignTables" component={AssignTables}/>
-          <Route exact path="/TimePerCover" component={TimePerCover}/>
-          <Route exact path="/FloorPlan" component={FloorPlan}/>
-          <Route exact path="/NewReservation" component={NewReservation}/>
-          <Route exact path="/Reservations" component={Reservations}/>
-          <Route exact path="/Privacy" component={Privacy}/>
-          <Route exact path="/Terms" component={Terms}/>
-          <Route exact path="/404" component={NotFound}/>
+          <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/SignUp" element={<SignUp/>}/>
+            <Route exact path="/Dashboard/:username" element={<Dashboard/>}/>
+            <Route exact path="/ForgotPassword" element={<ForgotPassword/>}/>
+            <Route exact path="/ResetPassword" element={<ResetPassword/>}/>
+            <Route exact path="/Account" element={<Account/>}/>
+            <Route exact path="/Analytics" element={<Analytics/>}/>
+            <Route exact path="/Notifications" element={<Notifications/>}/>
+            <Route exact path="/Help" element={<Help/>}/>
+            <Route exact path="/About" element={<About/>}/>
+            <Route exact path="/ShiftSchedule" element={<ShiftSchedule/>}/>
+            <Route exact path="/AssignTables" element={<AssignTables/>}/>
+            <Route exact path="/TimePerCover" element={<TimePerCover/>}/>
+            <Route exact path="/FloorPlan" element={<FloorPlan/>}/>
+            <Route exact path="/NewReservation" element={<NewReservation/>}/>
+            <Route exact path="/Reservations" element={<Reservations/>}/>
+            <Route exact path="/Privacy" element={<Privacy/>}/>
+            <Route exact path="/Terms" element={<Terms/>}/>
+            <Route exact path="/404" element={<NotFound/>}/>
+          </Routes>
         </Suspense>
     </div>
   )

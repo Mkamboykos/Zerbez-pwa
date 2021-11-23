@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {Link, useHistory, Redirect} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
@@ -9,7 +9,7 @@ Axios.defaults.withCredentials = true;
 
 function Dashboard() {
     
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [pass, setPass] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
@@ -56,12 +56,12 @@ function Dashboard() {
                 if (savedUser === authState.username){
                     return setPass(true)
                 }else{
-                    return history.push('/404');
+                    return navigate('/404');
                 }
             }else if (authState.username === undefined){
-                history.push('/');
+                navigate('/');
             }else if(authState.status === false){
-                history.push('/404');
+                navigate('/404');
             }
         }
         
