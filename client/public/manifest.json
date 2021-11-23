@@ -1,8 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [],
-  "start_url": ".",
+  "short_name": "thefarmerson",
+  "name": "This is official page of Karthikeyan Anbazhagan Indian Computer Science Engineer",
+  "icons": [
+    {
+      "src": "splashLogo.png",
+      "sizes": " 512x512 192x192 64x64 32x32 24x24 16x16",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

@@ -282,10 +282,7 @@ class Home extends Component{
     renderLogin(){
         return(
             <div>
-                <div className="homePageImageContainer">
-                    
-                    <img src={homeLogoA} alt=""/>
-                    </div>
+                <img src={homeLogoA} alt=""  className="homePageImageContainer" loading="eager"/>
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
                         <Form.Group className="contentBar">
