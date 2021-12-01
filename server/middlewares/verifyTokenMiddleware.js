@@ -11,6 +11,7 @@ function authenticateToken(req, res, next){
         const authHeaders = headersExist.split(' ')
 
         if (authHeaders){
+            // iterate through every cookie, find 'access' cookie
             for (let i=0; i < authHeaders.length; i++){  
                 console.log([...authHeaders][i])
                 if (([...authHeaders][i].includes('access')) === true){
@@ -34,6 +35,7 @@ function authenticateToken(req, res, next){
             // if access token fails verification, verify refresh token
             if (err) {
 
+                // iterate through every cookie, find 'refresh' cookie
                 for (let i=0; i < authHeaders.length; i++){  
                     if (([...authHeaders][i].includes('refresh')) === true){
                         if (i !== authHeaders.length -1){
@@ -59,7 +61,7 @@ function authenticateToken(req, res, next){
                         const accessToken = jwt.sign({verifiedRefresh}, process.env.ACCESS_TOKEN_SECRET)
                                     
                         res.cookie("access", accessToken, {
-                            maxAge: 15000, // 15 seconds
+                            maxAge: 5000, // 5 seconds
                             httpOnly: true,
                         })
                         
@@ -89,12 +91,3 @@ function authenticateToken(req, res, next){
 }
 
 module.exports = {authenticateToken};    
-
-
-
-
-    // const authHeader = req.headers['authorization']
-    // if (authHeader !== 'undefined'){
-    //     const authToken = authHeader.split(' ')[1]
-    //     req.token = authToken
-    // }

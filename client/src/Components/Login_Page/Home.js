@@ -120,7 +120,6 @@ class Home extends Component{
             }else if(this.state.userCaptcha === this.state.captcha){
                  Axios.get('http://localhost:3001/Auth/Login')
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.LoggedIn === true){
                         this.setState({
                             redirect: true,
@@ -178,7 +177,6 @@ class Home extends Component{
 
             await Axios.get('http://localhost:3001/Auth/Login')
             .then(res => {
-                console.log(res.data);
                 if (res.data.LoggedIn === true){
                     this.setState({
                         redirect: true,

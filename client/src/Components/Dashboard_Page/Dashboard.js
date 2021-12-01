@@ -20,6 +20,8 @@ function Dashboard() {
         role: "",
         status: null
     });
+
+
     
     useEffect(() => {
 
@@ -29,7 +31,6 @@ function Dashboard() {
             try {
                 Axios.get('http://localhost:3001/Auth/Login')
                     .then((res) => {
-                        console.log(res.data)
                         if (res.data.LoggedIn) {
                             setAuthState({
                                 username: res.data.username,
@@ -108,6 +109,14 @@ function Dashboard() {
         </animated.div>
     )
 
+    const logoutButton = async (e) => {
+        try {
+            await Axios.post(`http://localhost:3001/Auth/logout/${authState.username}`)
+        }catch(e){
+            console.log(e)
+        }
+    }
+
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
             <Link to="/FloorPlan" className="link"><button className="Dashboard_button_FloorPlan"><b>FLOOR PLAN</b></button></Link>
@@ -116,7 +125,7 @@ function Dashboard() {
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
             <Link to="/TimePerCover" className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
-            <Link to="/" className="link"><button className="Dashboard_button_EndShift"><b>END OF SHIFT</b></button></Link>
+            <Link to="/" className="link"><button className="Dashboard_button_EndShift" onClick={() => logoutButton()}><b>END OF SHIFT</b></button></Link>
         </animated.div>
     )
 

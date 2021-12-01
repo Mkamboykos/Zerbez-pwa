@@ -702,13 +702,14 @@ span.reqContainer{
 /* Dashboard page column outer container holding all buttons */
 .Dashboard_Buttons{
   display: inline-flex;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 251px;
+  padding-bottom: 168px;
   flex-direction: column;
   box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-evenly;
 }
 
 /* Dashboard buttons*/

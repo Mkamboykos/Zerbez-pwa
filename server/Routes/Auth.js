@@ -8,8 +8,7 @@ const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 const ValidationException = require('../Exceptions/ValidationException');
 
 
-
-// Capcha authentication
+// Check if user if logged in (authentication) -> used in every routes when logged in 
 router.get('/Login', authenticateToken, (req, res) => {
     if('Authorized'){
         if(req.user.name){
@@ -34,12 +33,19 @@ router.get('/Login', authenticateToken, (req, res) => {
     }
 });
 
+
 // logout and remove refresh token
-// router.delete('/logout', (req, res) => {
-//     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-//     res.sendStatus(204)
-// })
- 
+router.post('/logout/:username', (req, res) => {
+    try{
+        // clear the remembered cookie when logging out
+        // usually it gets redirected by setting username to undefined it sends it straight to do the login page
+        return res.clearCookie('refresh').json({username: undefined});
+    }catch(e){
+        console.log(e);
+    }
+});
+
+
 // Authenticate login credentials
 router.post('/Login', async (req, res) => {
     // Input from Home page in client
@@ -67,7 +73,7 @@ router.post('/Login', async (req, res) => {
 
                 // create access cookie with accessToken, expires in 15 seconds
                 res.cookie("access", accessToken, {
-                    maxAge: 15000, // 15 seconds
+                    maxAge: 5000, // 5 seconds
                     httpOnly: true,
                 })
                 res.json({auth: true});
@@ -93,7 +99,7 @@ router.post('/Login', async (req, res) => {
 
                 // create access cookie with accessToken, expires in 15 seconds
                 res.cookie("access", accessToken, {
-                    maxAge: 15000, // 15 seconds
+                    maxAge: 5000, // 5 seconds
                     httpOnly: true,
                 })
 
