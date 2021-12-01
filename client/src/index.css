@@ -93,6 +93,13 @@ button,select {
   text-transform: none
 }
 
+nav {
+  display: inline-flex;
+  height: inherit;
+  flex-direction: column;
+}
+
+
 [type=button],[type=reset],[type=submit],button {
   -webkit-appearance: button
 }
@@ -702,8 +709,8 @@ span.reqContainer{
 /* Dashboard page column outer container holding all buttons */
 .Dashboard_Buttons{
   display: inline-flex;
-  padding-top: 251px;
-  padding-bottom: 168px;
+  padding-top: 43vh;
+  padding-bottom: 7.5vh;
   flex-direction: column;
   box-sizing: border-box;
   height: 100vh;
@@ -790,7 +797,12 @@ span.reqContainer{
   cursor: pointer;
 }
 
-
+.centerLogout {
+  display: flex;
+  flex-direction: column;
+  height: 18.5vh;
+  justify-content: flex-start;
+}
 
 
 
@@ -839,12 +851,18 @@ span.reqContainer{
 /* Items in the list The padding 0 centers the list in the middle of the page */
 .menu-list {
   list-style: none;
+  height: 100vh;
+  display: inline-flex;
   padding: 0;
+  margin-top: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Line spacing between setting list options*/
 .menu-list-item--right {
-  margin: 24px 0;
+  margin: 14px 0;
   font-size: 2.5em;
 }
 

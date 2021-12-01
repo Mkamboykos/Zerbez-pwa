@@ -82,6 +82,14 @@ function Dashboard() {
         transform: MenuVisible ? `flash(0%)` : `flash(100%)`
     });
 
+    const logoutButton = async (e) => {
+        try {
+            await Axios.post(`http://localhost:3001/Auth/logout/${authState.username}`)
+        }catch(e){
+             console.log(e)
+        }
+    }
+
     const SettingsBar = ({ style }) => (
         <animated.div className="menu menu--right" style={style}>
             <nav>
@@ -99,23 +107,18 @@ function Dashboard() {
                         <a href="/Notifications">Notifications</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Help">Help</a>
-                    </li>
-                    <li className="menu-list-item menu-list-item--right">
                         <a href="/About">About</a>
                     </li>
-                </ul>
+                </ul>    
+            
+                <li className="centerLogout">
+                    <a href="/" className="menu-list-item menu-list-item--right" onClick={() => logoutButton()}>Logout</a>
+                </li>
             </nav>
         </animated.div>
     )
 
-    const logoutButton = async (e) => {
-        try {
-            await Axios.post(`http://localhost:3001/Auth/logout/${authState.username}`)
-        }catch(e){
-            console.log(e)
-        }
-    }
+  
 
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
@@ -125,7 +128,6 @@ function Dashboard() {
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
             <Link to="/TimePerCover" className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
-            <Link to="/" className="link"><button className="Dashboard_button_EndShift" onClick={() => logoutButton()}><b>END OF SHIFT</b></button></Link>
         </animated.div>
     )
 

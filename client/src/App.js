@@ -12,7 +12,6 @@ const ResetPassword = lazy(() => import('./Components/ForgotPassword_Page/ResetP
 const Account = lazy(() => import('./Components/Settings/Account'))
 const Analytics = lazy(() => import('./Components/Settings/Analytics'))
 const Notifications = lazy(() => import('./Components/Settings/Notifications'))
-const Help = lazy(() => import('./Components/Settings/Help'))
 const About = lazy(() => import('./Components/Settings/About'))
 const ShiftSchedule = lazy(() => import('./Components/Dashboard_Page/ShiftSchedule'))
 const AssignTables = lazy(() => import('./Components/Dashboard_Page/AssignTables'))
@@ -39,7 +38,6 @@ function App() {
             <Route exact path="/Account" element={<Account/>}/>
             <Route exact path="/Analytics" element={<Analytics/>}/>
             <Route exact path="/Notifications" element={<Notifications/>}/>
-            <Route exact path="/Help" element={<Help/>}/>
             <Route exact path="/About" element={<About/>}/>
             <Route exact path="/ShiftSchedule" element={<ShiftSchedule/>}/>
             <Route exact path="/AssignTables" element={<AssignTables/>}/>
