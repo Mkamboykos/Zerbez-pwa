@@ -700,11 +700,11 @@ class SignUp extends Component {
                     isValid: false,
                 });
             }else if(this.state.username === this.state.existUsername){
-                    this.setState({
-                        helperTextUsername: 'Username already exist!',
-                        errorUsername: true,
-                        isValid: false,
-                    });
+                this.setState({
+                    helperTextUsername: 'Username already exist!',
+                    errorUsername: true,
+                    isValid: false,
+                });
             }
         }).catch((err) => console.error(err)); 
 

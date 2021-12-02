@@ -55,7 +55,7 @@ router.post('/Email', async (req, res) => {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
             res.cookie("access", accessToken, {
-                maxAge: 900000, // 15 minutes
+                maxAge: 600000, // 15 minutes
                 httpOnly: true,
             })
 

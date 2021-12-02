@@ -52,9 +52,15 @@ class ResetPassword extends Component{
     }
 
     handlePasswords(){
+    
         // Validators for username and password
         if(this.state.isValid === false){
             this.setState({
+                helperTextPasswordLength: '',
+                helperTextPasswordUppercase: '',
+                helperTextPasswordLowercase: '',
+                helperTextPasswordNumber: '',
+                helperTextPasswordSpecial: '',
                 isValid: true
             })
         }
@@ -141,15 +147,6 @@ class ResetPassword extends Component{
                 errorNewPassword: true,
                 isValid: false
             });
-        }else {
-            this.setState({
-                helperTextPasswordLength: '',
-                helperTextPasswordUppercase: '',
-                helperTextPasswordLowercase: '',
-                helperTextPasswordNumber: '',
-                helperTextPasswordSpecial: '',
-                isValid: true
-            });
         }
 
         // Validators -> confirm_password
@@ -159,11 +156,6 @@ class ResetPassword extends Component{
                 errorConfirmPassword: true,
                 isValid: false
             });
-        }else if(this.state.confirmPassword === this.state.newPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
-            this.setState({
-                helperTextConfirmPassword: 'Passwords match!',
-                isValid: true
-            });
         }
 
     }
@@ -171,11 +163,15 @@ class ResetPassword extends Component{
     handleKeyPressPasswords(e){
          // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
-            e.preventDefault();
 
             // Validators for username and password
             if(this.state.isValid === false){
                 this.setState({
+                    helperTextPasswordLength: '',
+                    helperTextPasswordUppercase: '',
+                    helperTextPasswordLowercase: '',
+                    helperTextPasswordNumber: '',
+                    helperTextPasswordSpecial: '',
                     isValid: true
                 })
             }
@@ -262,15 +258,6 @@ class ResetPassword extends Component{
                     errorNewPassword: true,
                     isValid: false
                 });
-            }else {
-                this.setState({
-                    helperTextPasswordLength: '',
-                    helperTextPasswordUppercase: '',
-                    helperTextPasswordLowercase: '',
-                    helperTextPasswordNumber: '',
-                    helperTextPasswordSpecial: '',
-                    isValid: true
-                });
             }
 
             // Validators -> confirm_password
@@ -280,21 +267,13 @@ class ResetPassword extends Component{
                     errorConfirmPassword: true,
                     isValid: false
                 });
-            }else if(this.state.confirmPassword === this.state.newPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
-                this.setState({
-                    helperTextConfirmPassword: 'Passwords match!',
-                    isValid: true
-                });
             }
         }
     }
 
-    
-
-
     handleSubmit= async e =>{
         e.preventDefault();
-        if(this.state.newPassword === this.state.confirmPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
+        if(this.state.isValid === true && this.state.confirmPassword === this.state.newPassword && this.state.confirmPassword !== "" && this.state.newPassword !== ""){
             this.setState({
                 redirect: true
             }) 
@@ -308,7 +287,6 @@ class ResetPassword extends Component{
         }
     }
     
-    
     render() {
         return (
             <div>
@@ -321,7 +299,7 @@ class ResetPassword extends Component{
                         <Form onKeyPress={this.handleKeyPressPasswords} onSubmit={this.handleSubmit}>
                             <div className="forgotPasswordTextContainer">
                                 <p className="forgotPasswordText">
-                                Set the new password for your account so you can login and access all the features.
+                                    Set the new password for your account so you can login and access all the features.
                                 </p>
                             </div>
                             
