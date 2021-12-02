@@ -5,13 +5,12 @@ module.exports = (err, req, res, next) => {
       validationErrors = {};
       errors.forEach((error) => (validationErrors[error.param] = error.msg));
     }
-    res
-      .status(status)
-      .send(
-        {
-          message: message,
-          timestamp: Date.now(),
-          path: req.originalUrl,
-          validationErrors
-        });
+    
+    res.json({
+        message: message,
+        timestamp: Date.now(),
+        path: req.originalUrl,
+        validationErrors
+    });
+
   }

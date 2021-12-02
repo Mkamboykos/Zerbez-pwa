@@ -1,11 +1,13 @@
 const {Manager} = require('../models');
 
 const findByUsername = async (username) => {
-    await Manager.findOne({ where: {username: username} });
+    const user = Manager.findOne({ where: {username: username} });
+    return user;
 }
 
 const findByEmail = async (email) => {
-    await Manager.findOne({ where: {email: email} });
+    const user = await Manager.findOne({ where: {email: email} });
+    return user;
 }
   
 module.exports = {

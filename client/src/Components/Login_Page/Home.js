@@ -79,63 +79,7 @@ class Home extends Component{
             })
     }
 
-    handleKeyPressSubmit = (e) =>{
-        if (e.key === "Enter"){
-            e.preventDefault();
-            if(this.state.count === 0){
-
-                // reset count to 3
-                this.setState({
-                    count: 3
-                })
-
-                //refresh page
-                this.refreshPage()
-            }
-
-            if(this.state.userCaptcha === '' && this.state.count !== 0){
-    
-                this.setState((prevState, props) => ({
-                    count: prevState.count - 1
-                }));
-    
-                let random = Math.random().toString(36).substring(7);
-                this.setState({
-                    captcha: random,
-                    helperText: `You have ${this.state.count} attempts left!`,
-                    errorCaptcha: true,
-                });
-            }else if(this.state.userCaptcha != this.state.captcha && this.state.count !== 0){
-                
-                this.setState((prevState, props) => ({
-                    count: prevState.count - 1
-                }));
-    
-                let random = Math.random().toString(36).substring(7);
-                this.setState({
-                    captcha: random,
-                    helperText: `You have ${this.state.count} attempts left!`,
-                    errorCaptcha: true,
-                })
-            }else if(this.state.userCaptcha === this.state.captcha){
-                 Axios.get('http://localhost:3001/Auth/Login')
-                .then(res => {
-                    if (res.data.LoggedIn === true){
-                        this.setState({
-                            redirect: true,
-                            user: res.data.username
-                        }) 
-                    }else if (res.data.message === "Tokens not present"){
-                        this.refreshPage()
-                    }
-                })
-            }
-        }
-    }
-
-
-
-    handleSubmit = async (e) =>{
+    handleSubmit = (e) =>{
         e.preventDefault();
 
         if(this.state.count === 0){
@@ -175,7 +119,7 @@ class Home extends Component{
             })
         }else if(this.state.userCaptcha === this.state.captcha){
 
-            await Axios.get('http://localhost:3001/Auth/Login')
+            Axios.get('http://localhost:3001/Auth/Login')
             .then(res => {
                 if (res.data.LoggedIn === true){
                     this.setState({
@@ -186,6 +130,13 @@ class Home extends Component{
                     this.refreshPage()
                 }
             })
+        }
+    }
+
+
+    handleKeyPressSubmit = (e) =>{
+        if (e.key === "Enter"){
+            {this.handleSubmit(e)}
         }
     }
 
@@ -241,45 +192,57 @@ class Home extends Component{
     
     renderCaptcha(){
         return(
-            <div className="captchaContainer">
-                <Form onKeyPress={this.handleKeyPressSubmit} >
-                    <Form.Group  className="contentBar">
-                        <Form.Label className="captchaText">
-                            {this.state.captcha}
-                        </Form.Label>
+            <div className="homePageContainer" >
+                <div className="HomePageTitleContainer">
+                    <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                    <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
+                </div>
+            
+                <div className="captchaContainer transitionCapchaContainer">
+                    <Form onKeyPress={this.handleKeyPressSubmit} >
+                        <Form.Group  className="contentBar">
+                            <Form.Label className="captchaText">
+                                {this.state.captcha}
+                            </Form.Label>
 
-                        <InputGroup>
-                            <InputGroup.Text><FaKey/></InputGroup.Text>
-                            <Form.Control 
-                                type="text" 
-                                className="contentBarText"
-                                placeholder="Enter Captcha" 
-                                onChange={this.handleCaptcha} 
-                                isInvalid={this.state.errorCaptcha}
-                            />
-                        </InputGroup> 
-                        <FormHelperText error>
-                            <span className="homeReqContainer">
-                                <span className="requirements">{this.state.helperText}</span>
-                            </span>
-                        </FormHelperText>
-                    </Form.Group>
-                  
-                    <div>
-                        <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
-                            <b>SUBMIT</b>
-                        </button>
-                    </div>
-                    {this.renderRedirect()}
-                </Form>
-                <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+                            <InputGroup>
+                                <InputGroup.Text><FaKey/></InputGroup.Text>
+                                <Form.Control 
+                                    type="text" 
+                                    className="contentBarText"
+                                    placeholder="Enter Captcha" 
+                                    onChange={this.handleCaptcha} 
+                                    isInvalid={this.state.errorCaptcha}
+                                />
+                            </InputGroup> 
+                            <FormHelperText error>
+                                <span className="homeReqContainer">
+                                    <span className="requirements">{this.state.helperText}</span>
+                                </span>
+                            </FormHelperText>
+                        </Form.Group>
+                    
+                        <div>
+                            <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
+                                <b>SUBMIT</b>
+                            </button>
+                        </div>
+                        {this.renderRedirect()}
+                    </Form>
+                    <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+                </div>
             </div>
         ) 
     }
 
     renderLogin(){
         return(
-            <div>
+            <div className="homePageContainer">
+                <div className="HomePageTitleContainer">
+                    <h1 className="homeTitleTimeText"><b>Time</b></h1>
+                    <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
+                </div>
+
                 <img src={homeLogoA} alt=""  className="homePageImageContainer" loading="eager"/>
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
@@ -311,7 +274,7 @@ class Home extends Component{
                                     isInvalid={this.state.errorPassword}
                                 />
                             </InputGroup>
-                             
+                            
                             <FormHelperText error>
                                 <span className="centerReqContainer">
                                     <span className="requirements">{this.state.helperText}</span>
@@ -335,12 +298,7 @@ class Home extends Component{
     render() {
         if (this.state.loginDisplay){
             return ( 
-                <div className="homePageContainer">
-                    <div className="HomePageTitleContainer">
-                        <h1 className="homeTitleTimeText"><b>Time</b></h1>
-                        <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
-                    </div>
-                        
+                <div>  
                     {this.state.loginDisplay?this.renderLogin():""} 
                 </div>
             )
@@ -348,15 +306,9 @@ class Home extends Component{
             return (
                 <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
                     {style => (
-                        <div className="homePageContainer" >
-                            <div className="HomePageTitleContainer">
-                                <h1 className="homeTitleTimeText"><b>Time</b></h1>
-                                <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
-                            </div>
-                            <animated.div style={ style } className="transitionCapchaContainer">
-                                {this.state.capChaDisplay?this.renderCaptcha():""}
-                            </animated.div>
-                        </div>
+                        <animated.div style={ style }>
+                            {this.state.capChaDisplay ? this.renderCaptcha() : ""}
+                        </animated.div>
                     )}
                 </Spring>
             )

@@ -552,14 +552,32 @@ label{
 }
 
 /* font weight of password requirements in signup page */
-span.multiline-block{
-  font-weight: 600;
+span.multiline-block {
+  font-weight: 400;
+  color: #f4f1f27a;
+}
+
+label.MuiInputLabel-shrink {
+  transform: translate(0, 5.5px) scale(0.75);
+  transform-origin: top left;
+}
+
+p.MuiFormHelperText-root {
+  color: #00ff5a;
 }
 
 /* font weight of input text fields in the signup page */
-input.MuiInput-input{
+/* input.MuiInput-input{
   font-weight: bold;
-}
+} */
+
+
+
+
+
+
+
+
 
 /*Forgot Password Container*/
 

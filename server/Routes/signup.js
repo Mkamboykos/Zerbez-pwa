@@ -6,35 +6,23 @@ const ManagerService = require('../Service/ManagerService');
 const {body, validationResult} = require('express-validator');
 const ValidationException = require('../Exceptions/ValidationException');
 
-// check if username exists in signup
-router.post('/username', async (req, res) => {
-    const {username} = req.body;
-    const usernameExist = await Manager.findOne({ where: {username: username} })
-    usernameExist ? res.send(usernameExist).json : res.json("");
-});
 
-// check if email exists in signup
-router.post('/email', async (req, res) => {
-    const {email} = req.body;
-    const emailExist = await Manager.findOne({ where: {email: email} })
-    emailExist ? res.send(emailExist).json : res.json("");
-});
-
-// const user = await Users.findOne({ where: {username: username}})
 // Post API for when a manager signs up
 router.post('/Manager',[
     body('first_name').trim().notEmpty().withMessage('Field cannot be empty!').bail().isAlpha().withMessage('Field can only have letters!').bail(),
     body('last_name').trim().notEmpty().withMessage('Field cannot be empty!').bail().isAlpha().withMessage('Field can only have letters!').bail(),
     body('username').trim().notEmpty().withMessage('Field cannot be empty!').bail().isAlphanumeric().withMessage('Field can only have letters and numbers!').bail()
-        .custom(username => {
-            const usernameExist = ManagerService.findByUsername(username);
+        .custom( async (username) => {
+            const usernameExist = await ManagerService.findByUsername(username);
+
             if(usernameExist){
                 throw new Error('Username already exist!');
             }
         }),
     body('email').trim().notEmpty().withMessage('Field cannot be empty!').bail().isEmail().withMessage('This is not a valid email!').bail().normalizeEmail()
-        .custom(email => {
-            const emailExist = ManagerService.findByEmail(email);
+        .custom( async (email) => {
+            const emailExist = await ManagerService.findByEmail(email);
+
             if(emailExist){
                 throw new Error('This email is already being used!');
             }
