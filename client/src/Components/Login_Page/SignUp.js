@@ -423,62 +423,11 @@ class SignUp extends Component {
 
 
 
-    /*
-    *  HTTP POST Request sent to the databse, and redirect is enabled
-    */
+    
+    // HTTP POST Request sent to the databse, and redirect is enabled
     checkExistingUsernameAndSubmit = async e =>{
         e.preventDefault();
-
-        // check if username already exists
-        // Axios.post('http://localhost:3001/SignUp/username', {
-        //     username: this.state.username
-        // }).then(res => {
-        //     this.setState({
-        //         existUsername: res.data.username
-        //     });
-
-        //     if(this.state.existUsername === ""){
-        //         this.setState({
-        //             helperTextUsername: 'Field cannot be empty!',
-        //             errorUsername: true,
-        //             isValid: false,
-        //         });
-        //     }else if(this.state.username === "Admin" || this.state.username === "Administrator"){
-        //         this.setState({
-        //             helperTextUsername: 'Username already exist!',
-        //             errorUsername: true,
-        //             isValid: false,
-        //         });
-        //     }else if(this.state.username === this.state.existUsername){
-            //     this.setState({
-            //         helperTextUsername: 'Username already exist!',
-            //         errorUsername: true,
-            //         isValid: false,
-            //     });
-            // }
-        // }).catch((err) => console.error(err)); 
-
-        // check if email already exists
-        // Axios.post('http://localhost:3001/SignUp/email', {
-        //     email: this.state.email
-        // }).then(res => {
-        //     this.setState({
-        //         existEmail: res.data.email
-        //     });
-        //     if(this.state.existEmail === ""){
-        //         this.setState({
-        //             helperTextEmail: 'Field cannot be empty!',
-        //             errorEmail: true,
-        //             isValid: false,
-        //         });
-        //     }else if(this.state.email === this.state.existEmail){
-        //         this.setState({
-        //             helperTextEmail: 'This email is already being used!',
-        //             errorEmail: true,
-        //             isValid: false,
-        //         });
-        //     }
-            
+        
         if((this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
             // if username and email are unique then post the account to the database
             await Axios.post('http://localhost:3001/SignUp/Manager', {
@@ -493,18 +442,21 @@ class SignUp extends Component {
                 restaurant_state: this.state.restaurant_state, 
                 restaurant_zip: this.state.restaurant_zip
             }).then(res => {
-                if(res.username || res.email){
-                    if (res.username){
+
+                if(res.data.validationErrors){
+                    // Check if username already exist
+                    if (res.data.validationErrors.username){
                         this.setState({
-                            helperTextUsername: res.username,
+                            helperTextUsername: res.data.validationErrors.username,
                             errorUsername: true,
                             isValid: false,
                         });
                     }
-                    
-                    if(res.email){
+
+                    // Check if email already being used
+                    if(res.data.validationErrors.email){
                         this.setState({
-                            helperTextEmail: res.email,
+                            helperTextEmail: res.data.validationErrors.email,
                             errorEmail: true,
                             isValid: false,
                         });
