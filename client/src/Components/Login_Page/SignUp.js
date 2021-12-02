@@ -522,7 +522,9 @@ class SignUp extends Component {
 
                     <MuiThemeProvider theme={theme}>
                         <FormControl>
+
                             <TextField
+                                id="first_name"
                                 label="First Name"
                                 type="text"
                                 name="first_name"
@@ -536,6 +538,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="last_name"
                                 label="Last Name"
                                 type="text"
                                 name="last_name"
@@ -549,6 +552,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="username"
                                 label="Username"
                                 type="text"
                                 name="username"
@@ -562,6 +566,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="email"
                                 label="Email"
                                 type="email"
                                 name="email"
@@ -575,6 +580,7 @@ class SignUp extends Component {
                         
                         <FormControl>
                             <TextField
+                                id="password"
                                 label="Password"
                                 name="password"
                                 fullWidth
@@ -611,6 +617,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="retype_password"
                                 label="Retype Password"
                                 name="retypePassword"
                                 fullWidth
@@ -638,6 +645,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="restaurant_name"
                                 label="Restaurant Name"
                                 type="text"
                                 name="restaurant_name"
@@ -651,6 +659,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="restaurant_address"
                                 label="Restaurant Address"
                                 type="address"
                                 name="restaurant_address"
@@ -664,6 +673,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="city"
                                 label="City"
                                 type="city"
                                 name="restaurant_city"
@@ -676,9 +686,9 @@ class SignUp extends Component {
                         </FormControl>
 
                         <FormControl error={this.state.errorRestaurantState}>
-                            <InputLabel id="dropdown-state-select" >State</InputLabel>
+                            <InputLabel id="dropdown-state-select" className="state-label">State</InputLabel>
                             <Select
-                                labelId="dropdown-state-select"
+                                label="dropdown-state-select"
                                 type="state"
                                 name="restaurant_state"
                                 fullWidth
@@ -745,6 +755,7 @@ class SignUp extends Component {
 
                         <FormControl>
                             <TextField
+                                id="zip_code"
                                 label="ZIP Code"
                                 type="numbers"
                                 name="restaurant_zip"
@@ -819,7 +830,7 @@ class SignUp extends Component {
                     
                 </Form>
                 
-                <Link to="/" className="link"><IoChevronBack className="Back_button_SignUp"/></Link>
+                <Link to={'/'} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_SignUp"/></Link>
             </div>
         )
     }

@@ -558,18 +558,36 @@ span.multiline-block {
 }
 
 label.MuiInputLabel-shrink {
-  transform: translate(0, 5.5px) scale(0.75);
+  transform: translate(0, 0px) scale(0.75);
   transform-origin: top left;
 }
 
 p.MuiFormHelperText-root {
   color: #00ff5a;
+  padding-top: 8px;
 }
 
-/* font weight of input text fields in the signup page */
-/* input.MuiInput-input{
-  font-weight: bold;
-} */
+input.MuiInputBase-input{
+  padding-bottom: 4px;
+}
+
+div.MuiFormControl-root{
+  padding-top: 9px;
+}
+
+label.MuiInputLabel-formControl{
+  top: 5px;
+}
+
+label.state-label {
+  padding-top: 11px;
+}
+
+div.MuiSelect-select.MuiSelect-select {
+  padding-bottom: 8px;
+  padding-top: 12px;
+  display: inline-flex;
+}
 
 
 
