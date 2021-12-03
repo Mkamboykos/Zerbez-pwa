@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Navigate } from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import {Form} from 'react-bootstrap'
 import {TextField, createTheme, MuiThemeProvider,InputAdornment, IconButton, FormHelperText, MenuItem, FormControl, InputLabel, withStyles, Select, FormControlLabel, Checkbox} from '@material-ui/core'
 import Visibility from "@material-ui/icons/Visibility";
@@ -222,7 +222,7 @@ class SignUp extends Component {
                 errorEmail: true,
                 isValid: false
             });
-        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){   // eslint-disable-line
             this.setState({
                 helperTextEmail: 'This is not a valid email!',
                 errorEmail: true,
@@ -417,11 +417,9 @@ class SignUp extends Component {
 
     handleKeyPressSignUp(e){
         if (e.key === "Enter"){
-            {this.handleSignUp()}
+            this.handleSignUp()
         }
     }
-
-
 
     
     // HTTP POST Request sent to the databse, and redirect is enabled
@@ -473,7 +471,7 @@ class SignUp extends Component {
     // Redirect to Dashboard when redirect is true
     renderRedirect(){
         if(this.state.redirect === true){
-            return <Navigate  to='/'/>
+            return <Navigate to='/'/>
         }
     }
 

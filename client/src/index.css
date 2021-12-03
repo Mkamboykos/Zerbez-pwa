@@ -832,13 +832,6 @@ span.reqContainer{
   cursor: pointer;
 }
 
-.centerLogout {
-  display: flex;
-  flex-direction: column;
-  height: 18.5vh;
-  justify-content: flex-start;
-}
-
 
 
 

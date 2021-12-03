@@ -3,7 +3,7 @@ import {Link, Navigate} from 'react-router-dom'
 import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
-import {Input, FormHelperText} from '@material-ui/core';
+import {FormHelperText} from '@material-ui/core';
 
 
 class ResetPassword extends Component{
@@ -159,7 +159,7 @@ class ResetPassword extends Component{
     handleKeyPressPasswords(e){
          // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
-            {this.handlePasswords()}
+            this.handlePasswords()
         }
     }
 

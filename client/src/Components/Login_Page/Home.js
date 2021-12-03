@@ -6,7 +6,7 @@ import Axios from 'axios';
 import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
-import {Input, FormHelperText} from '@material-ui/core';
+import {FormHelperText} from '@material-ui/core';
 import homeLogoA from '../Icons/homeLogoA.svg';
 
 Axios.defaults.withCredentials = true;
@@ -16,7 +16,7 @@ class Home extends Component{
     constructor(props) {
         super(props);
 
-    //Initial State
+        //Initial State
         this.state = ({
             
             username: "",
@@ -105,7 +105,7 @@ class Home extends Component{
                 helperText: `You have ${this.state.count} attempts left!`,
                 errorCaptcha: true,
             });
-        }else if(this.state.userCaptcha != this.state.captcha && this.state.count !== 0){
+        }else if(this.state.userCaptcha !== this.state.captcha && this.state.count !== 0){
             
             this.setState((prevState, props) => ({
                 count: prevState.count - 1
@@ -125,7 +125,7 @@ class Home extends Component{
                     this.setState({
                         redirect: true,
                         user: res.data.username
-                    }) 
+                    });
                 }else if (res.data.message === "Tokens not present"){
                     this.refreshPage()
                 }
@@ -136,7 +136,7 @@ class Home extends Component{
 
     handleKeyPressSubmit = (e) =>{
         if (e.key === "Enter"){
-            {this.handleSubmit(e)}
+            this.handleSubmit(e)
         }
     }
 
