@@ -66,15 +66,13 @@ function Dashboard() {
     checker1.current = checkActive
     checker2.current = passUser
 
-    
+    // to avoid complexity in the useEffect method return
     const userStatus = JSON.stringify(authState)
 
-
+    // runs everytime the page refreshes
     useEffect(() => {
-        
         checker1.current();
         checker2.current();
-
     }, [userStatus]);
 
 
