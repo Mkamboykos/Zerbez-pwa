@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
@@ -10,7 +10,11 @@ function Dashboard() {
     
     let navigate = useNavigate();
 
-    const checker = useRef()
+    var savedUser = ""
+
+    const checker1 = useRef()
+    const checker2 = useRef()
+
     const [pass, setPass] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
@@ -21,55 +25,57 @@ function Dashboard() {
         status: null
     });
 
-    
-    const checkUserFunction = () => {
 
-        var savedUser = ""
-
-        const checkActive = () =>{
-            Axios.get('http://localhost:3001/Auth/Login')
-            .then((res) => {
-                if (res.data.LoggedIn) {
-                    setAuthState({
-                        username: res.data.username,
-                        id: res.data.id,
-                        role: res.data.role,
-                        status: res.data.LoggedIn,
-                    })
-                }else{
-                    setAuthState({ ...authState, status: false });
-                }
-            }).catch(error => console.log(error)); 
-        }
-        
-        const passUser = () =>{
-            if (authState.status === true){
-                if(savedUser !== undefined){
-                    const getUser = window.location.pathname.split('/');
-                    savedUser = [...getUser][2]
-                }
-                if (savedUser === authState.username){
-                    return setPass(true)
-                }else{
-                    return navigate('/404');
-                }
-            }else if (authState.username === undefined){
-                navigate('/');
-            }else if(authState.status === false){
-                navigate('/404');
+    const checkActive = () =>{
+        Axios.get('http://localhost:3001/Auth/Login')
+        .then((res) => {
+            if (res.data.LoggedIn) {
+                setAuthState({
+                    username: res.data.username,
+                    id: res.data.id,
+                    role: res.data.role,
+                    status: res.data.LoggedIn,
+                })
+            }else{
+                setAuthState({ ...authState, status: false });
             }
-        }
-        
-        checkActive();
-        passUser();
+        }).catch(error => console.log(error)); 
     }
+        
+
+    const passUser = () =>{
+        if (authState.status === true){
+            if(savedUser !== undefined){
+                const getUser = window.location.pathname.split('/');
+                savedUser = [...getUser][2]
+            }
+            if (savedUser === authState.username){
+                return setPass(true)
+            }else{
+                return navigate('/404');
+            }
+        }else if (authState.username === undefined){
+            navigate('/');
+        }else if(authState.status === false){
+            navigate('/404');
+        }
+    }
+        
     
-    // defining checkUserFunction as dependency for useEffect, must use reference 
-    checker.current = checkUserFunction
+    // defining checkActive and passUser as dependency for useEffect, must use reference 
+    checker1.current = checkActive
+    checker2.current = passUser
+
+    
+    const userStatus = JSON.stringify(authState)
+
 
     useEffect(() => {
-        checker.current();
-    }, [JSON.stringify(authState)]);
+        
+        checker1.current();
+        checker2.current();
+
+    }, [userStatus]);
 
 
     const MenuButtonAnimation = useSpring({
