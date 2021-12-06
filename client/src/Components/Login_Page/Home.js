@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Navigate} from 'react-router-dom'
 import { Spring, animated } from 'react-spring';
-import {Form, InputGroup} from 'react-bootstrap'
+import {Form, InputGroup} from 'react-bootstrap';
 import Axios from 'axios';
 import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
