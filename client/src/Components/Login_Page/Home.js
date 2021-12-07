@@ -7,7 +7,7 @@ import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
 import {FormHelperText} from '@material-ui/core';
-import homeLogoA from '../Icons/homeLogoA.svg';
+import homeLogoA from '../../Icons/homeLogo.svg';
 
 Axios.defaults.withCredentials = true;
 
@@ -18,10 +18,8 @@ class Home extends Component{
 
         //Initial State
         this.state = ({
-            
             username: "",
             password: "",
-
             userCaptcha: "",
             loginDisplay: true,
             capChaDisplay: false,
@@ -34,7 +32,6 @@ class Home extends Component{
             user: ""
         });
     }
-
 
     onChangeTextfield = (e) =>{
         let field = e.target.name;
@@ -49,25 +46,6 @@ class Home extends Component{
         });
     }
 
-    handleLogin = () =>{
-        let random = Math.random().toString(36).substring(7);
-        this.setState({
-            captcha: random
-        })
-    }
-
-    handleKeyPressLogin = (e) =>{
-        // Validators for username and password when Enter key is pressed
-        if (e.key === "Enter"){
-            e.preventDefault();
-            
-            let random = Math.random().toString(36).substring(7);
-            this.setState({
-                captcha: random
-            })
-            document.getElementById("loginButton").click();
-        }
-    }
 
     handleCaptcha = (e) =>{
         let userCaptcha = e.target.value
@@ -78,6 +56,68 @@ class Home extends Component{
                 userCaptcha: userCaptcha,
             })
     }
+
+
+    refreshPage = () => {
+        window.location.reload(false);
+    }
+
+
+    handleLogin = () =>{
+        let random = Math.random().toString(36).substring(7);
+        this.setState({
+            captcha: random
+        })
+    }
+
+    handleKeyPressLogin = (e) =>{
+        // Validators for username and password when Enter key is pressed
+        if (e.key === "Enter"){
+            e.preventDefault()
+            this.handleLogin()
+            document.getElementById("loginButton").click();
+        }
+    }
+
+
+    verifyCredentials = async e =>{
+        e.preventDefault();
+        
+        // Authenticate username and password
+        await Axios.post('http://localhost:3001/Auth/Login', {
+            username: this.state.username,
+            password: this.state.password,
+        }).then(res => {
+            console.log(res.data);
+            if(res.data.auth !== true || res.data === ""){
+                this.setState({
+                    helperText: 'Wrong username or password conbination!',
+                    errorUsername: true,
+                    errorPassword: true,
+                    isValid: false,
+                });
+            }else{
+                this.setState({                    
+                    capChaDisplay: true,
+                    btnDisplay:true,
+                    loginDisplay:false
+                });
+            }
+        }).catch(error => {
+            this.setState({
+                error: `${error}`
+            })
+            if(this.state.error !== ''){
+                this.setState({
+                    helperText: 'Wrong username or password conbination!',
+                    errorUsername: true,
+                    errorPassword: true,
+                    isValid: false,
+                });
+            }
+        });
+    }
+
 
     handleSubmit = (e) =>{
         e.preventDefault();
@@ -140,45 +180,6 @@ class Home extends Component{
         }
     }
 
-    
-    verifyCredentials = async e =>{
-        e.preventDefault();
-        
-        // Authenticate username and password
-        await Axios.post('http://localhost:3001/Auth/Login', {
-            username: this.state.username,
-            password: this.state.password,
-        }).then(res => {
-            console.log(res.data);
-            if(res.data.auth !== true || res.data === ""){
-                this.setState({
-                    helperText: 'Wrong username or password conbination!',
-                    errorUsername: true,
-                    errorPassword: true,
-                    isValid: false,
-                });
-            }else{
-                this.setState({                    
-                    capChaDisplay: true,
-                    btnDisplay:true,
-                    loginDisplay:false
-                });
-            }
-        }).catch(error => {
-            this.setState({
-                error: `${error}`
-            })
-            if(this.state.error !== ''){
-                this.setState({
-                    helperText: 'Wrong username or password conbination!',
-                    errorUsername: true,
-                    errorPassword: true,
-                    isValid: false,
-                });
-            }
-        });
-    }
-    
 
     renderRedirect = () =>{
         if (this.state.redirect === true) {
@@ -186,11 +187,8 @@ class Home extends Component{
         }
     }
 
-    refreshPage = () => {
-        window.location.reload(false);
-    }
     
-    renderCaptcha(){
+    renderCaptcha = () =>{
         return(
             <div className="homePageContainer" >
                 <div className="HomePageTitleContainer">
@@ -235,7 +233,7 @@ class Home extends Component{
         ) 
     }
 
-    renderLogin(){
+    renderLogin = () =>{
         return(
             <div className="homePageContainer">
                 <div className="HomePageTitleContainer">
@@ -299,7 +297,7 @@ class Home extends Component{
         if (this.state.loginDisplay){
             return ( 
                 <div>  
-                    {this.state.loginDisplay?this.renderLogin():""} 
+                    {this.state.loginDisplay ? this.renderLogin() : ""} 
                 </div>
             )
         } else if (this.state.capChaDisplay){

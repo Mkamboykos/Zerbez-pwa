@@ -52,7 +52,6 @@ function authenticateToken(req, res, next){
                 }
 
                 jwt.verify(req.refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, verifiedRefresh) => {
-
                     if (err){
                         res.json({message: "Invalid Refresh Token", status: false});
                     } else if (verifiedRefresh){
@@ -66,7 +65,6 @@ function authenticateToken(req, res, next){
                         })
                         
                         jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, authData) => {
-
                             if (err){
                                 res.json({message: "Invalid Access Token"});
                             }else if(authData){

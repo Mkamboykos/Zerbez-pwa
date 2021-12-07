@@ -99,6 +99,10 @@ nav {
   flex-direction: column;
 }
 
+/* make border of invalid entry white, instead of default red */
+input.contentBarText.form-control.is-invalid{
+  border-color: #FFFFFF
+}
 
 [type=button],[type=reset],[type=submit],button {
   -webkit-appearance: button
@@ -563,7 +567,7 @@ label.MuiInputLabel-shrink {
 }
 
 p.MuiFormHelperText-root {
-  color: #00ff5a;
+  color: #f4f1f27a;
 }
 
 input.MuiInputBase-input{

@@ -6,6 +6,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
+import termsOfUse from '../../Documents/terms-of-use-template.pdf';
 
 // styles are used to set the color white in the check boxes
 const styles = {
@@ -76,7 +77,6 @@ class SignUp extends Component {
             helperTextPasswordLowercase: "Must contain at least one lowercase character",
             helperTextPasswordNumber: "Must contain at least one number",
             helperTextPasswordSpecial: "Must contain special character(s) (e.g. !@$&$)",
-            
 
             existUsername:'',
             existEmail: '',
@@ -475,7 +475,7 @@ class SignUp extends Component {
         }
     }
 
-    render() {
+    render(){
 
         // color is the main white used accross the app
         const color = "#FFFFFF";
@@ -810,7 +810,7 @@ class SignUp extends Component {
                                 label={
                                     <div>
                                         <span>I accept the </span>
-                                            <Link to={'/terms'} target="_blank" className="linkService">terms of use</Link>
+                                            <Link to={termsOfUse} target="_blank" className="linkService">terms of use</Link>
                                         <span> & </span>
                                             <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                                     </div>

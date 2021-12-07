@@ -20,7 +20,6 @@ const FloorPlan = lazy(() => import('./Components/Dashboard_Page/FloorPlan'))
 const NewReservation = lazy(() => import('./Components/Dashboard_Page/NewReservation'))
 const Reservations = lazy(() => import('./Components/Dashboard_Page/Reservations'))
 const Privacy = lazy(() => import('./Components/Legal/Privacy'))
-const Terms = lazy(() => import('./Components/Legal/Terms'))
 const NotFound = lazy(() => import('./Components/404_NotFound/NotFound'))
 
 
@@ -46,7 +45,6 @@ function App() {
             <Route exact path="/NewReservation" element={<NewReservation/>}/>
             <Route exact path="/Reservations" element={<Reservations/>}/>
             <Route exact path="/Privacy" element={<Privacy/>}/>
-            <Route exact path="/Terms" element={<Terms/>}/>
             <Route exact path="/404" element={<NotFound/>}/>
           </Routes>
         </Suspense>

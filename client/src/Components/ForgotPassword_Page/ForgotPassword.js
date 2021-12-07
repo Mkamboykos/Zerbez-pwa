@@ -49,7 +49,7 @@ class ForgotPassword extends Component{
     }
 
 
-    handleContinue(e){
+    handleContinue(){
         // Validators for email
         if(this.state.isValid === false){
             this.setState({
@@ -64,7 +64,7 @@ class ForgotPassword extends Component{
                 errorEmail: true,
                 isValid: false
             });
-        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){   // eslint-disable-line
             this.setState({
                 helperTextEmail: 'This is not a valid email!',
                 errorEmail: true,
@@ -75,27 +75,7 @@ class ForgotPassword extends Component{
 
     handleKeyPressContinue(e){
         if (e.key === "Enter"){
-
-            if(this.state.isValid === false){
-                this.setState({
-                    isValid: true
-                })
-            }
-
-        // Validators -> email
-        if(this.state.email === ""){
-            this.setState({
-                helperTextEmail: 'Field cannot be empty!',
-                errorEmail: true,
-                isValid: false
-            });
-        }else if(!(this.state.email).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
-            this.setState({
-                helperTextEmail: 'This is not a valid email!',
-                errorEmail: true,
-                isValid: false
-            });
-        }
+            this.handleContinue()
         }
     }
 
@@ -166,7 +146,7 @@ class ForgotPassword extends Component{
         }
     }
 
-    handleContinueCode(e){
+    handleContinueCode(){
         if(this.state.isValidCode === false){
             this.setState({
                 isValidCode: true
@@ -195,31 +175,7 @@ class ForgotPassword extends Component{
 
     handleKeyPressContinueCode(e){
         if (e.key === "Enter"){
-            
-            if(this.state.isValidCode === false){
-                this.setState({
-                    isValidCode: true
-                })
-            }
-    
-            if(this.state.one === '' || this.state.two === '' || this.state.three === '' || this.state.four === ''){
-                this.setState({
-                    helperTextCode: 'Fields cannot be empty!',
-                    errorCode: true,
-                    isValidCode: false
-                });
-            }else if(!(this.state.one || this.state.two || this.state.three || this.state.four).match(/^[0-9]+$/)){
-                this.setState({
-                    helperTextCode: 'Fields can only have numbers!',
-                    errorCode: true,
-                    isValidCode: false
-                });
-            }else{
-                const nodesTogether = parseInt(this.state.one + this.state.two + this.state.three + this.state.four);
-                this.setState({
-                    nodesTogether: nodesTogether
-                })
-            }
+            this.handleContinueCode()
         }
     }
 

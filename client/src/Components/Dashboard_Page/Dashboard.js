@@ -25,54 +25,58 @@ function Dashboard() {
         status: null
     });
 
+    const checkActive = () => {
 
-    const checkActive = () =>{
-        Axios.get('http://localhost:3001/Auth/Login')
-        .then((res) => {
-            if (res.data.LoggedIn) {
-                setAuthState({
-                    username: res.data.username,
-                    id: res.data.id,
-                    role: res.data.role,
-                    status: res.data.LoggedIn,
-                })
-            }else{
-                setAuthState({ ...authState, status: false });
-            }
-        }).catch(error => console.log(error)); 
-    }
-        
-
-    const passUser = () =>{
-        if (authState.status === true){
-            if(savedUser !== undefined){
-                const getUser = window.location.pathname.split('/');
-                savedUser = [...getUser][2]
-            }
-            if (savedUser === authState.username){
-                return setPass(true)
-            }else{
-                return navigate('/404');
-            }
-        }else if (authState.username === undefined){
-            navigate('/');
-        }else if(authState.status === false){
-            navigate('/404');
+        const checkToken = () =>{
+            Axios.get('http://localhost:3001/Auth/Login')
+            .then((res) => {
+                if (res.data.LoggedIn) {
+                    setAuthState({
+                        username: res.data.username,
+                        id: res.data.id,
+                        role: res.data.role,
+                        status: res.data.LoggedIn,
+                    })
+                }else{
+                    setAuthState({ ...authState, status: false });
+                }
+            }).catch(error => console.log(error)); 
         }
+
+        const passUser = () =>{
+            if (authState.status === true){
+                if(savedUser !== undefined){
+                    const getUser = window.location.pathname.split('/');
+                    savedUser = [...getUser][2]
+                }
+                if (savedUser === authState.username){
+                    return setPass(true)
+                }else{
+                    return navigate('/404');
+                }
+            }else if (authState.username === undefined){
+                navigate('/');
+            }else if(authState.status === false){
+                navigate('/404');
+            }
+        }
+
+        checkToken()
+        passUser()
     }
         
     
     // defining checkActive and passUser as dependency for useEffect, must use reference 
     checker1.current = checkActive
-    checker2.current = passUser
+
 
     // to avoid complexity in the useEffect method return
     const userStatus = JSON.stringify(authState)
 
+
     // runs everytime the page refreshes
     useEffect(() => {
         checker1.current();
-        checker2.current();
     }, [userStatus]);
 
 
@@ -81,10 +85,12 @@ function Dashboard() {
         transform: MenuButtonsVisible ? `flash(0%)` : `flash(100%)`
     });
 
+
     const MenuAnimation = useSpring({
         opacity: MenuVisible ? 1 : 0,
         transform: MenuVisible ? `flash(0%)` : `flash(100%)`
     });
+
 
     const logoutButton = async (e) => {
         try {
@@ -93,6 +99,7 @@ function Dashboard() {
              console.log(e)
         }
     }
+
 
     const SettingsBar = ({ style }) => (
         <animated.div className="menu menu--right" style={style}>
@@ -120,7 +127,6 @@ function Dashboard() {
             </nav>
         </animated.div>
     )
-
   
 
     const MenuButtons = ({style}) => (
@@ -134,6 +140,7 @@ function Dashboard() {
         </animated.div>
     )
 
+    
     return(
         <div>
             {pass === true ? 

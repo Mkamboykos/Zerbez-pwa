@@ -7,6 +7,25 @@ const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 const ValidationException = require('../Exceptions/ValidationException');
 
+function tokensFunction(res, user){
+    // create accessToken and refreshToken with user
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+
+    // create access cookie with accessToken, expires in 15 seconds
+    res.cookie("access", accessToken, {
+        maxAge: 5000, // 5 seconds
+        httpOnly: true,
+    })
+
+    // create refresh cookie with refreshToken, expires in 24 hours
+    res.cookie("refresh", refreshToken, {
+        maxAge: 86400000, // 24 hours
+        httpOnly: true,
+    })
+
+    res.json({auth: true});
+}
 
 // Check if user if logged in (authentication) -> used in every routes when logged in 
 router.get('/Login', authenticateToken, (req, res) => {
@@ -38,7 +57,7 @@ router.get('/Login', authenticateToken, (req, res) => {
 router.post('/logout/:username', (req, res) => {
     try{
         // clear the remembered cookie when logging out
-        // usually it gets redirected by setting username to undefined it sends it straight to do the login page
+        // It gets redirected when setting username to undefined it sends it straight to do the login page
         return res.clearCookie('refresh').json({username: undefined});
     }catch(e){
         console.log(e);
@@ -60,29 +79,14 @@ router.post('/Login', async (req, res) => {
             }else if(match){
                 // get the username of the user in the database
                 const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
-
-                // create accessToken and refreshToken with user
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-
-                // create refresh cookie with refreshToken, expires in 24 hours
-                res.cookie("refresh", refreshToken, {
-                    maxAge: 86400000, // 24 hours
-                    httpOnly: true,
-                })
-
-                // create access cookie with accessToken, expires in 15 seconds
-                res.cookie("access", accessToken, {
-                    maxAge: 5000, // 5 seconds
-                    httpOnly: true,
-                })
-                res.json({auth: true});
+                tokensFunction(res, user);
             }
         }).catch(e =>{
             console.log(e)
         });
     }
 
+    // if adminUser does not exist try creating managerUser
     const managerUser = await Manager.findOne({where: {username: username}})
     
     if(managerUser){
@@ -92,24 +96,7 @@ router.post('/Login', async (req, res) => {
             }else if(match){
                 // get the username of the user in the database
                 const user = {id: managerUser.id, name: managerUser.username, role: managerUser.role};
-
-                // create accessToken and refreshToken with user
-                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-
-                // create access cookie with accessToken, expires in 15 seconds
-                res.cookie("access", accessToken, {
-                    maxAge: 5000, // 5 seconds
-                    httpOnly: true,
-                })
-
-                // create refresh cookie with refreshToken, expires in 24 hours
-                res.cookie("refresh", refreshToken, {
-                    maxAge: 86400000, // 24 hours
-                    httpOnly: true,
-                })
-
-                res.json({auth: true});
+                tokensFunction(res, user);
             }
         }).catch(e =>{
             console.log(e)
@@ -121,6 +108,7 @@ router.post('/Login', async (req, res) => {
     }
     
 });
+
 
 
 module.exports = router;
