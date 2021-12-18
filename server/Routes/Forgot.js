@@ -30,8 +30,6 @@ router.post('/Email', async (req, res) => {
                 }
             });
 
-
-
             //create random 4 digit code generator
             var randomCode = Math.floor(1000 + Math.random() * 9000);
             console.log(randomCode);
@@ -69,6 +67,8 @@ router.post('/Email', async (req, res) => {
     }
 });
 
+
+//Reset Password - update new password
 router.put('/Email', authenticateToken, async (req, res) => {
 
     const {newPassword} = req.body;
@@ -94,7 +94,7 @@ router.put('/Email', authenticateToken, async (req, res) => {
             return res.clearCookie('access').json({auth: true});
         }
     }).catch((error) => {
-      // do seomthing with the error
+      // do something with the error
       throw new Error(error)
     })
 });
