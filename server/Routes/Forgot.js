@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {Manager} = require('../models');
+const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
@@ -12,7 +13,6 @@ router.post('/Email', async (req, res) => {
     const emailExist = await Manager.findOne({ where: {email: email} });
 
     if(emailExist){
-        try{
             let transporter = await nodemailer.createTransport({
                 host: process.env.MAIL_HOST,
                 port: process.env.MAIL_PORT,
@@ -29,6 +29,8 @@ router.post('/Email', async (req, res) => {
                     console.log('Server is ready to take our messages');
                 }
             });
+
+
 
             //create random 4 digit code generator
             var randomCode = Math.floor(1000 + Math.random() * 9000);
@@ -51,27 +53,51 @@ router.post('/Email', async (req, res) => {
             //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
             
             const user = {id: emailExist.id, name: emailExist.username, role: emailExist.role};
-
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+            
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 
             res.cookie("access", accessToken, {
-                maxAge: 600000, // 15 minutes
+                maxAge: 900000, // 15 minutes
                 httpOnly: true,
             })
 
             // send both email and random code back
-            res.json({message:"success", code: code})
-
-        } catch (err) {
-            console.log(err);
-        }
+            res.json({auth: true, code: code})
 
     }else{
         res.status(404).send({error:'Email could not be found!'});
     }
 });
 
+router.put('/Email', authenticateToken, async (req, res) => {
 
+    const {newPassword} = req.body;
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await Manager.findOne({ where: {username: req.user.name} })
+    .then(user => {
+        
+        if (!user) {
+            throw new Error('No record found')
+        }else if (user){
+
+            let values = {
+                password: hashedPassword
+            }
+
+            user.update(values).then( updatedRecord => {
+                console.log(`updated record ${JSON.stringify(updatedRecord,null,2)}`)
+                // login into your DB and confirm update
+            })
+
+            return res.clearCookie('access').json({auth: true});
+        }
+    }).catch((error) => {
+      // do seomthing with the error
+      throw new Error(error)
+    })
+});
 
 
 

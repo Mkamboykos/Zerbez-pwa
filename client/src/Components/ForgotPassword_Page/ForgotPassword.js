@@ -26,7 +26,8 @@ class ForgotPassword extends Component{
             isValidCode: false,
             code: "",
             nodesTogether: "",
-            enterEmailDisplay: true
+            enterEmailDisplay: true,
+            user: ""
         });
     
         this.handleEmail = this.handleEmail.bind(this);
@@ -35,6 +36,10 @@ class ForgotPassword extends Component{
         this.handleContinueCode = this.handleContinueCode.bind(this);
         this.handleKeyPressContinueCode = this.handleKeyPressContinueCode.bind(this);
         this.onChangeCode = this.onChangeCode.bind(this);
+    }
+
+    refreshPage = () => {
+        window.location.reload(false);
     }
 
     //Class Properties (Events On Change)
@@ -79,7 +84,7 @@ class ForgotPassword extends Component{
         }
     }
 
-    verifyCredentials = async e =>{
+    verifyCredentials = (e) =>{
         e.preventDefault();
         
         // Authenticate username and password
@@ -87,7 +92,8 @@ class ForgotPassword extends Component{
             email: this.state.email
         }).then(res => {
 
-            console.log(res.data);
+            console.log(res);
+
             //save random 4 digit code for authentication
             if(res.data.code){
                 this.setState({
@@ -96,7 +102,7 @@ class ForgotPassword extends Component{
             }
 
             console.log(this.state.code);
-            if(res.data.message !== "success" || res.data === ""){
+            if(res.data.auth !== true || res.data === ""){
                 this.setState({
                     helperTextEmail: 'This is not a valid email!',
                     errorEmail: true,
@@ -146,7 +152,7 @@ class ForgotPassword extends Component{
         }
     }
 
-    handleContinueCode(){
+    handleContinueCode = () => {
         if(this.state.isValidCode === false){
             this.setState({
                 isValidCode: true
@@ -173,20 +179,29 @@ class ForgotPassword extends Component{
         }
     }
 
-    handleKeyPressContinueCode(e){
+    handleKeyPressContinueCode = (e) =>{
         if (e.key === "Enter"){
             this.handleContinueCode()
         }
     }
 
-    validateCode = async e =>{
+    validateCode = (e) =>{
         e.preventDefault();
-
         if(this.state.code !== "" && this.state.nodesTogether !== ""){
 
             if(this.state.nodesTogether === this.state.code){
-                this.setState({
-                    redirect: true
+
+                Axios.get('http://localhost:3001/Auth/Login')
+                .then(res => {
+                    console.log(res)
+                    if (res.data.LoggedIn === true){
+                        this.setState({
+                            redirect: true,
+                            user: res.data.username
+                        });
+                    }else if (res.data.message === "Tokens not present"){
+                        this.refreshPage()
+                    }
                 })
             }else{
                 this.setState({
@@ -198,16 +213,11 @@ class ForgotPassword extends Component{
         }
     }
 
-    refreshPage = () => {
-        window.location.reload(false);
-    }
-
     renderRedirect(){
         if (this.state.redirect === true){
-            return <Navigate  to='/ResetPassword'/>
+            return <Navigate  to={'/ResetPassword/'+ this.state.user} />
         }
     }
-    
     
     render() {
         if(this.state.enterEmailDisplay === true){

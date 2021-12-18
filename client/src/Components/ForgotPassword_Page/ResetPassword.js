@@ -4,6 +4,7 @@ import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
 import {FormHelperText} from '@material-ui/core';
+import Axios from 'axios';
 
 
 class ResetPassword extends Component{
@@ -163,12 +164,21 @@ class ResetPassword extends Component{
         }
     }
 
-    handleSubmit= async e =>{
+    handleSubmit = (e) =>{
         e.preventDefault();
         if(this.state.isValid === true && this.state.confirmPassword === this.state.newPassword){
-            this.setState({
-                redirect: true
-            }) 
+
+            Axios.put('http://localhost:3001/Forgot/Email', {
+                newPassword: this.state.newPassword
+            }).then(res => {
+                if (res.data.auth === true){
+                    this.setState({
+                        redirect: true
+                    }) 
+                }else{
+                    return <Navigate  to='/ForgotPassword'/>
+                }
+            })
         }
     }
 
