@@ -6,7 +6,6 @@ import Axios from 'axios';
 import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
-import {FormHelperText} from '@material-ui/core';
 import homeLogoA from '../../Icons/homeLogo.svg';
 
 Axios.defaults.withCredentials = true;
@@ -211,13 +210,12 @@ class Home extends Component{
                                     placeholder="Enter Captcha" 
                                     onChange={this.handleCaptcha} 
                                     isInvalid={this.state.errorCaptcha}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                 />
+                                <div className="invalid-tooltip" style={{right: '22%'}}>
+                                    <span>{this.state.helperText}</span>
+                                </div>
                             </InputGroup> 
-                            <FormHelperText error>
-                                <span className="homeReqContainer">
-                                    <span className="requirements">{this.state.helperText}</span>
-                                </span>
-                            </FormHelperText>
                         </Form.Group>
                     
                         <div>
@@ -272,18 +270,12 @@ class Home extends Component{
                                     isInvalid={this.state.errorPassword}
                                     style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                 />
-                                <div className="invalid-tooltip">
+                                <div className="invalid-tooltip" style={{right: '2%'}}>
                                     <span >{this.state.helperText}</span>
                                 </div>
                             </InputGroup>
-
-                            {/* <FormHelperText error>
-                                <span className="centerReqContainer">
-                                    <span className="requirements">{this.state.helperText}</span>
-                                </span>
-                            </FormHelperText> */}
-
                         </Form.Group>
+                        
                         <div className="input_and_login_Container">
                             <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
                                 

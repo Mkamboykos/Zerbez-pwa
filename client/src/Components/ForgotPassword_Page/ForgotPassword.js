@@ -3,7 +3,6 @@ import {Link, Navigate} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
-import {FormHelperText} from '@material-ui/core'
 import { Spring, animated } from 'react-spring';
 import Axios from 'axios';
 
@@ -29,13 +28,6 @@ class ForgotPassword extends Component{
             enterEmailDisplay: true,
             user: ""
         });
-    
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handleContinue = this.handleContinue.bind(this);
-        this.handleKeyPressContinue = this.handleKeyPressContinue.bind(this);
-        this.handleContinueCode = this.handleContinueCode.bind(this);
-        this.handleKeyPressContinueCode = this.handleKeyPressContinueCode.bind(this);
-        this.onChangeCode = this.onChangeCode.bind(this);
     }
 
     refreshPage = () => {
@@ -43,7 +35,7 @@ class ForgotPassword extends Component{
     }
 
     //Class Properties (Events On Change)
-    handleEmail(e){
+    handleEmail = (e) =>{
         let field = e.target.name;
         let value = e.target.value;
         this.setState({
@@ -54,7 +46,7 @@ class ForgotPassword extends Component{
     }
 
 
-    handleContinue(){
+    handleContinue = () =>{
         // Validators for email
         if(this.state.isValid === false){
             this.setState({
@@ -78,7 +70,7 @@ class ForgotPassword extends Component{
         }
     }
 
-    handleKeyPressContinue(e){
+    handleKeyPressContinue = (e) =>{
         if (e.key === "Enter"){
             this.handleContinue()
         }
@@ -130,7 +122,7 @@ class ForgotPassword extends Component{
         
     }
 
-    onChangeCode(e){
+    onChangeCode = (e) =>{
         let field = e.target.name;
         let value = e.target.value;
         
@@ -213,7 +205,8 @@ class ForgotPassword extends Component{
         }
     }
 
-    renderRedirect(){
+
+    renderRedirect = () =>{
         if (this.state.redirect === true){
             return <Navigate  to={'/ResetPassword/'+ this.state.user} />
         }
@@ -246,24 +239,22 @@ class ForgotPassword extends Component{
                                             value={this.state.email}
                                             className="contentBarText" 
                                             onChange={this.handleEmail}
-                                            isInvalid={this.state.errorEmail} 
+                                            isInvalid={this.state.errorEmail}
+                                            style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                         />
+                                        <div className="invalid-tooltip" style={{right: '22%'}}>
+                                            <span>{this.state.helperTextEmail}</span>
+                                        </div>
                                     </InputGroup>
-                                    <FormHelperText error>
-                                        <span className="centerReqContainer">
-                                            <span className="requirements">{this.state.helperTextEmail}</span>
-                                        </span>
-                                    </FormHelperText> 
                                 </Form.Group>
 
                                 <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
                                     <b>CONTINUE</b>
                                 </button>
-                                
                             </Form>
                         </div>
                     </div>
-                    <Link to="/" className="link"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
+                    <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
                 </div>    
             );
         }else if (this.state.enterCode === true){
@@ -286,47 +277,58 @@ class ForgotPassword extends Component{
                                     </div>
             
                                     <Form.Group className="codeBarContainer">
-                                        <Form.Control 
-                                            type="text" 
-                                            maxLength="1"
-                                            className="codeBarText"
-                                            name="one"
-                                            value={this.state.one}   
-                                            onChange={this.onChangeCode}
-                                            isInvalid={this.state.errorCode} 
-                                        />
-                                        <Form.Control 
-                                            type="text" 
-                                            maxLength="1"
-                                            className="codeBarText"
-                                            name="two"
-                                            value={this.state.two}    
-                                            onChange={this.onChangeCode}
-                                            isInvalid={this.state.errorCode}  
-                                        />
-                                        <Form.Control 
-                                            type="text" 
-                                            maxLength="1" 
-                                            className="codeBarText" 
-                                            name="three"
-                                            value={this.state.three}  
-                                            onChange={this.onChangeCode} 
-                                            isInvalid={this.state.errorCode} 
-                                        />
-                                        <Form.Control 
-                                            type="text" 
-                                            maxLength="1" 
-                                            className="codeBarText"
-                                            name="four"
-                                            value={this.state.four}
-                                            onChange={this.onChangeCode} 
-                                            isInvalid={this.state.errorCode} 
-                                        />
-                                        <Form.Control.Feedback type='invalid'>
-                                            <span className="codeReqContainer">
-                                                {this.state.helperTextCode}
-                                            </span>
-                                        </Form.Control.Feedback>
+                                        <InputGroup>
+                                            <Form.Control 
+                                                type="text" 
+                                                maxLength="1"
+                                                className="codeBarText"
+                                                name="one"
+                                                value={this.state.one}   
+                                                onChange={this.onChangeCode}
+                                                isInvalid={this.state.errorCode}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                            />
+                                            <Form.Control 
+                                                type="text" 
+                                                maxLength="1"
+                                                className="codeBarText"
+                                                name="two"
+                                                value={this.state.two}    
+                                                onChange={this.onChangeCode}
+                                                isInvalid={this.state.errorCode}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                            />
+                                            <Form.Control 
+                                                type="text" 
+                                                maxLength="1" 
+                                                className="codeBarText" 
+                                                name="three"
+                                                value={this.state.three}  
+                                                onChange={this.onChangeCode} 
+                                                isInvalid={this.state.errorCode}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                            />
+                                            <Form.Control 
+                                                type="text" 
+                                                maxLength="1" 
+                                                className="codeBarText"
+                                                name="four"
+                                                value={this.state.four}
+                                                onChange={this.onChangeCode} 
+                                                isInvalid={this.state.errorCode}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                            />
+
+                                            {this.state.helperTextCode === 'Incorrect Code!' ?
+                                                <div className="invalid-tooltip" style={{right: '12rem'}}>
+                                                    <span>{this.state.helperTextCode}</span>
+                                                </div> 
+                                                : 
+                                                <div className="invalid-tooltip" style={{right: '28%'}}>
+                                                    <span>{this.state.helperTextCode}</span>
+                                                </div>
+                                            }
+                                        </InputGroup>
                                     </Form.Group>
             
                                     <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >

@@ -3,7 +3,6 @@ import {Link, Navigate} from 'react-router-dom'
 import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
-import {FormHelperText} from '@material-ui/core';
 import Axios from 'axios';
 
 
@@ -27,15 +26,10 @@ class ResetPassword extends Component{
             isValid: false,
             redirect: false,
         });
-
-        this.onChangeTextfield = this.onChangeTextfield.bind(this);
-        this.handlePasswords = this.handlePasswords.bind(this);
-        this.handleKeyPressPasswords = this.handleKeyPressPasswords.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     //Class Properties (Events On Change)
-    onChangeTextfield(e){
+    onChangeTextfield = (e) =>{
         let field = e.target.name;
         let value = e.target.value;
         this.setState({
@@ -52,7 +46,7 @@ class ResetPassword extends Component{
         });
     }
 
-    handlePasswords(){
+    handlePasswords = () =>{
         // Validators for username and password
         if(this.state.isValid === false){
             this.setState({
@@ -85,6 +79,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(this.state.newPassword.length > 20){
@@ -95,6 +90,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if((this.state.newPassword).match(/[\s]/)){
@@ -105,6 +101,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: 'Password cannot contain whitespaces!',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(!(this.state.newPassword).match(/[A-Z]/)){
@@ -115,6 +112,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(!(this.state.newPassword).match(/[a-z]/)){
@@ -125,6 +123,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(!(this.state.newPassword).match(/[0-9]/)){
@@ -135,6 +134,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: 'Must contain at least one number!',
                 helperTextPasswordSpecial: '',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(!(this.state.newPassword).match(/[^\w\s]/)){
@@ -145,6 +145,7 @@ class ResetPassword extends Component{
                 helperTextPasswordNumber: '',
                 helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
                 errorNewPassword: true,
+                errorConfirmPassword: true,
                 isValid: false
             });
         }else if(this.state.confirmPassword !== this.state.newPassword){
@@ -157,7 +158,7 @@ class ResetPassword extends Component{
 
     }
 
-    handleKeyPressPasswords(e){
+    handleKeyPressPasswords = (e) =>{
          // Validators for username and password when Enter key is pressed
         if (e.key === "Enter"){
             this.handlePasswords()
@@ -182,7 +183,7 @@ class ResetPassword extends Component{
         }
     }
 
-    renderRedirect(){
+    renderRedirect = () =>{
         if (this.state.redirect){
             alert("Your password has been changed!")
             return <Navigate  to='/'/>
@@ -231,19 +232,34 @@ class ResetPassword extends Component{
                                             value={this.state.confirmPassword}
                                             onChange={this.onChangeTextfield}
                                             isInvalid={this.state.errorConfirmPassword}
+                                            style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                         />
-                                    </InputGroup>
 
-                                    <FormHelperText error={this.state.errorNewPassword}>
-                                        <span className="reqContainer">
-                                            <span className="requirements">{this.state.helperTextPasswordLength}</span>
-                                            <span className="requirements">{this.state.helperTextPasswordUppercase}</span>
-                                            <span className="requirements">{this.state.helperTextPasswordLowercase}</span>
-                                            <span className="requirements">{this.state.helperTextPasswordNumber}</span>
-                                            <span className="requirements">{this.state.helperTextPasswordSpecial}</span>
-                                            <span className="requirements">{this.state.helperTextConfirmPassword}</span>
-                                        </span>
-                                    </FormHelperText>
+                                        {/* Make the requirements only pop up when the first field is empty and while confirmation for the second field remains false */}
+                                        {this.state.errorConfirmPassword === false || this.state.newPassword === "" ?
+                                        
+                                            <span className="reqContainer">
+                                                <span className="requirements">{this.state.helperTextPasswordLength}</span>
+                                                <span className="requirements">{this.state.helperTextPasswordUppercase}</span>
+                                                <span className="requirements">{this.state.helperTextPasswordLowercase}</span>
+                                                <span className="requirements">{this.state.helperTextPasswordNumber}</span>
+                                                <span className="requirements">{this.state.helperTextPasswordSpecial}</span>
+                                                <span className="requirements">{this.state.helperTextConfirmPassword}</span>
+                                            </span>
+                                        :
+                                            <div className="invalid-tooltip">
+                                                <span>
+                                                    {this.state.helperTextPasswordLength}
+                                                    {this.state.helperTextPasswordUppercase}
+                                                    {this.state.helperTextPasswordLowercase}
+                                                    {this.state.helperTextPasswordNumber}
+                                                    {this.state.helperTextPasswordSpecial}
+                                                    {this.state.helperTextConfirmPassword}
+                                                </span>
+                                            </div> 
+                                        }
+                                            
+                                    </InputGroup>
                                 </Form.Group>
 
                             <button className="continue_button_forgotPassword" type="submit"  onClick={this.handlePasswords} >
@@ -253,10 +269,10 @@ class ResetPassword extends Component{
                         </Form>
                     </div>
                 </div>
-                <Link to="/ForgotPassword" className="link"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
+                <Link to={'/ForgotPassword'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
             </div>           
         );
-      }
     }
+}
 
     export default ResetPassword;

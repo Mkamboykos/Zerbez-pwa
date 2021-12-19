@@ -459,12 +459,6 @@ label.captchaText.form-label{
   background-color: #587B7F;
 }
 
-/* FormHelperText for home login */
-span.centerReqContainer{
-  display: block;
-  padding-block-start: 4px;
-  text-align: center;
-}
 
 
 
@@ -720,14 +714,18 @@ span.codeReqContainer{
 span.reqContainer{
   display: block;
   padding-block-start: 10px;
+  font-size: smaller;
+  text-align: left;
 }
 
-/*  place password input requriments from every password into a block, delete after changing*/
+/*  place password input requriments into a block*/
 .requirements{
   display: block;
 }
 
-
+div.input-group{
+  justify-content: center;
+}
 
 
 /* Dashboard */
