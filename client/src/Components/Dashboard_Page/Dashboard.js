@@ -13,7 +13,6 @@ function Dashboard() {
     var savedUser = ""
 
     const checker1 = useRef()
-    const checker2 = useRef()
 
     const [pass, setPass] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);

@@ -91,7 +91,7 @@ class Home extends Component{
             console.log(res.data);
             if(res.data.auth !== true || res.data === ""){
                 this.setState({
-                    helperText: 'Wrong username or password conbination!',
+                    helperText: 'Wrong username or password combination!',
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
@@ -109,7 +109,7 @@ class Home extends Component{
             })
             if(this.state.error !== ''){
                 this.setState({
-                    helperText: 'Wrong username or password conbination!',
+                    helperText: 'Wrong username or password combination!',
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
@@ -262,22 +262,27 @@ class Home extends Component{
                         <Form.Group className="contentBar">
                             <InputGroup>
                                 <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
-                                <Form.Control 
+                                <Form.Control  
                                     type="password"  
                                     placeholder="Password"
                                     name="password"
                                     value={this.state.password}
-                                    className="contentBarText" 
+                                    className="contentBarText"
                                     onChange={this.onChangeTextfield}
                                     isInvalid={this.state.errorPassword}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                 />
+                                <div className="invalid-tooltip">
+                                    <span >{this.state.helperText}</span>
+                                </div>
                             </InputGroup>
-                            
-                            <FormHelperText error>
+
+                            {/* <FormHelperText error>
                                 <span className="centerReqContainer">
                                     <span className="requirements">{this.state.helperText}</span>
                                 </span>
-                            </FormHelperText>
+                            </FormHelperText> */}
+
                         </Form.Group>
                         <div className="input_and_login_Container">
                             <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
