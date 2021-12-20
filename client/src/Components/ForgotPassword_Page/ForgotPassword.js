@@ -26,7 +26,8 @@ class ForgotPassword extends Component{
             code: "",
             nodesTogether: "",
             enterEmailDisplay: true,
-            user: ""
+            user: "",
+            btnDisplay: true,
         });
     }
 
@@ -42,6 +43,7 @@ class ForgotPassword extends Component{
             [field]: value,
             errorEmail: false,
             helperTextEmail: '',
+            btnDisplay: false,
         })
     }
 
@@ -103,14 +105,14 @@ class ForgotPassword extends Component{
             }else if (this.state.isValid === true){
                 this.setState({                    
                     enterCode: true,
+                    btnDisplay:true,
                     enterEmailDisplay: false
                 });
-        }}).catch((e) => {
+        }}).catch(error => {
             this.setState({
-                error: `${e.response.status}`
+                error: `${error}`
             })
-
-            if(this.state.error === '404'){
+            if(this.state.error !== ''){
                 this.setState({
                     helperTextEmail: 'Email could not be found!',
                     errorEmail: true,
@@ -215,49 +217,51 @@ class ForgotPassword extends Component{
     render() {
         if(this.state.enterEmailDisplay === true){
             return (
-                <div>
-                    <div className="forgotContainer">
-                        <div className="forgotPasswordTitleContainer">
-                            <h1 className="forgotTitleText"><b>Forgot</b></h1>
-                            <h1 className="passwordTitleText"><b>Password?</b></h1>
-                        </div>
-                        <div>
-                            <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
-                                                
-                                <div className="forgotPasswordTextContainer">
-                                    <p className="forgotPasswordText">
-                                        Enter your email for the verification process, we will send a 4 digit code to your email.
-                                    </p>
-                                </div>
+                
+                <div className="forgotContainer">
 
-                                <Form.Group className="contentBarPassword">
-                                    <InputGroup>
-                                        <InputGroup.Text><AiOutlineMail/></InputGroup.Text>
-                                        <Form.Control 
-                                            type="email"
-                                            placeholder="Email" 
-                                            name="email"
-                                            value={this.state.email}
-                                            className="contentBarText" 
-                                            onChange={this.handleEmail}
-                                            isInvalid={this.state.errorEmail}
-                                            style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
-                                        />
-                                        <div className="invalid-tooltip" style={{marginTop: '0.3rem'}}>
-                                            <span>{this.state.helperTextEmail}</span>
-                                        </div>
-                                    </InputGroup>
-                                </Form.Group>
-                                <div>
-                                    <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
-                                        <b>CONTINUE</b>
-                                    </button>
-                                </div>
-                            </Form>
-                        </div>
+                    <div className="forgotPasswordTitleContainer">
+                        <h1 className="forgotTitleText"><b>Forgot</b></h1>
+                        <h1 className="passwordTitleText"><b>Password?</b></h1>
                     </div>
+                                            
+                    <div className="forgotPasswordTextContainer">
+                        <p className="forgotPasswordText">
+                            Enter your email for the verification process, we will send a 4 digit code to your email.
+                        </p>
+                    </div>
+
+                    <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
+                        <div className="inputContainer">  
+                            <Form.Group className="contentBarPassword">
+                                <InputGroup className="forgotInputGroup">
+                                    <InputGroup.Text style={{display: 'inline-block'}}><AiOutlineMail/></InputGroup.Text>
+                                    <Form.Control 
+                                        type="email"
+                                        placeholder="Email" 
+                                        name="email"
+                                        value={this.state.email}
+                                        className="contentBarText" 
+                                        onChange={this.handleEmail}
+                                        isInvalid={this.state.errorEmail}
+                                        style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0, display: 'inline-grid', width: '89%'}}
+                                    />
+                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.3rem', width: 'fit-content'}}>
+                                        <span>{this.state.helperTextEmail}</span>
+                                    </div>
+                                </InputGroup>
+                            </Form.Group>
+                        
+                        
+                            <div className="input_and_login_Container">
+                                <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handleContinue}> <b>CONTINUE</b> </button>
+                            </div>
+                       </div>
+                    </Form>
+
                     <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
-                </div>    
+                
+                </div>
             );
         }else if (this.state.enterCode === true){
             return(

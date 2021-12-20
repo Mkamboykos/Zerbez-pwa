@@ -218,11 +218,10 @@ class Home extends Component{
                             </InputGroup> 
                         </Form.Group>
                     
-                        <div>
-                            <button className="Submit_button_Home" type="save" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
-                                <b>SUBMIT</b>
-                            </button>
-                        </div>
+                        <button className="Submit_button_Home" type="save" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
+                            <b>SUBMIT</b>
+                        </button>
+                        
                         {this.renderRedirect()}
                     </Form>
                     <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
@@ -239,7 +238,7 @@ class Home extends Component{
                     <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                 </div>
 
-                <img src={homeLogoA} alt=""  className="homePageImageContainer" loading="eager"/>
+                <img src={homeLogoA} alt=""  className="homePageImageContainer" loading="lazy"/>
                 
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  

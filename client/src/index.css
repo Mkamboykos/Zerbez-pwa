@@ -588,12 +588,14 @@ div.MuiSelect-select.MuiSelect-select {
 
 .forgotContainer{
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   box-sizing: border-box;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  height: 100vh;
+  width: 500px;
+  padding: 0;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .forgotPasswordTitleContainer{
@@ -609,8 +611,6 @@ div.MuiSelect-select.MuiSelect-select {
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  
 }
 
 /* Forgot Page Title */
@@ -655,11 +655,16 @@ div.MuiSelect-select.MuiSelect-select {
 
 .contentBarPassword{
   margin: 0 auto;
-  width: 315px;
+  width: 300px;
+  display: flex;
   padding-bottom: 13px;
+  flex-direction: column;
 }
 
-
+div.forgotInputGroup.input-group{
+  display: block;
+  text-align: -webkit-center;
+}
 
 
 
