@@ -240,6 +240,7 @@ class Home extends Component{
                 </div>
 
                 <img src={homeLogoA} alt=""  className="homePageImageContainer" loading="eager"/>
+                
                 <Form onKeyPress={this.handleKeyPressLogin} onSubmit={this.verifyCredentials}>    
                     <div className="inputContainer">  
                         <Form.Group className="contentBar">
@@ -270,8 +271,8 @@ class Home extends Component{
                                     isInvalid={this.state.errorPassword}
                                     style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                 />
-                                <div className="invalid-tooltip" style={{right: '2%'}}>
-                                    <span >{this.state.helperText}</span>
+                                <div className="invalid-tooltip" style={{ position: 'static', marginTop: '0.3rem'}}>
+                                    <span>{this.state.helperText}</span>
                                 </div>
                             </InputGroup>
                         </Form.Group>

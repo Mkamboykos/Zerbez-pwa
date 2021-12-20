@@ -223,13 +223,14 @@ class ForgotPassword extends Component{
                         </div>
                         <div>
                             <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
+                                                
                                 <div className="forgotPasswordTextContainer">
                                     <p className="forgotPasswordText">
                                         Enter your email for the verification process, we will send a 4 digit code to your email.
                                     </p>
                                 </div>
 
-                                <Form.Group className="contentBar">
+                                <Form.Group className="contentBarPassword">
                                     <InputGroup>
                                         <InputGroup.Text><AiOutlineMail/></InputGroup.Text>
                                         <Form.Control 
@@ -242,15 +243,16 @@ class ForgotPassword extends Component{
                                             isInvalid={this.state.errorEmail}
                                             style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                         />
-                                        <div className="invalid-tooltip" style={{right: '22%'}}>
+                                        <div className="invalid-tooltip" style={{marginTop: '0.3rem'}}>
                                             <span>{this.state.helperTextEmail}</span>
                                         </div>
                                     </InputGroup>
                                 </Form.Group>
-
-                                <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
-                                    <b>CONTINUE</b>
-                                </button>
+                                <div>
+                                    <button className="continue_button_forgotPassword" type="submit"  onClick={this.handleContinue} >
+                                        <b>CONTINUE</b>
+                                    </button>
+                                </div>
                             </Form>
                         </div>
                     </div>

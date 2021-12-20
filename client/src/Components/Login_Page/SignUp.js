@@ -800,13 +800,10 @@ class SignUp extends Component {
                                         name="isChecked2"
 
                                         //classes linked to const with classes, and root and checked from styles
-                                        classes={{
-                                            root: classes.root,
-                                            checked: classes.checked,
-                                        }}
+                                        classes={{root: classes.root, checked: classes.checked}}
                                     />
                                 } 
-                                
+                                style={{textAlign: 'left'}}
                                 label={
                                     <div>
                                         <span>I accept the </span>
@@ -815,7 +812,6 @@ class SignUp extends Component {
                                             <Link to={'/privacy'} target="_blank" className="linkService">privacy policy</Link>
                                     </div>
                                 }
-                                style={{textAlign: 'left'}}
                             />
                         </FormControl>
                     </MuiThemeProvider>
