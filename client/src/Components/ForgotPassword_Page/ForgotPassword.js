@@ -10,7 +10,7 @@ class ForgotPassword extends Component{
     
     constructor(props) {
         super(props);
-
+ 
     //Initial State
         this.state = ({
             email: "",
@@ -236,7 +236,7 @@ class ForgotPassword extends Component{
                             <Form.Group className="contentBarPassword">
                                 <InputGroup className="forgotInputGroup">
                                     <InputGroup.Text style={{display: 'inline-block'}}><AiOutlineMail/></InputGroup.Text>
-                                    <Form.Control 
+                                    <Form.Control
                                         type="email"
                                         placeholder="Email" 
                                         name="email"
@@ -270,6 +270,7 @@ class ForgotPassword extends Component{
                     <animated.div style={ style } >
                     <div>
                         <div className="forgotContainer">
+                        
                             <div className="forgotPasswordTitleContainer">
                                 <h1 className="codeTitleText"><b>Enter Code</b></h1>
                             </div>
@@ -283,7 +284,7 @@ class ForgotPassword extends Component{
                                     </div>
             
                                     <Form.Group className="codeBarContainer">
-                                        <InputGroup>
+                                        <InputGroup className="forgotInputGroup">
                                             <Form.Control 
                                                 type="text" 
                                                 maxLength="1"
@@ -292,7 +293,7 @@ class ForgotPassword extends Component{
                                                 value={this.state.one}   
                                                 onChange={this.onChangeCode}
                                                 isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
                                             />
                                             <Form.Control 
                                                 type="text" 
@@ -302,7 +303,7 @@ class ForgotPassword extends Component{
                                                 value={this.state.two}    
                                                 onChange={this.onChangeCode}
                                                 isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
                                             />
                                             <Form.Control 
                                                 type="text" 
@@ -312,7 +313,7 @@ class ForgotPassword extends Component{
                                                 value={this.state.three}  
                                                 onChange={this.onChangeCode} 
                                                 isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
                                             />
                                             <Form.Control 
                                                 type="text" 
@@ -322,24 +323,27 @@ class ForgotPassword extends Component{
                                                 value={this.state.four}
                                                 onChange={this.onChangeCode} 
                                                 isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px'}}
+                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
                                             />
 
                                             {this.state.helperTextCode === 'Incorrect Code!' ?
-                                                <div className="invalid-tooltip" style={{right: '12rem'}}>
+                                                <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
                                                     <span>{this.state.helperTextCode}</span>
                                                 </div> 
                                                 : 
-                                                <div className="invalid-tooltip" style={{right: '28%'}}>
+                                                <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
                                                     <span>{this.state.helperTextCode}</span>
                                                 </div>
                                             }
                                         </InputGroup>
                                     </Form.Group>
             
-                                    <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
-                                        <b>CONTINUE</b>
-                                    </button>
+                                    <div className="input_and_login_Container">
+                                        <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
+                                            <b>CONTINUE</b>
+                                        </button>
+                                    </div>
+
                                     {this.renderRedirect()}
                                 </Form>
                             </div>
