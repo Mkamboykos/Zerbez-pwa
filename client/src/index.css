@@ -588,11 +588,10 @@ div.MuiSelect-select.MuiSelect-select {
 
 .forgotContainer{
   display: inline-flex;
-  flex-direction: row;
+  flex-direction: column;
   box-sizing: border-box;
   align-items: stretch;
   justify-content: center;
-  width: 500px;
   padding: 0;
   overflow: hidden;
   flex-wrap: wrap;
@@ -633,7 +632,7 @@ div.MuiSelect-select.MuiSelect-select {
 .forgotPasswordText{
   text-align: center;
   font-size: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 

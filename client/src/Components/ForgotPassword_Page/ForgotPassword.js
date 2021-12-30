@@ -218,7 +218,7 @@ class ForgotPassword extends Component{
         if(this.state.enterEmailDisplay === true){
             return (
                 
-                <div className="forgotContainer">
+                <div className="forgotContainer" style={{width: '500px'}}>
 
                     <div className="forgotPasswordTitleContainer">
                         <h1 className="forgotTitleText"><b>Forgot</b></h1>
@@ -267,22 +267,22 @@ class ForgotPassword extends Component{
             return(
                 <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
                 {style => (
-                    <animated.div style={ style } >
-                    <div>
-                        <div className="forgotContainer">
+                    <animated.div style={ style }>
                         
+                        <div className="forgotContainer">
+                         
                             <div className="forgotPasswordTitleContainer">
                                 <h1 className="codeTitleText"><b>Enter Code</b></h1>
                             </div>
                             
-                            <div>
-                                <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
-                                    <div className="forgotPasswordTextContainer">
-                                        <p className="forgotPasswordText">
-                                            Enter the 4 digit code that you received on your email.
-                                        </p>
-                                    </div>
-            
+                            <div className="forgotPasswordTextContainer" style={{width: '348px'}}>
+                                <p className="forgotPasswordText">
+                                    Enter the 4 digit code that you received on your email.
+                                </p>
+                            </div>
+
+                            <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
+                                <div className="inputContainer">  
                                     <Form.Group className="codeBarContainer">
                                         <InputGroup className="forgotInputGroup">
                                             <Form.Control 
@@ -335,21 +335,23 @@ class ForgotPassword extends Component{
                                                     <span>{this.state.helperTextCode}</span>
                                                 </div>
                                             }
+
                                         </InputGroup>
                                     </Form.Group>
-            
+                
                                     <div className="input_and_login_Container">
                                         <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
                                             <b>CONTINUE</b>
                                         </button>
                                     </div>
 
-                                    {this.renderRedirect()}
-                                </Form>
-                            </div>
+                                </div>
+                                {this.renderRedirect()}
+                            </Form>
+                            
                         </div>   
                         <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
-                    </div>  
+                         
                     </animated.div>
                 )}
                 </Spring>     
