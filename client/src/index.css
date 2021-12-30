@@ -576,7 +576,9 @@ div.MuiSelect-select.MuiSelect-select {
   display: inline-flex;
 }
 
-
+input#email.MuiInputBase-input.MuiInput-input {
+  font-size: 1rem;
+}
 
 
 
