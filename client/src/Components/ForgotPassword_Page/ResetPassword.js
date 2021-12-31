@@ -41,7 +41,6 @@ class ResetPassword extends Component{
             helperTextPasswordLowercase: 'Must contain at least one lowercase character',
             helperTextPasswordNumber: 'Must contain at least one number',
             helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
-
             helperTextConfirmPassword: '',
         });
     }
