@@ -1,18 +1,10 @@
 
-/* BOOTSTRAP CSS EXTRACTED */
-:root {
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace
-}
 
 *,::after,::before {
   box-sizing: border-box
 }
+
+
 
 html {
   font-family: sans-serif;
@@ -85,6 +77,17 @@ input.codeBarText.form-control.is-invalid{
   border-color: #FFFFFF
 }
 
+/**Event transition**/
+@keyframes example {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.eventTransition {
+  animation-name: example;
+  animation-duration: 0.5s;
+}
+/**End of event transition**/
 
 [type=button],[type=reset],[type=submit],button {
   -webkit-appearance: button
