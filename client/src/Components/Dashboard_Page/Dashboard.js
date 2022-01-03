@@ -11,7 +11,6 @@ function Dashboard() {
     
     const userInfo = UserAuthenticator()
     
-    // const [pass, setPass] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
 
@@ -78,16 +77,13 @@ function Dashboard() {
     
     return(
         <div>
-            
-            {console.log(userInfo.authState)}
-        
-            {/* {pass === true ?  */}
+            {userInfo.renderPage === true ? 
                 <div>
                     {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
                     {MenuVisible && <SettingsBar style={MenuAnimation}/>}
                     <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
                 </div>
-            {/* : ''} */}
+            : ''}
         </div>
     )
 }

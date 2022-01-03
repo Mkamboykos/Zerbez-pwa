@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Axios from 'axios';
 
@@ -6,21 +6,17 @@ Axios.defaults.withCredentials = true;
 
 export const UserAuthenticator = () => {
 
+    var savedUser = ""
+    let navigate = useNavigate();
+    const checker = useRef();
+    
+    const [renderPage, setRenderPage] = useState(false);
     const [authState, setAuthState] = useState({
         username: "",
         id: 0,
         role: "",
         status: null
     });
-
-
-    // let authState = JSON.parse(userState);
-
-    // var savedUser = ""
-    const checker = useRef();
-    // let navigate = useNavigate();
-    // const [pass, setPass] = useState(false);
-    // const [newAuthState, setNewAuthState] = useState({ authState });
 
     const checkActive = () => {
 
@@ -40,40 +36,35 @@ export const UserAuthenticator = () => {
                 }).catch(error => console.log(error));
         };
 
-        //     const passUser = () =>{
-        //         if (authState.status === true){
-        //             if(savedUser !== undefined){
-        //                 const getUser = window.location.pathname.split('/');
-        //                 savedUser = [...getUser][2]
-        //             }
-        //             if (savedUser === authState.username){
-        //                 return setPass(true)
-        //             }else{
-        //                 return navigate('/404');
-        //             }
-        //         }else if (authState.username === undefined){
-        //             navigate('/');
-        //         }else if(authState.status === false){
-        //             navigate('/404');
-        //         }
-        //     }
+        const passUser = () =>{
+            if (authState.status === true){
+                if(savedUser !== undefined){
+                    const getUser = window.location.pathname.split('/');
+                    savedUser = [...getUser][2]
+                }
+                if (savedUser === authState.username){
+                    return setRenderPage(true)
+                }else{
+                    return navigate('/404');
+                }
+            }else if (authState.username === undefined){
+                navigate('/');
+            }else if(authState.status === false){
+                navigate('/404');
+            }
+        }
         checkToken();
-        //     passUser()
+        passUser()
     };
 
     checker.current = checkActive;
 
     const userStatus = JSON.stringify(authState);
-    // const passStatus = JSON.stringify(pass)
+
     useEffect(() => {
         checker.current();
     }, [userStatus]);
 
 
-    return {authState}
-    // (
-    //     authState.map(todo => {
-    //         return todo
-    //     })
-    // )
+    return {authState, renderPage}
 }
