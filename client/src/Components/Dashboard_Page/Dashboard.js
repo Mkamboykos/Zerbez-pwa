@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import React, { useState } from 'react'
+import {Link} from 'react-router-dom'
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
-import Axios from 'axios';
 import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
+import Axios from 'axios';
 Axios.defaults.withCredentials = true;
 
 function Dashboard() {
     
-    const userInfo = UserAuthenticator()
+    const user = UserAuthenticator(); // use user to access id, username, role, loggin status, and page render state
     
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
@@ -19,21 +19,18 @@ function Dashboard() {
         transform: MenuButtonsVisible ? `flash(0%)` : `flash(100%)`
     });
 
-
     const MenuAnimation = useSpring({
         opacity: MenuVisible ? 1 : 0,
         transform: MenuVisible ? `flash(0%)` : `flash(100%)`
     });
 
-
     const logoutButton = async (e) => {
         try {
-            await Axios.post(`http://localhost:3001/Auth/logout/${userInfo.authState.username}`)
+            await Axios.post(`http://localhost:3001/Auth/logout/${user.info.username}`)
         }catch(e){
              console.log(e)
         }
     }
-
 
     const SettingsBar = ({ style }) => (
         <animated.div className="menu menu--right" style={style}>
@@ -62,22 +59,20 @@ function Dashboard() {
         </animated.div>
     )
   
-
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
             <Link to="/FloorPlan" className="link"><button className="Dashboard_button_FloorPlan"><b>FLOOR PLAN</b></button></Link>
             <Link to="/NewReservation" className="link"><button className="Dashboard_button_NewReservation"><b>New<br/> Reservation</b></button></Link>
-            <Link to="/Reservations" className="link"><button className="Dashboard_button_Reserations"><b>Reservations</b></button></Link>
+            <Link to="/Reservations" className="link"><button className="Dashboard_button_Reservations"><b>Reservations</b></button></Link>
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
             <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
             <Link to="/TimePerCover" className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
         </animated.div>
     )
 
-    
     return(
         <div>
-            {userInfo.renderPage === true ? 
+            {user.renderPage === true ? 
                 <div>
                     {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
                     {MenuVisible && <SettingsBar style={MenuAnimation}/>}
