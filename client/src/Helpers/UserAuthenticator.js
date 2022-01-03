@@ -4,15 +4,23 @@ import Axios from 'axios';
 
 Axios.defaults.withCredentials = true;
 
-export const UserAuthenticator = ( authState ) => {
-    
+export const UserAuthenticator = () => {
+
+    const [authState, setAuthState] = useState({
+        username: "",
+        id: 0,
+        role: "",
+        status: null
+    });
+
+
     // let authState = JSON.parse(userState);
 
     // var savedUser = ""
     const checker = useRef();
     // let navigate = useNavigate();
     // const [pass, setPass] = useState(false);
-    const [newAuthState, setNewAuthState] = useState({ authState });
+    // const [newAuthState, setNewAuthState] = useState({ authState });
 
     const checkActive = () => {
 
@@ -20,14 +28,14 @@ export const UserAuthenticator = ( authState ) => {
             Axios.get('http://localhost:3001/Auth/Login')
                 .then((res) => {
                     if (res.data.LoggedIn) {
-                        setNewAuthState({
+                        setAuthState({
                             username: res.data.username,
                             id: res.data.id,
                             role: res.data.role,
                             status: res.data.LoggedIn,
                         });
                     } else {
-                        setNewAuthState({ ...authState, status: false });
+                        setAuthState({ ...authState, status: false });
                     }
                 }).catch(error => console.log(error));
         };
@@ -55,14 +63,14 @@ export const UserAuthenticator = ( authState ) => {
 
     checker.current = checkActive;
 
-    const userStatus = JSON.stringify(newAuthState);
+    const userStatus = JSON.stringify(authState);
     // const passStatus = JSON.stringify(pass)
     useEffect(() => {
         checker.current();
     }, [userStatus]);
 
 
-    return {newAuthState}
+    return {authState}
     // (
     //     authState.map(todo => {
     //         return todo

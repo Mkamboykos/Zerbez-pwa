@@ -9,23 +9,11 @@ Axios.defaults.withCredentials = true;
 
 function Dashboard() {
     
+    const userInfo = UserAuthenticator()
     
-
     // const [pass, setPass] = useState(false);
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
-    const [authState, setAuthState] = useState({
-        username: "",
-        id: 0,
-        role: "",
-        status: null
-    });
-
-    const authenticateLogin = () =>{
-        let userInfo = UserAuthenticator(setAuthState)
-        console.log(userInfo.newAuthState)
-    }
-
 
     const MenuButtonAnimation = useSpring({
         opacity: MenuButtonsVisible ? 1 : 0,
@@ -40,11 +28,11 @@ function Dashboard() {
 
 
     const logoutButton = async (e) => {
-        // try {
-        //     await Axios.post(`http://localhost:3001/Auth/logout/${authState.username}`)
-        // }catch(e){
-        //      console.log(e)
-        // }
+        try {
+            await Axios.post(`http://localhost:3001/Auth/logout/${userInfo.authState.username}`)
+        }catch(e){
+             console.log(e)
+        }
     }
 
 
@@ -90,7 +78,8 @@ function Dashboard() {
     
     return(
         <div>
-            {authenticateLogin()}
+            
+            {console.log(userInfo.authState)}
         
             {/* {pass === true ?  */}
                 <div>
