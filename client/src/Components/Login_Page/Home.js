@@ -12,6 +12,7 @@ Axios.defaults.withCredentials = true;
 
 class Home extends Component{
     
+    
     constructor(props) {
         super(props);
 
@@ -299,13 +300,20 @@ class Home extends Component{
             )
         } else if (this.state.capChaDisplay){
             return (
-                <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
+                /*<Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
                     {style => (
                         <animated.div style={ style }>
                             {this.state.capChaDisplay ? this.renderCaptcha() : ""}
                         </animated.div>
                     )}
                 </Spring>
+                */
+               
+                <div class="divtest">
+                   {this.state.capChaDisplay ? this.renderCaptcha() : ""}
+                </div>
+                
+               
             )
         }
     }

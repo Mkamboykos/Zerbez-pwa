@@ -14,6 +14,18 @@
   box-sizing: border-box
 }
 
+/**CARLOS CODE - CAPTHA FADE IN ANIMATION**********/
+@keyframes example {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.divtest {
+  animation-name: example;
+  animation-duration: 2s;
+}
+/**END OF FADE IN ANIMATION ***********************/
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
