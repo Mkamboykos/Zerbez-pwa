@@ -11,7 +11,6 @@ Axios.defaults.withCredentials = true;
 
 class Home extends Component{
     
-    
     constructor(props) {
         super(props);
 
@@ -45,7 +44,6 @@ class Home extends Component{
         });
     }
 
-
     handleCaptcha = (e) =>{
         let userCaptcha = e.target.value
         if(!userCaptcha)
@@ -56,11 +54,9 @@ class Home extends Component{
             })
     }
 
-
     refreshPage = () => {
         window.location.reload(false);
     }
-
 
     handleLogin = () =>{
         let random = Math.random().toString(36).substring(7);
@@ -77,7 +73,6 @@ class Home extends Component{
             document.getElementById("loginButton").click();
         }
     }
-
 
     verifyCredentials = async e =>{
         e.preventDefault();
@@ -116,7 +111,6 @@ class Home extends Component{
             }
         });
     }
-
 
     handleSubmit = (e) =>{
         e.preventDefault();
@@ -172,13 +166,11 @@ class Home extends Component{
         }
     }
 
-
     handleKeyPressSubmit = (e) =>{
         if (e.key === "Enter"){
             this.handleSubmit(e)
         }
     }
-
 
     renderRedirect = () =>{
         if (this.state.redirect === true) {
@@ -186,7 +178,6 @@ class Home extends Component{
         }
     }
 
-    
     renderCaptcha = () =>{
         return(
             <div className="homePageContainer" >
@@ -195,36 +186,38 @@ class Home extends Component{
                     <h1 className="homeTitleWaiterText"><b>Waiter</b></h1>
                 </div>
             
-                <div className="captchaContainer transitionCapchaContainer">
+                <div className="captchaContainer transitionCaptchaContainer">
                     <Form onKeyPress={this.handleKeyPressSubmit} >
-                        <Form.Group  className="contentBar">
-                            <Form.Label className="captchaText">
-                                {this.state.captcha}
-                            </Form.Label>
+                        <div className="inputContainer">  
+                            <Form.Group  className="contentBar">
+                                <Form.Label className="captchaText">
+                                    {this.state.captcha}
+                                </Form.Label>
 
-                            <InputGroup>
-                                <InputGroup.Text><FaKey/></InputGroup.Text>
-                                <Form.Control 
-                                    type="text" 
-                                    className="contentBarText"
-                                    placeholder="Enter Captcha" 
-                                    onChange={this.handleCaptcha} 
-                                    isInvalid={this.state.errorCaptcha}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
-                                />
-                                <div className="invalid-tooltip" style={{right: '22%'}}>
-                                    <span>{this.state.helperText}</span>
-                                </div>
-                            </InputGroup> 
-                        </Form.Group>
-                    
-                        <button className="Submit_button_Home" type="save" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleSubmit} >
-                            <b>SUBMIT</b>
-                        </button>
-                        
-                        {this.renderRedirect()}
+                                <InputGroup>
+                                    <InputGroup.Text><FaKey/></InputGroup.Text>
+                                    <Form.Control 
+                                        type="text" 
+                                        className="contentBarText"
+                                        placeholder="Enter Captcha" 
+                                        onChange={this.handleCaptcha} 
+                                        isInvalid={this.state.errorCaptcha}
+                                        style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0, display: 'inline-grid', width: '89%'}}
+                                    />
+                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.3rem', width: 'fit-content'}}>
+                                        <span>{this.state.helperText}</span>
+                                    </div>
+                                </InputGroup> 
+                            </Form.Group>
+
+                            <div className="input_and_login_Container">
+                                <button className="Submit_button_Home" type="save" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleSubmit}> <b>SUBMIT</b> </button>
+                            </div>
+
+                            {this.renderRedirect()}
+                        </div>
                     </Form>
-                    <IoChevronBack className="Back_button" onClick={this.refreshPage}/>
+                    <IoChevronBack className="Back_button link" onClick={this.refreshPage}/>
                 </div>
             </div>
         ) 
@@ -277,11 +270,11 @@ class Home extends Component{
                         </Form.Group>
                         
                         <div className="input_and_login_Container">
-                            <Link to="/SignUp" className="link"><button className="signUp_button_home"><b>SIGN UP</b></button></Link>
+                            <Link to="/SignUp" className="link"><button className="signUp_button_home"> <b>SIGN UP</b> </button></Link>
                                 
                             <button className="login_button_home" type="submit" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleLogin}><b>LOGIN</b></button>
                         </div>
-                        <div className="forgotpasswordContainer">
+                        <div className="forgotPasswordContainer">
                             <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
                         </div>                     
                     </div>

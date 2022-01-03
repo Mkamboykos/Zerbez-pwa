@@ -247,8 +247,7 @@ class ForgotPassword extends Component{
                                    <span>{this.state.helperTextEmail}</span>
                                </div>
                            </InputGroup>
-                       </Form.Group>
-                   
+                       </Form.Group>  
                    
                        <div className="input_and_login_Container">
                            <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handleContinue}> <b>CONTINUE</b> </button>
@@ -331,10 +330,8 @@ class ForgotPassword extends Component{
                             </InputGroup>
                         </Form.Group>
         
-                        <div className="input_and_login_Container">
-                            <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
-                                <b>CONTINUE</b>
-                            </button>
+                        <div className="input_and_login_Container" >
+                            <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode}> <b>CONTINUE</b> </button>
                         </div>
                     </div>
                     {this.renderRedirect()}

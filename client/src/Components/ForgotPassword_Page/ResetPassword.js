@@ -233,12 +233,12 @@ class ResetPassword extends Component{
                                     value={this.state.confirmPassword}
                                     onChange={this.onChangeTextfield}
                                     isInvalid={this.state.errorConfirmPassword}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0, display: 'inline-grid',  width: '89%'}}
                                 />
                                 {/* Make the requirements only pop up when the first field is empty and while confirmation for the second field remains false */}
                                 {this.state.errorConfirmPassword === true ?
                                 
-                                    <div className="invalid-tooltip">
+                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.3rem', width: 'fit-content'}}>
                                         <span>
                                             {this.state.helperTextPasswordLength}
                                             {this.state.helperTextPasswordUppercase}
@@ -262,9 +262,10 @@ class ResetPassword extends Component{
                             </InputGroup>
                         </Form.Group>
 
-                        <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handlePasswords} >
-                            <b>SUBMIT</b>
-                        </button>
+                        <div className="input_and_login_Container">
+                            <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handlePasswords}> <b>SUBMIT</b> </button>
+                        </div>
+
                         {this.renderRedirect()}
                     </div> 
                 </Form>
