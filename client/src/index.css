@@ -14,7 +14,7 @@
   box-sizing: border-box
 }
 
-/**CARLOS CODE - CAPTHA FADE IN ANIMATION**********/
+/**CARLOS CODE - CAPCTHA FADE IN ANIMATION**********/
 @keyframes example {
   from {opacity: 0;}
   to {opacity: 1;}
