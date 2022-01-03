@@ -911,7 +911,9 @@ div.input-group{
   color: #E95554;
 }
 
-
+.disabledCursor { 
+  cursor: default;
+}
 
 
 
@@ -952,23 +954,7 @@ div.input-group{
 }
  
 /*Back Buttons formatting*/
-.Back_button_Settings,
-.Back_button_ForgotPassword,
-.Back_button_Settings,
-.Back_button_Account,
-.Back_button_Analytics,
-.Back_button_Notifications,
-.Back_button_Help,
-.Back_button_About,
-.Back_button_FloorPlan,
-.Back_button_ShiftSchedule,
-.Back_button_TimePerCover,
-.Back_button_AssignTables,
-.Back_button_Reservations,
-.Back_button_NewReservation,
-.Back_button_EnterCode,
-.Back_button_ResetPassword,
-.Back_button_SignUp{
+.Back_button{
   position:   absolute;
   top:        25px;
   left:       25px;
@@ -976,27 +962,7 @@ div.input-group{
   font-size: 40px;
 } 
 
-
-
-
-
 /*Back Buttons hover mustard*/
-.Back_button_Settings:hover,
-.Back_button_ForgotPassword:hover,
-.Back_button_Settings:hover,
-.Back_button_Account:hover,
-.Back_button_Analytics:hover,
-.Back_button_Notifications:hover,
-.Back_button_Help:hover,
-.Back_button_About:hover,
-.Back_button_FloorPlan:hover,
-.Back_button_ShiftSchedule:hover,
-.Back_button_TimePerCover:hover,
-.Back_button_AssignTables:hover,
-.Back_button_Reservations:hover,
-.Back_button_NewReservation:hover,
-.Back_button_EnterCode:hover,
-.Back_button_ResetPassword:hover,
-.Back_button_SignUp:hover{
+.Back_button:hover{
   color: #E2C044;
 }

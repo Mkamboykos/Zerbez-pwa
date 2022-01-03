@@ -269,7 +269,7 @@ class ResetPassword extends Component{
                     </div> 
                 </Form>
                 
-                <Link to={'/ForgotPassword'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
+                <Link to={'/ForgotPassword'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button"/></Link> 
             </div>           
         );
     }

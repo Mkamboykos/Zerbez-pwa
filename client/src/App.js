@@ -34,16 +34,16 @@ function App() {
             <Route exact path="/Dashboard/:username" element={<Dashboard/>}/>
             <Route exact path="/ForgotPassword" element={<ForgotPassword/>}/>
             <Route exact path="/ResetPassword/:username" element={<ResetPassword/>}/>
-            <Route exact path="/Account" element={<Account/>}/>
-            <Route exact path="/Analytics" element={<Analytics/>}/>
-            <Route exact path="/Notifications" element={<Notifications/>}/>
-            <Route exact path="/About" element={<About/>}/>
-            <Route exact path="/ShiftSchedule" element={<ShiftSchedule/>}/>
-            <Route exact path="/AssignTables" element={<AssignTables/>}/>
-            <Route exact path="/TimePerCover" element={<TimePerCover/>}/>
-            <Route exact path="/FloorPlan" element={<FloorPlan/>}/>
-            <Route exact path="/NewReservation" element={<NewReservation/>}/>
-            <Route exact path="/Reservations" element={<Reservations/>}/>
+            <Route exact path="/ShiftSchedule/:username" element={<ShiftSchedule/>}/>
+            <Route exact path="/AssignTables/:username" element={<AssignTables/>}/>
+            <Route exact path="/TimePerCover/:username" element={<TimePerCover/>}/>
+            <Route exact path="/FloorPlan/:username" element={<FloorPlan/>}/>
+            <Route exact path="/NewReservation/:username" element={<NewReservation/>}/>
+            <Route exact path="/Reservations/:username" element={<Reservations/>}/>
+            <Route exact path="/Account/:username" element={<Account/>}/>
+            <Route exact path="/Analytics/:username" element={<Analytics/>}/>
+            <Route exact path="/Notifications/:username" element={<Notifications/>}/>
+            <Route exact path="/About/:username" element={<About/>}/>
             <Route exact path="/Privacy" element={<Privacy/>}/>
             <Route exact path="/404" element={<NotFound/>}/>
           </Routes>

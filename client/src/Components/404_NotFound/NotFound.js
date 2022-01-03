@@ -6,7 +6,7 @@ function NotFound() {
   return(
       <div>
           <h1>404 - Page Not Found</h1>
-          <Link to="/" className="link"><IoChevronBack className="Back_button_ShiftSchedule"/></Link>
+          <Link to="/" className="link"><IoChevronBack className="Back_button"/></Link>
       </div>
   )
 }

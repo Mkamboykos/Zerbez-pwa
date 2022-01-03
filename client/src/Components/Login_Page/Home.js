@@ -224,7 +224,7 @@ class Home extends Component{
                         
                         {this.renderRedirect()}
                     </Form>
-                    <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+                    <IoChevronBack className="Back_button" onClick={this.refreshPage}/>
                 </div>
             </div>
         ) 

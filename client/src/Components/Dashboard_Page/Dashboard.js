@@ -37,19 +37,19 @@ function Dashboard() {
             <nav>
                 <ul className="menu-list menu-list--right">
                     <li className="menu-list-item menu-list-item--right homeButton">
-                        <a href="/Dashboard" style={{color: "#E95554"}}>Home</a>
+                        <a href="/" className="disabledCursor" onClick={(event) => event.preventDefault()} style={{color: "#E95554"}}>Home</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Account">Account</a>
+                        <a href={`/Account/${user.info.username}`}>Account</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Analytics">Analytics</a>
+                        <a href={`/Analytics/${user.info.username}`}>Analytics</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Notifications">Notifications</a>
+                        <a href={`/Notifications/${user.info.username}`}>Notifications</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/About">About</a>
+                        <a href={`/About/${user.info.username}`}>About</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href="/"  onClick={() => logoutButton()}>Logout</a>
@@ -61,12 +61,12 @@ function Dashboard() {
   
     const MenuButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
-            <Link to="/FloorPlan" className="link"><button className="Dashboard_button_FloorPlan"><b>FLOOR PLAN</b></button></Link>
-            <Link to="/NewReservation" className="link"><button className="Dashboard_button_NewReservation"><b>New<br/> Reservation</b></button></Link>
-            <Link to="/Reservations" className="link"><button className="Dashboard_button_Reservations"><b>Reservations</b></button></Link>
-            <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
-            <Link to="/ShiftSchedule" className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
-            <Link to="/TimePerCover" className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
+            <Link to={`/FloorPlan/${user.info.username}`} className="link"><button className="Dashboard_button_FloorPlan"><b>FLOOR PLAN</b></button></Link>
+            <Link to={`/NewReservation/${user.info.username}`} className="link"><button className="Dashboard_button_NewReservation"><b>New<br/> Reservation</b></button></Link>
+            <Link to={`/Reservations/${user.info.username}`} className="link"><button className="Dashboard_button_Reservations"><b>Reservations</b></button></Link>
+            <Link to={`/ShiftSchedule/${user.info.username}`} className="link"><button className="Dashboard_button_ShiftSchedule"><b>SHIFT SCHEDULE</b></button></Link>
+            <Link to={`/AssignTables/${user.info.username}`} className="link"><button className="Dashboard_button_AssignTables"><b>ASSIGN TABLES</b></button></Link>
+            <Link to={`/TimePerCover/${user.info.username}`} className="link"><button className="Dashboard_button_TimePerCover"><b>TIME PER COVER</b></button></Link>
         </animated.div>
     )
 

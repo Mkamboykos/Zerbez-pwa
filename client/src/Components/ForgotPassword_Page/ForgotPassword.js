@@ -256,7 +256,7 @@ class ForgotPassword extends Component{
                   </div>
                </Form>
 
-               <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
+               <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button"/></Link>   
            
            </div>
        );
@@ -339,7 +339,7 @@ class ForgotPassword extends Component{
                     </div>
                     {this.renderRedirect()}
                 </Form>
-                <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+                <IoChevronBack className="Back_button link" onClick={this.refreshPage}/>
             </div>   
         );
     }  

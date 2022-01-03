@@ -1,16 +1,22 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
+import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
 import {IoChevronBack} from 'react-icons/io5'
 
-/*   Reservations.js is rendered in App.js    */
-
 function Reservations() {
+
+    const user = UserAuthenticator();
+
     return(
         <div>
-            <h1>Reservations</h1>
-            <Link to="/Dashboard" className="link"><IoChevronBack className="Back_button_Reservations"/></Link>
-
+            {user.renderPage === true ? 
+                <div>
+                    <h1>Reservations</h1>
+                    <Link to={`/Dashboard/${user.info.username}`} className="link"><IoChevronBack className="Back_button"/></Link>
+                    <br></br>
+                    <button className="Plus_button_FloorPlan"><Link to={`/Dashboard/${user.info.username}`} className="link">Plus</Link></button>
+                </div>
+            : ''}
         </div>
     )
 }

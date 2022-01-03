@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
+import Axios from 'axios';
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
 
 function Analytics() {
+
+    const user = UserAuthenticator();
 
     const [AnalyticsButtonsVisible, setAnalyticsButtonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
@@ -19,29 +22,37 @@ function Analytics() {
         transform: MenuVisible ? `flash(0%)` : `flash(100%)`
     });
 
+    const logoutButton = async (e) => {
+        try {
+            await Axios.post(`http://localhost:3001/Auth/logout/${user.info.username}`)
+        }catch(e){
+             console.log(e)
+        }
+    }
+
     const SettingsBar = ({ style }) => (
         <animated.div className="menu menu--right" style={style}>
             <nav>
                 <ul className="menu-list menu-list--right">
                     <li className="menu-list-item menu-list-item--right homeButton">
-                        <a href="/Dashboard">Home</a>
+                        <a href={`/Dashboard/${user.info.username}`}>Home</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Account" >Account</a>
+                        <a href={`/Account/${user.info.username}`}>Account</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Analytics" style={{color: "#E95554"}}>Analytics</a>
+                        <a href="/" className="disabledCursor" onClick={(event) => event.preventDefault()} style={{color: "#E95554"}}>Analytics</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Notifications">Notifications</a>
+                        <a href={`/Notifications/${user.info.username}`}>Notifications</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/Help">Help</a>
+                        <a href={`/About/${user.info.username}`}>About</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/About">About</a>
+                        <a href="/"  onClick={() => logoutButton()}>Logout</a>
                     </li>
-                </ul>
+                </ul>    
             </nav>
         </animated.div>
     )
@@ -55,11 +66,13 @@ function Analytics() {
 
     return(
         <div>
-            <div>
-                {AnalyticsButtonsVisible && <AnalyticsButtons style={AnalyticsButtonsAnimation}/>}
-                {MenuVisible && <SettingsBar style={MenuAnimation}/>}
-                <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setAnalyticsButtonsVisible(!AnalyticsButtonsVisible)}/>
-            </div>
+            {user.renderPage === true ? 
+                <div>
+                    {AnalyticsButtonsVisible && <AnalyticsButtons style={AnalyticsButtonsAnimation}/>}
+                    {MenuVisible && <SettingsBar style={MenuAnimation}/>}
+                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setAnalyticsButtonsVisible(!AnalyticsButtonsVisible)}/>
+                </div>
+            : ''}
         </div>
     )
 }
