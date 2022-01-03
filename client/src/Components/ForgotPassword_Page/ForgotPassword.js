@@ -3,7 +3,6 @@ import {Link, Navigate} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
-import { Spring, animated } from 'react-spring';
 import Axios from 'axios';
 
 class ForgotPassword extends Component{
@@ -25,7 +24,7 @@ class ForgotPassword extends Component{
             isValidCode: false,
             code: "",
             nodesTogether: "",
-            enterEmailDisplay: true,
+            emailDisplay: true,
             user: "",
             btnDisplay: true,
         });
@@ -106,7 +105,7 @@ class ForgotPassword extends Component{
                 this.setState({                    
                     enterCode: true,
                     btnDisplay:true,
-                    enterEmailDisplay: false
+                    emailDisplay: false
                 });
         }}).catch(error => {
             this.setState({
@@ -214,149 +213,156 @@ class ForgotPassword extends Component{
         }
     }
     
-    render() {
-        if(this.state.enterEmailDisplay === true){
-            return (
-                <div className="forgotContainer" style={{width: '500px'}}>
+    renderEmail = () =>{
+        return(
+           <div className="forgotContainer" style={{width: '500px'}}>
 
-                    <div className="forgotPasswordTitleContainer">
-                        <h1 className="forgotTitleText"><b>Forgot</b></h1>
-                        <h1 className="passwordTitleText"><b>Password?</b></h1>
-                    </div>
-                                            
-                    <div className="forgotPasswordTextContainer">
-                        <p className="forgotPasswordText">
-                            Enter your email for the verification process, we will send a 4 digit code to your email.
-                        </p>
-                    </div>
+               <div className="forgotPasswordTitleContainer">
+                   <h1 className="forgotTitleText"><b>Forgot</b></h1>
+                   <h1 className="passwordTitleText"><b>Password?</b></h1>
+               </div>
+                                       
+               <div className="forgotPasswordTextContainer">
+                   <p className="forgotPasswordText">
+                       Enter your email for the verification process, we will send a 4 digit code to your email.
+                   </p>
+               </div>
 
-                    <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
-                        <div className="inputContainer">  
-                            <Form.Group className="contentBarPassword">
-                                <InputGroup className="forgotInputGroup">
-                                    <InputGroup.Text style={{display: 'inline-block'}}><AiOutlineMail/></InputGroup.Text>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Email" 
-                                        name="email"
-                                        value={this.state.email}
-                                        className="contentBarText" 
-                                        onChange={this.handleEmail}
-                                        isInvalid={this.state.errorEmail}
-                                        style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0, display: 'inline-grid', width: '89%'}}
-                                    />
-                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.3rem', width: 'fit-content'}}>
-                                        <span>{this.state.helperTextEmail}</span>
-                                    </div>
-                                </InputGroup>
-                            </Form.Group>
-                        
-                        
-                            <div className="input_and_login_Container">
-                                <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handleContinue}> <b>CONTINUE</b> </button>
-                            </div>
+               <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
+                   <div className="inputContainer">  
+                       <Form.Group className="contentBarPassword">
+                           <InputGroup className="forgotInputGroup">
+                               <InputGroup.Text style={{display: 'inline-block'}}><AiOutlineMail/></InputGroup.Text>
+                               <Form.Control
+                                   type="email"
+                                   placeholder="Email" 
+                                   name="email"
+                                   value={this.state.email}
+                                   className="contentBarText" 
+                                   onChange={this.handleEmail}
+                                   isInvalid={this.state.errorEmail}
+                                   style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0, display: 'inline-grid', width: '89%'}}
+                               />
+                               <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.3rem', width: 'fit-content'}}>
+                                   <span>{this.state.helperTextEmail}</span>
+                               </div>
+                           </InputGroup>
+                       </Form.Group>
+                   
+                   
+                       <div className="input_and_login_Container">
+                           <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handleContinue}> <b>CONTINUE</b> </button>
                        </div>
-                    </Form>
+                  </div>
+               </Form>
 
-                    <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
-                
+               <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button_ForgotPassword"/></Link>   
+           
+           </div>
+       );
+    }
+        
+    renderEnterCode = () =>{
+        return(
+            <div className="forgotContainer">
+              
+                <div className="forgotPasswordTitleContainer">
+                    <h1 className="codeTitleText"><b>Enter Code</b></h1>
                 </div>
-            );
-        }else if (this.state.enterCode === true){
-            return(
-                <Spring from={{ opacity: 0, Transform: `flash(0%)`}} to={{ opacity: 1, Transform: `flash(100%)`}}>
-                {style => (
-                    <animated.div style={ style }>
-                        
-                        <div className="forgotContainer">
-                         
-                            <div className="forgotPasswordTitleContainer">
-                                <h1 className="codeTitleText"><b>Enter Code</b></h1>
-                            </div>
-                            
-                            <div className="forgotPasswordTextContainer" style={{width: '348px'}}>
-                                <p className="forgotPasswordText">
-                                    Enter the 4 digit code that you received on your email.
-                                </p>
-                            </div>
-
-                            <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
-                                <div className="inputContainer">  
-                                    <Form.Group className="codeBarContainer">
-                                        <InputGroup className="forgotInputGroup">
-                                            <Form.Control 
-                                                type="text" 
-                                                maxLength="1"
-                                                className="codeBarText"
-                                                name="one"
-                                                value={this.state.one}   
-                                                onChange={this.onChangeCode}
-                                                isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                            />
-                                            <Form.Control 
-                                                type="text" 
-                                                maxLength="1"
-                                                className="codeBarText"
-                                                name="two"
-                                                value={this.state.two}    
-                                                onChange={this.onChangeCode}
-                                                isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                            />
-                                            <Form.Control 
-                                                type="text" 
-                                                maxLength="1" 
-                                                className="codeBarText" 
-                                                name="three"
-                                                value={this.state.three}  
-                                                onChange={this.onChangeCode} 
-                                                isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                            />
-                                            <Form.Control 
-                                                type="text" 
-                                                maxLength="1" 
-                                                className="codeBarText"
-                                                name="four"
-                                                value={this.state.four}
-                                                onChange={this.onChangeCode} 
-                                                isInvalid={this.state.errorCode}
-                                                style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                            />
-
-                                            {this.state.helperTextCode === 'Incorrect Code!' ?
-                                                <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
-                                                    <span>{this.state.helperTextCode}</span>
-                                                </div> 
-                                                : 
-                                                <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
-                                                    <span>{this.state.helperTextCode}</span>
-                                                </div>
-                                            }
-
-                                        </InputGroup>
-                                    </Form.Group>
-                
-                                    <div className="input_and_login_Container">
-                                        <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
-                                            <b>CONTINUE</b>
-                                        </button>
+                  
+                <div className="forgotPasswordTextContainer" style={{width: '348px'}}>
+                    <p className="forgotPasswordText">
+                        Enter the 4 digit code that you received on your email.
+                    </p>
+                </div>
+                <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
+                    <div className="inputContainer">  
+                        <Form.Group className="codeBarContainer">
+                            <InputGroup className="forgotInputGroup">
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1"
+                                    className="codeBarText"
+                                    name="one"
+                                    value={this.state.one}   
+                                    onChange={this.onChangeCode}
+                                    isInvalid={this.state.errorCode}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1"
+                                    className="codeBarText"
+                                    name="two"
+                                    value={this.state.two}    
+                                    onChange={this.onChangeCode}
+                                    isInvalid={this.state.errorCode}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1" 
+                                    className="codeBarText" 
+                                    name="three"
+                                    value={this.state.three}  
+                                    onChange={this.onChangeCode} 
+                                    isInvalid={this.state.errorCode}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
+                                />
+                                <Form.Control 
+                                    type="text" 
+                                    maxLength="1" 
+                                    className="codeBarText"
+                                    name="four"
+                                    value={this.state.four}
+                                    onChange={this.onChangeCode} 
+                                    isInvalid={this.state.errorCode}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
+                                />
+                                {this.state.helperTextCode === 'Incorrect Code!' ?
+                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
+                                        <span>{this.state.helperTextCode}</span>
+                                    </div> 
+                                    : 
+                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
+                                        <span>{this.state.helperTextCode}</span>
                                     </div>
-
-                                </div>
-                                {this.renderRedirect()}
-                            </Form>
-                            
-                        </div>   
-                        <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
-                         
-                    </animated.div>
-                )}
-                </Spring>     
-            );    
-        }
+                                }
+                            </InputGroup>
+                        </Form.Group>
+        
+                        <div className="input_and_login_Container">
+                            <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode} >
+                                <b>CONTINUE</b>
+                            </button>
+                        </div>
+                    </div>
+                    {this.renderRedirect()}
+                </Form>
+                <IoChevronBack className="Back_button_EnterCode link" onClick={this.refreshPage}/>
+            </div>   
+        );
     }  
+    
+    
+    render(){
+        if (this.state.emailDisplay){
+            return ( 
+                <div>  
+                    {this.state.emailDisplay ? this.renderEmail() : ""} 
+                </div>
+            )
+        } else if (this.state.enterCode){
+            return (
+                <div className="eventTransition">
+                   {this.state.enterCode ? this.renderEnterCode() : ""}
+                </div>
+            )
+        }
+    }
+
+
+
 }
 
 export default ForgotPassword;
