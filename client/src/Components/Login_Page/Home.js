@@ -299,7 +299,7 @@ class Home extends Component{
             )
         } else if (this.state.capChaDisplay){
             return (
-                <div class="divtest">
+                <div class="eventTransition">
                    {this.state.capChaDisplay ? this.renderCaptcha() : ""}
                 </div>
             )
