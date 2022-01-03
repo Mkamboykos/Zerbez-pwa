@@ -1,12 +1,12 @@
-const {Manager} = require('../models');
+const {Admin} = require('../models');
 
 const findByUsername = async (username) => {
-    const user = await Manager.findOne({ where: {username: username} });
+    const user = await Admin.findOne({ where: {username: username} });
     return user;
 }
 
 const findByEmail = async (email) => {
-    const user = await Manager.findOne({ where: {email: email} });
+    const user = await Admin.findOne({ where: {email: email} });
     return user;
 }
   

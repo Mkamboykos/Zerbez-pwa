@@ -544,7 +544,7 @@ label{
 
 /* font weight of password requirements in signup page */
 span.multiline-block {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 12px;
 }
 

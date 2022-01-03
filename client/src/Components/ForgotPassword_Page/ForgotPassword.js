@@ -217,7 +217,6 @@ class ForgotPassword extends Component{
     render() {
         if(this.state.enterEmailDisplay === true){
             return (
-                
                 <div className="forgotContainer" style={{width: '500px'}}>
 
                     <div className="forgotPasswordTitleContainer">

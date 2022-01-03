@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 const ValidationException = require('../Exceptions/ValidationException');
+const ManagerService = require('../Service/ManagerService');
+const AdminService = require('../Service/AdminService');
 
 function tokensFunction(res, user){
     // create accessToken and refreshToken with user
@@ -70,7 +72,7 @@ router.post('/Login', async (req, res) => {
     // Input from Home page in client
     const {username, password} = req.body;
 
-    const adminUser = await Admin.findOne({ where: {username: username} });
+    const adminUser = await AdminService.findByUsername(username);
 
     if(adminUser){
         await bcrypt.compare(password, adminUser.password).then((match) =>{
@@ -87,7 +89,7 @@ router.post('/Login', async (req, res) => {
     }
 
     // if adminUser does not exist try creating managerUser
-    const managerUser = await Manager.findOne({where: {username: username}})
+    const managerUser = await ManagerService.findByUsername(username);
     
     if(managerUser){
         await bcrypt.compare(password, managerUser.password).then((match) =>{
@@ -104,7 +106,7 @@ router.post('/Login', async (req, res) => {
     }
     
     if(adminUser === null && managerUser === null){
-        res.status(400).send({error:'Wrong username or password conbination!'})
+        res.status(400).send({error:'Wrong username or password combination!'})
     }
     
 });

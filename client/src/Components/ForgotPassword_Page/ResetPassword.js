@@ -15,16 +15,15 @@ class ResetPassword extends Component{
         this.state = ({
             newPassword: "",
             confirmPassword: "",
-
-            //password requirements
             helperTextPasswordLength: "Must be between 8 and 20 characters long ",
             helperTextPasswordUppercase: "Must contain at least one uppercase character",
             helperTextPasswordLowercase: "Must contain at least one lowercase character",
             helperTextPasswordNumber: "Must contain at least one number",
             helperTextPasswordSpecial: "Must contain special character(s) (e.g. !@$&$)",
-
+            errorConfirmPassword: false,
             isValid: false,
             redirect: false,
+            btnDisplay: true,
         });
     }
 
@@ -42,10 +41,12 @@ class ResetPassword extends Component{
             helperTextPasswordNumber: 'Must contain at least one number',
             helperTextPasswordSpecial: 'Must contain special character(s) (e.g. !@$&$)',
             helperTextConfirmPassword: '',
+            btnDisplay: false,
         });
     }
 
     handlePasswords = () =>{
+
         // Validators for username and password
         if(this.state.isValid === false){
             this.setState({
@@ -59,7 +60,7 @@ class ResetPassword extends Component{
         }
 
          // Validators -> password
-         if(this.state.newPassword === "" || this.state.confirmPassword === ""){
+         if(this.state.newPassword.length === 0 || this.state.confirmPassword.length === 0){
             this.setState({
                 helperTextPasswordLength: 'Field(s) cannot be empty!',
                 helperTextPasswordUppercase: '',
@@ -191,83 +192,83 @@ class ResetPassword extends Component{
     
     render() {
         return (
-            <div>
-                <div className="forgotContainer">
-                    <div className="forgotPasswordTitleContainer">
-                        <h1 className="forgotTitleText"><b>Reset</b></h1>
-                        <h1 className="passwordTitleText"><b>Password</b></h1>
-                    </div>
-                    <div>
-                        <Form onKeyPress={this.handleKeyPressPasswords} onSubmit={this.handleSubmit}>
-                            <div className="forgotPasswordTextContainer">
-                                <p className="forgotPasswordText">
-                                    Set the new password for your account so you can login and access all the features.
-                                </p>
-                            </div>
-                            
-                                <Form.Group className="contentBar">
-                                    <InputGroup>
-                                        <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
-                                        <Form.Control 
-                                            type="password" 
-                                            placeholder="New Password" 
-                                            name="newPassword"
-                                            className="contentBarText" 
-                                            value={this.state.newPassword}
-                                            onChange={this.onChangeTextfield}
-                                            isInvalid={this.state.errorNewPassword}
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                
-                                <Form.Group className="contentBar">
-                                    <InputGroup>
-                                        <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
-                                        <Form.Control 
-                                            type="password"  
-                                            placeholder="Confirm New Password"
-                                            name="confirmPassword"
-                                            className="contentBarText"
-                                            value={this.state.confirmPassword}
-                                            onChange={this.onChangeTextfield}
-                                            isInvalid={this.state.errorConfirmPassword}
-                                            style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
-                                        />
+            <div className="forgotContainer">
 
-                                        {/* Make the requirements only pop up when the first field is empty and while confirmation for the second field remains false */}
-                                        {this.state.errorConfirmPassword === false || this.state.newPassword === "" ?
-                                        
-                                            <span className="reqContainer">
-                                                <span className="requirements">{this.state.helperTextPasswordLength}</span>
-                                                <span className="requirements">{this.state.helperTextPasswordUppercase}</span>
-                                                <span className="requirements">{this.state.helperTextPasswordLowercase}</span>
-                                                <span className="requirements">{this.state.helperTextPasswordNumber}</span>
-                                                <span className="requirements">{this.state.helperTextPasswordSpecial}</span>
-                                                <span className="requirements">{this.state.helperTextConfirmPassword}</span>
-                                            </span>
-                                        :
-                                            <div className="invalid-tooltip">
-                                                <span>
-                                                    {this.state.helperTextPasswordLength}
-                                                    {this.state.helperTextPasswordUppercase}
-                                                    {this.state.helperTextPasswordLowercase}
-                                                    {this.state.helperTextPasswordNumber}
-                                                    {this.state.helperTextPasswordSpecial}
-                                                    {this.state.helperTextConfirmPassword}
-                                                </span>
-                                            </div> 
-                                        }
-                                            
-                                    </InputGroup>
-                                </Form.Group>
-
-                            <button className="continue_button_forgotPassword" type="submit"  onClick={this.handlePasswords} >
-                                <b>SUBMIT</b>
-                            </button>
-                            {this.renderRedirect()}
-                        </Form>
-                    </div>
+                <div className="forgotPasswordTitleContainer">
+                    <h1 className="forgotTitleText"><b>Reset</b></h1>
+                    <h1 className="passwordTitleText"><b>Password</b></h1>
                 </div>
+
+                <div className="forgotPasswordTextContainer">
+                    <p className="forgotPasswordText">
+                        Set the new password for your account so you can login and access all the features.
+                    </p>
+                </div>
+
+                <Form onKeyPress={this.handleKeyPressPasswords} onSubmit={this.handleSubmit}>
+                    <div className="inputContainer">
+                        <Form.Group className="contentBar">
+                            <InputGroup>
+                                <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
+                                <Form.Control 
+                                    type="password" 
+                                    placeholder="New Password" 
+                                    name="newPassword"
+                                    className="contentBarText" 
+                                    value={this.state.newPassword}
+                                    onChange={this.onChangeTextfield}
+                                    isInvalid={this.state.errorNewPassword}
+                                />
+                            </InputGroup>
+                        </Form.Group>
+                            
+                        <Form.Group className="contentBar">
+                            <InputGroup>
+                                <InputGroup.Text><RiLockPasswordLine/></InputGroup.Text>
+                                <Form.Control 
+                                    type="password"  
+                                    placeholder="Confirm New Password"
+                                    name="confirmPassword"
+                                    className="contentBarText"
+                                    value={this.state.confirmPassword}
+                                    onChange={this.onChangeTextfield}
+                                    isInvalid={this.state.errorConfirmPassword}
+                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+                                />
+                                {/* Make the requirements only pop up when the first field is empty and while confirmation for the second field remains false */}
+                                {this.state.errorConfirmPassword === true ?
+                                
+                                    <div className="invalid-tooltip">
+                                        <span>
+                                            {this.state.helperTextPasswordLength}
+                                            {this.state.helperTextPasswordUppercase}
+                                            {this.state.helperTextPasswordLowercase}
+                                            {this.state.helperTextPasswordNumber}
+                                            {this.state.helperTextPasswordSpecial}
+                                            {this.state.helperTextConfirmPassword}
+                                        </span>
+                                    </div> 
+                                :
+                                    <span className="reqContainer">
+                                        <span className="requirements">{this.state.helperTextPasswordLength}</span>
+                                        <span className="requirements">{this.state.helperTextPasswordUppercase}</span>
+                                        <span className="requirements">{this.state.helperTextPasswordLowercase}</span>
+                                        <span className="requirements">{this.state.helperTextPasswordNumber}</span>
+                                        <span className="requirements">{this.state.helperTextPasswordSpecial}</span>
+                                        <span className="requirements">{this.state.helperTextConfirmPassword}</span>
+                                    </span>
+                                }
+                                    
+                            </InputGroup>
+                        </Form.Group>
+
+                        <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handlePasswords} >
+                            <b>SUBMIT</b>
+                        </button>
+                        {this.renderRedirect()}
+                    </div> 
+                </Form>
+                
                 <Link to={'/ForgotPassword'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button_ResetPassword"/></Link> 
             </div>           
         );
