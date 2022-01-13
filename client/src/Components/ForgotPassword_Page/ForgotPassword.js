@@ -215,7 +215,7 @@ class ForgotPassword extends Component{
     
     renderEmail = () =>{
         return(
-           <div className="forgotContainer" style={{width: '500px'}}>
+           <div className="forgotContainer">
 
                <div className="forgotPasswordTitleContainer">
                    <h1 className="forgotTitleText"><b>Forgot</b></h1>

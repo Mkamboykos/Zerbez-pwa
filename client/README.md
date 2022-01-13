@@ -69,3 +69,36 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+
+
+
+
+
+
+
+DOCKER COMMANDS
+
+- See docker images
+docker ps
+
+- Build docker image
+docker build -f Dockerfile -t zerbez-client .
+
+- Run docker image using Powershell
+docker run -v ${pwd}:/app:ro -it -p 3000:3000 zerbez-client
+
+or 
+
+- Run docker image using windows cmd
+docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app:ro -it -p 3000:3000 zerbez-client
+
+or
+
+- Run docker image using linux or linux
+docker run -v $(pwd):/app:ro -it -p 3000:3000 zerbez-client
+
+- Go into Docker container 
+docker exec -it zerbez-client
+
+- Remove Docker image
+docker rm zerbez-client -f
