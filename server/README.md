@@ -27,7 +27,7 @@ docker run -v $(pwd):/app:ro -it -p 3001:3001 --restart unless-stopped zerbez-se
 
 ------------------------------------------------------------------------------------------
 
-- Go into Docker container 
+- Go into Docker container
 docker exec -it zerbez-server
 
 ------------------------------------------------------------------------------------------

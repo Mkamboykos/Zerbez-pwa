@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "start": "nodemon server.js",
-    "start-server": "nodemon server.js"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -25,5 +21,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
   }
 }
