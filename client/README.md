@@ -81,7 +81,7 @@ DOCKER COMMANDS
 ------------------------------------------------------------------------------------------
 
 - See docker images
-docker ps
+docker ps -a
 
 ------------------------------------------------------------------------------------------
 
@@ -90,18 +90,18 @@ docker build -f Dockerfile -t zerbez-client .
 
 ------------------------------------------------------------------------------------------
 
-- Run docker image using Powershell
-docker run -v ${pwd}:/app:ro -it -p 3000:3000 zerbez-client
+- Run docker image using Powershell, restart everytime container crashes
+docker run -v ${pwd}:/app:ro -it -p 3000:3000 --restart unless-stopped zerbez-client
 
 or 
 
-- Run docker image using windows cmd
-docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app:ro -it -p 3000:3000 zerbez-client
+- Run docker image using windows cmd, restart everytime container crashes
+docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app:ro -it -p 3000:3000 --restart unless-stopped zerbez-client
 
 or
 
-- Run docker image using linux or linux
-docker run -v $(pwd):/app:ro -it -p 3000:3000 zerbez-client
+- Run docker image using linux or linux, restart everytime container crashes
+docker run -v $(pwd):/app:ro -it -p 3000:3000 --restart unless-stopped zerbez-client
 
 ------------------------------------------------------------------------------------------
 

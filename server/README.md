@@ -3,7 +3,7 @@ DOCKER COMMANDS
 ------------------------------------------------------------------------------------------
 
 - See docker images
-docker ps
+docker ps -a
 
 ------------------------------------------------------------------------------------------
 
@@ -12,18 +12,18 @@ docker build -f Dockerfile -t zerbez-server .
 
 ------------------------------------------------------------------------------------------
 
-- Run docker image using Powershell
-docker run -v ${pwd}:/app:ro -it -p 3000:3000 zerbez-server
+- Run docker image using Powershell, restart everytime container crashes
+docker run -v ${pwd}:/app:ro -it -p 3001:3001 --restart unless-stopped zerbez-server
 
 or 
 
-- Run docker image using windows cmd
-docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app:ro -it -p 3000:3000 zerbez-server
+- Run docker image using windows cmd, restart everytime container crashes
+docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app:ro -it -p 3001:3001 --restart unless-stopped zerbez-server
 
 or
 
-- Run docker image using linux or linux
-docker run -v $(pwd):/app:ro -it -p 3000:3000 zerbez-server
+- Run docker image using linux or linux, restart everytime container crashes
+docker run -v $(pwd):/app:ro -it -p 3001:3001 --restart unless-stopped zerbez-server
 
 ------------------------------------------------------------------------------------------
 
@@ -36,3 +36,6 @@ docker exec -it zerbez-server
 docker rm zerbez-server -f
 
 ------------------------------------------------------------------------------------------
+
+- Setup auto restart unless stopped, on an already running docker image
+docker update --restart unless-stopped [container_id]
