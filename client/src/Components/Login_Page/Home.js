@@ -6,6 +6,7 @@ import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
 import homeLogoA from '../../Icons/homeLogo.svg';
+import {Mode} from '../../Mode/Mode';
 
 Axios.defaults.withCredentials = true;
 
@@ -27,7 +28,8 @@ class Home extends Component{
             loading: true,
             error: "",
             count: 3,
-            user: ""
+            user: "",
+            mode: Mode(),
         });
     }
 
@@ -78,7 +80,7 @@ class Home extends Component{
         e.preventDefault();
         
         // Authenticate username and password
-        await Axios.post('http://localhost:3001/Auth/Login', {
+        await Axios.post(`${this.state.mode}/Auth/Login`, {
             username: this.state.username,
             password: this.state.password,
         }).then(res => {
@@ -152,7 +154,7 @@ class Home extends Component{
             })
         }else if(this.state.userCaptcha === this.state.captcha){
 
-            Axios.get('http://localhost:3001/Auth/Login')
+            Axios.get(`${this.state.mode}/Auth/Login`)
             .then(res => {
                 if (res.data.LoggedIn === true){
                     this.setState({

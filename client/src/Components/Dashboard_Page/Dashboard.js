@@ -5,12 +5,14 @@ import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
 import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
 import Axios from 'axios';
+import {Mode} from '../../Mode/Mode';
 Axios.defaults.withCredentials = true;
 
 function Dashboard() {
     
+    const mode = Mode();
     const user = UserAuthenticator(); // use user to access id, username, role, loggin status, and page render state
-    
+
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
 
@@ -26,7 +28,7 @@ function Dashboard() {
 
     const logoutButton = async (e) => {
         try {
-            await Axios.post(`http://localhost:3001/Auth/logout/${user.info.username}`)
+            await Axios.post(`${mode}/Auth/logout/${user.info.username}`)
         }catch(e){
              console.log(e)
         }

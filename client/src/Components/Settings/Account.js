@@ -4,9 +4,12 @@ import Axios from 'axios';
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
+import {Mode} from '../../Mode/Mode';
+Axios.defaults.withCredentials = true;
 
 function Account() {
 
+    const mode = Mode();
     const user = UserAuthenticator();
   
     const [AccountButtonsVisible, setAccountButtonsVisible] = useState(true);
@@ -24,7 +27,7 @@ function Account() {
 
     const logoutButton = async (e) => {
         try {
-            await Axios.post(`http://localhost:3001/Auth/logout/${user.info.username}`)
+            await Axios.post(`${mode}/Auth/logout/${user.info.username}`)
         }catch(e){
              console.log(e)
         }

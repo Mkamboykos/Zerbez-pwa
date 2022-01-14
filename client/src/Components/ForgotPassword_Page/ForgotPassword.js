@@ -4,6 +4,7 @@ import {IoChevronBack} from 'react-icons/io5'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
 import Axios from 'axios';
+import {Mode} from '../../Mode/Mode';
 
 class ForgotPassword extends Component{
     
@@ -27,6 +28,7 @@ class ForgotPassword extends Component{
             emailDisplay: true,
             user: "",
             btnDisplay: true,
+            mode: Mode(),
         });
     }
 
@@ -81,7 +83,7 @@ class ForgotPassword extends Component{
         e.preventDefault();
         
         // Authenticate username and password
-        Axios.post('http://localhost:3001/Forgot/Email', {
+        Axios.post(`${this.state.mode}/Forgot/Email`, {
             email: this.state.email
         }).then(res => {
 
@@ -184,7 +186,7 @@ class ForgotPassword extends Component{
 
             if(this.state.nodesTogether === this.state.code){
 
-                Axios.get('http://localhost:3001/Auth/Login')
+                Axios.get(`${this.state.mode}/Auth/Login`)
                 .then(res => {
                     console.log(res)
                     if (res.data.LoggedIn === true){

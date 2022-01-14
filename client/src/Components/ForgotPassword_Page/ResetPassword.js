@@ -4,6 +4,7 @@ import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
 import Axios from 'axios';
+import {Mode} from '../../Mode/Mode';
 
 
 class ResetPassword extends Component{
@@ -24,6 +25,7 @@ class ResetPassword extends Component{
             isValid: false,
             redirect: false,
             btnDisplay: true,
+            mode: Mode(),
         });
     }
 
@@ -169,7 +171,7 @@ class ResetPassword extends Component{
         e.preventDefault();
         if(this.state.isValid === true && this.state.confirmPassword === this.state.newPassword){
 
-            Axios.put('http://localhost:3001/Forgot/Email', {
+            Axios.put(`${this.state.mode}/Forgot/Email`, {
                 newPassword: this.state.newPassword
             }).then(res => {
                 if (res.data.auth === true){

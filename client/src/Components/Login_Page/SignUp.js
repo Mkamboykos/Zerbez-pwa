@@ -7,6 +7,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 import termsOfUse from '../../Documents/terms-of-use-template.pdf';
+import {Mode} from '../../Mode/Mode';
 
 // styles are used to set the color white in the check boxes
 const styles = {
@@ -70,6 +71,7 @@ class SignUp extends Component {
             restaurant_city: "", 
             restaurant_state: "", 
             restaurant_zip: "",
+            mode: Mode(),
 
             //password requirements
             helperTextPasswordLength: "Must be between 8 and 20 characters long ",
@@ -428,7 +430,7 @@ class SignUp extends Component {
         
         if((this.state.isValid && this.state.isChecked1 && this.state.isChecked2) === true){
             // if username and email are unique then post the account to the database
-            await Axios.post('http://localhost:3001/SignUp/Manager', {
+            await Axios.post(`${this.state.mode}/SignUp/Manager`, {
                 first_name: this.state.first_name, 
                 last_name: this.state.last_name, 
                 username: this.state.username, 
