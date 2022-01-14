@@ -63,6 +63,7 @@ router.post('/Email', async (req, res) => {
             res.json({auth: true, code: code})
 
     }else{
+        console.log(error);
         res.status(404).send({error:'Email could not be found!'});
     }
 });
