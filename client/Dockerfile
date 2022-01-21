@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1
 
-FROM node:16.13.1
-WORKDIR /App
-COPY package.json .
-COPY package-lock.json .
+FROM node:16.13.1 as builder
+WORKDIR /app
+COPY package.json ./
+RUN npm i
 COPY . .
-RUN npm install
+RUN npm run build
+
+FROM nginx
 EXPOSE 3000
-CMD ["npm", "start"]
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html

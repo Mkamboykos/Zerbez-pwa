@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:latest
+    environment:
+       MYSQL_ROOT_PASSWORD: 'password'
+       MYSQL_DATABASE: 'time_waiter_mysql'
+       MYSQL_PASSWORD: 'password'
+       MYSQL_ROOT_HOST: '%'
+    restart: unless-stopped
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    volumes:
+      - '/app/node_modules'
+      - ./server:/app    
+    env_file:
+      - ./server/.env
+    restart: unless-stopped
+    depends_on:
+      - mysqldb
+  client:
+    stdin_open: true
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    restart: unless-stopped
