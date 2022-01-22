@@ -26,12 +26,12 @@ app.use(express.json());
 
 // This is to allow our api for cross-origin resource sharing
 
-// app.use(cors({
-//     origin: ["http://localhost:3000"],
-//     methods: ["POST, GET, PUT, DELETE"],
-//     credentials: true
-// }));
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["POST, GET, PUT, DELETE"],
+    credentials: true
+}));
+// app.use(cors());
 
 // Create a session that will last up to 24 hours before expiring
 // app.use(session({
@@ -72,10 +72,10 @@ app.use(ErrorHandler);
 // Test database connection is working
 const sequelize = new Sequelize(DB_DATABASE || 'mysql',
                                 DB_USERNAME || 'mysql',
-                                DB_PASSWORD || '', 
+                                DB_PASSWORD || '',
                                 {
-                                    host: DB_HOST || 'localhost',
-                                    port: DB_PORT || '3306',
+                                    host: DB_HOST,
+                                    port: DB_PORT,
                                     dialect: 'mysql',
                                     // dialectOptions: {
                                     //     ssl: DB_SSL == true
