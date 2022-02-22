@@ -211,7 +211,7 @@ class ForgotPassword extends Component{
 
     renderRedirect = () =>{
         if (this.state.redirect === true){
-            return <Navigate  to={'/ResetPassword/'+ this.state.user} />
+            return <Navigate  to={'/reset/'+ this.state.user} />
         }
     }
     
@@ -257,7 +257,7 @@ class ForgotPassword extends Component{
                   </div>
                </Form>
 
-               <Link to={"/"} className="link" aria-label="Back to home"><IoChevronBack className="Back_button"/></Link>   
+               <Link to={"/login"} className="link" aria-label="Back to login"><IoChevronBack className="Back_button"/></Link>   
            
            </div>
        );

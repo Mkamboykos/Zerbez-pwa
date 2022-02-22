@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
 import {IoChevronBack} from 'react-icons/io5'
 
-function TimePerCover() {
+function Schedule() {
   
     const user = UserAuthenticator();
 
@@ -11,14 +11,14 @@ function TimePerCover() {
         <div>
             {user.renderPage === true ? 
                 <div>
-                    <h1>Time Per Cover</h1>
-                    <Link to={`/Dashboard/${user.info.username}`} className="link"><IoChevronBack className="Back_button"/></Link>
+                    <h1>Shift Schedule</h1>
+                    <Link to={`/dashboard/${user.info.username}`} className="link"><IoChevronBack className="Back_button"/></Link>
                     <br></br>
-                    <button className="Plus_button_FloorPlan"><Link to={`/Dashboard/${user.info.username}`} className="link">Plus</Link></button>
+                    <button className="Plus_button_FloorPlan"><Link to={`/dashboard/${user.info.username}`} className="link">Plus</Link></button>
                 </div>
             : ''}
         </div>
     )
 }
 
-export default TimePerCover;
+export default Schedule;

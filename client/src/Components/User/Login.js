@@ -176,7 +176,7 @@ class Home extends Component{
 
     renderRedirect = () =>{
         if (this.state.redirect === true) {
-            return <Navigate  to={'/Dashboard/'+ this.state.user}  />
+            return <Navigate  to={'/dashboard/'+ this.state.user}  />
         }
     }
 
@@ -272,12 +272,12 @@ class Home extends Component{
                         </Form.Group>
                         
                         <div className="input_and_login_Container">
-                            <Link to="/SignUp" className="link"><button className="signUp_button_home"> <b>SIGN UP</b> </button></Link>
+                            <Link to="/sign-up" className="link"><button className="signUp_button_home"> <b>SIGN UP</b> </button></Link>
                                 
                             <button className="login_button_home" type="submit" id="loginButton" disabled={this.state.btnDisplay} onClick={this.handleLogin}><b>LOGIN</b></button>
                         </div>
                         <div className="forgotPasswordContainer">
-                            <Link to="/ForgotPassword" className="link"><b>Forgot Password?</b></Link>
+                            <Link to="/forgot" className="link"><b>Forgot Password?</b></Link>
                         </div>                     
                     </div>
                 </Form> 

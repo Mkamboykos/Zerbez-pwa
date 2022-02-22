@@ -179,7 +179,7 @@ class ResetPassword extends Component{
                         redirect: true
                     }) 
                 }else{
-                    return <Navigate  to='/ForgotPassword'/>
+                    return <Navigate  to='/forgot'/>
                 }
             })
         }
@@ -188,7 +188,7 @@ class ResetPassword extends Component{
     renderRedirect = () =>{
         if (this.state.redirect){
             alert("Your password has been changed!")
-            return <Navigate  to='/'/>
+            return <Navigate  to='/login'/>
         }
     }
     
@@ -272,7 +272,7 @@ class ResetPassword extends Component{
                     </div> 
                 </Form>
                 
-                <Link to={'/ForgotPassword'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button"/></Link> 
+                <Link to={'/forgot'} className="link" aria-label="Back to forgot password"><IoChevronBack className="Back_button"/></Link> 
             </div>           
         );
     }

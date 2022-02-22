@@ -1,14 +1,16 @@
 import {useState, useRef, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Axios from 'axios';
+import {Mode} from '../Mode/Mode';
 Axios.defaults.withCredentials = true;
 
 export const UserAuthenticator = () => {
 
     var savedUser = ""
     let navigate = useNavigate();
-    const checker = useRef();
-    
+    const user = useRef();
+    const mode = Mode();
+
     const [renderPage, setRenderPage] = useState(false);
     const [info, setInfo] = useState({
         username: "",
@@ -20,19 +22,19 @@ export const UserAuthenticator = () => {
     const checkActive = () => {
 
         const checkToken = () => {
-            Axios.get('http://localhost:3001/Auth/Login')
-                .then((res) => {
-                    if (res.data.LoggedIn) {
-                        setInfo({
-                            username: res.data.username,
-                            id: res.data.id,
-                            role: res.data.role,
-                            status: res.data.LoggedIn,
-                        });
-                    } else {
-                        setInfo({ ...info, status: false });
-                    }
-                }).catch(error => console.log(error));
+            Axios.get(`${mode}/Auth/Login`)
+            .then((res) => {
+                if (res.data.LoggedIn) {
+                    setInfo({
+                        username: res.data.username,
+                        id: res.data.id,
+                        role: res.data.role,
+                        status: res.data.LoggedIn,
+                    });
+                } else {
+                    setInfo({ ...info, status: false });
+                }
+            }).catch(error => console.log(error));
         };
 
         const passUser = () =>{
@@ -47,23 +49,22 @@ export const UserAuthenticator = () => {
                     return navigate('/404');
                 }
             }else if (info.username === undefined){
-                navigate('/');
+                navigate('/login');
             }else if(info.status === false){
                 navigate('/404');
             }
         }
         checkToken();
-        passUser()
+        passUser();
     };
 
-    checker.current = checkActive;
+    user.current = checkActive;
 
     const userStatus = JSON.stringify(info);
 
     useEffect(() => {
-        checker.current();
+        user.current();
     }, [userStatus]);
-
 
     return {info, renderPage}
 }

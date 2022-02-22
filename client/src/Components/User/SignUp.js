@@ -826,7 +826,7 @@ class SignUp extends Component {
                     
                 </Form>
                 
-                <Link to={'/'} className="link" aria-label="Back to home"><IoChevronBack className="Back_button"/></Link>
+                <Link to={'/login'} className="link" aria-label="Back to login"><IoChevronBack className="Back_button"/></Link>
             </div>
         )
     }

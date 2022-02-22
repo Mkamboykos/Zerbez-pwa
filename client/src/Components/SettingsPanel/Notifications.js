@@ -38,7 +38,7 @@ function Notifications() {
             <nav>
                 <ul className="menu-list menu-list--right">
                     <li className="menu-list-item menu-list-item--right homeButton">
-                        <a href={`/Dashboard/${user.info.username}`}>Home</a>
+                        <a href={`/dashboard/${user.info.username}`}>Home</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href={`/Account/${user.info.username}`}>Account</a>

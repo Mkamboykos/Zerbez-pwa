@@ -7,17 +7,17 @@ import { animated } from "react-spring";
 import {Mode} from '../../Mode/Mode';
 Axios.defaults.withCredentials = true;
 
-function About() {
+function Analytics() {
 
     const mode = Mode();
     const user = UserAuthenticator();
 
-    const [AboutButtonsVisible, setAboutButtonsVisible] = useState(true);
+    const [AnalyticsButtonsVisible, setAnalyticsButtonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
 
-    const AboutButtonsAnimation = useSpring({
-        opacity: AboutButtonsVisible ? 1 : 0,
-        transform: AboutButtonsVisible ? `flash(0%)` : `flash(100%)`
+    const AnalyticsButtonsAnimation = useSpring({
+        opacity: AnalyticsButtonsVisible ? 1 : 0,
+        transform: AnalyticsButtonsVisible ? `flash(0%)` : `flash(100%)`
     });
 
     const MenuAnimation = useSpring({
@@ -38,19 +38,19 @@ function About() {
             <nav>
                 <ul className="menu-list menu-list--right">
                     <li className="menu-list-item menu-list-item--right homeButton">
-                        <a href={`/Dashboard/${user.info.username}`}>Home</a>
+                        <a href={`/dashboard/${user.info.username}`}>Home</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href={`/Account/${user.info.username}`}>Account</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href={`/Analytics/${user.info.username}`}>Analytics</a>
+                        <a href="/" className="disabledCursor" onClick={(event) => event.preventDefault()} style={{color: "#E95554"}}>Analytics</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href={`/Notifications/${user.info.username}`}>Notifications</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
-                        <a href="/" className="disabledCursor" onClick={(event) => event.preventDefault()} style={{color: "#E95554"}}>About</a>
+                        <a href={`/About/${user.info.username}`}>About</a>
                     </li>
                     <li className="menu-list-item menu-list-item--right">
                         <a href="/"  onClick={() => logoutButton()}>Logout</a>
@@ -60,9 +60,10 @@ function About() {
         </animated.div>
     )
 
-    const AboutButtons = ({style}) => (
+    const AnalyticsButtons = ({style}) => (
         <animated.div className="Dashboard_Buttons" style={style}>
-            <h1>ABOUT</h1>
+            <h1>ANALYTICS</h1>
+
         </animated.div>
     )
 
@@ -70,13 +71,13 @@ function About() {
         <div>
             {user.renderPage === true ? 
                 <div>
-                    {AboutButtonsVisible && <AboutButtons style={AboutButtonsAnimation}/>}
+                    {AnalyticsButtonsVisible && <AnalyticsButtons style={AnalyticsButtonsAnimation}/>}
                     {MenuVisible && <SettingsBar style={MenuAnimation}/>}
-                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setAboutButtonsVisible(!AboutButtonsVisible)}/>
+                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setAnalyticsButtonsVisible(!AnalyticsButtonsVisible)}/>
                 </div>
             : ''}
         </div>
     )
 }
 
-export default About;
+export default Analytics;

@@ -14,9 +14,9 @@ function FloorPlan() {
             {user.renderPage === true ? 
                 <div>
                     <h1>Floor Plan</h1>
-                    <Link to={`/Dashboard/${user.info.username}`} className="link"><IoChevronBack className="Back_button"/></Link>
+                    <Link to={`/dashboard/${user.info.username}`} className="link"><IoChevronBack className="Back_button"/></Link>
                     <br></br>
-                    <button className="Plus_button_FloorPlan"><Link to={`/Dashboard/${user.info.username}`} className="link">Plus</Link></button>
+                    <button className="Plus_button_FloorPlan"><Link to={`/dashboard/${user.info.username}`} className="link">Plus</Link></button>
                 </div>
             : ''}
         </div>

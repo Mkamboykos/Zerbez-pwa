@@ -4,7 +4,7 @@ export const Mode = () => {
     const mode = 'http://localhost:3001'
 
     // production mode
-    // const mode = '/api'
+    //const mode = '/api'
 
     return mode
 }
