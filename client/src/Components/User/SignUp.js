@@ -473,7 +473,7 @@ class SignUp extends Component {
     // Redirect to Dashboard when redirect is true
     renderRedirect(){
         if(this.state.redirect === true){
-            return <Navigate to='/'/>
+            return <Navigate to='/login'/>
         }
     }
 

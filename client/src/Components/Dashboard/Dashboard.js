@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
-import { GoThreeBars } from "react-icons/go"
-import { animated, useSpring} from "react-spring";
+// import {Link} from 'react-router-dom'
+// import { GoThreeBars } from "react-icons/go"
+// import { animated, useSpring} from "react-spring";
 import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
 import Axios from 'axios';
-import {SettingsBarDashboard} from '../../Helpers/SettingsBar';
+// import {SettingsBarDashboard} from '../../Helpers/SettingsBar';
 Axios.defaults.withCredentials = true;
 
 function Dashboard() {
     
+    /* THIS IS THE CODE FOR FADE IN SETTINGS MENU
+
     const user = UserAuthenticator(); // use user to access id, username, role, loggin status, and page render state
-    
+
     const [MenuButtonsVisible, setMenuBottonsVisible] = useState(true);
     const [MenuVisible, setMenuVisible] = useState(false);
 
@@ -41,7 +43,25 @@ function Dashboard() {
                 <div>
                     {MenuButtonsVisible && <MenuButtons style={MenuButtonAnimation}/>}
                     {MenuVisible && <SettingsBarDashboard user={user.info.username} style={MenuAnimation}/>}
-                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/>
+                    <GoThreeBars  className="menu-button" onClick={() => setMenuVisible(!MenuVisible) & setMenuBottonsVisible(!MenuButtonsVisible)}/> 
+
+                    <h1> Dashboard </h1>
+                </div>
+            : ''}
+        </div>
+    )
+
+    */
+
+    const user = UserAuthenticator(); // use user to access id, username, role, loggin status, and page render state
+
+
+    
+    return(
+        <div>
+            {user.renderPage === true ? 
+                <div>
+                    <h1> Dashboard </h1>
                 </div>
             : ''}
         </div>

@@ -80,7 +80,7 @@ router.post('/Login', async (req, res) => {
                 res.status(422).send({error: 'Wrong username or password combination!'})
             }else if(match){
                 // get the username of the user in the database
-                const user = {id: adminUser.id, name: adminUser.username, role: adminUser.role};
+                const user = {id: adminUser.id, name: adminUser.username.toLowerCase(), role: adminUser.role};
                 tokensFunction(res, user);
             }
         }).catch(e =>{

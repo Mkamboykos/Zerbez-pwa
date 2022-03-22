@@ -157,9 +157,10 @@ class Home extends Component{
             Axios.get(`${this.state.mode}/Auth/Login`)
             .then(res => {
                 if (res.data.LoggedIn === true){
+                    let username = res.data.username
                     this.setState({
                         redirect: true,
-                        user: res.data.username
+                        user: username
                     });
                 }else if (res.data.message === "Tokens not present"){
                     this.refreshPage()
