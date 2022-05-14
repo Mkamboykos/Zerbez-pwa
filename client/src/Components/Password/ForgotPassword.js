@@ -33,7 +33,7 @@ class ForgotPassword extends Component{
     }
 
     refreshPage = () => {
-        window.location.reload(false);
+        window.location.reload(true);
     }
 
     //Class Properties (Events On Change)

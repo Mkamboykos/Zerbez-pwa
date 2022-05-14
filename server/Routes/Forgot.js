@@ -9,10 +9,12 @@ const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
 
 //check if username exists in signup
 router.post('/Email', async (req, res) => {
+
     const {email} = req.body;
     const emailExist = await Manager.findOne({ where: {email: email} });
 
-    if(emailExist){
+    try{
+        if(emailExist){
             let transporter = await nodemailer.createTransport({
                 host: process.env.MAIL_HOST,
                 port: process.env.MAIL_PORT,
@@ -57,15 +59,19 @@ router.post('/Email', async (req, res) => {
             res.cookie("access", accessToken, {
                 maxAge: 900000, // 15 minutes
                 httpOnly: true,
-            })
+            });
 
             // send both email and random code back
-            res.json({auth: true, code: code})
+            res.json({auth: true, code: code});
 
-    }else{
+        }else{
+            res.status(404).send({error:'Email could not be found!'});
+        }
+
+    } catch (error) {
         console.log(error);
-        res.status(404).send({error:'Email could not be found!'});
     }
+    
 });
 
 

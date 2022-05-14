@@ -15,6 +15,7 @@ const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_PORT = process.env.DB_PORT;
 const DB_HOST = process.env.DB_HOST;
+
 // Enable cookie dependency
 app.use(cookieParser());
 
@@ -57,7 +58,7 @@ const floorPlanRouter = require('./Routes/FloorPlan');
 app.use('/Auth', authRouter);
 app.use('/SignUp', signupRouter);
 app.use('/Forgot', forgotRouter);
-app.use('./FloorPlan', floorPlanRouter);
+app.use('/FloorPlan', floorPlanRouter);
 
 // Apply error handler to every call
 app.use(ErrorHandler);
