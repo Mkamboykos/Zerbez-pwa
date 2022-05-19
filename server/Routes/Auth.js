@@ -4,7 +4,7 @@ const {Admin} = require('../models');
 const {Manager} = require('../models');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const {authenticateToken} = require('../middlewares/verifyTokenMiddleware');
+const {authenticateUser} = require('../middlewares/verifyTokenMiddleware');
 const ValidationException = require('../Exceptions/ValidationException');
 const ManagerService = require('../Service/ManagerService');
 const AdminService = require('../Service/AdminService');
@@ -30,7 +30,7 @@ function tokensFunction(res, user){
 }
 
 // Check if user if logged in (authentication) -> used in every routes when logged in 
-router.get('/Login', authenticateToken, (req, res) => {
+router.get('/Login', authenticateUser, (req, res) => {
     if('Authorized'){
         if(req.user.name){
             return res.json({

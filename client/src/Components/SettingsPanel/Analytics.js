@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
+import {UserAuthenticator} from '../../Helpers/Authenticator'
 import Axios from 'axios';
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"

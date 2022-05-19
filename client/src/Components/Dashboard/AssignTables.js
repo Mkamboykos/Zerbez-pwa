@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
+import {UserAuthenticator} from '../../Helpers/Authenticator'
 import {IoChevronBack} from 'react-icons/io5'
 
 function AssignTables() {

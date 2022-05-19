@@ -1,9 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-function authenticateToken(req, res, next){
 
+// For refresh-access cookie
+function authenticateUser(req, res, next){
+
+    
     const headersExist = req.headers['cookie']
-
+    
     // check if headers for cookies exists
     if (headersExist){ 
 
@@ -88,4 +91,54 @@ function authenticateToken(req, res, next){
     }
 }
 
-module.exports = {authenticateToken};    
+
+// Regular cookie verification, not refresh-access cookie
+function authenticateEmail(req, res, next){
+
+    const headersExist = req.headers['cookie']
+
+    // check if headers for cookies exists
+    if (headersExist){ 
+
+        // check if there are more then one cookie
+        const authHeaders = headersExist.split(' ')
+
+        if (authHeaders){
+            // iterate through every cookie, find 'email' cookie
+            for (let i=0; i < authHeaders.length; i++){  
+                if (([...authHeaders][i].includes('email')) === true){
+                    if (i !== authHeaders.length -1){
+                        authHeaderAccessSlided = [...authHeaders][i].slice(6).slice(0, -1)
+                        req.emailToken = authHeaderAccessSlided;
+                    }else if (i === authHeaders.length - 1){
+                        authHeaderAccessSlided = [...authHeaders][i].slice(6)
+                        req.emailToken = authHeaderAccessSlided;
+                    }else{
+                        const authHeader = req.headers['cookie']
+                        req.emailToken = authHeader;
+                    }
+                }
+            }
+        }
+
+        // verify email token (sliced)
+        jwt.verify(req.emailToken, process.env.ACCESS_TOKEN_SECRET, (err, authData) => {
+
+            // if access token fails verification, verify refresh token
+            if (err) {
+                console.log("Token is invalid")
+                res.sendStatus(401);
+            }else if (authData){
+                // if email token is verified, pass the user information from the token to the req.email
+                req.user = authData
+                next()
+            }
+        })
+    }else{
+        // if tokens not present 
+        console.log("Tokens not present");
+        res.sendStatus(401);
+    }
+}
+
+module.exports = {authenticateUser, authenticateEmail};    

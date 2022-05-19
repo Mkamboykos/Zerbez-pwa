@@ -9,6 +9,7 @@ const Login = lazy(() => import('./Components/User/Login'))
 const SignUp = lazy(() => import('./Components/User/SignUp'))
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'))
 const ForgotPassword = lazy(() => import('./Components/Password/ForgotPassword'))
+const EnterCode = lazy(() => import('./Components/Password/EnterCode'))
 const ResetPassword = lazy(() => import('./Components/Password/ResetPassword'))
 const Account = lazy(() => import('./Components/SettingsPanel/Account'))
 const Analytics = lazy(() => import('./Components/SettingsPanel/Analytics'))
@@ -35,6 +36,7 @@ function App() {
             <Route exact path="/sign-up" element={<SignUp/>}/>
             <Route exact path="/dashboard/:username" element={<Dashboard/>}/>
             <Route exact path="/forgot" element={<ForgotPassword/>}/>
+            <Route exact path="/forgot/:username/code" element={<EnterCode/>}/>
             <Route exact path="/reset/:username" element={<ResetPassword/>}/>
             <Route exact path="/floor-plan/:username" element={<FloorPlan/>}/>
             <Route exact path="/schedule/:username" element={<Schedule/>}/>

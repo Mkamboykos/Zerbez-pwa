@@ -4,12 +4,13 @@ import Axios from 'axios';
 import {Mode} from '../Mode/Mode';
 Axios.defaults.withCredentials = true;
 
+const mode = Mode();
+
 export const UserAuthenticator = () => {
 
-    var savedUser = ""
+    var savedUser = "";
     let navigate = useNavigate();
     const user = useRef();
-    const mode = Mode();
 
     const [renderPage, setRenderPage] = useState(false);
     const [info, setInfo] = useState({
@@ -68,3 +69,22 @@ export const UserAuthenticator = () => {
 
     return {info, renderPage}
 }
+
+
+// only used to authenticate user to render page during forgot password
+// export const EmailAuthenticator = async ({username, renderPage}) => {
+
+//     await Axios.get(`${mode}/Forgot/auth`)
+//     .then(res => {
+//         // console.log(res)
+//         if (res.data){
+//             renderPage = res.data.auth;
+//             username = res.data.username
+    
+//             return {username, renderPage}
+//             // console.log(renderPage)
+//         };
+//     })
+
+//     return {username, renderPage}
+// }

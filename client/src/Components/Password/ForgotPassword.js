@@ -15,25 +15,11 @@ class ForgotPassword extends Component{
         this.state = ({
             email: "",
             isValid: false,
-            enterCode: false,
             redirect: false,
-            error: "",
-            one: "",
-            two: "",
-            three: "",
-            four: "",
-            isValidCode: false,
-            code: "",
-            nodesTogether: "",
-            emailDisplay: true,
             user: "",
             btnDisplay: true,
             mode: Mode(),
         });
-    }
-
-    refreshPage = () => {
-        window.location.reload(true);
     }
 
     //Class Properties (Events On Change)
@@ -47,7 +33,6 @@ class ForgotPassword extends Component{
             btnDisplay: false,
         })
     }
-
 
     handleContinue = () =>{
         // Validators for email
@@ -79,139 +64,33 @@ class ForgotPassword extends Component{
         }
     }
 
-    verifyCredentials = (e) =>{
+    verifyEmail = async (e) =>{
         e.preventDefault();
-        
-        // Authenticate username and password
-        Axios.post(`${this.state.mode}/Forgot/Email`, {
-            email: this.state.email
-        }).then(res => {
 
-            console.log(res);
+        if (this.state.isValid === true){
 
-            //save random 4 digit code for authentication
-            if(res.data.code){
+            await Axios.post(`${this.state.mode}/Forgot/verify`, {
+                email: this.state.email
+            }).then(res => {
+                if (res.status === 200 && res.data.user){
+                    this.setState({                    
+                        redirect: true,
+                        user: res.data.user
+                    });
+                }
+            }).catch(error => {
                 this.setState({
-                    code: res.data.code
-                });
-            }
-
-            console.log(this.state.code);
-            if(res.data.auth !== true || res.data === ""){
-                this.setState({
-                    helperTextEmail: 'This is not a valid email!',
+                    helperTextEmail: `${error.response.data.error}`,
                     errorEmail: true,
                     isValid: false,
                 });
-            }else if (this.state.isValid === true){
-                this.setState({                    
-                    enterCode: true,
-                    btnDisplay:true,
-                    emailDisplay: false
-                });
-        }}).catch(error => {
-            this.setState({
-                error: `${error}`
-            })
-            if(this.state.error !== ''){
-                this.setState({
-                    helperTextEmail: 'Email could not be found!',
-                    errorEmail: true,
-                    isValid: false,
-                });
-            }
-            
-        });
-        
-    }
-
-    onChangeCode = (e) =>{
-        let field = e.target.name;
-        let value = e.target.value;
-        
-        this.setState({
-            [field]: value,
-            errorCode: false,
-            helperTextCode: '',
-        })
-        
-        //code for the the next and previous node
-        if (value.length >= e.target.getAttribute("maxlength")) {
-            if(value !== this.state.four){
-                e.target.nextElementSibling.focus();
-            }
-        }else if(value.length <= e.target.getAttribute("maxlength")){
-            if(value !== this.state.two){
-                e.target.previousElementSibling.focus();
-            }
-        }
-    }
-
-    handleContinueCode = () => {
-        if(this.state.isValidCode === false){
-            this.setState({
-                isValidCode: true
-            })
-        }
-
-        if(this.state.one === '' || this.state.two === '' || this.state.three === '' || this.state.four === ''){
-            this.setState({
-                helperTextCode: 'Fields cannot be empty!',
-                errorCode: true,
-                isValidCode: false
             });
-        }else if(!(this.state.one || this.state.two || this.state.three || this.state.four).match(/^[0-9]+$/)){
-            this.setState({
-                helperTextCode: 'Fields can only have numbers!',
-                errorCode: true,
-                isValidCode: false
-            });
-        }else{
-            const nodesTogether = parseInt(this.state.one + this.state.two + this.state.three + this.state.four);
-            this.setState({
-                nodesTogether: nodesTogether
-            })
         }
     }
-
-    handleKeyPressContinueCode = (e) =>{
-        if (e.key === "Enter"){
-            this.handleContinueCode()
-        }
-    }
-
-    validateCode = (e) =>{
-        e.preventDefault();
-        if(this.state.code !== "" && this.state.nodesTogether !== ""){
-
-            if(this.state.nodesTogether === this.state.code){
-
-                Axios.get(`${this.state.mode}/Auth/Login`)
-                .then(res => {
-                    console.log(res)
-                    if (res.data.LoggedIn === true){
-                        this.setState({
-                            redirect: true,
-                            user: res.data.username
-                        });
-                    }else if (res.data.message === "Tokens not present"){
-                        this.refreshPage()
-                    }
-                })
-            }else{
-                this.setState({
-                    helperTextCode: 'Incorrect Code!',
-                    errorCode: true,
-                    isValidCode: false
-                });
-            }
-        }
-    }
-
 
     renderRedirect = () =>{
         if (this.state.redirect === true){
-            return <Navigate  to={'/reset/'+ this.state.user} />
+            return <Navigate  to={`/forgot/${this.state.user}/code`} />
         }
     }
     
@@ -230,7 +109,7 @@ class ForgotPassword extends Component{
                    </p>
                </div>
 
-               <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyCredentials}>
+               <Form onKeyPress={this.handleKeyPressContinue} onSubmit={this.verifyEmail}>
                    <div className="inputContainer">  
                        <Form.Group className="contentBarPassword">
                            <InputGroup className="forgotInputGroup">
@@ -255,113 +134,21 @@ class ForgotPassword extends Component{
                            <button className="continue_button_forgotPassword" type="submit" disabled={this.state.btnDisplay} onClick={this.handleContinue}> <b>CONTINUE</b> </button>
                        </div>
                   </div>
+                  {this.renderRedirect()}
                </Form>
-
-               <Link to={"/login"} className="link" aria-label="Back to login"><IoChevronBack className="Back_button"/></Link>   
-           
+               
+               <Link to={"/login"} className="link" aria-label="Back to login"><IoChevronBack className="Back_button"/></Link>
            </div>
        );
     }
-        
-    renderEnterCode = () =>{
-        return(
-            <div className="forgotContainer">
-              
-                <div className="forgotPasswordTitleContainer">
-                    <h1 className="codeTitleText"><b>Enter Code</b></h1>
-                </div>
-                  
-                <div className="forgotPasswordTextContainer" style={{width: '348px'}}>
-                    <p className="forgotPasswordText">
-                        Enter the 4 digit code that you received on your email.
-                    </p>
-                </div>
-                <Form onKeyPress={this.handleKeyPressContinueCode} onSubmit={this.validateCode}>
-                    <div className="inputContainer">  
-                        <Form.Group className="codeBarContainer">
-                            <InputGroup className="forgotInputGroup">
-                                <Form.Control 
-                                    type="text" 
-                                    maxLength="1"
-                                    className="codeBarText"
-                                    name="one"
-                                    value={this.state.one}   
-                                    onChange={this.onChangeCode}
-                                    isInvalid={this.state.errorCode}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                />
-                                <Form.Control 
-                                    type="text" 
-                                    maxLength="1"
-                                    className="codeBarText"
-                                    name="two"
-                                    value={this.state.two}    
-                                    onChange={this.onChangeCode}
-                                    isInvalid={this.state.errorCode}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                />
-                                <Form.Control 
-                                    type="text" 
-                                    maxLength="1" 
-                                    className="codeBarText" 
-                                    name="three"
-                                    value={this.state.three}  
-                                    onChange={this.onChangeCode} 
-                                    isInvalid={this.state.errorCode}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                />
-                                <Form.Control 
-                                    type="text" 
-                                    maxLength="1" 
-                                    className="codeBarText"
-                                    name="four"
-                                    value={this.state.four}
-                                    onChange={this.onChangeCode} 
-                                    isInvalid={this.state.errorCode}
-                                    style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: '25px', borderTopLeftRadius: '25px', display: 'inline-grid'}}
-                                />
-                                {this.state.helperTextCode === 'Incorrect Code!' ?
-                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
-                                        <span>{this.state.helperTextCode}</span>
-                                    </div> 
-                                    : 
-                                    <div className="invalid-tooltip" style={{position: 'static', marginTop: '0.7rem', width: 'fit-content'}}>
-                                        <span>{this.state.helperTextCode}</span>
-                                    </div>
-                                }
-                            </InputGroup>
-                        </Form.Group>
-        
-                        <div className="input_and_login_Container" >
-                            <button className="continue_button_forgotPassword" type="submit" onClick={this.handleContinueCode}> <b>CONTINUE</b> </button>
-                        </div>
-                    </div>
-                    {this.renderRedirect()}
-                </Form>
-                <IoChevronBack className="Back_button link" onClick={this.refreshPage}/>
-            </div>   
-        );
-    }  
-    
     
     render(){
-        if (this.state.emailDisplay){
-            return ( 
-                <div>  
-                    {this.state.emailDisplay ? this.renderEmail() : ""} 
-                </div>
-            )
-        } else if (this.state.enterCode){
-            return (
-                <div className="eventTransition">
-                   {this.state.enterCode ? this.renderEnterCode() : ""}
-                </div>
-            )
-        }
+        return ( 
+            <div>
+                {this.renderEmail()} 
+            </div>
+        )
     }
-
-
-
 }
 
 export default ForgotPassword;

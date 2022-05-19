@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { GoThreeBars } from "react-icons/go"
 import { animated, useSpring} from "react-spring";
-import {UserAuthenticator} from '../../Helpers/UserAuthenticator'
+import {UserAuthenticator} from '../../Helpers/Authenticator'
 import Axios from 'axios';
 import {SettingsBarDashboard} from '../../Helpers/SettingsBar';
 Axios.defaults.withCredentials = true;
