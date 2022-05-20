@@ -13,24 +13,19 @@ router.post('/verify', async (req, res) => {
     const {email} = req.body;
     const emailExist = await ManagerService.findByEmail(email);
 
-    try{
-        if (emailExist){
-            const user = {name: emailExist.username, email: emailExist.email};
-            
-            const emailToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+    if (emailExist){
+        const user = {name: emailExist.username, email: emailExist.email};
+        
+        const emailToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 
-            res.cookie("email", emailToken, {
-                maxAge: 900000, // 15 minutes
-                httpOnly: true,
-            });
+        res.cookie("email", emailToken, {
+            maxAge: 900000, // 15 minutes
+            httpOnly: true,
+        });
 
-            res.status(200).send({user: emailExist.username});
-            
-        }else{
-            res.status(404).send({error:'Email could not be found!'});
-        }
-    }catch (error) {
-        console.log(error);
+        res.status(200).send({user: emailExist.username});
+    }else{
+        res.status(404).send({error:'Email could not be found!'});
     }
 })
 
@@ -112,7 +107,7 @@ router.post('/validate', authenticateEmail, async (req, res) => {
         if (parseInt(code) === parseInt(nodesTogether)){
             res.json({auth: true});
         }else if (parseInt(code) !== parseInt(nodesTogether)){
-            res.status(422).send({error:'Incorrect code!'})
+            res.status(400).send({error:'Incorrect code!'})
         }
     }
     

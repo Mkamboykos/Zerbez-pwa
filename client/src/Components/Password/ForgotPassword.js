@@ -6,6 +6,8 @@ import {Form, InputGroup} from 'react-bootstrap'
 import Axios from 'axios';
 import {Mode} from '../../Mode/Mode';
 
+Axios.defaults.withCredentials = true;
+
 class ForgotPassword extends Component{
     
     constructor(props) {
@@ -72,18 +74,20 @@ class ForgotPassword extends Component{
             await Axios.post(`${this.state.mode}/Forgot/verify`, {
                 email: this.state.email
             }).then(res => {
-                if (res.status === 200 && res.data.user){
+                if (res.status === 200){
                     this.setState({                    
                         redirect: true,
                         user: res.data.user
                     });
                 }
             }).catch(error => {
-                this.setState({
-                    helperTextEmail: `${error.response.data.error}`,
-                    errorEmail: true,
-                    isValid: false,
-                });
+                if (error.response.status === 404){
+                    this.setState({
+                        helperTextEmail: `${error.response.data.error}`,
+                        errorEmail: true,
+                        isValid: false,
+                    });
+                }
             });
         }
     }

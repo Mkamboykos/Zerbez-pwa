@@ -31,6 +31,7 @@ function tokensFunction(res, user){
 
 // Check if user if logged in (authentication) -> used in every routes when logged in 
 router.get('/Login', authenticateUser, (req, res) => {
+
     if('Authorized'){
         if(req.user.name){
             return res.json({
@@ -68,7 +69,7 @@ router.post('/logout/:username', (req, res) => {
 
 
 // Authenticate login credentials
-router.post('/Login', async (req, res) => {
+router.post('/login', async (req, res) => {
     // Input from Home page in client
     const {username, password} = req.body;
 
@@ -106,7 +107,7 @@ router.post('/Login', async (req, res) => {
     }
     
     if(adminUser === null && managerUser === null){
-        res.status(400).send({error:'Wrong username or password combination!'})
+        res.status(400).send({error:'  Fields cannot be empty!  '})
     }
     
 });

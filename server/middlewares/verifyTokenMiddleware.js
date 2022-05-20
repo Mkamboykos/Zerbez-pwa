@@ -87,7 +87,8 @@ function authenticateUser(req, res, next){
         })
     }else{
         // if both access or refresh token are missing, send 404
-        res.json({message: "Tokens not present", status: false});
+        // res.json({message: "Tokens not present", status: false});
+        res.sendStatus(401);
     }
 }
 
@@ -137,6 +138,7 @@ function authenticateEmail(req, res, next){
     }else{
         // if tokens not present 
         console.log("Tokens not present");
+        // res.status(401).send({error: "Tokens not present"});
         res.sendStatus(401);
     }
 }

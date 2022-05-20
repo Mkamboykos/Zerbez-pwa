@@ -21,7 +21,6 @@ class Home extends Component{
             password: "",
             userCaptcha: "",
             loginDisplay: true,
-            capChaDisplay: false,
             btnDisplay: true,
             redirect: false,
             isValid: false,
@@ -80,32 +79,18 @@ class Home extends Component{
         e.preventDefault();
         
         // Authenticate username and password
-        await Axios.post(`${this.state.mode}/Auth/Login`, {
+        await Axios.post(`${this.state.mode}/Auth/login`, {
             username: this.state.username,
             password: this.state.password,
         }).then(res => {
-            console.log(res.data);
-            if(res.data.auth !== true || res.data === ""){
-                this.setState({
-                    helperText: 'Wrong username or password combination!',
-                    errorUsername: true,
-                    errorPassword: true,
-                    isValid: false,
-                });
-            }else{
-                this.setState({                    
-                    capChaDisplay: true,
-                    btnDisplay:true,
-                    loginDisplay:false
-                });
-            }
+            this.setState({                    
+                btnDisplay:true,
+                loginDisplay:false
+            });
         }).catch(error => {
-            this.setState({
-                error: `${error}`
-            })
-            if(this.state.error !== ''){
+            if (error.response.status === 422 || error.response.status === 400){
                 this.setState({
-                    helperText: 'Wrong username or password combination!',
+                    helperText: error.response.data.error,
                     errorUsername: true,
                     errorPassword: true,
                     isValid: false,
@@ -117,14 +102,11 @@ class Home extends Component{
     handleSubmit = (e) =>{
         e.preventDefault();
 
+        // attempt counter
         if(this.state.count === 0){
-            
-            // reset count to 3
             this.setState({
                 count: 3
-            })  
-
-            //refresh page
+            })
             this.refreshPage()
         }
         
@@ -156,12 +138,12 @@ class Home extends Component{
 
             Axios.get(`${this.state.mode}/Auth/Login`)
             .then(res => {
-                if (res.data.LoggedIn === true){
-                    this.setState({
-                        redirect: true,
-                        user: res.data.username
-                    });
-                }else if (res.data.message === "Tokens not present"){
+                this.setState({
+                    redirect: true,
+                    user: res.data.username
+                });
+            }).catch(error => {
+                if (error.response.status === 401){
                     this.refreshPage()
                 }
             })
@@ -265,12 +247,15 @@ class Home extends Component{
                                     isInvalid={this.state.errorPassword}
                                     style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
                                 />
-                                <div className="invalid-tooltip" style={{ position: 'static', marginTop: '0.3rem'}}>
+                                <br/>
+                                <div className="invalid-tooltip" style={{marginTop: '0.3rem'}}>
                                     <span>{this.state.helperText}</span>
                                 </div>
                             </InputGroup>
                         </Form.Group>
                         
+                        {this.state.helperText ? <br/> : ''}
+
                         <div className="input_and_login_Container">
                             <Link to="/sign-up" className="link"><button className="signUp_button_home"> <b>SIGN UP</b> </button></Link>
                                 
@@ -286,19 +271,12 @@ class Home extends Component{
     }
     
     render() {
-        if (this.state.loginDisplay){
-            return ( 
-                <div>  
-                    {this.state.loginDisplay ? this.renderLogin() : ""} 
-                </div>
-            )
-        } else if (this.state.capChaDisplay){
-            return (
-                <div className="eventTransition">
-                   {this.state.capChaDisplay ? this.renderCaptcha() : ""}
-                </div>
-            )
-        }
+        
+        return ( 
+            <div>  
+                {this.state.loginDisplay ? this.renderLogin() : this.renderCaptcha()} 
+            </div>
+        )
     }
 }
 

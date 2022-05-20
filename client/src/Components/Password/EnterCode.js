@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import {Link, Navigate} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
-import {AiOutlineMail} from 'react-icons/ai'
 import {Form, InputGroup} from 'react-bootstrap'
 import Axios from 'axios';
 import {Mode} from '../../Mode/Mode';
-import {EmailAuthenticator} from '../../Helpers/Authenticator';
-import { animated } from 'react-spring'
 
+Axios.defaults.withCredentials = true;
 
 class EnterCode extends Component{
     
@@ -17,7 +15,6 @@ class EnterCode extends Component{
     //Initial State
         this.state = ({
             username: '',
-            renderPage: false,
             redirect: false,
             error: "",
             one: "",
@@ -27,10 +24,8 @@ class EnterCode extends Component{
             isValidCode: false,
             code: "",
             nodesTogether: "",
-            emailDisplay: true,
-            btnDisplay: true,
             mode: Mode(),
-            missingToken: false,
+            token: true,
         });
     }
 
@@ -60,14 +55,14 @@ class EnterCode extends Component{
     sendCode = () =>{
         Axios.post(`${this.state.mode}/Forgot/send`)
         .then(res => {
-            //console.log(res)
+            // console.log(res)
             this.setState({
-                code: res.data.code
+                code: res.data.code,
             });
         }).catch(error => {
             if (error.response.status === 401){
                 this.setState({
-                    missingToken: true
+                    token: false
                 });
             }
         })
@@ -80,6 +75,7 @@ class EnterCode extends Component{
                 isValidCode: true
             })
         }
+
         if(this.state.code === ''){
             this.setState({
                 helperTextCode: 'You must send a code first!',
@@ -121,21 +117,20 @@ class EnterCode extends Component{
                 code: this.state.code,
                 nodesTogether: this.state.nodesTogether
             }).then(res => {
-                if (res.data.auth){
-                    this.setState({                    
-                        redirect: res.data.auth,
-                    });
-                }
+                // console.log(res)
+                this.setState({                    
+                    redirect: res.data.auth,
+                });
             }).catch(error => {
-                if (error.response.status === 401){
-                    this.setState({
-                        missingToken: true
-                    });
-                }else if(error.response.status === 422){
+                if(error.response.status === 400){
                     this.setState({
                         helperTextCode: error.response.data.error,
                         errorCode: true,
                         isValidCode: false
+                    });
+                }else if (error.response.status === 401){
+                    this.setState({
+                        token: false
                     });
                 }
             });
@@ -145,7 +140,7 @@ class EnterCode extends Component{
     // redirect to reset password page
     renderRedirect = () =>{
         if (this.state.redirect === true){
-            return <Navigate  to={'/reset/'+ this.state.user} />
+            return <Navigate  to={`/reset/${this.state.username}`} />
         }
     }
         
@@ -230,9 +225,7 @@ class EnterCode extends Component{
         );
     }  
 
-    // before the page loads, authenticate cookie values
-    componentDidMount() { 
-        console.log("checked")
+    componentDidMount(){
         this.checkUserAuth()
     }
 
@@ -240,32 +233,25 @@ class EnterCode extends Component{
     checkUserAuth() {
         Axios.get(`${this.state.mode}/Forgot/auth`)
         .then(res => {
-            //console.log(res)
             this.setState({
-                username: res.data.username,
-                renderPage: res.data.auth
+                username: res.data.username
             });
         }).catch(error => {
-            this.setState({
-                missingToken: true
-            });
+            if (error.response.status === 401){
+                this.setState({
+                    token: false
+                });
+            }
         })
     }   
 
     render(){
-        if( !this.state.missingToken ){
-            return ( 
-                <div className="eventTransition">
-                    {this.state.renderPage ? this.renderEnterCode() : this.checkUserAuth()}
-                </div>
-            )
-        }else{
-            return(
-                <div>
-                    <Navigate to={'/404'}/>
-                </div>
-            )
-        }
+        
+        return ( 
+            <div className="eventTransition">
+                {this.state.token ? this.renderEnterCode() : <Navigate to={'/404'}/>}
+            </div>
+        )
     }
 }
 

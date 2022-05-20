@@ -70,21 +70,3 @@ export const UserAuthenticator = () => {
     return {info, renderPage}
 }
 
-
-// only used to authenticate user to render page during forgot password
-// export const EmailAuthenticator = async ({username, renderPage}) => {
-
-//     await Axios.get(`${mode}/Forgot/auth`)
-//     .then(res => {
-//         // console.log(res)
-//         if (res.data){
-//             renderPage = res.data.auth;
-//             username = res.data.username
-    
-//             return {username, renderPage}
-//             // console.log(renderPage)
-//         };
-//     })
-
-//     return {username, renderPage}
-// }
