@@ -107,7 +107,7 @@ router.post('/login', async (req, res) => {
     }
     
     if(adminUser === null && managerUser === null){
-        res.status(400).send({error:'  Fields cannot be empty!  '})
+        res.status(422).send({error:'  Wrong username or password combination!  '})
     }
     
 });

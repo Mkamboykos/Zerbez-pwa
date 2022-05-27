@@ -88,7 +88,7 @@ class Home extends Component{
                 loginDisplay:false
             });
         }).catch(error => {
-            if (error.response.status === 422 || error.response.status === 400){
+            if (error.response.status === 422){
                 this.setState({
                     helperText: error.response.data.error,
                     errorUsername: true,
