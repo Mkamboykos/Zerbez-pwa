@@ -4,7 +4,7 @@ import {RiLockPasswordLine} from 'react-icons/ri';
 import {IoChevronBack} from 'react-icons/io5';
 import {Form, InputGroup} from 'react-bootstrap';
 import Axios from 'axios';
-import {Mode} from '../../Mode/Mode';
+import {Mode} from '../../Stage/Mode';
 
 
 class ResetPassword extends Component{

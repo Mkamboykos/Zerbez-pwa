@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { useSpring } from "react-spring"
 import { GoThreeBars } from "react-icons/go"
 import { animated } from "react-spring";
-import {Mode} from '../../Mode/Mode';
+import {Mode} from '../../Stage/Mode';
 Axios.defaults.withCredentials = true;
 
 function Notifications() {

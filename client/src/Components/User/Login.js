@@ -6,7 +6,7 @@ import { IoChevronBack} from 'react-icons/io5';
 import {FaRegUser, FaKey} from 'react-icons/fa';
 import {RiLockPasswordLine} from 'react-icons/ri';
 import homeLogoA from '../../Icons/homeLogo.svg';
-import {Mode} from '../../Mode/Mode';
+import {Mode} from '../../Stage/Mode';
 
 Axios.defaults.withCredentials = true;
 
@@ -266,6 +266,7 @@ class Home extends Component{
                         </div>                     
                     </div>
                 </Form> 
+                 <Link to={'/'} className="link" aria-label="Back to home"><IoChevronBack className="Back_button"/></Link>
             </div>
         )
     }

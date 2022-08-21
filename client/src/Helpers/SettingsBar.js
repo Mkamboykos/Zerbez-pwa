@@ -1,7 +1,7 @@
 import React from "react";
 import { animated } from "react-spring";
 import Axios from 'axios';
-import {Mode} from '../Mode/Mode';
+import {Mode} from '../Stage/Mode';
 Axios.defaults.withCredentials = true;
 
 const mode = Mode()

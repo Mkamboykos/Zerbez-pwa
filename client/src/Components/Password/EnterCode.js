@@ -3,7 +3,7 @@ import {Link, Navigate} from 'react-router-dom'
 import {IoChevronBack} from 'react-icons/io5'
 import {Form, InputGroup} from 'react-bootstrap'
 import Axios from 'axios';
-import {Mode} from '../../Mode/Mode';
+import {Mode} from '../../Stage/Mode';
 
 Axios.defaults.withCredentials = true;
 

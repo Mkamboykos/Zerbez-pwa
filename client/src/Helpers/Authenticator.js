@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Axios from 'axios';
-import {Mode} from '../Mode/Mode';
+import {Mode} from '../Stage/Mode';
 Axios.defaults.withCredentials = true;
 
 const mode = Mode();

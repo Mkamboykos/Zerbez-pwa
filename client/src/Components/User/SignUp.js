@@ -7,7 +7,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {IoChevronBack} from 'react-icons/io5'
 import Axios from 'axios';
 import termsOfUse from '../../Documents/terms-of-use-template.pdf';
-import {Mode} from '../../Mode/Mode';
+import {Mode} from '../../Stage/Mode';
 
 // styles are used to set the color white in the check boxes
 const styles = {

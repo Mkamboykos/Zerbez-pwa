@@ -7,8 +7,25 @@ function Home() {
 
     return(
         <div>
-            <button className="Plus_button_FloorPlan"><Link to={`/login`} className="link">Login</Link></button>
+            <div className='Home_Menu_Container'>
+                <div className='Home_Menu_Items_Left'>
+                    {/* logo here */}
+                </div>
+
+                <div className='Home_Menu_Items_Right'>
+                    <button className="transparent no-border"><Link to={`/About`} className="link Home_Menu_Item_Text">About</Link></button> 
+                    <button className='transparent no-border' ><Link to={`/login`} className="link Home_Menu_Item_Text">Login</Link></button>
+                </div>
+            </div>
+
+
+
+
+
+
+            
         </div>
+        
     )
 }
 
