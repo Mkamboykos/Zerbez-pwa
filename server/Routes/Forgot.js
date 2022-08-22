@@ -19,10 +19,9 @@ router.post('/verify', async (req, res) => {
         const emailToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 
         res.cookie("email", emailToken, {
-            maxAge: 900000, // 15 minutes
+            maxAge: 600000, // 15 minutes
             httpOnly: true,
         });
-
         res.status(200).send({user: emailExist.username});
     }else{
         res.status(404).send({error:'Email could not be found!'});
@@ -73,9 +72,9 @@ router.post('/send', authenticateEmail, async (req, res) => {
     
         //create random 4 digit code generator
         var randomCode = Math.floor(1000 + Math.random() * 9000);
-        console.log(randomCode);
+        
         code = randomCode;
-    
+        console.log(code);
         const msg = {
             from: `"Time Waiter Team" <${process.env.MAIL_FROM}>`, // sender address
             to: req.user.email, // list of receivers
